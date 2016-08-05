@@ -108,7 +108,7 @@ node_modules
 .node_repl_history
 
 # HTML Docs
-docs/
+# docs/
 
 # Custom testing/CI folders
 test-reports/
@@ -119,3 +119,17 @@ typings/
 
 # This is a library, so we ignore package-lock.json
 package-lock.json
+
+# For the gh-pages branch only
+dist/
+examples/
+hooks/
+.babel*
+.editor*
+.eslint*
+.gitattributes
+.npm*
+bower.json
+*.md
+webpack.config.js
+

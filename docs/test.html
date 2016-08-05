@@ -1,0 +1,2908 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="">
+  <title data-ice="title">Test | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1>Test</h1>
+<table class="test-summary">
+  <thead>
+    <tr>
+      <td class="test-description">Description</td>
+      <td class="test-target">Identifier</td>
+      <td class="test-count">Count</td>
+    </tr>
+  </thead>
+
+  <tbody data-ice="tests">
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/authorization.js.html#lineNumber13"><p>Authorization</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></td>
+  <td data-ice="testCount">20</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/authorization.js.html#lineNumber38"><p>refreshExistingAccessToken</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/authorization.js~Authorization.html#static-method-refreshExistingAccessToken">Authorization.refreshExistingAccessToken</a></span></td>
+  <td data-ice="testCount">5</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber46"><p>should call the refresh token endpoint in the auth proxy</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber63"><p>should retry the call to the refresh token endpoint in the auth proxy if it receives a bad response the first time</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber93"><p>should retry the call to the refresh token endpoint in the auth proxy up to 3 times, but then error out</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/authorization.js.html#lineNumber124"><p>if no auth proxy URL is set</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber129"><p>should throw a TypeError</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/authorization.js.html#lineNumber136"><p>if no access token is set</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber141"><p>should throw a TypeError</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/authorization.js.html#lineNumber151"><p>logout</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/authorization.js~Authorization.html#instance-method-logout">Authorization#logout</a></span></td>
+  <td data-ice="testCount">4</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber152"><p>should call the logout endpoint in the auth proxy</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber171"><p>should throw an error if the response is not &apos;ok&apos;</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/authorization.js.html#lineNumber183"><p>if no access token is set</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber188"><p>should throw a TypeError</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/authorization.js.html#lineNumber195"><p>if no auth proxy URL is set</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber200"><p>should throw a TypeError</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/authorization.js.html#lineNumber210"><p>getDeviceCode</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/authorization.js~Authorization.html#instance-method-getDeviceCode">Authorization#getDeviceCode</a></span></td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber211"><p>should throw an error if not configured properly</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber218"><p>should make a request to authProxyUrl when called</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber233"><p>should make a request to authProxyUrl with additional scopes when scopes are passed in</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/authorization.js.html#lineNumber252"><p>pollDeviceCode</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/authorization.js~Authorization.html#instance-method-pollDeviceCode">Authorization#pollDeviceCode</a></span></td>
+  <td data-ice="testCount">8</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber256"><p>should throw an error if not configured properly</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber263"><p>should throw an error if no active device code exists</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber269"><p>should return a Promise that rejects if the active device code is expired</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber283"><p>should return a Promise that resolves to a valid access token if device code is valid</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber301"><p>should return a Promise that rejects if the active device code is invalid (or possibly expired)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber316"><p>should return a Promise that rejects if the active device code is valid but the user went to log in and denied the app access</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber331"><p>should return a Promise that resolves to valid access token after polling a number of times if the user logs in</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/authorization.js.html#lineNumber367"><p>should return a Promise that rejects if the returned access token is invalid</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/identity.js.html#lineNumber15"><p>Identity</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></td>
+  <td data-ice="testCount">12</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/identity.js.html#lineNumber31"><p>getUser</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/identity.js~Identity.html#instance-method-getUser">Identity#getUser</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber43"><p>should make a request to /user</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/identity.js.html#lineNumber57"><p>setUserStation</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/identity.js~Identity.html#instance-method-setUserStation">Identity#setUserStation</a></span></td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber62"><p>should validate the station, and then make a PUT request to identity/stations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber81"><p>should fail if a non-numeric station ID is passed in</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber86"><p>should reject the promise if station finder returns a 404</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/identity.js.html#lineNumber101"><p>followShow</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/identity.js~Identity.html#instance-method-followShow">Identity#followShow</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber105"><p>should validate the aggregation, and then make a POST request to identity/following</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber125"><p>should throw a TypeError if a non-numeric aggregation ID is passed in</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/identity.js.html#lineNumber134"><p>unfollowShow</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/identity.js~Identity.html#instance-method-unfollowShow">Identity#unfollowShow</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber138"><p>should validate the aggregation, and then make a POST request to identity/following</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber158"><p>should throw a TypeError if a non-numeric aggregation ID is passed in</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/identity.js.html#lineNumber167"><p>createTemporaryUser</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/identity.js~Identity.html#instance-method-createTemporaryUser">Identity#createTemporaryUser</a></span></td>
+  <td data-ice="testCount">4</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber178"><p>should make a request to NPR proxy when called</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber189"><p>should make a request to NPR proxy when called using the correct query param character</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/identity.js.html#lineNumber202"><p>if no client ID is set</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber207"><p>should throw a TypeError</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/identity.js.html#lineNumber215"><p>if no auth proxy URL is set</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/identity.js.html#lineNumber220"><p>should throw a TypeError</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber15"><p>Listening</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></td>
+  <td data-ice="testCount">43</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber78"><p>getRecommendation</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/listening.js~Listening.html#instance-method-getRecommendation">Listening#getRecommendation</a></span></td>
+  <td data-ice="testCount">22</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber97"><p>should throw an exception if access token is not supplied</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber105"><p>should make a request to /recommendations with channel npr if a bad channel is passed in</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber115"><p>should make a request to /recommendations when no queued ratings exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber125"><p>should return the currently executing promise if called again before first promise has resolved</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber139"><p>should make a request to /recommendations with a custom channel when no queued ratings exist and a channel is specified</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber150"><p>should include x- headers if supplied in config when making API requests</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber168"><p>should make /recommendations request with sharedMediaId when a UID is given</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber189"><p>should make a request to /ratings when a rating is queued</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber201"><p>should make a request to /ratings and not send duplicate ratings if an action was record twice</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber219"><p>should return the same recommendation when no START rating has been received</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber232"><p>should return a different recommendation when a START rating has been received</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber241"><p>should return a different recommendation when a TIMEOUT rating has been received</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber250"><p>should return a different recommendation when a TAPTHRU rating has been received</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber259"><p>should fire impression url GET requests for sponsorship when a START happens</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber277"><p>should disable ads when an adblocker is present</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber307"><p>should progress through the flow normally</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber332"><p>should go to sponsored channel on TAPTHRU to sponsorship [tests related]</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber356"><p>should go to action URL on TAPTHRU of promo [tests action, or callsToAction]</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber380"><p>should throw when no API recommendations are returned and no previous exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber397"><p>should call the refresh token endpoint in the auth proxy if the getRecommendations call returns a 401, and then retry the request</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber431"><p>if queueRecommendationFromChannel() was previously called and the recommendation with the given UID was already added to flowRecommendations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber439"><p>should NOT make a new API call if the UID is present in the cached list, and return that item</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber451"><p>should make a new API call if the UID is not found in the list</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber464"><p>getUpcomingFlowRecommendations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/listening.js~Listening.html#instance-method-getUpcomingFlowRecommendations">Listening#getUpcomingFlowRecommendations</a></span></td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber465"><p>should make a GET request when no flow recommendations are present</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber476"><p>should NOT make a GET request when flow recommendations are present</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber488"><p>should make a GET request with a custom channel when no flow recommendations are present and a channel is specified</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber501"><p>getRecommendationsFromChannel</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/listening.js~Listening.html#instance-method-getRecommendationsFromChannel">Listening#getRecommendationsFromChannel</a></span></td>
+  <td data-ice="testCount">4</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber502"><p>should make a GET request to the default channel (&quot;recommended&quot;) if no channel is specified</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber513"><p>should make a GET request to the specified channel if a channel is specified</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber524"><p>should make a GET request to the default channel (&quot;recommended&quot;) if an invalid channel format is supplied</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber535"><p>should flush any pending ratings before returning channel recommendations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber558"><p>queueRecommendationFromChannel</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/listening.js~Listening.html#instance-method-queueRecommendationFromChannel">Listening#queueRecommendationFromChannel</a></span></td>
+  <td data-ice="testCount">9</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber563"><p>should throw a TypeError if no channel is specified</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber569"><p>should throw a TypeError if a channel is specified but is not a valid string</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber575"><p>should throw a TypeError if no UID is specified</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber581"><p>should throw a TypeError if a channel is specified but is not a valid string</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber587"><p>should throw an Error if getRecommendationsFromChannel() was not previously called</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber594"><p>if getRecommendationsFromChannel() was previously called but the cached list of recommendations is empty</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber599"><p>should throw an Error</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber607"><p>if getRecommendationsFromChannel() was previously called and the cached list of recommendations is not empty</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber612"><p>should throw an Error if the uid is not found in the list</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber618"><p>should return the found recommendation if the UID is present in the cached list</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber624"><p>should put the found recommendation at the top of the flow recommendations if the UID is present in the cached list</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber633"><p>getHistory</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/listening.js~Listening.html#instance-method-getHistory">Listening#getHistory</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber634"><p>should make a request to /history when getHistory is called</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber648"><p>resetFlow</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/listening.js~Listening.html#instance-method-resetFlow">Listening#resetFlow</a></span></td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber649"><p>no recommendations have been requested yet</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber650"><p>should return a fulfilled promise</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber654"><p>if recommendations have already been requested</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber655"><p>and no queued ratings are present</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="4">
+  <td data-ice="testDescription" style="padding-left: 50px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber656"><p>should reset internal variables to allow the flow to reset</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber670"><p>and queued ratings are present</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="4">
+  <td data-ice="testDescription" style="padding-left: 50px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber671"><p>should send the queued ratings first, then reset</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber690"><p>resumeFlowFromRecommendation</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/listening.js~Listening.html#instance-method-resumeFlowFromRecommendation">Listening#resumeFlowFromRecommendation</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/listening.js.html#lineNumber691"><p>no recommendations have been requested yet</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/controller/listening.js.html#lineNumber692">unit/controller/listening.js</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber13"><p>StationFinder</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></td>
+  <td data-ice="testCount">14</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber36"><p>searchStations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/station-finder.js~StationFinder.html#instance-method-searchStations">StationFinder#searchStations</a></span></td>
+  <td data-ice="testCount">4</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber37"><p>should make a request to /stationfinder/stations and find two stations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber48"><p>should include the query string in the search if one is given</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber59"><p>should throw an error when given an invalid query string</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber65"><p>should return an empty array if no stations results were found</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber86"><p>searchStationsByLatLongCoordinates</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/station-finder.js~StationFinder.html#instance-method-searchStationsByLatLongCoordinates">StationFinder#searchStationsByLatLongCoordinates</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber87"><p>should make a request to /stationfinder/stations and find two stations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber98"><p>should throw an error when given an invalid values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber107"><p>searchStationsByCity</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/station-finder.js~StationFinder.html#instance-method-searchStationsByCity">StationFinder#searchStationsByCity</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber108"><p>should make a request to /stationfinder/stations and find two stations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber119"><p>should throw an error when given an invalid values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber128"><p>searchStationsByState</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/station-finder.js~StationFinder.html#instance-method-searchStationsByState">StationFinder#searchStationsByState</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber129"><p>should make a request to /stationfinder/stations and find two stations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber140"><p>should throw an error when given an invalid values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber149"><p>searchStationsByCityAndState</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/station-finder.js~StationFinder.html#instance-method-searchStationsByCityAndState">StationFinder#searchStationsByCityAndState</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber150"><p>should make a request to /stationfinder/stations and find two stations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber164"><p>getStationDetails</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/controller/station-finder.js~StationFinder.html#instance-method-getStationDetails">StationFinder#getStationDetails</a></span></td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber165"><p>should make a request to /stationfinder/stations and find the requested station</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber183"><p>should make a request to /stationfinder/stations and return a promise that rejects if the requested station is a non-NPR One station</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/controller/station-finder.js.html#lineNumber195"><p>should throw an error when given an invalid values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber15"><p>NprOneSDK</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></td>
+  <td data-ice="testCount">43</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber25"><p>config</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#static-get-config">NprOneSDK.config</a></span></td>
+  <td data-ice="testCount">4</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber26"><p>getter</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/index.js.html#lineNumber27"><p>should return an object with config related properties</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber32"><p>setter</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/index.js.html#lineNumber33"><p>should update specific config values when set</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/index.js.html#lineNumber42"><p>should setup defaults if they haven&apos;t been set yet</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/index.js.html#lineNumber48"><p>should log a warning when setting deprecated properties</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber66"><p>accessToken</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#static-get-accessToken">NprOneSDK.accessToken</a></span></td>
+  <td data-ice="testCount">5</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber67"><p>getter</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/index.js.html#lineNumber68"><p>should return the value of the accessToken string in the hidden config object</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber73"><p>setter</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">4</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/index.js.html#lineNumber74"><p>should throw a TypeError if the passed-in value is not a string</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/index.js.html#lineNumber80"><p>should set the internal access token to the supplied string</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/index.js.html#lineNumber86"><p>should call the registered callback if one is set</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/index.js.html#lineNumber94"><p>but only if the new token is different from the old</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber105"><p>onAccessTokenChanged</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#static-set-onAccessTokenChanged">NprOneSDK.onAccessTokenChanged</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber106"><p>setter</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="3">
+  <td data-ice="testDescription" style="padding-left: 40px"><span><a href="test-file/unit/index.js.html#lineNumber107"><p>should throw a TypeError if the passed-in value is not a function</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber117"><p>Action</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#static-get-Action">NprOneSDK.Action</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber118"><p>should return the Action class</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber125"><p>Logger</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#static-get-Logger">NprOneSDK.Logger</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber126"><p>should return the Logger class</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber133"><p>refreshExistingAccessToken</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#static-method-refreshExistingAccessToken">NprOneSDK.refreshExistingAccessToken</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber138"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber144"><p>should call the correct service controller method with non-default param values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber153"><p>logout</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-logout">NprOneSDK#logout</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber154"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber163"><p>getDeviceCode</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-getDeviceCode">NprOneSDK#getDeviceCode</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber164"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber170"><p>should call the correct service controller method with non-default param values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber179"><p>pollDeviceCode</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-pollDeviceCode">NprOneSDK#pollDeviceCode</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber180"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber189"><p>getRecommendation</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-getRecommendation">NprOneSDK#getRecommendation</a></span></td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber190"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber196"><p>should call the correct service controller method with non-default param values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber202"><p>should call the correct service controller method with non-default param values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber211"><p>getUpcomingFlowRecommendations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-getUpcomingFlowRecommendations">NprOneSDK#getUpcomingFlowRecommendations</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber212"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber218"><p>should call the correct service controller method with non-default param values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber227"><p>getRecommendationsFromChannel</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-getRecommendationsFromChannel">NprOneSDK#getRecommendationsFromChannel</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber228"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber234"><p>should call the correct service controller method with non-default param values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber243"><p>queueRecommendationFromChannel</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-queueRecommendationFromChannel">NprOneSDK#queueRecommendationFromChannel</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber244"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber253"><p>getHistory</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-getHistory">NprOneSDK#getHistory</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber254"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber263"><p>resetFlow</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-resetFlow">NprOneSDK#resetFlow</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber264"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber273"><p>resumeFlowFromRecommendation</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-resumeFlowFromRecommendation">NprOneSDK#resumeFlowFromRecommendation</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber274"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber282"><p>getUser</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-getUser">NprOneSDK#getUser</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber283"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber292"><p>setUserStation</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-setUserStation">NprOneSDK#setUserStation</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber293"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber302"><p>followShow</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-followShow">NprOneSDK#followShow</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber303"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber312"><p>unfollowShow</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-unfollowShow">NprOneSDK#unfollowShow</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber313"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber322"><p>createTemporaryUser</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-createTemporaryUser">NprOneSDK#createTemporaryUser</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber323"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber332"><p>searchStations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-searchStations">NprOneSDK#searchStations</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber333"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber339"><p>should call the correct service controller method with non-default param values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber348"><p>searchStationsByLatLongCoordinates</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-searchStationsByLatLongCoordinates">NprOneSDK#searchStationsByLatLongCoordinates</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber349"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber358"><p>searchStationsByCityAndState</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-searchStationsByCityAndState">NprOneSDK#searchStationsByCityAndState</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber359"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber368"><p>searchStationsByCity</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-searchStationsByCity">NprOneSDK#searchStationsByCity</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber369"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber378"><p>searchStationsByState</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-searchStationsByState">NprOneSDK#searchStationsByState</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber379"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber388"><p>getStationDetails</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#instance-method-getStationDetails">NprOneSDK#getStationDetails</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber389"><p>should call the correct service controller method</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/index.js.html#lineNumber398"><p>getServiceUrl</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#static-method-getServiceUrl">NprOneSDK.getServiceUrl</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber399"><p>should return the correct API service url</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/index.js.html#lineNumber404"><p>should throw if an invalid service name is specified</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/model/access-token.js.html#lineNumber10"><p>AccessToken</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></td>
+  <td data-ice="testCount">7</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/access-token.js.html#lineNumber23"><p>constructor</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/access-token.js~AccessToken.html#instance-constructor-constructor">AccessToken#constructor</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/access-token.js.html#lineNumber24"><p>should not set an expiry date if expires_in is NaN</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/access-token.js.html#lineNumber35"><p>validate</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/access-token.js~AccessToken.html#instance-method-validate">AccessToken#validate</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/access-token.js.html#lineNumber36"><p>should not throw an error on valid input</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/access-token.js.html#lineNumber43"><p>isExpired</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/access-token.js~AccessToken.html#instance-method-isExpired">AccessToken#isExpired</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/access-token.js.html#lineNumber44"><p>should not be expired for test data token</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/access-token.js.html#lineNumber48"><p>should be expired if the expires_in time is in the past</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/access-token.js.html#lineNumber59"><p>token</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/access-token.js~AccessToken.html#instance-get-token">AccessToken.token</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/access-token.js.html#lineNumber60"><p>should match the &quot;access_token&quot; value from the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/access-token.js.html#lineNumber67"><p>ttl</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/access-token.js~AccessToken.html#instance-get-ttl">AccessToken.ttl</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/access-token.js.html#lineNumber68"><p>should convert the &quot;expires_in&quot; value from the API response (which is in seconds) to milliseconds</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/access-token.js.html#lineNumber75"><p>toString</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/access-token.js~AccessToken.html#instance-method-toString">AccessToken#toString</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/access-token.js.html#lineNumber76"><p>should match the &quot;access_token&quot; value from the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber4"><p>Action</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/index.js~NprOneSDK.html#static-get-Action">Action</a></span></td>
+  <td data-ice="testCount">14</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber6"><p>COMPLETED</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-get-COMPLETED">Action.COMPLETED</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber7"><p>should exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber13"><p>PASS</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-get-PASS">Action.PASS</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber14"><p>should exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber20"><p>SHARE</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-get-SHARE">Action.SHARE</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber21"><p>should exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber27"><p>SKIP</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-get-SKIP">Action.SKIP</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber28"><p>should exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber34"><p>SRCHCOMPL</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-get-SRCHCOMPL">Action.SRCHCOMPL</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber35"><p>should exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber41"><p>SRCHSTART</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-get-SRCHSTART">Action.SRCHSTART</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber42"><p>should exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber48"><p>START</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-get-START">Action.START</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber49"><p>should exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber55"><p>TAPTHRU</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-get-TAPTHRU">Action.TAPTHRU</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber56"><p>should exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber62"><p>THUMBUP</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-get-THUMBUP">Action.THUMBUP</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber63"><p>should exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber69"><p>TIMEOUT</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-get-TIMEOUT">Action.TIMEOUT</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber70"><p>should exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber76"><p>getEndActions</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-method-getEndActions">Action.getEndActions</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber77"><p>should include what is specified</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber83"><p>getFlowAdvancingActions</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-method-getFlowAdvancingActions">Action.getFlowAdvancingActions</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber84"><p>should include what is specified</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/action.js.html#lineNumber90"><p>isValidAction</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/action.js~Action.html#static-method-isValidAction">Action.isValidAction</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber91"><p>should be true for valid actions</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/action.js.html#lineNumber95"><p>should be false for invalid actions</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/model/collection-doc.js.html#lineNumber6"><p>CollectionDoc</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/collection-doc.js.html#lineNumber17"><p>collectionDoc</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html#instance-get-collectionDoc">CollectionDoc#collectionDoc</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/collection-doc.js.html#lineNumber18"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/model/device-code.js.html#lineNumber10"><p>DeviceCode</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></td>
+  <td data-ice="testCount">9</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/device-code.js.html#lineNumber23"><p>constructor</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/device-code.js~DeviceCode.html#instance-constructor-constructor">DeviceCode#constructor</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/device-code.js.html#lineNumber24"><p>should not set an expiry date if expires_in is NaN</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/device-code.js.html#lineNumber35"><p>validate</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/device-code.js~DeviceCode.html#instance-method-validate">DeviceCode#validate</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/device-code.js.html#lineNumber36"><p>should not throw an error on valid input</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/device-code.js.html#lineNumber43"><p>isExpired</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/device-code.js~DeviceCode.html#instance-method-isExpired">DeviceCode#isExpired</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/device-code.js.html#lineNumber44"><p>should not be expired for test data token</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/device-code.js.html#lineNumber48"><p>should be expired if the expires_in time is in the past</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/device-code.js.html#lineNumber59"><p>userCode</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/device-code.js~DeviceCode.html#instance-get-userCode">DeviceCode.userCode</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/device-code.js.html#lineNumber60"><p>should match the &quot;user_code&quot; value from the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/device-code.js.html#lineNumber67"><p>verificationUri</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/device-code.js~DeviceCode.html#instance-get-verificationUri">DeviceCode.verificationUri</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/device-code.js.html#lineNumber68"><p>should match the &quot;verification_uri&quot; value from the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/device-code.js.html#lineNumber75"><p>ttl</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/device-code.js~DeviceCode.html#instance-get-ttl">DeviceCode.ttl</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/device-code.js.html#lineNumber76"><p>should convert the &quot;expires_in&quot; value from the API response (which is in seconds) to milliseconds</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/device-code.js.html#lineNumber83"><p>interval</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/device-code.js~DeviceCode.html#instance-get-interval">DeviceCode.interval</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/device-code.js.html#lineNumber84"><p>should convert the &quot;interval&quot; value from the API response (which is in seconds) to milliseconds</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/device-code.js.html#lineNumber91"><p>toString</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/device-code.js~DeviceCode.html#instance-method-toString">DeviceCode#toString</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/device-code.js.html#lineNumber92"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/model/rating.js.html#lineNumber7"><p>Rating</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/rating.js.html#lineNumber20"><p>constructor</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/rating.js~Rating.html#instance-constructor-constructor">Rating#constructor</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/rating.js.html#lineNumber21"><p>should hydrate the model</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/rating.js.html#lineNumber28"><p>toString</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/rating.js~Rating.html#instance-method-toString">Rating#toString</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/rating.js.html#lineNumber29"><p>should match what is specified</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/rating.js.html#lineNumber35"><p>privateMemberReplacer</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/rating.js~Rating.html#static-method-privateMemberReplacer">Rating.privateMemberReplacer</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/rating.js.html#lineNumber36"><p>should remove private member variables</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber10"><p>Recommendation</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></td>
+  <td data-ice="testCount">33</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber51"><p>constructor</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-constructor-constructor">Recommendation#constructor</a></span></td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber59"><p>should throw an error if audio doesn&apos;t exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber66"><p>should throw an error if recommendations doesn&apos;t exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber73"><p>should throw an error if attributes.rating doesn&apos;t exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber82"><p>getImages</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-getImages">Recommendation#getImages</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber83"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber89"><p>getAudio</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-getAudio">Recommendation#getAudio</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber90"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber96"><p>getWeb</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-getWeb">Recommendation#getWeb</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber97"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber103"><p>getOnRamps</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-getOnRamps">Recommendation#getOnRamps</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber104"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber110"><p>getImpressions</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-getImpressions">Recommendation#getImpressions</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber111"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber117"><p>getCallsToAction</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-getCallsToAction">Recommendation#getCallsToAction</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber118"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber124"><p>getRelateds</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-getRelateds">Recommendation#getRelateds</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber125"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber131"><p>getRelatedImpressions</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-getRelatedImpressions">Recommendation#getRelatedImpressions</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber132"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber138"><p>getRatings</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-getRatings">Recommendation#getRatings</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber139"><p>should return a ratings object</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber145"><p>getRecommendationUrl</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-getRecommendationUrl">Recommendation#getRecommendationUrl</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber146"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber152"><p>getActionRecommendationUrl</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-getActionRecommendationUrl">Recommendation#getActionRecommendationUrl</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber155"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber160"><p>should only use urls that start with nprone://</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber169"><p>isSponsorship</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-isSponsorship">Recommendation#isSponsorship</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber170"><p>should be true for an ad</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber173"><p>should be false for non ads</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber183"><p>isShareable</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-isShareable">Recommendation#isShareable</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber184"><p>should be true for recommendations with onramps</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber189"><p>should be false for recommendations without onramps</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber197"><p>toString</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-toString">Recommendation#toString</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber198"><p>should match the format specified</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber204"><p>recordAction</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-recordAction">Recommendation#recordAction</a></span></td>
+  <td data-ice="testCount">10</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber205"><p>should only allow valid ratings</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber218"><p>should require elapsed time to be an integer</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber230"><p>should auto-correct bad elapsed time values</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber239"><p>should auto-correct bad elapsed time values but only if duration is greater than 0</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber253"><p>should warn developers when a zero elapsed time is given for a COMPLETED or SKIP</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber257"><p>should warn developers when a non-START rating is received before START</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber267"><p>should auto-correct bad elapsed time values if the difference is more than 30</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber276"><p>should execute a GET request against all impression URLs</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber286"><p>but only on the first START rating and not subsequent STARTs</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber300"><p>should call the callback set via setRatingReceivedCallback</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber309"><p>hasAction</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-hasAction">Recommendation#hasAction</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber310"><p>should be true when a recommendation actually has that rating</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber316"><p>should be false when a recommendation does not have that rating</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/recommendation.js.html#lineNumber325"><p>hasEndAction</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/recommendation.js~Recommendation.html#instance-method-hasEndAction">Recommendation#hasEndAction</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/recommendation.js.html#lineNumber326"><p>should be true when a recommendation has a finished rating</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/model/station.js.html#lineNumber11"><p>Station</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/station.js~Station.html">Station</a></span></td>
+  <td data-ice="testCount">21</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/station.js.html#lineNumber24"><p>id</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/station.js~Station.html#instance-get-id">Station.id</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber25"><p>should exist and equal the value from the test data</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/station.js.html#lineNumber32"><p>displayName</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/station.js~Station.html#instance-get-displayName">Station.displayName</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber33"><p>should equal name from the test data</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/station.js.html#lineNumber40"><p>logo</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/station.js~Station.html#instance-get-logo">Station.logo</a></span></td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber41"><p>should equal rel=&quot;logo&quot; brand link if it exists</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber45"><p>should be null and NOT the rel=&quot;small-logo&quot; brand link if equal rel=&quot;logo&quot; brand link does not exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber51"><p>should be null if none of the above exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/station.js.html#lineNumber59"><p>tagline</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/station.js~Station.html#instance-get-tagline">Station.tagline</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber60"><p>should exist on test data</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber64"><p>should be an empty string if it does not exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/station.js.html#lineNumber73"><p>callSignAndFrequency</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/station.js~Station.html#instance-get-callSignAndFrequency">Station.callSignAndFrequency</a></span></td>
+  <td data-ice="testCount">5</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber74"><p>should exist on test data</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber78"><p>should omit call if it does not exist on test data</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber83"><p>should omit band if it does not exist on test data</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber88"><p>should omit frequency if it does not exist on test data</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber93"><p>should return null if all attempted data is missing</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/station.js.html#lineNumber103"><p>location</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/station.js~Station.html#instance-get-location">Station.location</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber104"><p>should exist on test data</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/station.js.html#lineNumber111"><p>homepageUrl</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/station.js~Station.html#instance-get-homepageUrl">Station.homepageUrl</a></span></td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber112"><p>should exist on test data</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber116"><p>should be null if only non-rel=&quot;homepage&quot; links exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber121"><p>should be null if none of the above exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/station.js.html#lineNumber129"><p>donationUrl</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/station.js~Station.html#instance-get-donationUrl">Station.donationUrl</a></span></td>
+  <td data-ice="testCount">3</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber130"><p>should equal type 27 donation link if it exists</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber134"><p>should equal type 4 donation link if type 27 donation does not exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber141"><p>should be null if none of the above exist</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/station.js.html#lineNumber149"><p>attributes</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/station.js~Station.html#instance-get-attributes">Station.attributes</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber150"><p>should exist on test data</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/station.js.html#lineNumber157"><p>toString</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/station.js~Station.html#instance-method-toString">Station#toString</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/station.js.html#lineNumber158"><p>should exist on test data</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/model/user.js.html#lineNumber8"><p>User</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/user.js~User.html">User</a></span></td>
+  <td data-ice="testCount">10</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/user.js.html#lineNumber19"><p>constructor</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/user.js~User.html#instance-constructor-constructor">User#constructor</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/user.js.html#lineNumber20"><p>should hydrate the model</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/user.js.html#lineNumber29"><p>isTemporary</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/user.js~User.html#instance-method-isTemporary">User#isTemporary</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/user.js.html#lineNumber30"><p>should be true for a temporary user</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/user.js.html#lineNumber36"><p>should be false for a non-temporary user</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/user.js.html#lineNumber42"><p>getCohort</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/user.js~User.html#instance-method-getCohort">User#getCohort</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/user.js.html#lineNumber43"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/user.js.html#lineNumber49"><p>getOrganizations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/user.js~User.html#instance-method-getOrganizations">User#getOrganizations</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/user.js.html#lineNumber50"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/user.js.html#lineNumber54"><p>should return an array even if the API data is undefined</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/user.js.html#lineNumber63"><p>getPrimaryOrganization</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/user.js~User.html#instance-method-getPrimaryOrganization">User#getPrimaryOrganization</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/user.js.html#lineNumber64"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/user.js.html#lineNumber68"><p>should return an array even if the API data is undefined</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/user.js.html#lineNumber76"><p>getAffiliations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/user.js~User.html#instance-method-getAffiliations">User#getAffiliations</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/user.js.html#lineNumber77"><p>should match the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/model/user.js.html#lineNumber83"><p>toString</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/model/user.js~User.html#instance-method-toString">User#toString</a></span></td>
+  <td data-ice="testCount">1</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/model/user.js.html#lineNumber84"><p>should match the &quot;id&quot; value from the API response</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/util/recommender-creator.js.html#lineNumber8"><p>createRecommendations</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/unit/util/recommender-creator.js.html#lineNumber15"><p>should create an array of recommendations with valid input</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/unit/util/recommender-creator.js.html#lineNumber21"><p>should filter out recommendations which are not valid</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span class="toggle closed"></span><span><a href="test-file/unit/util/validator.js.html#lineNumber10"><p>Validator</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></td>
+  <td data-ice="testCount">6</td>
+</tr>
+
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/util/validator.js.html#lineNumber15"><p>validateCollectionDoc</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/util/validator.js~Validator.html#static-method-validateCollectionDoc">Validator.validateCollectionDoc</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/util/validator.js.html#lineNumber20"><p>should not throw an error on valid input</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/util/validator.js.html#lineNumber24"><p>should throw an error on invalid input</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/util/validator.js.html#lineNumber32"><p>validateAccessToken</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/util/validator.js~Validator.html#static-method-validateAccessToken">Validator.validateAccessToken</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/util/validator.js.html#lineNumber37"><p>should not throw an error on valid input</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/util/validator.js.html#lineNumber41"><p>should throw an error on invalid input</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+
+<tr class="test-describe" data-ice="testDescribe" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span class="toggle closed"></span><span><a href="test-file/unit/util/validator.js.html#lineNumber49"><p>validateDeviceCode</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target"><span><a href="class/src/util/validator.js~Validator.html#static-method-validateDeviceCode">Validator.validateDeviceCode</a></span></td>
+  <td data-ice="testCount">2</td>
+</tr>
+
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/util/validator.js.html#lineNumber54"><p>should not throw an error on valid input</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+<tr data-ice="testIt" style="display: none;" data-test-depth="2">
+  <td data-ice="testDescription" style="padding-left: 30px"><span><a href="test-file/unit/util/validator.js.html#lineNumber58"><p>should throw an error on invalid input</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+  <td></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

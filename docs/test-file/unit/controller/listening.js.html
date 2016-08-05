@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">unit/controller/listening.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">unit/controller/listening.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import chai from &apos;chai&apos;;
+import chaiAsPromised from &apos;chai-as-promised&apos;;
+import sinon from &apos;sinon&apos;;
+import { testConfig } from &apos;../../test&apos;;
+import mockery from &apos;mockery&apos;;
+import fetchMock from &apos;fetch-mock&apos;;
+import { LISTENING_V2_RECOMMENDATIONS_RESPONSE, ACCESS_TOKEN_RESPONSE } from &apos;./../../test-data&apos;;
+import Listening from &apos;./../../../src/controller/listening&apos;;
+import NprOne from &apos;./../../../src/index&apos;;
+
+const should = chai.should();
+chai.use(chaiAsPromised);
+
+/** @test {Listening} */
+describe(&apos;Listening&apos;, () =&gt; {
+    const recommendUrl = `^${NprOne.getServiceUrl(&apos;listening&apos;)}/recommendations`;
+    // This hostname is set in TEST_DATA output
+    const ratingUrl = `^${NprOne.getServiceUrl(&apos;listening&apos;)}/ratings`;
+    const adsWizzUrl = &apos;^https://demo.adswizz.com&apos;;
+    const adsWizzWwwUrl = &apos;https://adswizz.com&apos;;
+    const adsWizzCdnUrl = &apos;^https://delivery-s3.adswizz.com&apos;;
+    const doubleClickUrl = &apos;^https://ad.doubleclick.net&apos;;
+    const historyUrl = `^${NprOne.getServiceUrl(&apos;listening&apos;)}/history`;
+
+    let testDataClone = {};
+    let listening;
+    let refreshTokenUrl;
+
+    const advance = (recommendation, rating) =&gt; {
+        testDataClone.items.shift();
+        recommendation.recordAction(NprOne.Action.START, 0);
+
+        return new Promise((resolve) =&gt; {
+            setTimeout(() =&gt; {
+                recommendation.recordAction(rating, recommendation.attributes.duration);
+                resolve(listening.getRecommendation());
+            }, 5);
+        });
+    };
+
+    const skip = recommendation =&gt; {
+        return advance(recommendation, NprOne.Action.SKIP);
+    };
+
+    const complete = recommendation =&gt; {
+        return advance(recommendation, NprOne.Action.COMPLETED);
+    };
+
+    const tapthru = recommendation =&gt; {
+        return advance(recommendation, NprOne.Action.TAPTHRU);
+    };
+
+    beforeEach(() =&gt; {
+        testDataClone = JSON.parse(JSON.stringify(LISTENING_V2_RECOMMENDATIONS_RESPONSE));
+
+        mockery.registerMock(&apos;fetch&apos;, fetchMock
+            .mock(recommendUrl, &apos;GET&apos;, testDataClone)
+            .mock(ratingUrl, &apos;POST&apos;, testDataClone)
+            .mock(adsWizzUrl, &apos;GET&apos;)
+            .mock(adsWizzWwwUrl, &apos;GET&apos;, 200)
+            .mock(adsWizzCdnUrl, &apos;GET&apos;, 200)
+            .mock(doubleClickUrl, &apos;GET&apos;)
+            .mock(historyUrl, &apos;GET&apos;, LISTENING_V2_RECOMMENDATIONS_RESPONSE)
+            .getMock());
+
+        listening = new Listening();
+        NprOne.config = testConfig;
+
+        refreshTokenUrl = `^${testConfig.authProxyBaseUrl}${NprOne.config.refreshTokenPath}`;
+    });
+
+    afterEach(() =&gt; {
+        fetchMock.restore();
+        mockery.deregisterMock(&apos;fetch&apos;);
+    });
+
+    /** @test {Listening#getRecommendation} */
+    describe(&apos;getRecommendation&apos;, () =&gt; {
+        let firstRecommendation = null;
+
+        const sendSingleAction = (action) =&gt; {
+            return listening.getRecommendation()
+                .then(recommendation =&gt; {
+                    firstRecommendation = recommendation;
+                    testDataClone.items.shift();
+                    firstRecommendation.recordAction(action, 0);
+                    return listening.getRecommendation();
+                });
+        };
+
+
+        beforeEach(() =&gt; {
+            firstRecommendation = null;
+        });
+
+
+        it(&apos;should throw an exception if access token is not supplied&apos;, () =&gt; {
+            NprOne.config = { accessToken: &apos;&apos; };
+
+            chai.expect(() =&gt; {
+                listening.getRecommendation();
+            }).to.throw(&apos;An Access Token must set before making API requests.&apos;);
+        });
+
+        it(&apos;should make a request to /recommendations with channel npr if a bad channel is passed in&apos;, done =&gt; {
+            listening.getRecommendation(&apos;&apos;, { &apos;bad&apos;: &apos;channel&apos; })
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should make a request to /recommendations when no queued ratings exist&apos;, done =&gt; {
+            listening.getRecommendation()
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should return the currently executing promise if called again before first promise has resolved&apos;, done =&gt; {
+            const p1 = listening.getRecommendation();
+            const p2 = listening.getRecommendation();
+
+            Promise.all([p1, p2])
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.true;
+                    fetchMock.calls(recommendUrl).length.should.equal(1); // most important check
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should make a request to /recommendations with a custom channel when no queued ratings exist and a channel is specified&apos;, done =&gt; {
+            listening.getRecommendation(null, &apos;my_channel&apos;)
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.true;
+                    /channel=my_channel/.test(fetchMock.lastUrl()).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should include x- headers if supplied in config when making API requests&apos;, done =&gt; {
+            NprOne.config = Object.assign({}, testConfig, {
+                advertisingId: &apos;test_ad_id&apos;,
+                advertisingTarget: &apos;test_ad_target&apos;,
+            });
+
+            listening.getRecommendation()
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    const lastCall = fetchMock.lastCall(recommendUrl);
+                    lastCall[1].headers._headers[&apos;x-advertising-id&apos;][0].should.equal(&apos;test_ad_id&apos;);
+                    lastCall[1].headers._headers[&apos;x-advertising-target&apos;][0].should.equal(&apos;test_ad_target&apos;);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should make /recommendations request with sharedMediaId when a UID is given&apos;, done =&gt; {
+            fetchMock.restore();
+            mockery.deregisterMock(&apos;fetch&apos;);
+
+            const url = `^${NprOne.getServiceUrl(&apos;listening&apos;)}/recommendations?channel=npr&amp;sharedMediaId=123`;
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(url, &apos;GET&apos;, LISTENING_V2_RECOMMENDATIONS_RESPONSE)
+                .mock(adsWizzWwwUrl, &apos;GET&apos;, 200)
+                .mock(adsWizzCdnUrl, &apos;GET&apos;, 200)
+                .getMock());
+
+            listening.getRecommendation(&apos;123&apos;)
+                .then(() =&gt; {
+                    fetchMock.called(url).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should make a request to /ratings when a rating is queued&apos;, done =&gt; {
+            listening.getRecommendation()
+                .then(complete)
+                .then(() =&gt; {
+                    fetchMock.called(ratingUrl).should.be.true;
+                    fetchMock.called(recommendUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should make a request to /ratings and not send duplicate ratings if an action was record twice&apos;, done =&gt; {
+            listening.getRecommendation()
+                .then(recommendation =&gt; {
+                    // COMPLETED before START is not correct, but needed for this test
+                    recommendation.recordAction(NprOne.Action.COMPLETED, recommendation.attributes.duration);
+                    recommendation.recordAction(NprOne.Action.COMPLETED, recommendation.attributes.duration);
+                    recommendation.recordAction(NprOne.Action.START, 0);
+                })
+                .then(() =&gt; {
+                    fetchMock.called(ratingUrl).should.be.true;
+                    fetchMock.called(recommendUrl).should.be.true;
+                    JSON.parse(fetchMock.lastOptions(ratingUrl).body).length.should.be.equal(2); // 2 ratings, not 3!
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should return the same recommendation when no START rating has been received&apos;, done =&gt; {
+            listening.getRecommendation()
+                .then(recommendation =&gt; {
+                    firstRecommendation = recommendation;
+                    return listening.getRecommendation();
+                })
+                .then((nextRecommendation) =&gt; {
+                    firstRecommendation.should.deep.equal(nextRecommendation);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should return a different recommendation when a START rating has been received&apos;, done =&gt; {
+            sendSingleAction(NprOne.Action.START)
+                .then(nextRecommendation =&gt; {
+                    firstRecommendation.should.not.equal(nextRecommendation);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should return a different recommendation when a TIMEOUT rating has been received&apos;, done =&gt; {
+            sendSingleAction(NprOne.Action.TIMEOUT)
+                .then(nextRecommendation =&gt; {
+                    firstRecommendation.should.not.equal(nextRecommendation);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should return a different recommendation when a TAPTHRU rating has been received&apos;, done =&gt; {
+            sendSingleAction(NprOne.Action.TAPTHRU)
+                .then(nextRecommendation =&gt; {
+                    firstRecommendation.should.not.equal(nextRecommendation);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should fire impression url GET requests for sponsorship when a START happens&apos;, done =&gt; {
+            testDataClone.items.splice(0, 3); // remove stationId, newscast, story
+
+            listening.getRecommendation()
+                .then(recommendation =&gt; { // start ad
+                    recommendation.attributes.uid.should.equal(&apos;299999:AdswizzAd13460|2016-02-17-12-42&apos;);
+                    return complete(recommendation);
+                })
+                .then(recommendation =&gt; { // start promo
+                    recommendation.attributes.uid.should.equal(&apos;458726244:458726246-P&apos;);
+                    fetchMock.called(adsWizzUrl).should.be.true;
+                    fetchMock.called(doubleClickUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should disable ads when an adblocker is present&apos;, done =&gt; {
+            fetchMock.restore();
+            mockery.deregisterMock(&apos;fetch&apos;);
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(recommendUrl, &apos;GET&apos;, testDataClone)
+                .mock(ratingUrl, &apos;POST&apos;, testDataClone)
+                .mock(adsWizzWwwUrl, &apos;GET&apos;, { &apos;throws&apos;: new Error(&apos;TypeError: Failed to fetch&apos;) })
+                .mock(adsWizzCdnUrl, &apos;GET&apos;, { &apos;throws&apos;: new Error(&apos;TypeError: Failed to fetch&apos;) })
+                .getMock());
+
+            testDataClone.items.splice(0, 2); // remove stationId, newscast,
+
+            NprOne.config = testConfig;
+            listening = new NprOne();
+
+
+            listening.getRecommendation()
+                .then(recommendation =&gt; {
+                    recommendation.attributes.uid.should.equal(&apos;466898631:466898632&apos;);
+                    return complete(recommendation);
+                })
+                .then(recommendation =&gt; {
+                    // normally sponsorship would be next
+                    recommendation.attributes.uid.should.equal(&apos;458726244:458726246-P&apos;);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should progress through the flow normally&apos;, done =&gt; {
+            listening.getRecommendation()
+                .then(recommendation =&gt; {
+                    recommendation.attributes.uid.should.equal(&apos;300305:idWAMU2016-02-16-09-37&apos;);
+                    return complete(recommendation);
+                })
+                .then(recommendation =&gt; {
+                    recommendation.attributes.uid.should.equal(&apos;999900001:2016-02-16T09:00:00-0500|short&apos;);
+                    return skip(recommendation);
+                })
+                .then(recommendation =&gt; {
+                    recommendation.attributes.uid.should.equal(&apos;466898631:466898632&apos;);
+                    return complete(recommendation);
+                })
+                .then(recommendation =&gt; {
+                    recommendation.attributes.uid.should.equal(&apos;299999:AdswizzAd13460|2016-02-17-12-42&apos;);
+                    return complete(recommendation);
+                })
+                .then(recommendation =&gt; {
+                    recommendation.attributes.uid.should.equal(&apos;458726244:458726246-P&apos;);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should go to sponsored channel on TAPTHRU to sponsorship [tests related]&apos;, done =&gt; {
+            let actionUrl = &apos;&apos;;
+
+            testDataClone.items.splice(0, 3); // remove stationId, newscast, story
+
+            listening.getRecommendation()
+                .then(recommendation =&gt; {
+                    recommendation.attributes.uid.should.equal(&apos;299999:AdswizzAd13460|2016-02-17-12-42&apos;);
+                    actionUrl = recommendation.getActionRecommendationUrl();
+                    actionUrl.should.not.be.empty;
+                    return tapthru(recommendation);
+                })
+                .then(() =&gt; {
+                    /*
+                     * All bets are off here as to what the recommendation would be - I&apos;m not going to mock
+                     * the sponsored channel API behavior. It&apos;s sufficient to see that we made a ratings call to
+                     * the sponsored channel URL.
+                     */
+                    fetchMock.lastUrl().should.equal(actionUrl);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should go to action URL on TAPTHRU of promo [tests action, or callsToAction]&apos;, done =&gt; {
+            let actionUrl = &apos;&apos;;
+
+            testDataClone.items.splice(0, 4); // remove stationId, newscast, story, ad
+
+            listening.getRecommendation()
+                .then(recommendation =&gt; {
+                    recommendation.attributes.uid.should.equal(&apos;458726244:458726246-P&apos;);
+                    actionUrl = recommendation.getActionRecommendationUrl();
+                    actionUrl.should.not.be.empty;
+                    return tapthru(recommendation);
+                })
+                .then(() =&gt; {
+                    /*
+                     * All bets are off here as to what the recommendation would be - I&apos;m not going to mock
+                     * the promo behavior. It&apos;s sufficient to see that we made a ratings call to
+                     * the promo channel URL.
+                     */
+                    fetchMock.lastUrl().should.equal(actionUrl);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should throw when no API recommendations are returned and no previous exist&apos;, done =&gt; {
+            fetchMock.restore();
+            mockery.deregisterMock(&apos;fetch&apos;);
+
+            const url = `^${NprOne.getServiceUrl(&apos;listening&apos;)}/recommendations`;
+
+            testDataClone.items = [];
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(url, &apos;GET&apos;, testDataClone)
+                .mock(adsWizzWwwUrl, &apos;GET&apos;, 200)
+                .mock(adsWizzCdnUrl, &apos;GET&apos;, 200)
+                .getMock());
+
+            listening.getRecommendation().should.be.rejectedWith(&apos;Error: All recommendations exhausted!&apos;).notify(done);
+        });
+
+        it(&apos;should call the refresh token endpoint in the auth proxy if the getRecommendations call returns a 401, and then retry the request&apos;, done =&gt; {
+            let numTries = 0;
+
+            const responses = () =&gt; {
+                numTries += 1;
+
+                if (numTries === 1) {
+                    return 401;
+                } else {
+                    return testDataClone;
+                }
+            };
+
+            fetchMock.restore();
+            mockery.deregisterMock(&apos;fetch&apos;);
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(recommendUrl, &apos;GET&apos;, responses)
+                .mock(refreshTokenUrl, &apos;POST&apos;, ACCESS_TOKEN_RESPONSE)
+                .getMock());
+
+            const originalAccessToken = NprOne.accessToken;
+
+            listening.getRecommendation()
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.true;
+                    fetchMock.called(refreshTokenUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    NprOne.accessToken.should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                    NprOne.accessToken.should.not.equal(originalAccessToken);
+                    done();
+                })
+                .catch(done);
+        });
+
+        describe(&apos;if queueRecommendationFromChannel() was previously called and the recommendation with the given UID was already added to flowRecommendations&apos;, () =&gt; {
+            const badUid = &apos;1234:5678&apos;;
+            const goodUid = &apos;466898631:466898632&apos;;
+
+            beforeEach(() =&gt; {
+                listening._flowRecommendations = testDataClone.items;
+            });
+
+            it(&apos;should NOT make a new API call if the UID is present in the cached list, and return that item&apos;, done =&gt; {
+                listening.getRecommendation(goodUid)
+                    .then((recommendation) =&gt; {
+                        fetchMock.called(recommendUrl).should.be.false;
+                        fetchMock.called(ratingUrl).should.be.false;
+                        fetchMock.calls().unmatched.length.should.equal(0);
+                        recommendation.attributes.uid.should.equal(goodUid);
+                        done();
+                    })
+                    .catch(done);
+            });
+
+            it(&apos;should make a new API call if the UID is not found in the list&apos;, done =&gt; {
+                listening.getRecommendation(badUid)
+                    .then(() =&gt; {
+                        fetchMock.called(recommendUrl).should.be.true;
+                        fetchMock.calls().unmatched.length.should.equal(0);
+                        done();
+                    })
+                    .catch(done);
+            });
+        });
+    });
+
+    /** @test {Listening#getUpcomingFlowRecommendations} */
+    describe(&apos;getUpcomingFlowRecommendations&apos;, () =&gt; {
+        it(&apos;should make a GET request when no flow recommendations are present&apos;, done =&gt; {
+            listening.getUpcomingFlowRecommendations()
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    /channel=npr/.test(fetchMock.lastUrl()).should.be.true;
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should NOT make a GET request when flow recommendations are present&apos;, done =&gt; {
+            listening._flowRecommendations = [1, 2, 3, 4]; // technically doesn&apos;t even matter what&apos;s in the array...
+
+            listening.getUpcomingFlowRecommendations()
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.false;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should make a GET request with a custom channel when no flow recommendations are present and a channel is specified&apos;, done =&gt; {
+            listening.getUpcomingFlowRecommendations(&apos;newscasts&apos;)
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.true;
+                    /channel=newscasts/.test(fetchMock.lastUrl()).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+    /** @test {Listening#getRecommendationsFromChannel} */
+    describe(&apos;getRecommendationsFromChannel&apos;, () =&gt; {
+        it(&apos;should make a GET request to the default channel (&quot;recommended&quot;) if no channel is specified&apos;, done =&gt; {
+            listening.getRecommendationsFromChannel()
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.true;
+                    /channel=recommended$/.test(fetchMock.lastUrl()).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should make a GET request to the specified channel if a channel is specified&apos;, done =&gt; {
+            listening.getRecommendationsFromChannel(&apos;notrecommended&apos;)
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.true;
+                    /channel=notrecommended$/.test(fetchMock.lastUrl()).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should make a GET request to the default channel (&quot;recommended&quot;) if an invalid channel format is supplied&apos;, done =&gt; {
+            listening.getRecommendationsFromChannel(null)
+                .then(() =&gt; {
+                    fetchMock.called(recommendUrl).should.be.true;
+                    /channel=recommended$/.test(fetchMock.lastUrl()).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should flush any pending ratings before returning channel recommendations&apos;, done =&gt; {
+            const sendRatingsSpy = sinon.spy(listening, &apos;_sendRatings&apos;);
+            listening.getRecommendation()
+                .then(recommendation =&gt; {
+                    recommendation.recordAction(NprOne.Action.COMPLETED, recommendation.attributes.duration);
+                })
+                .then(() =&gt; {
+                    listening.getRecommendationsFromChannel()
+                        .then(() =&gt; {
+                            fetchMock.called(ratingUrl).should.be.true;
+                            fetchMock.called(recommendUrl).should.be.true;
+                            /channel=recommended$/.test(fetchMock.lastUrl()).should.be.true;
+                            fetchMock.calls().unmatched.length.should.equal(0);
+                            sinon.assert.calledOnce(sendRatingsSpy);
+                            done();
+                        })
+                        .catch(done);
+                })
+                .catch(done);
+        });
+    });
+
+    /** @test {Listening#queueRecommendationFromChannel} */
+    describe(&apos;queueRecommendationFromChannel&apos;, () =&gt; {
+        const channel = &apos;my_channel&apos;;
+        const badUid = &apos;1234:5678&apos;;
+        const goodUid = &apos;466898631:466898632&apos;;
+
+        it(&apos;should throw a TypeError if no channel is specified&apos;, () =&gt; {
+            chai.expect(() =&gt; {
+                listening.queueRecommendationFromChannel();
+            }).to.throw(&apos;Must pass in a valid channel to queueRecommendationFromChannel()&apos;);
+        });
+
+        it(&apos;should throw a TypeError if a channel is specified but is not a valid string&apos;, () =&gt; {
+            chai.expect(() =&gt; {
+                listening.queueRecommendationFromChannel(1234);
+            }).to.throw(&apos;Must pass in a valid channel to queueRecommendationFromChannel()&apos;);
+        });
+
+        it(&apos;should throw a TypeError if no UID is specified&apos;, () =&gt; {
+            chai.expect(() =&gt; {
+                listening.queueRecommendationFromChannel(channel);
+            }).to.throw(&apos;Must pass in a valid uid to queueRecommendationFromChannel()&apos;);
+        });
+
+        it(&apos;should throw a TypeError if a channel is specified but is not a valid string&apos;, () =&gt; {
+            chai.expect(() =&gt; {
+                listening.queueRecommendationFromChannel(channel, 1234);
+            }).to.throw(&apos;Must pass in a valid uid to queueRecommendationFromChannel()&apos;);
+        });
+
+        it(&apos;should throw an Error if getRecommendationsFromChannel() was not previously called&apos;, () =&gt; {
+            chai.expect(() =&gt; {
+                listening.queueRecommendationFromChannel(channel, badUid);
+            }).to.throw(&apos;Results from channel &quot;my_channel&quot; are not cached. You must call getRecommendationsFromChannel() first.&apos;);
+        });
+
+
+        describe(&apos;if getRecommendationsFromChannel() was previously called but the cached list of recommendations is empty&apos;, () =&gt; {
+            beforeEach(() =&gt; {
+                listening._channelRecommendations[channel] = [];
+            });
+
+            it(&apos;should throw an Error&apos;, () =&gt; {
+                chai.expect(() =&gt; {
+                    listening.queueRecommendationFromChannel(channel, badUid);
+                }).to.throw(&apos;Results from channel &quot;my_channel&quot; are not cached. You must call getRecommendationsFromChannel() first.&apos;);
+            });
+        });
+
+
+        describe(&apos;if getRecommendationsFromChannel() was previously called and the cached list of recommendations is not empty&apos;, () =&gt; {
+            beforeEach(() =&gt; {
+                listening._channelRecommendations[channel] = testDataClone.items;
+            });
+
+            it(&apos;should throw an Error if the uid is not found in the list&apos;, () =&gt; {
+                chai.expect(() =&gt; {
+                    listening.queueRecommendationFromChannel(channel, badUid);
+                }).to.throw(&apos;Unable to find story with uid &apos; + badUid + &apos; in cached list of recommendations from channel &quot;&apos; + channel + &apos;&quot;.&apos;);
+            });
+
+            it(&apos;should return the found recommendation if the UID is present in the cached list&apos;, () =&gt; {
+                const result = listening.queueRecommendationFromChannel(channel, goodUid);
+
+                result.attributes.uid.should.equal(goodUid);
+            });
+
+            it(&apos;should put the found recommendation at the top of the flow recommendations if the UID is present in the cached list&apos;, () =&gt; {
+                listening.queueRecommendationFromChannel(channel, goodUid);
+
+                listening._flowRecommendations[0].attributes.uid.should.equal(goodUid);
+            });
+        });
+    });
+
+    /** @test {Listening#getHistory} */
+    describe(&apos;getHistory&apos;, () =&gt; {
+        it(&apos;should make a request to /history when getHistory is called&apos;, done =&gt; {
+            listening.getHistory()
+                .then(recommendations =&gt; {
+                    fetchMock.called(historyUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    recommendations.should.not.be.undefined;
+                    recommendations.length.should.be.equal(6);
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+    /** @test {Listening#resetFlow} */
+    describe(&apos;resetFlow&apos;, () =&gt; {
+        describe(&apos;no recommendations have been requested yet&apos;, () =&gt; {
+            it(&apos;should return a fulfilled promise&apos;, done =&gt; {
+                listening.resetFlow().should.eventually.be.ok.notify(done);
+            });
+        });
+        describe(&apos;if recommendations have already been requested&apos;, () =&gt; {
+            describe(&apos;and no queued ratings are present&apos;, () =&gt; {
+                it(&apos;should reset internal variables to allow the flow to reset&apos;, done =&gt; {
+                    listening.getRecommendation()
+                        .then(() =&gt; {
+                            listening.resetFlow()
+                                .then(() =&gt; {
+                                    listening._flowRecommendations.length.should.equal(0);
+                                    chai.expect(listening._flowPromise).to.be.null;
+                                    done();
+                                })
+                                .catch(done);
+                        })
+                        .catch(done);
+                });
+            });
+            describe(&apos;and queued ratings are present&apos;, () =&gt; {
+                it(&apos;should send the queued ratings first, then reset&apos;, done =&gt; {
+                    listening.getRecommendation()
+                        .then(recommendation =&gt; {
+                            recommendation.recordAction(NprOne.Action.COMPLETED, recommendation.attributes.duration);
+                            return listening.resetFlow();
+                        })
+                        .then(() =&gt; {
+                            fetchMock.called(ratingUrl).should.be.true;
+                            fetchMock.calls().unmatched.length.should.equal(0);
+                            listening._flowRecommendations.length.should.equal(0);
+                            done();
+                        })
+                        .catch(done);
+                });
+            });
+        });
+    });
+
+    /** @test {Listening#resumeFlowFromRecommendation} */
+    describe(&apos;resumeFlowFromRecommendation&apos;, () =&gt; {
+        describe(&apos;no recommendations have been requested yet&apos;, () =&gt; {
+            it(&apos;should set the recommendations to the active recommendation &apos; +
+               &apos;and the flow should advance as normal when actions are received&apos;, done =&gt; {
+                testDataClone.items.splice(0, 1); // remove stationId, should be newscast
+
+                const rec = listening.resumeFlowFromRecommendation(testDataClone);
+                rec.recordAction(NprOne.Action.START, 0);
+
+                listening.getRecommendation()
+                    .then(recommendation =&gt; {
+                        fetchMock.called(ratingUrl).should.be.true;
+                        fetchMock.calls().unmatched.length.should.equal(0);
+                        listening._flowRecommendations.length.should.equal(5);  // testDataClone
+                        recommendation.attributes.uid !== testDataClone.items[0].attributes.uid;
+                        done();
+                    })
+                    .catch(done);
+            });
+        });
+    });
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

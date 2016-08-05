@@ -1,0 +1,108 @@
+{
+  "name": "@npr/npr-one-sdk",
+  "version": "0.0.0-semantically-released",
+  "homepage": "http://npr.github.io/npr-one-api-js-sdk/",
+  "description": "An SDK for interfacing with the NPR One API, designed as a Universal Javascript Module",
+  "keywords": [
+    "npr",
+    "nprone",
+    "radio",
+    "sdk"
+  ],
+  "author": "NPR Enterprise Team <NPROneEnterprise@npr.org> (http://dev.npr.org/)",
+  "contributors": [
+    "Jared Biehler <jaredbcoding@gmail.com>",
+    "Nara Kasbergen <nara.kasbergen@gmail.com>"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npr/npr-one-api-js-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/npr/npr-one-api-js-sdk/issues",
+    "email": "NPROneEnterprise@npr.org"
+  },
+  "files": [
+    "dist",
+    "src",
+    "typings.json"
+  ],
+  "main": "./dist/node/index.js",
+  "browser": "./dist/browser/npr-one-sdk.js",
+  "directories": {
+    "lib": "src",
+    "test": "test",
+    "example": "examples"
+  },
+  "typings": "./src/index.d.ts",
+  "scripts": {
+    "update": "npm prune && npm cache clean && npm install",
+    "lint": "eslint 'src/**/*.js'",
+    "lint:fix": "npm run lint -- --fix",
+    "compile": "npm run compile:node && npm run compile:browser",
+    "compile:node": "rm -rf dist/node && babel src -d dist/node --optional runtime",
+    "compile:browser": "rm -rf dist/browser && webpack",
+    "pretest": "rm -rf test-reports/ && mkdir test-reports/",
+    "test": "mocha --compilers js:babel-core/register test/test.js",
+    "test:debug": "env LOG=on npm run test",
+    "precoverage": "rm -rf test-reports/coverage/ && mkdir test-reports/coverage/",
+    "coverage": "babel-node ./node_modules/.bin/babel-istanbul cover --dir ./test-reports/coverage ./node_modules/mocha/bin/_mocha --coverage --report html",
+    "coverage:upload": "npm run coverage -- --report lcovonly -- -R spec && cat ./test-reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "predocs": "rm -rf docs/",
+    "docs": "esdoc -c esdoc.json",
+    "commit": "git-cz",
+    "prepublish": "not-in-install && npm run compile || true",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "dependencies": {
+    "es6-error": "3.0.1",
+    "isomorphic-fetch": "2.2.1",
+    "js-logger": "1.3.0",
+    "url-parse": "1.0.5"
+  },
+  "devDependencies": {
+    "babel-cli": "6.11.4",
+    "babel-core": "6.13.2",
+    "babel-eslint": "6.1.2",
+    "babel-istanbul": "0.11.0",
+    "babel-loader": "6.2.4",
+    "babel-plugin-transform-proto-to-assign": "6.9.0",
+    "babel-preset-es2015": "6.13.2",
+    "babel-preset-es2015-loose": "7.0.0",
+    "chai": "3.5.0",
+    "chai-as-promised": "5.3.0",
+    "commitizen": "2.8.5",
+    "coveralls": "2.11.12",
+    "cz-conventional-changelog": "1.1.7",
+    "esdoc": "0.4.8",
+    "esdoc-importpath-plugin": "0.0.1",
+    "eslint": "3.2.2",
+    "eslint-config-airbnb-base": "5.0.1",
+    "eslint-loader": "1.5.0",
+    "eslint-plugin-import": "1.12.0",
+    "fetch-mock": "4.6.1",
+    "in-publish": "2.0.0",
+    "istanbul": "0.4.4",
+    "mocha": "2.5.3",
+    "mocha-lcov-reporter": "1.2.0",
+    "mockery": "1.7.0",
+    "semantic-release": "4.3.5",
+    "shared-git-hooks": "1.2.1",
+    "sinon": "1.17.5",
+    "sinon-chai": "2.8.0",
+    "webpack": "1.13.1"
+  },
+  "engines": {
+    "node": ">= 6",
+    "npm": ">= 2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

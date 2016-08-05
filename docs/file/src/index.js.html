@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/index.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import &apos;isomorphic-fetch&apos;;
+import Action from &apos;./model/action&apos;;
+import Logger from &apos;./util/logger&apos;;
+import Authorization from &apos;./controller/authorization&apos;;
+import Listening from &apos;./controller/listening&apos;;
+import Identity from &apos;./controller/identity&apos;;
+import StationFinder from &apos;./controller/station-finder&apos;;
+
+Logger.setLevel(Logger.WARN);
+
+/**
+ * This SDK attempts to abstract away most of the interaction with the NPR One API.
+ * In general, a consumer of this API should be primarily concerned with asking for
+ * recommendations and recording user actions against those recommendations.
+ */
+export class NprOneSDK {
+    /**
+     * Instantiates the NPR One SDK.
+     */
+    constructor() {
+        /** @type {null|Function} A callback that gets triggered whenever the access token has changed
+         * @private */
+        this._accessTokenChangedCallback = null;
+        /** @type {Authorization}
+         * @private */
+        this._authorization = new Authorization();
+        /** @type {Listening}
+         * @private */
+        this._listening = new Listening();
+        /** @type {Identity}
+         * @private */
+        this._identity = new Identity();
+        /** @type {StationFinder}
+         * @private */
+        this._stationfinder = new StationFinder();
+
+        // setup the default config
+        NprOneSDK._initConfig();
+    }
+
+    /**
+     * @typedef {Object} Config
+     * @property {string} [apiBaseUrl=&apos;https://api.npr.org&apos;] DEPRECATED / NO LONGER IN USE: The NPR One API hostname and protocol, typically `https://api.npr.org`; in most cases, this does not need to be manually set by clients
+     * @property {string} [apiVersion=&apos;v2&apos;] DEPRECATED / NO LONGER IN USE: The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients
+     * @property {string} [authProxyBaseUrl] The full URL to your OAuth proxy, e.g. `https://one.example.com/oauth2/`
+     * @property {string} [newDeviceCodePath=&apos;/device&apos;] The path to your proxy for starting a `device_code` grant (relative to `authProxyBaseUrl`)
+     * @property {string} [pollDeviceCodePath=&apos;/device/poll&apos;] The path to your proxy for polling a `device_code` grant (relative to `authProxyBaseUrl`)
+     * @property {string} [refreshTokenPath=&apos;/refresh&apos;] The path to your proxy for the `refresh_token` grant (relative to `authProxyBaseUrl`)
+     * @property {string} [tempUserPath=&apos;/temporary&apos;] The path to your proxy for the `temporary_user` grant (relative to `authProxyBaseUrl`), not available to third-party clients
+     * @property {string} [logoutPath=&apos;/logout&apos;] The path to your proxy for the `POST /authorization/v2/token/revoke` endpoint (relative to `authProxyBaseUrl`)
+     * @property {string} [accessToken] The access token to use if not using the auth proxy
+     * @property {string} [clientId] The NPR One API `client_id` to use, only required if using the auth proxy with the `temporary_user` grant type
+     * @property {string} [advertisingId] The custom X-Advertising-ID header to send with most requests, not typically used by third-party clients
+     * @property {string} [advertisingTarget] The custom X-Advertising-Target header to send with most requests, not typically used by third-party clients
+     * @property {string} [subdomain] The custom subdomain to use for requests, not typically used by third-party clients
+     */
+    /**
+     * @type {Config}
+     */
+    static get config() {
+        NprOneSDK._initConfig();
+        return NprOneSDK._config;
+    }
+
+    /**
+     * Updates private `_config` member attributes but does not overwrite entire `_config` object
+     *
+     * @type {Config}
+     */
+    static set config(value) {
+        if (value.apiBaseUrl) {
+            Logger.warn(&apos;Property &quot;apiBaseUrl&quot; in config is deprecated &apos;
+                + &apos;and will be removed in a future release. &apos;
+                + &apos;Please use the &quot;subdomain&quot; property instead if a different API URL is needed.&apos;);
+        }
+        if (value.apiVersion) {
+            Logger.warn(&apos;Property &quot;apiVersion&quot; in config is deprecated &apos;
+                + &apos;and will be removed in a future release.&apos;);
+        }
+
+        NprOneSDK._initConfig();
+        Object.assign(NprOneSDK._config, value);
+    }
+
+    /** @type {string} */
+    static get accessToken() {
+        return NprOneSDK.config.accessToken;
+    }
+
+    /** @type {string} */
+    static set accessToken(token) {
+        if (typeof token !== &apos;string&apos;) {
+            throw new TypeError(&apos;Value for accessToken must be a string&apos;);
+        }
+
+        const oldToken = NprOneSDK.accessToken;
+        NprOneSDK.config.accessToken = token;
+
+        if (oldToken !== token &amp;&amp; typeof NprOneSDK._accessTokenChangedCallback === &apos;function&apos;) {
+            NprOneSDK._accessTokenChangedCallback(token);
+        }
+    }
+
+    /**
+     * Sets a callback to be triggered whenever the SDK rotates the access token for a new one, usually when
+     * the old token expires and a `refresh_token` is used to generate a fresh token. Clients who wish to persist
+     * access tokens across sessions are urged to use this callback to be notified whenever a token change has
+     * occurred; the only other alternative is to call `get accessToken()` after every API call.
+     *
+     * @type {Function}
+     * @throws {TypeError} if the passed-in value isn&apos;t a function
+     */
+    static set onAccessTokenChanged(callback) {
+        if (typeof callback !== &apos;function&apos;) {
+            throw new TypeError(&apos;Value for onAccessTokenChanged must be a function&apos;);
+        }
+        NprOneSDK._accessTokenChangedCallback = callback;
+    }
+
+    /**
+     * Exposes the Action class for clients to record actions
+     *
+     * @type {Action}
+     */
+    static get Action() {
+        return Action;
+    }
+
+    /**
+     * Exposes the Logger class for clients to adjust logging if desired
+     *
+     * @type {src/util/logger.js~Logger}
+     */
+    static get Logger() {
+        return Logger;
+    }
+
+    /* Authorization */
+
+    /**
+     * See {@link Authorization.refreshExistingAccessToken} for description.
+     *
+     * @param {number} [numRetries=0]   The number of times this function has been tried. Will retry up to 3 times.
+     * @returns {Promise&lt;AccessToken&gt;}
+     * @throws {TypeError} if an OAuth proxy is not configured or no access token is set
+     */
+    static refreshExistingAccessToken(numRetries = 0) {
+        return Authorization.refreshExistingAccessToken(numRetries);
+    }
+
+    /**
+     * See {@link Authorization#logout} for description.
+     *
+     * @returns {Promise}
+     * @throws {TypeError} if an OAuth proxy is not configured or no access token is currently set
+     */
+    logout() {
+        return this._authorization.logout();
+    }
+
+    /**
+     * See {@link Authorization#getDeviceCode} for description.
+     *
+     * @param {Array&lt;string&gt;} [scopes=[]]   The scopes (as strings) that should be associated with the resulting access token
+     * @returns {Promise&lt;DeviceCode&gt;}
+     * @throws {TypeError} if an OAuth proxy is not configured
+     */
+    getDeviceCode(scopes = []) {
+        return this._authorization.getDeviceCode(scopes);
+    }
+
+    /**
+     * See {@link Authorization#pollDeviceCode} for description.
+     *
+     * @returns {Promise&lt;AccessToken&gt;}
+     * @throws {TypeError} if an OAuth proxy is not configured or `getDeviceCode()` was not previously called
+     */
+    pollDeviceCode() {
+        return this._authorization.pollDeviceCode();
+    }
+
+    /* Listening */
+
+    /**
+     * See {@link Listening#getRecommendation} for description.
+     *
+     * @param {string} [uid=&apos;&apos;]           Optional; a UID for a specific recommendation to play. In 99% of use cases, this is not needed.
+     * @param {string} [channel=&apos;npr&apos;]    Optional; a channel to pull the recommendation from; the main flow channel of `npr` is used as the default. In 99% of use cases, this does not need to be changed.
+     * @returns {Promise&lt;Recommendation&gt;}
+     */
+    getRecommendation(uid = &apos;&apos;, channel = &apos;npr&apos;) {
+        return this._listening.getRecommendation(uid, channel);
+    }
+
+    /**
+     * See {@link Listening#resumeFlowFromRecommendation} for description.
+     *
+     * @param {Object} json JSON object representation of a recommendation
+     * @returns {Recommendation}
+     */
+    resumeFlowFromRecommendation(json) {
+        return this._listening.resumeFlowFromRecommendation(json);
+    }
+
+    /**
+     * See {@link Listening#getUpcomingFlowRecommendations} for description.
+     *
+     * @experimental
+     * @param {string} [channel=&apos;npr&apos;]   A channel to pull the next recommendation from
+     * @returns {Promise&lt;Array&lt;Recommendation&gt;&gt;}
+     */
+    getUpcomingFlowRecommendations(channel = &apos;npr&apos;) {
+        return this._listening.getUpcomingFlowRecommendations(channel);
+    }
+
+    /**
+     * See {@link Listening#getRecommendationsFromChannel} for description.
+     *
+     * @param {string} [channel=&apos;recommended&apos;]   A non-flow (i.e. non-`npr`) channel to retrieve a list of recommendations from
+     * @returns {Promise&lt;Array&lt;Recommendation&gt;&gt;}
+     */
+    getRecommendationsFromChannel(channel = &apos;recommended&apos;) {
+        return this._listening.getRecommendationsFromChannel(channel);
+    }
+
+    /**
+     * See {@link Listening#queueRecommendationFromChannel} for description.
+     *
+     * @param {string} channel   The channel used in the original call to `getRecommendationsFromChannel()`
+     * @param {string} uid       The unique ID of the item to queue up for the user
+     * @returns {Recommendation}
+     * @throws {TypeError} If no valid channel or UID is passed in
+     * @throws {Error} If no recommendations for this channel were previously cached, or if the UID was not found in that cached list
+     */
+    queueRecommendationFromChannel(channel, uid) {
+        return this._listening.queueRecommendationFromChannel(channel, uid);
+    }
+
+    /**
+     * See {@link Listening#getHistory} for description.
+     *
+     * @returns {Promise&lt;Array&lt;Recommendation&gt;&gt;}
+     */
+    getHistory() {
+        return this._listening.getHistory();
+    }
+
+    /**
+     * See {@link Listening#resetFlow} for description.
+     *
+     * @returns {Promise}
+     */
+    resetFlow() {
+        return this._listening.resetFlow();
+    }
+
+    /* Identity */
+
+    /**
+     * See {@link Identity#getUser} for description.
+     *
+     * @returns {Promise&lt;User&gt;}
+     */
+    getUser() {
+        return this._identity.getUser();
+    }
+
+    /**
+     * See {@link Identity#setUserStation} for description.
+     *
+     * @param {number|string} stationId   The station&apos;s ID, which is either an integer or a numeric string (e.g. `123` or `&apos;123&apos;`)
+     * @returns {Promise&lt;User&gt;}
+     */
+    setUserStation(stationId) {
+        return this._identity.setUserStation(stationId);
+    }
+
+    /**
+     * See {@link Identity#followShow} for description.
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `&apos;123&apos;`)
+     * @returns {Promise&lt;User&gt;}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     */
+    followShow(aggregationId) {
+        return this._identity.followShow(aggregationId);
+    }
+
+    /**
+     * See {@link Identity#unfollowShow} for description.
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `&apos;123&apos;`)
+     * @returns {Promise&lt;User&gt;}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     */
+    unfollowShow(aggregationId) {
+        return this._identity.unfollowShow(aggregationId);
+    }
+
+    /**
+     * See {@link Identity#createTemporaryUser} for description.
+     *
+     * @returns {Promise&lt;User&gt;}
+     * @throws {TypeError} if an OAuth proxy is not configured or no client ID is set
+     */
+    createTemporaryUser() {
+        return this._identity.createTemporaryUser();
+    }
+
+    /* Station Finder */
+
+    /**
+     * See {@link StationFinder#searchStations} for description.
+     *
+     * @param {null|string} [query]   An optional query, which can be a station name, network name, or zip code
+     * @returns {Promise&lt;Array&lt;Station&gt;&gt;}
+     */
+    searchStations(query = null) {
+        return this._stationfinder.searchStations(query);
+    }
+
+    /**
+     * See {@link StationFinder#searchStationsByLatLongCoordinates} for description.
+     *
+     * @param {number} lat    A float representing the latitude value of the geographic coordinates
+     * @param {number} long   A float representing the longitude value of the geographic coordinates
+     * @returns {Promise&lt;Array&lt;Station&gt;&gt;}
+     */
+    searchStationsByLatLongCoordinates(lat, long) {
+        return this._stationfinder.searchStationsByLatLongCoordinates(lat, long);
+    }
+
+    /**
+     * See {@link StationFinder#searchStationsByCityAndState} for description.
+     *
+     * @param {string} city     A full city name (e.g. &quot;New York&quot;, &quot;San Francisco&quot;, &quot;Phoenix&quot;)
+     * @param {string} state    A state name (e.g. &quot;Maryland&quot;) or abbreviation (e.g. &quot;MD&quot;)
+     * @returns {Promise&lt;Array&lt;Station&gt;&gt;}
+     */
+    searchStationsByCityAndState(city, state) {
+        return this._stationfinder.searchStationsByCityAndState(city, state);
+    }
+
+    /**
+     * See {@link StationFinder#searchStationsByCity} for description.
+     *
+     * @param {string} city   A full city name (e.g. &quot;New York&quot;, &quot;San Francisco&quot;, &quot;Phoenix&quot;)
+     * @returns {Promise&lt;Array&lt;Station&gt;&gt;}
+     */
+    searchStationsByCity(city) {
+        return this._stationfinder.searchStationsByCity(city);
+    }
+
+    /**
+     * See {@link StationFinder#searchStationsByState} for description.
+     *
+     * @param {string} state    A state name (e.g. &quot;Maryland&quot;) or abbreviation (e.g. &quot;MD&quot;)
+     * @returns {Promise&lt;Array&lt;Station&gt;&gt;}
+     */
+    searchStationsByState(state) {
+        return this._stationfinder.searchStationsByState(state);
+    }
+
+    /**
+     * See {@link StationFinder#getStationDetails} for description.
+     *
+     * @param {number|string} stationId   The station&apos;s ID, which is either an integer or a numeric string (e.g. `123` or `&apos;123&apos;`)
+     * @returns {Promise&lt;Station&gt;}
+     */
+    getStationDetails(stationId) {
+        return this._stationfinder.getStationDetails(stationId);
+    }
+
+    /**
+     * Returns the foundational path for a given service
+     *
+     * @param {string} service
+     * @returns {string}
+     * @throws {TypeError} if the passed-in service name is missing or invalid
+     */
+    static getServiceUrl(service) {
+        switch (service) {
+            case &apos;authorization&apos;:
+                return `https://${NprOneSDK.config.subdomain}authorization.api.npr.org/v2`;
+            case &apos;identity&apos;:
+                return `https://${NprOneSDK.config.subdomain}identity.api.npr.org/v2`;
+            case &apos;listening&apos;:
+                return `https://${NprOneSDK.config.subdomain}listening.api.npr.org/v2`;
+            case &apos;stationfinder&apos;:
+                return `https://${NprOneSDK.config.subdomain}station.api.npr.org/v3`;
+            default:
+                throw new TypeError(&apos;Must specify a valid service name&apos;);
+        }
+    }
+
+    /**
+     * Initializes the config using default settings.
+     *
+     * @private
+     */
+    static _initConfig() {
+        if (!NprOneSDK._config) {
+            NprOneSDK._config = {
+                authProxyBaseUrl: &apos;&apos;,
+                newDeviceCodePath: &apos;/device&apos;,
+                pollDeviceCodePath: &apos;/device/poll&apos;,
+                refreshTokenPath: &apos;/refresh&apos;,
+                tempUserPath: &apos;/temporary&apos;,
+                logoutPath: &apos;/logout&apos;,
+                accessToken: &apos;&apos;,
+                clientId: &apos;&apos;,
+                advertisingId: &apos;&apos;,
+                advertisingTarget: &apos;&apos;,
+                subdomain: &apos;&apos;,
+            };
+        }
+    }
+}
+export default NprOneSDK;
+
+/**
+ * @external {Response} https://developer.mozilla.org/en-US/docs/Web/API/Response
+ */
+/**
+ * @external {Headers} https://developer.mozilla.org/en-US/docs/Web/API/Headers
+ */
+/**
+ * @external {JsLogger} https://github.com/jonnyreeves/js-logger
+ */
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

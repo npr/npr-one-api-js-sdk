@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">unit/index.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">unit/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import chai from &apos;chai&apos;;
+import sinon from &apos;sinon&apos;;
+import sinonChai from &apos;sinon-chai&apos;;
+import NprOneSDK from &apos;./../../src/index&apos;;
+import Authorization from &apos;./../../src/controller/authorization&apos;;
+import Action from &apos;./../../src/model/action&apos;;
+import Logger from &apos;./../../src/util/logger&apos;;
+
+
+const should = chai.should();
+chai.use(sinonChai);
+
+
+/** @test {NprOneSDK} */
+describe(&apos;NprOneSDK&apos;, () =&gt; {
+    /** @type {NprOneSDK} */
+    let nprOne;
+
+    beforeEach(() =&gt; {
+        nprOne = new NprOneSDK();
+    });
+
+
+    /** @test {NprOneSDK.config} */
+    describe(&apos;config&apos;, () =&gt; {
+        describe(&apos;getter&apos;, () =&gt; {
+            it(&apos;should return an object with config related properties&apos;, () =&gt; {
+                NprOneSDK.config.authProxyBaseUrl.should.be.ok;
+            });
+        });
+
+        describe(&apos;setter&apos;, () =&gt; {
+            it(&apos;should update specific config values when set&apos;, () =&gt; {
+                const previousUrl = NprOneSDK.config.authProxyBaseUrl;
+                NprOneSDK.config = { &apos;authProxyBaseUrl&apos;: &apos;https://test&apos; };
+
+                const newUrl = NprOneSDK.config.authProxyBaseUrl;
+                NprOneSDK.config.authProxyBaseUrl = previousUrl;
+                newUrl.should.equal(&apos;https://test&apos;);
+            });
+
+            it(&apos;should setup defaults if they haven\&apos;t been set yet&apos;, () =&gt; {
+                NprOneSDK._config = undefined;
+                NprOneSDK.config = { &apos;test&apos;: &apos;value&apos; };
+                NprOneSDK.config.test.should.equal(&apos;value&apos;);
+            });
+
+            it(&apos;should log a warning when setting deprecated properties&apos;, () =&gt; {
+                const stub = sinon.stub(Logger, &apos;warn&apos;);
+
+                const previousUrl = NprOneSDK.config.apiBaseUrl;
+                NprOneSDK.config = {
+                    &apos;apiBaseUrl&apos;: &apos;https://test&apos;,
+                    &apos;apiVersion&apos;: &apos;v2&apos;,
+                };
+
+                NprOneSDK.config.apiBaseUrl.should.equal(&apos;https://test&apos;);
+                NprOneSDK.config.apiVersion.should.equal(&apos;v2&apos;);
+                stub.should.have.been.calledTwice;
+            });
+        });
+    });
+
+
+    /** @test {NprOneSDK.accessToken} */
+    describe(&apos;accessToken&apos;, () =&gt; {
+        describe(&apos;getter&apos;, () =&gt; {
+            it(&apos;should return the value of the accessToken string in the hidden config object&apos;, () =&gt; {
+                NprOneSDK.accessToken.should.equal(NprOneSDK.config.accessToken);
+            });
+        });
+
+        describe(&apos;setter&apos;, () =&gt; {
+            it(&apos;should throw a TypeError if the passed-in value is not a string&apos;, () =&gt; {
+                chai.expect(() =&gt; {
+                    NprOneSDK.accessToken = 1234;
+                }).to.throw(&apos;Value for accessToken must be a string&apos;);
+            });
+
+            it(&apos;should set the internal access token to the supplied string&apos;, () =&gt; {
+                NprOneSDK.accessToken = &apos;abcdefgh123456&apos;;
+
+                NprOneSDK.config.accessToken.should.equal(&apos;abcdefgh123456&apos;);
+            });
+
+            it(&apos;should call the registered callback if one is set&apos;, (done) =&gt; {
+                NprOneSDK.onAccessTokenChanged = () =&gt; {
+                    NprOneSDK.config.accessToken.should.equal(&apos;abcdefgh123456789abced&apos;);
+                    done();
+                };
+                NprOneSDK.accessToken = &apos;abcdefgh123456789abced&apos;;
+            });
+
+            it(&apos;but only if the new token is different from the old&apos;, () =&gt; {
+                NprOneSDK.onAccessTokenChanged = () =&gt; {
+                    throw new Error(&apos;access token did not actually change, should never get here&apos;);
+                };
+                NprOneSDK.accessToken = NprOneSDK.config.accessToken;
+            });
+        });
+    });
+
+
+    /** @test {NprOneSDK.onAccessTokenChanged} */
+    describe(&apos;onAccessTokenChanged&apos;, () =&gt; {
+        describe(&apos;setter&apos;, () =&gt; {
+            it(&apos;should throw a TypeError if the passed-in value is not a function&apos;, () =&gt; {
+                chai.expect(() =&gt; {
+                    NprOneSDK.onAccessTokenChanged = &apos;i_am_not_a_function&apos;;
+                }).to.throw(&apos;Value for onAccessTokenChanged must be a function&apos;);
+            });
+        });
+    });
+
+
+    /** @test {NprOneSDK.Action} */
+    describe(&apos;Action&apos;, () =&gt; {
+        it(&apos;should return the Action class&apos;, () =&gt; {
+            NprOneSDK.Action.should.equal(Action);
+        });
+    });
+
+
+    /** @test {NprOneSDK.Logger} */
+    describe(&apos;Logger&apos;, () =&gt; {
+        it(&apos;should return the Logger class&apos;, () =&gt; {
+            NprOneSDK.Logger.should.equal(Logger);
+        });
+    });
+
+
+    /** @test {NprOneSDK.refreshExistingAccessToken} */
+    describe(&apos;refreshExistingAccessToken&apos;, () =&gt; {
+        afterEach(() =&gt; {
+            Authorization.refreshExistingAccessToken.restore();
+        });
+
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(Authorization, &apos;refreshExistingAccessToken&apos;);
+            NprOneSDK.refreshExistingAccessToken();
+            stub.should.have.been.calledWith();
+        });
+
+        it(&apos;should call the correct service controller method with non-default param values&apos;, () =&gt; {
+            const stub = sinon.stub(Authorization, &apos;refreshExistingAccessToken&apos;);
+            NprOneSDK.refreshExistingAccessToken(3);
+            stub.should.have.been.calledWith(3);
+        });
+    });
+
+
+    /** @test {NprOneSDK#logout} */
+    describe(&apos;logout&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._authorization, &apos;logout&apos;);
+            nprOne.logout();
+            stub.should.have.been.calledOnce;
+        });
+    });
+
+
+    /** @test {NprOneSDK#getDeviceCode} */
+    describe(&apos;getDeviceCode&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._authorization, &apos;getDeviceCode&apos;);
+            nprOne.getDeviceCode();
+            stub.should.have.been.calledWith([]);
+        });
+
+        it(&apos;should call the correct service controller method with non-default param values&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._authorization, &apos;getDeviceCode&apos;);
+            nprOne.getDeviceCode([&apos;listening.readonly&apos;]);
+            stub.should.have.been.calledWith([&apos;listening.readonly&apos;]);
+        });
+    });
+
+
+    /** @test {NprOneSDK#pollDeviceCode} */
+    describe(&apos;pollDeviceCode&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._authorization, &apos;pollDeviceCode&apos;);
+            nprOne.pollDeviceCode();
+            stub.should.have.been.calledOnce;
+        });
+    });
+
+
+    /** @test {NprOneSDK#getRecommendation} */
+    describe(&apos;getRecommendation&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._listening, &apos;getRecommendation&apos;);
+            nprOne.getRecommendation();
+            stub.should.have.been.calledWith(&apos;&apos;, &apos;npr&apos;);
+        });
+
+        it(&apos;should call the correct service controller method with non-default param values&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._listening, &apos;getRecommendation&apos;);
+            nprOne.getRecommendation(&apos;string1&apos;);
+            stub.should.have.been.calledWith(&apos;string1&apos;, &apos;npr&apos;);
+        });
+
+        it(&apos;should call the correct service controller method with non-default param values&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._listening, &apos;getRecommendation&apos;);
+            nprOne.getRecommendation(&apos;&apos;, &apos;string2&apos;);
+            stub.should.have.been.calledWith(&apos;&apos;, &apos;string2&apos;);
+        });
+    });
+
+
+    /** @test {NprOneSDK#getUpcomingFlowRecommendations} */
+    describe(&apos;getUpcomingFlowRecommendations&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._listening, &apos;getUpcomingFlowRecommendations&apos;);
+            nprOne.getUpcomingFlowRecommendations();
+            stub.should.have.been.calledWith(&apos;npr&apos;);
+        });
+
+        it(&apos;should call the correct service controller method with non-default param values&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._listening, &apos;getUpcomingFlowRecommendations&apos;);
+            nprOne.getUpcomingFlowRecommendations(&apos;string1&apos;);
+            stub.should.have.been.calledWith(&apos;string1&apos;);
+        });
+    });
+
+
+    /** @test {NprOneSDK#getRecommendationsFromChannel} */
+    describe(&apos;getRecommendationsFromChannel&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._listening, &apos;getRecommendationsFromChannel&apos;);
+            nprOne.getRecommendationsFromChannel();
+            stub.should.have.been.calledWith(&apos;recommended&apos;);
+        });
+
+        it(&apos;should call the correct service controller method with non-default param values&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._listening, &apos;getRecommendationsFromChannel&apos;);
+            nprOne.getRecommendationsFromChannel(&apos;string1&apos;);
+            stub.should.have.been.calledWith(&apos;string1&apos;);
+        });
+    });
+
+
+    /** @test {NprOneSDK#queueRecommendationFromChannel} */
+    describe(&apos;queueRecommendationFromChannel&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._listening, &apos;queueRecommendationFromChannel&apos;);
+            nprOne.queueRecommendationFromChannel();
+            stub.should.have.been.calledOnce;
+        });
+    });
+
+
+    /** @test {NprOneSDK#getHistory} */
+    describe(&apos;getHistory&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._listening, &apos;getHistory&apos;);
+            nprOne.getHistory();
+            stub.should.have.been.calledOnce;
+        });
+    });
+
+
+    /** @test {NprOneSDK#resetFlow} */
+    describe(&apos;resetFlow&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._listening, &apos;resetFlow&apos;);
+            nprOne.resetFlow();
+            stub.should.have.been.calledOnce;
+        });
+    });
+
+
+    /** @test {NprOneSDK#resumeFlowFromRecommendation} */
+    describe(&apos;resumeFlowFromRecommendation&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._listening, &apos;resumeFlowFromRecommendation&apos;);
+            nprOne.resumeFlowFromRecommendation();
+            stub.should.have.been.calledOnce;
+        });
+    });
+
+    /** @test {NprOneSDK#getUser} */
+    describe(&apos;getUser&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._identity, &apos;getUser&apos;);
+            nprOne.getUser();
+            stub.should.have.been.calledOnce;
+        });
+    });
+
+
+    /** @test {NprOneSDK#setUserStation} */
+    describe(&apos;setUserStation&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._identity, &apos;setUserStation&apos;);
+            nprOne.setUserStation(&apos;404&apos;);
+            stub.should.have.been.calledWith(&apos;404&apos;);
+        });
+    });
+
+
+    /** @test {NprOneSDK#followShow} */
+    describe(&apos;followShow&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._identity, &apos;followShow&apos;);
+            nprOne.followShow(&apos;123&apos;);
+            stub.should.have.been.calledWith(&apos;123&apos;);
+        });
+    });
+
+
+    /** @test {NprOneSDK#unfollowShow} */
+    describe(&apos;unfollowShow&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._identity, &apos;unfollowShow&apos;);
+            nprOne.unfollowShow(&apos;456&apos;);
+            stub.should.have.been.calledWith(&apos;456&apos;);
+        });
+    });
+
+
+    /** @test {NprOneSDK#createTemporaryUser} */
+    describe(&apos;createTemporaryUser&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._identity, &apos;createTemporaryUser&apos;);
+            nprOne.createTemporaryUser();
+            stub.should.have.been.calledOnce;
+        });
+    });
+
+
+    /** @test {NprOneSDK#searchStations} */
+    describe(&apos;searchStations&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._stationfinder, &apos;searchStations&apos;);
+            nprOne.searchStations();
+            stub.should.have.been.calledWith();
+        });
+
+        it(&apos;should call the correct service controller method with non-default param values&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._stationfinder, &apos;searchStations&apos;);
+            nprOne.searchStations(&apos;ohio&apos;);
+            stub.should.have.been.calledWith(&apos;ohio&apos;);
+        });
+    });
+
+
+    /** @test {NprOneSDK#searchStationsByLatLongCoordinates} */
+    describe(&apos;searchStationsByLatLongCoordinates&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._stationfinder, &apos;searchStationsByLatLongCoordinates&apos;);
+            nprOne.searchStationsByLatLongCoordinates(&apos;37.742&apos;, &apos;-77.42&apos;);
+            stub.should.have.been.calledWith(&apos;37.742&apos;, &apos;-77.42&apos;);
+        });
+    });
+
+
+    /** @test {NprOneSDK#searchStationsByCityAndState} */
+    describe(&apos;searchStationsByCityAndState&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._stationfinder, &apos;searchStationsByCityAndState&apos;);
+            nprOne.searchStationsByCityAndState(&apos;fremont&apos;, &apos;ohio&apos;);
+            stub.should.have.been.calledWith(&apos;fremont&apos;, &apos;ohio&apos;);
+        });
+    });
+
+
+    /** @test {NprOneSDK#searchStationsByCity} */
+    describe(&apos;searchStationsByCity&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._stationfinder, &apos;searchStationsByCity&apos;);
+            nprOne.searchStationsByCity(&apos;Toledo&apos;);
+            stub.should.have.been.calledWith(&apos;Toledo&apos;);
+        });
+    });
+
+
+    /** @test {NprOneSDK#searchStationsByState} */
+    describe(&apos;searchStationsByState&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._stationfinder, &apos;searchStationsByState&apos;);
+            nprOne.searchStationsByState(&apos;ohio&apos;);
+            stub.should.have.been.calledWith(&apos;ohio&apos;);
+        });
+    });
+
+
+    /** @test {NprOneSDK#getStationDetails} */
+    describe(&apos;getStationDetails&apos;, () =&gt; {
+        it(&apos;should call the correct service controller method&apos;, () =&gt; {
+            const stub = sinon.stub(nprOne._stationfinder, &apos;getStationDetails&apos;);
+            nprOne.getStationDetails(305);
+            stub.should.have.been.calledWith(305);
+        });
+    });
+
+
+    /** @test {NprOneSDK.getServiceUrl} */
+    describe(&apos;getServiceUrl&apos;, () =&gt; {
+        it(&apos;should return the correct API service url&apos;, () =&gt; {
+            const url = NprOneSDK.getServiceUrl(&apos;listening&apos;);
+            url.should.be.ok;
+        });
+
+        it(&apos;should throw if an invalid service name is specified&apos;, () =&gt; {
+            chai.expect(() =&gt; {
+                NprOneSDK.getServiceUrl(&apos;invalid&apos;);
+            }).to.throw(&apos;Must specify a valid service name&apos;);
+        });
+    });
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

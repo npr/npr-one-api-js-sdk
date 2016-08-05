@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/model/recommendation.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/model/recommendation.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import &apos;isomorphic-fetch&apos;;
+import URL from &apos;url-parse&apos;;
+import CollectionDoc from &apos;./collection-doc&apos;;
+import Rating from &apos;./rating&apos;;
+import Action from &apos;./action&apos;;
+import Logger from &apos;./../util/logger&apos;;
+
+
+/**
+ * Container class for all metadata pertaining to a recommendation.
+ *
+ * Provides metadata and the recordAction method, which sends feedback on user actions to NPR&apos;s APIs and advances the flow of audio recommendations to the user
+ *
+ * @extends {CollectionDoc}
+ */
+export default class Recommendation extends CollectionDoc
+{
+    /**
+     * @param {CollectionDocJSON} json   The decoded JSON object that should be used as the basis for this model
+     */
+    constructor(json) {
+        super(json);
+        /** @type {Object}
+         * @private */
+        this._raw = json;
+        /**
+         * The metadata used to describe this recommendation, such as type and title
+         * @type {RecommendationAttributes}
+         */
+        this.attributes = {};
+        /**
+         * An internal store of ratings collected for this application; should never be accessed directly by consumers
+         * @type {Array&lt;Rating&gt;}
+         */
+        this.ratings = [];
+        /**
+         * The actual audio files associated with this recommendation; should never be empty
+         * @type {Array&lt;Link&gt;}
+         */
+        this.audio = [];
+        /**
+         * A list of API calls the app can make to retrieve subsequent recommendations; should never be accessed directly by consumers
+         * @type {Array&lt;Link&gt;}
+         */
+        this.recommendations = [];
+        /**
+         * A list of images associated with this recommendation; could be empty
+         * @type {Array&lt;ImageLink&gt;}
+         */
+        this.images = [];
+        /**
+         * A list of links to other places where this story can be found on the web (for example, on NPR.org); could be empty
+         * @type {Array&lt;Link&gt;}
+         */
+        this.web = [];
+        /**
+         * A list of links that are used as the canonical link(s) when sharing this story on social media
+         * @type {Array&lt;Link&gt;}
+         */
+        this.onramps = [];
+        /**
+         * This is the `action` array from the API within `links`, and _NOT_ this SDK&apos;s notion of {@link Action}
+         * @type {Array&lt;Link&gt;}
+         */
+        this.callsToAction = [];
+        /**
+         * A list of API calls to make if this recommendation is of type `sponsorship` and the consuming client
+         * has played the accompanying audio
+         * @type {Array&lt;FormFactorLink&gt;}
+         */
+        this.impressions = [];
+        /**
+         * A list of links to places where the app can take the user if they interact with this `sponsorship` item
+         * @type {Array&lt;FormFactorLink&gt;}
+         */
+        this.relateds = [];
+        /**
+         * A list of API calls to make if this recommendation is of type `sponsorship` and the consuming client has
+         * chosen to interact with the sponsorship item using the contents of {@link relateds}
+         * @type {Array&lt;FormFactorLink&gt;}
+         */
+        this.relatedImpressions = [];
+        /** @type {Object}
+          * @private */
+        this._ratingTemplate = {};
+        /**
+         * Used to prevent impressions from being fired twice
+         * @type {boolean}
+         * @private
+         */
+        this._hasSentImpressions = false;
+        /** @type {null|Function}
+          * @private */
+        this._ratingReceivedCallback = null;
+
+        this._hydrate();
+    }
+
+    /**
+     * Hydrate the internal member variables.
+     *
+     * @private
+     */
+    _hydrate() {
+        this._validate();
+
+        this._ratingTemplate = this._raw.attributes.rating;
+
+        // deep copy, we do not want duplicate rating objects
+        this.attributes = Object.assign({}, this._raw.attributes);
+        delete this.attributes.rating;
+
+        const links = this._raw.links;
+
+        // Required
+        this.audio = links.audio;
+        this.recommendations = links.recommendations;
+
+        // Optional
+        this.web = links.web ? links.web : [];
+        this.images = links.image ? links.image : [];
+        this.onramps = links.onramps ? links.onramps : [];
+        this.callsToAction = links.action ? links.action : [];
+        this.impressions = links.impression ? links.impression : [];
+        this.relateds = links.related ? links.related : [];
+        this.relatedImpressions = links[&apos;related-impression&apos;] ? links[&apos;related-impression&apos;] : [];
+    }
+
+    /**
+     * Determines whether the collection doc has the required fields for a valid recommendation
+     *
+     * @protected
+     * @throws {TypeError} if the collection doc is invalid
+     */
+    _validate() {
+        const links = this._raw.links;
+
+        if (!links.audio ||
+            links.audio.constructor !== Array ||
+            links.audio.length &lt;= 0) {
+            throw new TypeError(&apos;Audio must exist within links.&apos;);
+        }
+
+        if (!links.recommendations ||
+            links.recommendations.constructor !== Array ||
+            links.recommendations.length &lt;= 0) {
+            throw new TypeError(&apos;Recommendation (contains URL) must exist within links.&apos;);
+        }
+
+        if (!this._raw.attributes.rating) {
+            throw new TypeError(&apos;Attributes must contain a rating object.&apos;);
+        }
+    }
+
+    /**
+     * Returns a list of images associated with this recommendation
+     *
+     * @returns {Array&lt;ImageLink&gt;}
+     */
+    getImages() {
+        return this.images;
+    }
+
+    /**
+     * Returns the actual audio files associated with this recommendation
+     *
+     * @returns {Array&lt;Link&gt;}
+     */
+    getAudio() {
+        return this.audio;
+    }
+
+    /**
+     * Returns a list of links to other places where this story can be found on the web (for example, on NPR.org)
+     *
+     * @returns {Array&lt;Link&gt;}
+     */
+    getWeb() {
+        return this.web;
+    }
+
+    /**
+     * Returns a list of links that are used as the canonical link(s) when sharing this story on social media.
+     *
+     * @returns {Array&lt;Link&gt;}
+     */
+    getOnRamps() {
+        return this.onramps;
+    }
+
+    /**
+     * Returns a list of API calls to make if this recommendation is of type `sponsorship` and the consuming client
+     * has played the accompanying audio. Note that the SDK will take care of this automatically as long as the client
+     * uses {@link recordAction} to send the rating.
+     *
+     * @returns {Array&lt;FormFactorLink&gt;}
+     */
+    getImpressions() {
+        return this.impressions;
+    }
+
+    /**
+     * This is the `action` array from the API within `links`, and _NOT_ this SDK&apos;s notion of {@link Action}
+     *
+     * An example of what might be contained within this is array is a link to full-length content
+     * for a promo recommendation.
+     *
+     * @returns {Array&lt;Link&gt;}
+     */
+    getCallsToAction() {
+        return this.callsToAction;
+    }
+
+    /**
+     * Returns a list of links to places where the app can take the user if they interact with this `sponsorship` item
+     * (such as by clicking/tapping on the image or using a voice command to learn more)
+     *
+     * @returns {Array&lt;FormFactorLink&gt;}
+     */
+    getRelateds() {
+        return this.relateds;
+    }
+
+    /**
+     * Returns a list of API calls to make if this recommendation is of type `sponsorship` and the consuming client
+     * has chosen to interact with the sponsorship item using the contents returned by {@link getRelateds}. Note that
+     * the SDK will take care of this automatically as long as the client uses {@link recordAction} to send the rating.
+     *
+     * @returns {Array&lt;FormFactorLink&gt;}
+     */
+    getRelatedImpressions() {
+        return this.relatedImpressions;
+    }
+
+    /**
+     * Returns an internal store of ratings collected for this application. This should never be accessed directly by
+     * consumers; use {@link recordAction} to send ratings, and the SDK will figure out the appropriate time to make
+     * the API call that submits them to the server.
+     *
+     * @returns {Array&lt;Rating&gt;}
+     */
+    getRatings() {
+        return this.ratings;
+    }
+
+    /**
+     * Returns the URL that should be used to obtain the next set of recommendations. This should typically not be used
+     * by clients directly; use {@link recordAction} followed by {@link NprOneSDK#getRecommendation} instead.
+     *
+     * @returns {string}
+     */
+    getRecommendationUrl() {
+        return this.recommendations[0].href;
+    }
+
+    /**
+     * This method looks through the recommendation&apos;s action and related array to search for any URL starting with `&apos;nprone://listen&apos;`.
+     * If found, everything from the query params is appended to the original recommendation URL.
+     * This value is then used anytime a user indicates they want more similar stories by clicking or tapping on this recommendation.
+     *
+     * For many recommendations, this will not exist and getRecommendationUrl is used instead.
+     *
+     * @returns {string}
+     */
+    getActionRecommendationUrl() {
+        const original = new URL(this.getRecommendationUrl());
+        const potentialActions = this.callsToAction.concat(this.relateds);
+
+        let nprOneUrl = &apos;&apos;;
+        for (const action of potentialActions) {
+            if (action.href &amp;&amp; action.href.indexOf(&apos;nprone://&apos;) === 0) {
+                nprOneUrl = new URL(action.href);
+                break;
+            }
+        }
+
+        let url = &apos;&apos;;
+        if (nprOneUrl) {
+            url = `${original.set(&apos;query&apos;, nprOneUrl.query).href}&amp;recommend=true`;
+        }
+
+        return url;
+    }
+
+    /**
+     * Returns whether this recommendation is of type `sponsorship`
+     *
+     * @returns {boolean}
+     */
+    isSponsorship() {
+        return this.attributes.type === &apos;sponsorship&apos;;
+    }
+
+    /**
+     * Returns whether this recommendation is shareable on social media
+     *
+     * @returns {boolean}
+     */
+    isShareable() {
+        return this.onramps.length &gt; 0;
+    }
+
+    /**
+     * Returns whether this recommendation has a given action
+     *
+     * @param {string} action    Which action to look up; should be one of the static string constants returned by {@link Action}
+     * @returns {boolean}
+     */
+    hasAction(action) {
+        for (const rating of this.ratings) {
+            if (rating.rating === action) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns whether this recommendation has received a rating indicating it is no longer
+     * being presented to the user
+     *
+     * @returns {boolean}
+     */
+    hasEndAction() {
+        for (const endAction of Action.getEndActions()) {
+            if (this.hasAction(endAction)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Record a user action taken and the time it was taken against this recommendation
+     *
+     * @param {string} action                  Which action to record; should be one of the static string constants returned by {@link Action}
+     * @param {number} elapsedTimeInSeconds    The number of seconds this piece of audio has been playing for
+     */
+    recordAction(action, elapsedTimeInSeconds) {
+        let _elapsedTime = elapsedTimeInSeconds;
+
+        if (!Action.isValidAction(action)) {
+            throw new Error(`${action} action is invalid. See Action class for valid actions.`);
+        }
+
+        const n = parseInt(_elapsedTime, 10);
+        if (isNaN(n) || !isFinite(n)) {
+            throw new Error(&apos;Elapsed time must be supplied and be a positive integer value.&apos;);
+        }
+
+        if (_elapsedTime &lt; 0) {
+            Logger.warn(`Elapsed time of ${_elapsedTime} is invalid ` +
+                &apos;and has been changed to 0 seconds.&apos;);
+            _elapsedTime = 0;
+        }
+
+        if (_elapsedTime &gt; this.attributes.duration &amp;&amp; this.attributes.duration &gt; 0) {
+            // 30s has been arbitrarily chosen as it&apos;s enough to indicate the consumer of this SDK might have made a coding error.
+            if (_elapsedTime &gt; this.attributes.duration + 30) {
+                Logger.warn(`Elapsed time of ${_elapsedTime} exceeds overall audio duration ` +
+                    `and has been modified to ${this.attributes.duration} seconds.`);
+            }
+            _elapsedTime = this.attributes.duration;
+        }
+
+        if (_elapsedTime === 0 &amp;&amp; (action === Action.COMPLETED || action === Action.SKIP)) {
+            Logger.warn(&apos;Elapsed time value should be greater than zero; &apos; +
+                &apos;please ensure the time passed since the START rating is recorded.&apos;);
+        }
+
+        if (action !== Action.START) {
+            if (!this.hasAction(Action.START)) {
+                Logger.warn(`Action &apos;${action}&apos; has been recorded; however, no START action ` +
+                    &apos;exists. Please ensure START actions are recorded first.&apos;);
+            }
+        }
+
+        const rating = new Rating(this._ratingTemplate);
+        rating.rating = action;
+        rating.elapsed = _elapsedTime;
+        rating.timestamp = new Date().toISOString();
+        rating._recommendationUrl = this.getRecommendationUrl();
+        rating._actionUrl = this.getActionRecommendationUrl();
+
+        // Handle Sponsorship Impressions
+        if (this.isSponsorship() &amp;&amp; action === Action.START &amp;&amp; !this._hasSentImpressions) {
+            this._hasSentImpressions = true;
+            const impressions = this.impressions.concat(this.relatedImpressions);
+            impressions.forEach((link) =&gt; {
+                if (link[&apos;form-factor&apos;] === &apos;audio&apos;) {
+                    fetch(link.href, { mode: &apos;no-cors&apos; });  // no really, that&apos;s it. We don&apos;t care about the result of these fetches.
+                }
+            });
+        }
+
+        this.ratings.push(rating);
+
+        if (this._ratingReceivedCallback !== null) {
+            this._ratingReceivedCallback(rating);
+        }
+    }
+
+    /**
+     * A callback which provides for communication of a received rating
+     *
+     * @param {?Function} callback    A function to call whenever this recommendation has received a rating (action)
+     */
+    setRatingReceivedCallback(callback) {
+        this._ratingReceivedCallback = callback;
+    }
+
+    /**
+     * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
+     *
+     * @returns {string}
+     */
+    toString() {
+        return `[UID=${this.attributes.uid}, R=${this.getRatings().join(&apos;,&apos;)}]`;
+    }
+
+    /**
+     * @typedef {Object} RecommendationAttributes
+     * @property {string} type The type of recommendation, usually `audio`. Can also be `stationId`, `sponsorship`, etc.
+     * @property {string} uid The universal identifier of the recommendation
+     * @property {string} title The title of the recommendation
+     * @property {boolean} skippable Whether or not the recommendation is skippable, usually true, but false for e.g. sponsorship
+     * @property {string} [slug] A slug or category for the recommendation
+     * @property {string} provider The provider of the story, usually `NPR`. Can also be a member station or third-party podcast provider.
+     * @property {string} [program] The program as part of which this recommendation aired
+     * @property {number} duration The duration of the audio according to the API; note that the actual duration can differ
+     * @property {string} date ISO-8601 formatted date/time; the date at which the story was first published
+     * @property {string} [description] A short description of the recommendation
+     * @property {string} rationale The reason for recommending this piece to the listener
+     * @property {string} [button] The text to display in a clickable button on a feature card
+     */
+    /**
+     * @typedef {Link} FormFactorLink
+     * @property {string} [form-factor] The form-factor for the most appropriate display of or interaction with the resource, usually irrelevant unless there is more than one link of the same type
+     */
+    /**
+     * @typedef {FormFactorLink} ImageLink
+     * @property {string} [rel] The relation of the image to the content, which usually corresponds to the crop-type
+     * @property {number} [height] The pixel height of the image
+     * @property {number} [width] The pixel width of the image
+     */
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

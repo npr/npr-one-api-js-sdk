@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">unit/model/station.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">unit/model/station.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import chai from &apos;chai&apos;;
+import Station from &apos;../../../src/model/station&apos;;
+import { STATION_FINDER_RESPONSE } from &apos;../../test-data&apos;;
+
+
+const should = chai.should();
+const STATION_FINDER_SINGLE_ORG_RESPONSE = STATION_FINDER_RESPONSE.items[0];
+
+
+/** @test {Station} */
+describe(&apos;Station&apos;, () =&gt; {
+    /** @type Station */
+    let station;
+    let responseClone;
+
+
+    beforeEach(() =&gt; {
+        responseClone = JSON.parse(JSON.stringify(STATION_FINDER_SINGLE_ORG_RESPONSE));
+        station = new Station(responseClone);
+    });
+
+
+    /** @test {Station.id} */
+    describe(&apos;id&apos;, () =&gt; {
+        it(&apos;should exist and equal the value from the test data&apos;, () =&gt; {
+            station.id.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.orgId);
+        });
+    });
+
+
+    /** @test {Station.displayName} */
+    describe(&apos;displayName&apos;, () =&gt; {
+        it(&apos;should equal name from the test data&apos;, () =&gt; {
+            station.displayName.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.brand.name);
+        });
+    });
+
+
+    /** @test {Station.logo} */
+    describe(&apos;logo&apos;, () =&gt; {
+        it(&apos;should equal rel=&quot;logo&quot; brand link if it exists&apos;, () =&gt; {
+            station.logo.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.brand[1].href);
+        });
+
+        it(&apos;should be null and NOT the rel=&quot;small-logo&quot; brand link if equal rel=&quot;logo&quot; brand link does not exist&apos;, () =&gt; {
+            responseClone.links.brand.shift(); // homepage
+            responseClone.links.brand.shift(); // logo
+            chai.expect(station.logo).to.not.be.ok;
+        });
+
+        it(&apos;should be null if none of the above exist&apos;, () =&gt; {
+            delete responseClone.links.brand;
+            chai.expect(station.logo).to.not.be.ok;
+        });
+    });
+
+
+    /** @test {Station.tagline} */
+    describe(&apos;tagline&apos;, () =&gt; {
+        it(&apos;should exist on test data&apos;, () =&gt; {
+            station.tagline.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.brand.tagline);
+        });
+
+        it(&apos;should be an empty string if it does not exist&apos;, () =&gt; {
+            delete responseClone.attributes.brand.tagline;
+            station = new Station(responseClone);
+            chai.expect(station.tagline).to.not.be.ok;
+        });
+    });
+
+
+    /** @test {Station.callSignAndFrequency} */
+    describe(&apos;callSignAndFrequency&apos;, () =&gt; {
+        it(&apos;should exist on test data&apos;, () =&gt; {
+            station.callSignAndFrequency.should.equal(&apos;WBUR FM 90.9&apos;);
+        });
+
+        it(&apos;should omit call if it does not exist on test data&apos;, () =&gt; {
+            delete responseClone.attributes.brand.call;
+            station.callSignAndFrequency.should.equal(&apos;FM 90.9&apos;);
+        });
+
+        it(&apos;should omit band if it does not exist on test data&apos;, () =&gt; {
+            delete responseClone.attributes.brand.band;
+            station.callSignAndFrequency.should.equal(&apos;WBUR 90.9&apos;);
+        });
+
+        it(&apos;should omit frequency if it does not exist on test data&apos;, () =&gt; {
+            delete responseClone.attributes.brand.frequency;
+            station.callSignAndFrequency.should.equal(&apos;WBUR FM&apos;);
+        });
+
+        it(&apos;should return null if all attempted data is missing&apos;, () =&gt; {
+            delete responseClone.attributes.brand.call;
+            delete responseClone.attributes.brand.band;
+            delete responseClone.attributes.brand.frequency;
+            chai.expect(station.callSignAndFrequency).to.be.null;
+        });
+    });
+
+
+    /** @test {Station.location} */
+    describe(&apos;location&apos;, () =&gt; {
+        it(&apos;should exist on test data&apos;, () =&gt; {
+            station.location.should.be.ok;
+        });
+    });
+
+
+    /** @test {Station.homepageUrl} */
+    describe(&apos;homepageUrl&apos;, () =&gt; {
+        it(&apos;should exist on test data&apos;, () =&gt; {
+            station.homepageUrl.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.brand[0].href);
+        });
+
+        it(&apos;should be null if only non-rel=&quot;homepage&quot; links exist&apos;, () =&gt; {
+            responseClone.links.brand.shift();
+            chai.expect(station.homepageUrl).to.not.be.ok;
+        });
+
+        it(&apos;should be null if none of the above exist&apos;, () =&gt; {
+            delete responseClone.links.brand;
+            chai.expect(station.homepageUrl).to.not.be.ok;
+        });
+    });
+
+
+    /** @test {Station.donationUrl} */
+    describe(&apos;donationUrl&apos;, () =&gt; {
+        it(&apos;should equal type 27 donation link if it exists&apos;, () =&gt; {
+            station.donationUrl.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.donation[1].href);
+        });
+
+        it(&apos;should equal type 4 donation link if type 27 donation does not exist&apos;, () =&gt; {
+            const donationAudio = responseClone.links.donation.pop(); // donation audio
+            responseClone.links.donation.pop(); // type 27
+            responseClone.links.donation.push(donationAudio);
+            station.donationUrl.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.donation[0].href);
+        });
+
+        it(&apos;should be null if none of the above exist&apos;, () =&gt; {
+            delete responseClone.links.donation;
+            chai.expect(station.donationUrl).to.not.be.ok;
+        });
+    });
+
+
+    /** @test {Station.attributes} */
+    describe(&apos;attributes&apos;, () =&gt; {
+        it(&apos;should exist on test data&apos;, () =&gt; {
+            station.attributes.should.be.ok;
+        });
+    });
+
+
+    /** @test {Station#toString} */
+    describe(&apos;toString&apos;, () =&gt; {
+        it(&apos;should exist on test data&apos;, () =&gt; {
+            station.toString().should.be.ok;
+        });
+    });
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

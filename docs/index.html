@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl">
+  <title data-ice="title">API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="npr-one-api-sdk">NPR One API SDK</h1>
+<p>A <a href="https://github.com/umdjs/umd">Universal JavaScript Module</a> for interfacing with the <a href="https://dev.npr.org/api/">NPR One API</a>, suitable for both client-side and server-side projects.</p>
+<p><a href="https://www.npmjs.com/package/@npr/npr-one-sdk"><img src="https://img.shields.io/npm/v/@npr/npr-one-sdk.svg" alt="npm"></a> <a href="https://travis-ci.org/npr/npr-one-api-js-sdk"><img src="https://travis-ci.org/npr/npr-one-api-js-sdk.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/npr/npr-one-api-js-sdk?branch=master"><img src="https://coveralls.io/repos/github/npr/npr-one-api-js-sdk/badge.svg?branch=master" alt="Coverage Status"></a> <a href="https://npr.github.io/npr-one-api-js-sdk/docs/"><img src="https://npr.github.io/npr-one-api-js-sdk/docs/badge.svg" alt="Documentation coverage"></a> <a href="https://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen friendly"></a> <a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release"></a></p>
+<h5 id="table-of-contents">Table of Contents</h5>
+<ul>
+<li><a href="#background">Background</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation">Installation</a><ul>
+<li><a href="#using-npm">Using NPM</a></li>
+<li><a href="#using-bower">Using Bower</a></li>
+<li><a href="#using-downloaded-files">Using Downloaded Files</a></li>
+</ul>
+</li>
+<li><a href="#setup">Setup</a><ul>
+<li><a href="#client-side">Client-side</a><ul>
+<li><a href="#es6">ES6</a></li>
+<li><a href="#es5">ES5</a></li>
+</ul>
+</li>
+<li><a href="#server-side">Server-side</a></li>
+</ul>
+</li>
+<li><a href="#usage">Usage</a><ul>
+<li><a href="#managing-access-tokens">Managing Access Tokens</a><ul>
+<li><a href="#using-an-oauth-proxy-recommended">Using an OAuth Proxy (Recommended)</a></li>
+<li><a href="#do-it-yourself">Do-It-Yourself</a></li>
+</ul>
+</li>
+<li><a href="#basic-flow">Basic Flow</a></li>
+<li><a href="#additional-functionality">Additional Functionality</a></li>
+</ul>
+</li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#changelog">CHANGELOG</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2 id="background">Background</h2>
+<p>Listening to NPR One is a simple and engaging experience. Developing your app should be too. That being said, developing an NPR One app requires a fair amount of business logic and a solid understanding of the sequence of API calls necessary to deliver audio to your users. Our API implements the <a href="http://cdoc.io/">Collection.Doc+JSON Hypermedia Specification</a> and we&apos;ve received feedback from our partner-developers that there is a learning curve to interacting with our services, especially when it comes to the concepts of &quot;ratings&quot; and &quot;recommendations&quot; that fuel the personalization of the NPR One user experience.</p>
+<p>This open-source SDK was designed in part as a companion to the <a href="https://dev.npr.org/develop/">NPR Developer Center</a>, part utility for partner-developers working in JavaScript, and part toy box for the general public. We&apos;ve made it our goal to abstract away as much of the business logic as possible, leaving an API that&apos;s more intuitive and user-friendly. The end result is more time to spend on building a rich UI with delightful user interactions and less time worrying about when and how to send that rating or get the next recommendation.</p>
+<p>And this isn&apos;t just an experimental project! This very minute, this very same SDK is powering all of the interaction with the NPR One API for the recently-rebuilt <a href="https://one.npr.org">NPR One for the Web</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Using this SDK requires a registered developer account with the <a href="https://dev.npr.org/">NPR One Developer Center</a>. If you do not already have a Dev Center account, you can <a href="https://dev.npr.org/apply/">register for a personal account</a> to get started.</p>
+<p>Use of this SDK requires a valid <code>access_token</code>. This SDK is unable to talk to the NPR Authorization Service and generate access tokens, for reasons discussed <a href="#managing-access-tokens">further below</a>. If you have a server-side proxy to handle authentication for your app, it can be configured to hook into this SDK. To help with this requirement, we have separately provided <a href="https://github.com/nprdm/npr-one-backend-proxy-php">npr-one-backend-proxy-php</a> as an open-source package that will securely proxy calls to the Authorization Service for your app.</p>
+<h2 id="installation">Installation</h2>
+<p>Depending on your environment, there are various methods you can use to add this library to your project.</p>
+<h3 id="using-npm">Using NPM</h3>
+<p>Assuming a recent version of <a href="https://nodejs.org">node.js</a> (v6.x or newer) and <a href="https://npmjs.org">npm</a> are installed globally on your system, you can do:</p>
+<pre><code><code class="source-code prettyprint">npm install @npr/npr-one-sdk --save</code>
+</code></pre><p>...to add the latest stable version of this SDK to your existing node.js project.</p>
+<p>If you do not already have an existing node.js project, you can start one with:</p>
+<pre><code><code class="source-code prettyprint">npm init</code>
+</code></pre><p>...which will ask you some questions and generate a <code>package.json</code> for you. You can then run <code>npm install @npr/npr-one-sdk --save</code> to save the SDK to your new project&apos;s list of dependencies.</p>
+<h3 id="using-bower">Using Bower</h3>
+<p>For those using <a href="https://nodejs.org">node.js</a> with <a href="https://bower.io/">Bower</a> as your frontend package manager, we&apos;ve also made this SDK available there. Run:</p>
+<pre><code><code class="source-code prettyprint">bower install npr-one-sdk --save</code>
+</code></pre><p>...to add the latest stable version of this SDK to your existing Bower project.</p>
+<p>If you do not already have an existing Bower project, you can start one with:</p>
+<pre><code><code class="source-code prettyprint">bower init</code>
+</code></pre><p>...which will ask you some questions and generate a <code>bower.json</code> for you. You can then run <code>bower install npr-one-sdk --save</code> to save the SDK to your new project&apos;s list of dependencies.</p>
+<p><strong>Note:</strong> Bower has been losing considerable market share to <a href="https://npmjs.org">npm</a> as the JavaScript package manager of choice, so we may cease to support Bower in the future. Unless you plan to integrate this SDK into a project that is already using Bower, we highly recommend using npm.</p>
+<h3 id="using-downloaded-files">Using Downloaded Files</h3>
+<p><strong>DISCLAIMER:</strong> We strongly discourage using this method unless using a package manager is not an option.</p>
+<p>You can download the project files in a ZIP <a href="https://github.com/npr/npr-one-api-js-sdk/archive/master.zip">here</a>, then unzip and/or copy-paste those files into your project. Note that you should generally only need the contents of the <code>dist</code> directory (and more specifically, only <code>dist/browser</code> for frontend JS projects, or <code>dist/node</code> for server-side JS projects); the <code>src</code> directory is included only for reference and in most cases can be safely deleted.</p>
+<p>We will consider providing the distribution files for this project via a CDN (for frontend JS projects) if there is demand, but we will hold off on that until we have a chance to see how much traction this library receives.</p>
+<h2 id="setup">Setup</h2>
+<p>Once you have installed the SDK, how you set it up and incorporate it into your code will vary depending on your dev environment.</p>
+<h3 id="client-side">Client-side</h3>
+<p>Your setup will depend slightly on whether you are using ES5 (the current mainstream version of JavaScript) or ES6 (the next-generation version of JavaScript). The SDK itself is written in ES6, although the distribution files are compiled into syntax that is compatible with ES5. We encourage consumers to use ES6 because we will be able to provide more guidance on that implementation.</p>
+<p><strong>Note:</strong> All of the following <code>config</code> settings are offered as examples. In most use cases, you will provide either a proxy base URL or an access token, but likely not both.</p>
+<h4 id="es6">ES6</h4>
+<p>If you&apos;re using ES6, we are generally assuming that you are already using <a href="https://npmjs.org">npm</a> as your frontend package manager in combination with a modern JavaScript module bundler such as <a href="https://webpack.github.io/">Webpack</a>, <a href="https://browserify.org/">Browserify</a> or <a href="https://jspm.io/">jspm</a>. Those tools will typically resolve your dependencies, pulling in our distribution files from the proper location, so all you need to do to import the SDK and use it is:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">import NprOneSDK from &apos;@npr/npr-one-sdk&apos;;
+const nprOneSDK = new NprOneSDK();
+
+NprOneSDK.config = {
+    authProxyBaseUrl: &apos;https://one.example.com/oauth2&apos;,
+    accessToken: &apos;aaaabbbbcccc12345678&apos;
+};</code>
+</code></pre>
+<h4 id="es5">ES5</h4>
+<p>The ES5 syntax and process for loading the SDK is a little less pretty. Using a module bundler will help simplify the loading process somewhat, but without a bundler, your setup will likely look/act along the lines of:</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script src=&quot;/path/to/npr-one-sdk/dist/browser/npr-one-sdk.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    var NprOneSDK = NprOneSDK.default;
+    var nprOneSDK = new NprOneSDK();
+
+    NprOneSDK.config = {
+        authProxyBaseUrl: &apos;https://one.example.com/oauth2&apos;,
+        accessToken: &apos;aaaabbbbcccc12345678&apos;
+    };
+&lt;/script&gt;</code>
+</code></pre>
+<h3 id="server-side">Server-side</h3>
+<p>Because node.js already takes care of loading dependencies, the only prerequisite to getting the SDK set up is knowing how to instantiate the library. The syntax also varies based on whether you are using ES5 or ES6, but since ES6 is still fairly uncommon in the server-side world, ES5 will be considered canonical here.</p>
+<p>In ES5 (most common):</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">var NprOneSDK = require(&apos;@npr/npr-one-sdk&apos;).default;
+var nprOneSDK = new NprOneSDK();
+
+NprOneSDK.config = {
+    authProxyBaseUrl: &apos;https://one.example.com/oauth2&apos;,
+    accessToken: &apos;aaaabbbbcccc12345678&apos;
+};</code>
+</code></pre>
+<p>In ES6 (less common):</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">const NprOneSDK = require(&apos;@npr/npr-one-sdk&apos;).default;
+const nprOneSDK = new NprOneSDK();
+
+NprOneSDK.config = {
+    authProxyBaseUrl: &apos;https://one.example.com/oauth2&apos;,
+    accessToken: &apos;aaaabbbbcccc12345678&apos;
+};</code>
+</code></pre>
+<h2 id="usage">Usage</h2>
+<p>Once you successfully complete the <a href="#setup">Setup</a> steps relevant to your environment and build process, you are ready to put this SDK to work!</p>
+<h3 id="managing-access-tokens">Managing Access Tokens</h3>
+<p>As mentioned above, this SDK does not automatically generate access tokens. Third-party developers (such as yourself) have two primary methods for obtaining the OAuth access tokens required to interact with our micro-services:</p>
+<ul>
+<li><code>authorization_code</code> grant</li>
+<li><code>device_code</code> grant (a custom grant based on Google&apos;s proposed spec for <a href="https://developers.google.com/identity/protocols/OAuth2ForDevices">OAuth2 for Limited Input Devices</a>)</li>
+</ul>
+<p>The <code>implicit</code> grant type described in the OAuth2 spec is not currently supported due to security concerns.</p>
+<p>Both the <code>device_code</code> and <code>authorization_code</code> grant types require an OAuth2 <code>client_secret</code> to generate an access token. However, since the source code for web applications written in client-side JavaScript cannot be kept private, a server-side proxy is required to safely make calls to the authorization server and ensure the security of your OAuth2 credentials.</p>
+<p>While this security restriction isn&apos;t an issue for server-side JavaScript apps, we cannot restrict calls from the SDK to the authorization server to server-side JS only, so we had to take a least-common-denominator approach and assume this code will be run client-side. As such, it is left up to the consumer (you) to either provide access to a server-side proxy, or to manage access tokens yourself and tell the SDK which token to use for all calls.</p>
+<h4 id="using-an-oauth-proxy-recommended-">Using an OAuth Proxy (Recommended)</h4>
+<p>The recommended approach (if you are using this SDK in a client-side project) is to use a server-side proxy that talks to the NPR Authorization Service. We have separately provided <a href="https://github.com/nprdm/npr-one-backend-proxy-php">npr-one-backend-proxy-php</a> as an open-source package that will fill this requirement. Even if you do not to use this particular proxy and plan to implement your own, this project can be seen as a template for how to construct calls and securely store the refresh tokens that come paired with access tokens.</p>
+<p>In order to configure the SDK to use the proxy, there are a few config variables you need to set:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">NprOneSDK.config = {
+    authProxyBaseUrl: &apos;https://one.example.com/oauth2&apos;,
+    refreshTokenPath: &apos;/refresh&apos;
+};</code>
+</code></pre>
+<ul>
+<li><code>authProxyBaseUrl</code> represents the root path for your auth proxy.</li>
+<li><code>refreshTokenPath</code> refers to the specific endpoint (or sub-path) corresponding to the <code>refresh_token</code> grant type in your auth proxy.</li>
+</ul>
+<p>So, if the full path to the <code>refresh_token</code> endpoint in your proxy is <code>https://one.example.com/oauth2/refresh</code>, then <code>https://one.example.com/oauth2</code> is your <code>authProxyBaseUrl</code> and <code>/refresh</code> is your <code>refreshTokenPath</code>.</p>
+<p>If you are using the <a href="https://dev.npr.org/guide/services/authorization/#Auth_Code">Authorization Code Grant</a>, this SDK does not offer built-in support for sign-in; there isn&apos;t much that this SDK <em>could</em> do for you, and the few implementation decisions that need to be made will vary across apps. Essentially, if you are using <a href="https://github.com/nprdm/npr-one-backend-proxy-php">npr-one-backend-proxy-php</a> or a similar OAuth proxy, if a user clicks on a &apos;Sign In&apos; link, all your app needs to do is redirect (most likely by setting <code>window.location.href</code>) to the same <code>authProxyBaseUrl</code> as above, followed by the path that corresponds to your Auth Code grant implementation. Once the proxy has obtained your authorization code, swaps it out for an access token, and is ready to redirect back to your app, it is up to your JavaScript app to figure out how to obtain that new access token. <a href="https://github.com/nprdm/npr-one-backend-proxy-php">npr-one-backend-proxy-php</a> stores it in a cookie which can be read by client-side code (and for security purposes, this cookie should promptly be deleted after it is read and stored in the SDK), but other implementations are possible.</p>
+<p>If you are using the <a href="https://dev.npr.org/guide/services/authorization/#device_code">Device Code Grant</a> instead, this SDK offers additional support. If you add the following endpoints to the config:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">NprOneSDK.config = {
+    authProxyBaseUrl: &apos;https://one.example.com/oauth2&apos;,
+    refreshTokenPath: &apos;/refresh&apos;,
+    newDeviceCodePath: &apos;/device&apos;,
+    pollDeviceCodePath: &apos;/device/poll&apos;,
+};</code>
+</code></pre>
+<p>...following the same guidance as above, where <code>newDeviceCodePath</code> and <code>pollDeviceCodePath</code> are existing paths relative to <code>authProxyBaseUrl</code>, then you can use the built-in <code>getDeviceCode()</code> and <code>pollDeviceCode()</code> functions to add login via device code out of the box:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">function logInViaDeviceCode(scopes) {
+    nprOneSDK.getDeviceCode(scopes)
+        .then((deviceCodeModel) =&gt; {
+            displayCodeToUser(deviceCodeModel); // display code to user on the screen
+            nprOneSDK.pollDeviceCode()
+                .then(() =&gt; {
+                    startPlayingAudio(); // you&apos;re now ready to call `nprOneSDK.getRecommendation()` elsewhere in your app
+                }).catch(logInViaDeviceCode.bind(this, scopes)); // recursively call this function until the user logs in
+        });
+}
+
+logInViaDeviceCode([&apos;identity.readonly&apos;, &apos;identity.write&apos;, &apos;listening.readonly&apos;, &apos;listening.write&apos;, &apos;localactivation&apos;]);</code>
+</code></pre>
+<p>Note that the above functions have been optimized to work with the <a href="https://github.com/nprdm/npr-one-backend-proxy-php">npr-one-backend-proxy-php</a> package. If you have created a custom OAuth proxy that does not use the same approach to the Device Code Grant, then the above built-in functionality may or may not work.</p>
+<p>It is important to note that the <strong>SDK</strong> (and not your app) should be considered the single source of truth as to what the current access token is because the SDK is configured to refresh tokens behind-the-scenes when they expire, allowing the desired API calls to go through uninterrupted. As such, <strong>the access token may change at any time</strong>. If your app is not storing or otherwise consuming access tokens outside of the SDK, you have nothing to worry about. However, if you are persisting access tokens across sessions (which is left entirely up to your app to implement), then we recommend using the callback provided below to notify your app when the access token changes:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">NprOneSDK.onAccessTokenChanged = function (newToken) {
+    console.log(&apos;Access token has changed! New token:&apos;, newToken);
+    // in production, replace console.log() with code to update your token in memory/localStorage/wherever
+};</code>
+</code></pre>
+<p>The alternative is to check the value of <code>NprOneSDK.accessToken</code> after each API call to see whether the token has changed, but the callback approach offers a simpler method.</p>
+<h4 id="do-it-yourself">Do-It-Yourself</h4>
+<p>The DIY approach is only recommended if you are using this SDK in server-side JavaScript. Since a <code>client_secret</code> should <strong>never</strong> be included in frontend code, only server-side apps can safely make calls directly to the Authorization Service.</p>
+<p>If you do plan to take the DIY approach, the method for obtaining an access token is up to you to design, but you can reference the <a href="https://github.com/nprdm/npr-one-backend-proxy-php">npr-one-backend-proxy-php</a> project as a template for how to construct your calls.</p>
+<p>Once you have obtained your access token, you have two ways of communicating that to the SDK:</p>
+<p>...either through the <code>.config</code> setting:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">NprOneSDK.config = {
+    accessToken: &apos;aaaabbbbcccc12345678&apos;
+};</code>
+</code></pre>
+<p>...or using the <code>.accessToken</code> shortcut:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">NprOneSDK.accessToken = &apos;aaaabbbbcccc12345678&apos;;</code>
+</code></pre>
+<p>Neither of these is considered preferable over the other, but if all you are changing is the access token, the second option offers shorter syntax.</p>
+<h3 id="basic-flow">Basic Flow</h3>
+<p>The basic flow of an NPR One application is as follows:</p>
+<ol>
+<li>Ask for a list of recommendations; grab the first item in the list and deliver that audio to your user</li>
+<li>Begin playing the audio associated with the first item; send a <code>START</code> rating</li>
+<li>Finish playing the audio; send a <code>COMPLETED</code> rating</li>
+<li>Play the next item in the recommendation list; rinse &amp; repeat</li>
+</ol>
+<p>This SDK abstracts away the logic of when to actually make new API calls. Given the above flow, a simple application might look similar to the following:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">nprOneSDK.getRecommendation()
+    .then(function (recommendation) {
+        recommendation.recordAction(NprOneSDK.Action.START, 0);
+
+        audioPlayer.play(recommendation.getAudio()[0]); // where &quot;audioPlayer&quot; here is a stand-in for your audio player implementation
+
+        // assuming some time passes and the audio player completes playing the audio...
+
+        recommendation.recordAction(NprOneSDK.Action.COMPLETED, recommendation.attributes.duration);
+
+        nprOneSDK.getRecommendation()
+            .then(function (nextRecommendation) {
+                // repeat the same steps as above with the new recommendation; repeat ad infinitum
+            });
+    });</code>
+</code></pre>
+<p>There are many opportunities for including reusable callback functions, but we&apos;ve kept it simple here to give the main overview.</p>
+<p>Aside from <code>START</code> and <code>COMPLETED</code>, here are the other actions (or &quot;ratings&quot;) you can send:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NprOneSDK.Action.SKIP</code></td>
+<td>To be used when the user has explicitly chosen to move on to the next story; the SDK will automatically advance to the next piece on the next call to <code>getRecommendation()</code>.</td>
+</tr>
+<tr>
+<td><code>NprOneSDK.Action.TIMEOUT</code></td>
+<td>To be used when the audio player is unable to play the audio; the SDK will automatically advance to the next piece on the next call to <code>getRecommendation()</code>.</td>
+</tr>
+<tr>
+<td><code>NprOneSDK.Action.THUMBUP</code></td>
+<td>If your app has a &quot;Mark as Interesting&quot; button or a similar non-canonical &quot;Like&quot; or &quot;Favorite&quot; mechanism, send this action when the user explicitly presses that button/uses that feedback mechanism.</td>
+</tr>
+<tr>
+<td><code>NprOneSDK.Action.SHARE</code></td>
+<td>If your app has some type of social sharing integration, send this action when the user explicitly chooses to share a piece via social media.</td>
+</tr>
+<tr>
+<td><code>NprOneSDK.Action.TAPTHRU</code></td>
+<td>If a user explicitly interacts with a feature card or taps/clicks on the image for a sponsorship card, send this action.</td>
+</tr>
+<tr>
+<td><code>NprOneSDK.Action.PASS</code></td>
+<td>If your app displays a list of upcoming recommendations and the user explicitly chooses to skip multiple recommendations in favor of one much further down the list, send this action (see <a href="https://dev.npr.org/develop/developer-documentation/examples/recommendation-examples/">here</a> for more info).</td>
+</tr>
+<tr>
+<td><code>NprOneSDK.Action.SRCHSTART</code></td>
+<td>If your app provides search functionality (not yet included in this SDK, but likely coming in a future update), send this action when the user has explicitly initiated search.</td>
+</tr>
+<tr>
+<td><code>NprOneSDK.Action.SRCHCOMPL</code></td>
+<td>If your app provides search functionality (not yet included in this SDK, but likely coming in a future update), send this action when the user has finished searching (either by selecting something to listen to, or canceling out of search).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="additional-functionality">Additional Functionality</h3>
+<p>Aside from the basic flow to play audio piece-by-piece, here are the other calls you can make through this SDK:</p>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getUpcomingFlowRecommendations()</code></td>
+<td>Can be used to display a &quot;Coming Up&quot; list in your app; items in this list represent what&apos;s queued to play next, assuming no other user interactions occur.</td>
+</tr>
+<tr>
+<td><code>getRecommendationsFromChannel(channel)</code></td>
+<td>Can be used to retrieve a list of stories in a channel other than the regular flow channel of <code>&apos;npr&apos;</code>, suitable for displaying in lists or grids of recommended/featured content.</td>
+</tr>
+<tr>
+<td><code>queueRecommendationFromChannel(channel, uid)</code></td>
+<td>Should be used in tandem with <code>getRecommendationsFromChannel()</code> after the user has selected a specific piece from that channel to play next, in order to ensure that the correct ratings (actions) will be sent and the flow of audio will continue appropriately with the necessary API calls.</td>
+</tr>
+<tr>
+<td><code>getHistory()</code></td>
+<td>Can be used to display a list of items that the user has recently heard, in reverse-chronological order.</td>
+</tr>
+<tr>
+<td><code>getUser()</code></td>
+<td>Can be used to retrieve and/or display metadata about the current logged-in user, such as their name, e-mail address, and their localized NPR member station.</td>
+</tr>
+<tr>
+<td><code>followShow(aggregationId)</code></td>
+<td>Can be used to indicate that the user wishes to follow, or subscribe to, the show, program, or podcast with the given ID. Note that at this time, because we have not yet implemented search in this SDK, there is no way to retrieve a list of aggregation (show) IDs through this SDK.</td>
+</tr>
+<tr>
+<td><code>unfollowShow(aggregationId)</code></td>
+<td>Can be used to indicate that the user wishes to unfollow, or unsubscribe from, the show, program, or podcast with the given ID; a counter to <code>followShow()</code>. The same restrictions apply.</td>
+</tr>
+<tr>
+<td><code>setUserStation(stationId)</code></td>
+<td>Can be used to manually set a user&apos;s NPR station to the station with the given ID. Note that the NPR One API already auto-localizes users to their nearest station, so this particular function should only be used if your app offers the ability to search for and manually select a station.</td>
+</tr>
+<tr>
+<td><code>searchStations(query)</code></td>
+<td>Can be used to perform a general search of all NPR One stations, using an optional query. If no query is passed in, this function will return a list of one or more stations geographically closest to the client based on the consumer&apos;s IP address.</td>
+</tr>
+<tr>
+<td><code>searchStationsByLatLongCoordinates(lat, long)</code></td>
+<td>Can be used to perform a geographic search of all NPR One stations using a passed-in pair of lat-long coordinates. In most cases, this means you will need to first use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation">HTML5 Geolocation API</a> or a similar library in order to obtain the lat-long coordinates for the end-user&apos;s location.</td>
+</tr>
+<tr>
+<td><code>searchStationsByCityAndState(city, state)</code></td>
+<td>Can be used to perform a geographic search of all NPR One stations using a city name (full) and state (name or abbreviation). While you <em>can</em> pass in a city <em>or</em> state to <code>searchStations()</code> as the query, this function will return more accurate results, particularly for common city names such as &apos;Springfield&apos;.</td>
+</tr>
+<tr>
+<td><code>getStationDetails(stationId)</code></td>
+<td>Can be used to retrieve additional metadata about the NPR station with the given ID. The most common use case is for a screen that shows the end-user more information about the station they are currently localized to.</td>
+</tr>
+<tr>
+<td><code>logout()</code></td>
+<td>Can be used to perform cleanup as part of a logout process if you have a <a href="#using-an-oauth-proxy-recommended">backend auth proxy</a> configured. If you are using <a href="#do-it-yourself">the DIY approach</a> instead of a proxy, then you are responsible for your own cleanup.</td>
+</tr>
+</tbody>
+</table>
+<p>Search will be implemented at some later date; we don&apos;t typically add functionality to the SDK until we have a chance to dogfood our work ourselves, and <a href="https://one.npr.org">NPR One for the Web</a> does not (yet) offer search functionality.</p>
+<h2 id="examples">Examples</h2>
+<p>The <a href="https://github.com/npr/npr-one-api-js-sdk/tree/master/examples/">examples</a> directory contains some examples of the SDK in use, both for client-side and server-side environments.</p>
+<ul>
+<li><a href="https://github.com/npr/npr-one-api-js-sdk/tree/master/examples/browser/example.html"><code>examples/browser/example.html</code></a> shows an example of the SDK in use in the browser</li>
+<li><a href="https://github.com/npr/npr-one-api-js-sdk/tree/master/examples/node/main.js"><code>examples/node/main.js</code></a> shows an example of the SDK in use in a node.js server-side app</li>
+</ul>
+<p>These example files will not run out-of-the-box because they require a valid OAuth access token to be configured. If you would like to try running these, clone or download the repository to your local filesystem, then edit <a href="https://github.com/npr/npr-one-api-js-sdk/tree/master/examples/browser/example.html#L38">line 38 of the browser example file</a> and <a href="https://github.com/npr/npr-one-api-js-sdk/tree/master/examples/node/main.js#L9">line 9 of the node.js example file</a>, respectively, replacing the fake access token with your own, valid access token.</p>
+<h2 id="documentation">Documentation</h2>
+<p>Further information about the public API of this package can be found <a href="https://npr.github.io/npr-one-api-js-sdk/docs/">here</a>.</p>
+<p>For background information about the NPR One API, please see the <a href="https://dev.npr.org/develop/">developer guide</a> at the <a href="https://dev.npr.org/">NPR One Developer Center</a>.</p>
+<h2 id="changelog">CHANGELOG</h2>
+<p>The changelog can be found on our <a href="https://github.com/npr/npr-one-api-js-sdk/releases">GitHub releases</a> page.</p>
+<h2 id="contributing">Contributing</h2>
+<p>If you&apos;re interested in contributing to this project by submitting bug reports, helping to improve the documentation, or writing actual code, please read <a href="https://github.com/npr/npr-one-api-js-sdk/tree/master/CONTRIBUTING.md">our contribution guidelines</a>.</p>
+<h2 id="license">License</h2>
+<p>Copyright (c) 2016-2018 NPR</p>
+<p>Licensed under the <a href="https://www.apache.org/licenses/License-2.0">Apache License, Version 2.0</a> (the &#x201C;License&#x201D;) with the following modification; You may not use this file except in compliance with the License as modified by the addition of Section 10, as follows:</p>
+<h5 id="10-additional-prohibitions">10. Additional Prohibitions</h5>
+<p>When using the Work, You may not (or allow those acting on Your behalf to):</p>
+<p>a.    Perform any action with the intent of introducing to the Work, the NPR One API, the NPR servers or network infrastructure, or any NPR products and services any viruses, worms, defects, Trojan horses, malware or any items of a destructive or malicious nature; or obtaining unauthorized access to the NPR One API, the NPR servers or network infrastructure, or any NPR products or services;</p>
+<p>b.    Remove, obscure or alter any NPR terms of service, including the <a href="https://www.npr.org/about-npr/179876898/terms-of-use">NPR services Terms of Use</a> and the <a href="https://dev.npr.org/terms-of-use/">Developer API Terms of Use</a>, or any links to or notices of those terms; or</p>
+<p>c.    Take any other action prohibited by any NPR terms of service, including the <a href="https://www.npr.org/about-npr/179876898/terms-of-use">NPR services Terms of Use</a> and the <a href="https://dev.npr.org/terms-of-use/">Developer API Terms of Use</a>.</p>
+<p>You may obtain a copy of the License at <a href="https://www.apache.org/licenses/License-2.0">https://www.apache.org/licenses/License-2.0</a></p>
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License with the above modification is distributed on an &#x201C;AS IS&#x201D; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the specific language governing permissions and limitations under the License.</p>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

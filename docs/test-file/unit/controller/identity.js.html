@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">unit/controller/identity.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">unit/controller/identity.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import chai from &apos;chai&apos;;
+import { ACCESS_TOKEN_RESPONSE, IDENTITY_V2_USER_RESPONSE, STATION_FINDER_RESPONSE } from &apos;../../test-data&apos;;
+import mockery from &apos;mockery&apos;;
+import fetchMock from &apos;fetch-mock&apos;;
+import Identity from &apos;./../../../src/controller/identity&apos;;
+import NprOne from &apos;./../../../src/index&apos;;
+import { testConfig } from &apos;../../test&apos;;
+
+
+const should = chai.should();
+const STATION_FINDER_SINGLE_ORG_RESPONSE = STATION_FINDER_RESPONSE.items[0];
+
+
+/** @test {Identity} */
+describe(&apos;Identity&apos;, () =&gt; {
+    let identity;
+
+
+    beforeEach(() =&gt; {
+        identity = new Identity();
+        NprOne.config = testConfig;
+    });
+
+    afterEach(() =&gt; {
+        fetchMock.restore();
+        mockery.deregisterMock(&apos;fetch&apos;);
+    });
+
+
+    /** @test {Identity#getUser} */
+    describe(&apos;getUser&apos;, () =&gt; {
+        const userUrl = `^${NprOne.getServiceUrl(&apos;identity&apos;)}/user`;
+        let userClone;
+
+        beforeEach(() =&gt; {
+            userClone = JSON.parse(JSON.stringify(IDENTITY_V2_USER_RESPONSE));
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(userUrl, &apos;GET&apos;, userClone)
+                .getMock());
+        });
+
+        it(&apos;should make a request to /user&apos;, (done) =&gt; {
+            identity.getUser()
+                .then((user) =&gt; {
+                    fetchMock.called(userUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    user.isTemporary().should.equal(false);
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+
+    /** @test {Identity#setUserStation} */
+    describe(&apos;setUserStation&apos;, () =&gt; {
+        const identityUrl = `^${NprOne.getServiceUrl(&apos;identity&apos;)}/stations`;
+        const stationFinderUrl = `^${NprOne.getServiceUrl(&apos;stationfinder&apos;)}/stations`;
+        const stationId = 305;
+
+        it(&apos;should validate the station, and then make a PUT request to identity/stations&apos;, (done) =&gt; {
+            const userClone = JSON.parse(JSON.stringify(IDENTITY_V2_USER_RESPONSE));
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(stationFinderUrl, &apos;GET&apos;, STATION_FINDER_SINGLE_ORG_RESPONSE)
+                .mock(identityUrl, &apos;PUT&apos;, userClone)
+                .getMock());
+
+            identity.setUserStation(stationId)
+                .then(user =&gt; {
+                    fetchMock.called(stationFinderUrl).should.be.true;
+                    fetchMock.called(identityUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    user.isTemporary().should.equal(false);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should fail if a non-numeric station ID is passed in&apos;, (done) =&gt; {
+            const error = &apos;Error: Station ID must be an integer greater than 0&apos;;
+            identity.setUserStation(&apos;bad-station-id&apos;).should.be.rejectedWith(error).notify(done);
+        });
+
+        it(&apos;should reject the promise if station finder returns a 404&apos;, (done) =&gt; {
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(stationFinderUrl, &apos;GET&apos;, 404)
+                .getMock());
+
+            identity.setUserStation(241452).should.be.rejected.notify(() =&gt; {
+                fetchMock.called(stationFinderUrl).should.be.true;
+                fetchMock.calls().unmatched.length.should.equal(0);
+                done();
+            });
+        });
+    });
+
+
+    /** @test {Identity#followShow} */
+    describe(&apos;followShow&apos;, () =&gt; {
+        const identityUrl = `^${NprOne.getServiceUrl(&apos;identity&apos;)}/following`;
+        const aggregationId = 123;
+
+        it(&apos;should validate the aggregation, and then make a POST request to identity/following&apos;, (done) =&gt; {
+            const userClone = JSON.parse(JSON.stringify(IDENTITY_V2_USER_RESPONSE));
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(identityUrl, &apos;POST&apos;, userClone)
+                .getMock());
+
+            identity.followShow(aggregationId)
+                .then(() =&gt; {
+                    fetchMock.called(identityUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    JSON.parse(fetchMock.lastOptions(identityUrl).body).should.deep.equal({
+                        id: aggregationId,
+                        following: true,
+                    });
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should throw a TypeError if a non-numeric aggregation ID is passed in&apos;, () =&gt; {
+            chai.expect(() =&gt; {
+                identity.followShow(&apos;bad-aggregation-id&apos;);
+            }).to.throw(&apos;Aggregation (show) ID must be an integer greater than 0&apos;);
+        });
+    });
+
+
+    /** @test {Identity#unfollowShow} */
+    describe(&apos;unfollowShow&apos;, () =&gt; {
+        const identityUrl = `^${NprOne.getServiceUrl(&apos;identity&apos;)}/following`;
+        const aggregationId = 456;
+
+        it(&apos;should validate the aggregation, and then make a POST request to identity/following&apos;, (done) =&gt; {
+            const userClone = JSON.parse(JSON.stringify(IDENTITY_V2_USER_RESPONSE));
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(identityUrl, &apos;POST&apos;, userClone)
+                .getMock());
+
+            identity.unfollowShow(aggregationId)
+                .then(() =&gt; {
+                    fetchMock.called(identityUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    JSON.parse(fetchMock.lastOptions(identityUrl).body).should.deep.equal({
+                        id: aggregationId,
+                        following: false,
+                    });
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should throw a TypeError if a non-numeric aggregation ID is passed in&apos;, () =&gt; {
+            chai.expect(() =&gt; {
+                identity.unfollowShow(&apos;bad-aggregation-id&apos;);
+            }).to.throw(&apos;Aggregation (show) ID must be an integer greater than 0&apos;);
+        });
+    });
+
+
+    /** @test {Identity#createTemporaryUser} */
+    describe(&apos;createTemporaryUser&apos;, () =&gt; {
+        let tempUrl;
+
+        beforeEach(() =&gt; {
+            tempUrl = `^${NprOne.config.authProxyBaseUrl}${NprOne.config.tempUserPath}`;
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(tempUrl, &apos;GET&apos;, ACCESS_TOKEN_RESPONSE)
+                .getMock());
+        });
+
+        it(&apos;should make a request to NPR proxy when called&apos;, (done) =&gt; {
+            identity.createTemporaryUser()
+                .then(() =&gt; {
+                    fetchMock.called(tempUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    NprOne.accessToken.should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should make a request to NPR proxy when called using the correct query param character&apos;, (done) =&gt; {
+            NprOne.config.tempUserPath = `${NprOne.config.tempUserPath}?test=true`;
+
+            identity.createTemporaryUser()
+                .then(() =&gt; {
+                    fetchMock.called(tempUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    NprOne.accessToken.should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                    done();
+                })
+                .catch(done);
+        });
+
+        describe(&apos;if no client ID is set&apos;, () =&gt; {
+            beforeEach(() =&gt; {
+                NprOne.config = { clientId: &apos;&apos; };
+            });
+
+            it(&apos;should throw a TypeError&apos;, () =&gt; {
+                chai.expect(() =&gt; {
+                    identity.createTemporaryUser();
+                }).to.throw(&apos;A client ID must be set for temporary user requests.&apos;);
+            });
+        });
+
+
+        describe(&apos;if no auth proxy URL is set&apos;, () =&gt; {
+            beforeEach(() =&gt; {
+                NprOne.config = { authProxyBaseUrl: &apos;&apos; };
+            });
+
+            it(&apos;should throw a TypeError&apos;, () =&gt; {
+                chai.expect(() =&gt; {
+                    identity.createTemporaryUser();
+                }).to.throw(&apos;OAuth proxy not configured. Unable to create temporary users.&apos;);
+            });
+        });
+    });
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/controller/authorization.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/controller/authorization.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import NPROneSDK from &apos;./../index&apos;;
+import AccessToken from &apos;./../model/access-token&apos;;
+import DeviceCode from &apos;./../model/device-code&apos;;
+import Logger from &apos;./../util/logger&apos;;
+import FetchUtil from &apos;./../util/fetch-util&apos;;
+import ApiError from &apos;./../error/api-error&apos;;
+
+
+/**
+ * Simulates a delay by wrapping a Promise around JavaScript&apos;s native `setTimeout` function.
+ *
+ * @param {number} ms The amount of time to delay for, in milliseconds
+ * @returns {Promise}
+ * @private
+ */
+const delay = ms =&gt; new Promise(r =&gt; setTimeout(r, ms));
+
+
+/**
+ * Encapsulates all of the logic for communication with the [Authorization Service](https://dev.npr.org/api/#/authorization)
+ * in the NPR One API.
+ *
+ * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
+ * functions in the main {@link NprOneSDK} class.
+ *
+ * @example &lt;caption&gt;Rudimentary example of implementing the Device Code flow&lt;/caption&gt;
+ * const nprOneSDK = new NprOneSDK();
+ * nprOneSDK.config = { ... };
+ * const scopes = [&apos;identity.readonly&apos;, &apos;identity.write&apos;, &apos;listening.readonly&apos;, &apos;listening.write&apos;];
+ * nprOneSDK.getDeviceCode(scopes)
+ *     .then((deviceCodeModel) =&gt; {
+ *         // display code to user on the screen
+ *         nprOneSDK.pollDeviceCode()
+ *             .then(() =&gt; {
+ *                 nprOneSDK.getRecommendation();
+ *             });
+ *      })
+ *     .catch(() =&gt; {
+ *         nprOneSDK.getDeviceCode(scopes).then(...); // repeat ad infinitum until `pollDeviceCode()` resolves successfully
+ *         // In actual use, it may be preferable to refactor this into a recursive function
+ *     ));
+ */
+export default class Authorization {
+    /**
+     * Initializes the controller class with private variables needed later on.
+     */
+    constructor() {
+        /** @type {null|DeviceCode} The device code model for the currently-active device code grant
+         * @private */
+        this._activeDeviceCodeModel = null;
+    }
+
+    /**
+     * Attempts to swap the existing access token for a new one using the refresh token endpoint in the OAuth proxy
+     *
+     * @param {number} [numRetries=0]   The number of times this function has been tried. Will retry up to 3 times.
+     * @returns {Promise&lt;AccessToken&gt;}
+     * @throws {TypeError} if an OAuth proxy is not configured or no access token is set
+     */
+    static refreshExistingAccessToken(numRetries = 0) {
+        if (!NPROneSDK.config.authProxyBaseUrl) {
+            throw new TypeError(&apos;OAuth proxy not configured. Unable to refresh the access token.&apos;);
+        }
+        if (!NPROneSDK.accessToken) {
+            throw new TypeError(&apos;An access token must be set in order to attempt a refresh.&apos;);
+        }
+
+        Logger.debug(&apos;Access token appears to have expired. Attempting to generate a fresh one.&apos;);
+
+        const url = `${NPROneSDK.config.authProxyBaseUrl}${NPROneSDK.config.refreshTokenPath}`;
+        const options = {
+            method: &apos;POST&apos;,
+            credentials: &apos;include&apos;,
+        };
+
+        return FetchUtil.nprApiFetch(url, options)
+            .then((json) =&gt; {
+                const tokenModel = new AccessToken(json);
+                tokenModel.validate(); // throws exception if invalid
+                Logger.debug(&apos;Access token refresh was successful, new token:&apos;,
+                    tokenModel.toString());
+                NPROneSDK.accessToken = tokenModel.token;
+                return tokenModel; // never directly consumed, but useful for testing
+            })
+            .catch((err) =&gt; {
+                Logger.debug(&apos;Error generating a new token in refreshExistingAccessToken()&apos;);
+                Logger.debug(err);
+
+                if (numRetries &lt; 2) {
+                    Logger.debug(&apos;refreshExistingAccessToken() will make another attempt&apos;);
+                    return delay(5000)
+                        .then(Authorization.refreshExistingAccessToken.bind(this, numRetries + 1));
+                }
+
+                // rethrow
+                Logger.debug(&apos;refreshExistingAccessToken() has made too many attempts, aborting&apos;);
+                return Promise.reject(err);
+            });
+    }
+
+    /**
+     * Logs out the user, revoking their access token from the authorization server and removing the refresh token from
+     * the secure storage in the backend proxy (if a backend proxy is configured). Note that the consuming client is
+     * still responsible for removing the access token anywhere else it might be stored outside of this SDK (e.g. in
+     * localStorage or elsewhere in application memory).
+     *
+     * @returns {Promise}
+     * @throws {TypeError} if an OAuth proxy is not configured or no access token is currently set
+     */
+    logout() {
+        if (!NPROneSDK.accessToken) {
+            throw new TypeError(&apos;An access token must be set in order to attempt a logout.&apos;);
+        }
+        if (!NPROneSDK.config.authProxyBaseUrl) {
+            throw new TypeError(&apos;OAuth proxy not configured. Unable to securely log out the user.&apos;);
+        }
+
+        const url = `${NPROneSDK.config.authProxyBaseUrl}${NPROneSDK.config.logoutPath}`;
+        const options = {
+            method: &apos;POST&apos;,
+            credentials: &apos;include&apos;,
+            body: `token=${NPROneSDK.accessToken}`,
+            headers: {
+                Accept: &apos;application/json, application/xml, text/plain, text/html, *.*&apos;,
+                &apos;Content-Type&apos;: &apos;application/x-www-form-urlencoded; charset=utf-8&apos;,
+            },
+        };
+
+        return fetch(url, options) // we cannot use FetchUtil.nprApiFetch() here because the success response has an empty body
+            .then((response) =&gt; {
+                if (response.ok) {
+                    NPROneSDK.accessToken = &apos;&apos;;
+                    return true;
+                }
+                return FetchUtil.formatErrorResponse(response);
+            });
+    }
+
+    /**
+     * Uses the OAuth proxy to start a `device_code` grant flow. This function _just_ makes an API call that produces a
+     * device code/user code pair, and should be followed up with a call to {@link pollDeviceCode} in order to complete
+     * the process.
+     *
+     * Note that device code/user code pairs do expire after a set time, so the consuming client may need to call these
+     * 2 functions multiple times before the user logs in. It is a good idea to encapsulate them in a function which
+     * can be called recursively on errors; see the example below for details.
+     *
+     * @example
+     * function logInViaDeviceCode(scopes) {
+     *     nprOneSDK.getDeviceCode(scopes)
+     *         .then((deviceCodeModel) =&gt; {
+     *             displayCodeToUser(deviceCodeModel); // display code to user on the screen
+     *             nprOneSDK.pollDeviceCode()
+     *                 .then(() =&gt; {
+     *                     startPlayingAudio(); // you&apos;re now ready to call `nprOneSDK.getRecommendation()` elsewhere in your app
+     *                 }).catch(logInViaDeviceCode.bind(this, scopes)); // recursively call this function until the user logs in
+     *         });
+     * }
+     *
+     * @see https://dev.npr.org/guide/services/authorization/#device_code
+     *
+     * @param {Array&lt;string&gt;} [scopes=[]]   The scopes (as strings) that should be associated with the resulting access token
+     * @returns {Promise&lt;DeviceCode&gt;}
+     * @throws {TypeError} if an OAuth proxy is not configured
+     */
+    getDeviceCode(scopes = []) {
+        if (!NPROneSDK.config.authProxyBaseUrl) {
+            throw new TypeError(&apos;OAuth proxy not configured. Unable to use the device code.&apos;);
+        }
+
+        const url = `${NPROneSDK.config.authProxyBaseUrl}${NPROneSDK.config.newDeviceCodePath}`;
+        const options = {
+            method: &apos;POST&apos;,
+            credentials: &apos;include&apos;,
+            body: `scope=${encodeURIComponent(scopes.join(&apos; &apos;)).replace(&apos;%20&apos;, &apos;+&apos;)}`,
+            headers: {
+                Accept: &apos;application/json, application/xml, text/plain, text/html, *.*&apos;,
+                &apos;Content-Type&apos;: &apos;application/x-www-form-urlencoded; charset=utf-8&apos;,
+            },
+        };
+
+        return FetchUtil.nprApiFetch(url, options)
+            .then((json) =&gt; {
+                const deviceCodeModel = new DeviceCode(json);
+                deviceCodeModel.validate(); // throws exception if invalid
+                this._activeDeviceCodeModel = deviceCodeModel;
+                return deviceCodeModel;
+            });
+    }
+
+    /**
+     * Uses the OAuth proxy to poll the access token endpoint as part of a `device_code` grant flow. This endpoint will
+     * continue to poll until the user successfully logs in, _or_ the user goes to log in but then denies the request
+     * for access to their account by this client, _or_ the device code/user code pair expires, whichever comes first.
+     * In the first case, it will automatically set {@link NPROneSDK.accessToken} to the newly-generated access token,
+     * and the consuming client can proceed to play recommendations immediately; in the other 2 cases, it will return
+     * a Promise that rejects with a debugging message, but the next course of action would generally be to call
+     * {@link getDeviceCode} again and start the whole process from the top.
+     *
+     * @example
+     * function logInViaDeviceCode(scopes) {
+     *     nprOneSDK.getDeviceCode(scopes)
+     *         .then((deviceCodeModel) =&gt; {
+     *             displayCodeToUser(deviceCodeModel); // display code to user on the screen
+     *             nprOneSDK.pollDeviceCode()
+     *                 .then(() =&gt; {
+     *                     startPlayingAudio(); // you&apos;re now ready to call `nprOneSDK.getRecommendation()` elsewhere in your app
+     *                 }).catch(logInViaDeviceCode.bind(this, scopes)); // recursively call this function until the user logs in
+     *         });
+     * }
+     *
+     * @see https://dev.npr.org/guide/services/authorization/#device_code
+     *
+     * @returns {Promise&lt;AccessToken&gt;}
+     * @throws {TypeError} if an OAuth proxy is not configured or `getDeviceCode()` was not previously called
+     */
+    pollDeviceCode() {
+        Logger.debug(&apos;Starting to poll device code. Will poll until user logs in or code expires&apos;); // eslint-disable-line max-len
+
+        if (!NPROneSDK.config.authProxyBaseUrl) {
+            throw new TypeError(&apos;OAuth proxy not configured. Unable to use the device code.&apos;);
+        }
+        if (!this._activeDeviceCodeModel) {
+            throw new TypeError(&apos;No active device code set. Please call getDeviceCode() before calling this function.&apos;); // eslint-disable-line max-len
+        }
+
+        return this._pollDeviceCodeOnce();
+    }
+
+    /**
+     * Polls the device code once. If the result is an error of type `&apos;authorization_pending&apos;`, this will recurse,
+     * calling itself after a delay equal to the interval specified in the original call to {@link getDeviceCode}.
+     *
+     * @returns {Promise&lt;AccessToken&gt;}
+     * @private
+     */
+    _pollDeviceCodeOnce() {
+        Logger.debug(&apos;Polling device code once&apos;);
+
+        if (this._activeDeviceCodeModel.isExpired()) {
+            return Promise.reject(&apos;The device code has expired. Please generate a new one before continuing.&apos;); // eslint-disable-line max-len
+        }
+
+        const url = `${NPROneSDK.config.authProxyBaseUrl}${NPROneSDK.config.pollDeviceCodePath}`;
+        const options = {
+            method: &apos;POST&apos;,
+            credentials: &apos;include&apos;,
+        };
+
+        return FetchUtil.nprApiFetch(url, options)
+            .then((json) =&gt; {
+                Logger.debug(&apos;Device code poll returned successfully! An access token was returned.&apos;); // eslint-disable-line max-len
+
+                const tokenModel = new AccessToken(json);
+                tokenModel.validate(); // throws exception if invalid
+                NPROneSDK.accessToken = tokenModel.token;
+                return tokenModel; // never directly consumed, but useful for testing
+            })
+            .catch((error) =&gt; {
+                if (error instanceof ApiError) {
+                    if (error.statusCode === 401) {
+                        if (error.json.type === &apos;authorization_pending&apos;) {
+                            return delay(this._activeDeviceCodeModel.interval)
+                                .then(this._pollDeviceCodeOnce.bind(this));
+                        }
+                        Logger.debug(&apos;The response was a 401, but not of type &quot;authorization_pending&quot;. The user presumably denied the app access; rejecting.&apos;); // eslint-disable-line max-len
+                    } else {
+                        Logger.debug(&apos;Response was not a 401. The device code has probably expired; rejecting.&apos;); // eslint-disable-line max-len
+                    }
+                } else {
+                    Logger.debug(&apos;An unknown type of error was received. Unsure of how to respond; rejecting.&apos;); // eslint-disable-line max-len
+                }
+                return Promise.reject(error);
+            });
+    }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

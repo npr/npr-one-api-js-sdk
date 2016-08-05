@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">unit/controller/authorization.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">unit/controller/authorization.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import chai from &apos;chai&apos;;
+import { ACCESS_TOKEN_RESPONSE, DEVICE_CODE_RESPONSE, DEVICE_CODE_POLL_RESPONSE, DEVICE_CODE_DENIED_RESPONSE, DEVICE_CODE_EXPIRED_RESPONSE } from &apos;../../test-data&apos;;
+import mockery from &apos;mockery&apos;;
+import fetchMock from &apos;fetch-mock&apos;;
+import Authorization from &apos;./../../../src/controller/authorization&apos;;
+import NprOne from &apos;./../../../src/index&apos;;
+import { testConfig } from &apos;../../test&apos;;
+
+const should = chai.should();
+
+
+/** @test {Authorization} */
+describe(&apos;Authorization&apos;, () =&gt; {
+    let authorization;
+    let refreshTokenUrl;
+    let logoutUrl;
+    let newDeviceCodeUrl;
+    let deviceCodePollUrl;
+
+
+    beforeEach(() =&gt; {
+        authorization = new Authorization();
+        NprOne.config = testConfig;
+
+        refreshTokenUrl = `^${testConfig.authProxyBaseUrl}${NprOne.config.refreshTokenPath}`;
+        logoutUrl = `^${testConfig.authProxyBaseUrl}${NprOne.config.logoutPath}`;
+        newDeviceCodeUrl = `${NprOne.config.authProxyBaseUrl}${NprOne.config.newDeviceCodePath}`;
+        deviceCodePollUrl = `${NprOne.config.authProxyBaseUrl}${NprOne.config.pollDeviceCodePath}`;
+    });
+
+    afterEach(() =&gt; {
+        fetchMock.restore();
+        mockery.deregisterMock(&apos;fetch&apos;);
+    });
+
+
+    /** @test {Authorization.refreshExistingAccessToken} */
+    describe(&apos;refreshExistingAccessToken&apos;, function () { // intentionally can&apos;t use arrow function here
+        // see: https://github.com/mochajs/mocha/issues/1763
+        this.timeout(16000);
+
+        // @TODO this should not be necessary - quick-fix to deal with implicit dependency on Listening controller - see #8
+        const adsWizzWwwUrl = &apos;https://adswizz.com&apos;;
+        const adsWizzCdnUrl = &apos;^https://delivery-s3.adswizz.com&apos;;
+
+        it(&apos;should call the refresh token endpoint in the auth proxy&apos;, (done) =&gt; {
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(refreshTokenUrl, &apos;POST&apos;, ACCESS_TOKEN_RESPONSE)
+                .mock(adsWizzWwwUrl, &apos;GET&apos;, 200) // @TODO remove as part of fix for #8
+                .mock(adsWizzCdnUrl, &apos;GET&apos;, 200) // @TODO remove as part of fix for #8
+                .getMock());
+
+            Authorization.refreshExistingAccessToken()
+                .then(() =&gt; {
+                    fetchMock.called(refreshTokenUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    NprOne.accessToken.should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should retry the call to the refresh token endpoint in the auth proxy if it receives a bad response the first time&apos;, (done) =&gt; {
+            let numTries = 0;
+
+            const responses = () =&gt; {
+                numTries += 1;
+
+                if (numTries === 1) {
+                    return 500;
+                } else {
+                    return ACCESS_TOKEN_RESPONSE;
+                }
+            };
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(refreshTokenUrl, &apos;POST&apos;, responses)
+                .mock(adsWizzWwwUrl, &apos;GET&apos;, 200) // @TODO remove as part of fix for #8
+                .mock(adsWizzCdnUrl, &apos;GET&apos;, 200) // @TODO remove as part of fix for #8
+                .getMock());
+
+            Authorization.refreshExistingAccessToken()
+                .then(() =&gt; {
+                    fetchMock.called(refreshTokenUrl).should.be.true;
+                    fetchMock.calls().matched.length.should.be.greaterThan(1);
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    NprOne.accessToken.should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should retry the call to the refresh token endpoint in the auth proxy up to 3 times, but then error out&apos;, (done) =&gt; {
+            let numTries = 0;
+
+            const responses = () =&gt; {
+                numTries += 1;
+
+                if (numTries &lt; 5) {
+                    return 500;
+                } else {
+                    return ACCESS_TOKEN_RESPONSE;
+                }
+            };
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(refreshTokenUrl, &apos;POST&apos;, responses)
+                .mock(adsWizzWwwUrl, &apos;GET&apos;, 200) // @TODO remove as part of fix for #8
+                .mock(adsWizzCdnUrl, &apos;GET&apos;, 200) // @TODO remove as part of fix for #8
+                .getMock());
+
+            Authorization.refreshExistingAccessToken()
+                .then(() =&gt; {
+                    done(&apos;Should not be here, call should have ended on a throw&apos;);
+                })
+                .catch(() =&gt; {
+                    fetchMock.called(refreshTokenUrl).should.be.true;
+                    fetchMock.calls().matched.length.should.be.greaterThan(1);
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    done();
+                });
+        });
+
+        describe(&apos;if no auth proxy URL is set&apos;, () =&gt; {
+            beforeEach(() =&gt; {
+                NprOne.config = { authProxyBaseUrl: &apos;&apos; };
+            });
+
+            it(&apos;should throw a TypeError&apos;, () =&gt; {
+                chai.expect(() =&gt; {
+                    Authorization.refreshExistingAccessToken();
+                }).to.throw(&apos;OAuth proxy not configured. Unable to refresh the access token.&apos;);
+            });
+        });
+
+        describe(&apos;if no access token is set&apos;, () =&gt; {
+            beforeEach(() =&gt; {
+                NprOne.config = { accessToken: &apos;&apos; };
+            });
+
+            it(&apos;should throw a TypeError&apos;, () =&gt; {
+                chai.expect(() =&gt; {
+                    Authorization.refreshExistingAccessToken();
+                }).to.throw(&apos;An access token must be set in order to attempt a refresh.&apos;);
+            });
+        });
+    });
+
+
+    /** @test {Authorization#logout} */
+    describe(&apos;logout&apos;, () =&gt; {
+        it(&apos;should call the logout endpoint in the auth proxy&apos;, (done) =&gt; {
+            const oldAccessToken = NprOne.accessToken;
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(logoutUrl, &apos;POST&apos;, JSON.stringify(&apos;&apos;))
+                .getMock());
+
+            authorization.logout()
+                .then(() =&gt; {
+                    fetchMock.called(logoutUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    const options = fetchMock.lastOptions(logoutUrl);
+                    options.body.should.equal(`token=${oldAccessToken}`);
+                    NprOne.accessToken.should.equal(&apos;&apos;);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should throw an error if the response is not \&apos;ok\&apos;&apos;, (done) =&gt; {
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(logoutUrl, &apos;POST&apos;, 400)
+                .getMock());
+
+            authorization.logout().should.be.rejected.notify(() =&gt; {
+                fetchMock.called(logoutUrl).should.be.true;
+                fetchMock.calls().unmatched.length.should.equal(0);
+                done();
+            });
+        });
+
+        describe(&apos;if no access token is set&apos;, () =&gt; {
+            beforeEach(() =&gt; {
+                NprOne.config = { accessToken: &apos;&apos; };
+            });
+
+            it(&apos;should throw a TypeError&apos;, () =&gt; {
+                chai.expect(() =&gt; {
+                    authorization.logout();
+                }).to.throw(&apos;An access token must be set in order to attempt a logout.&apos;);
+            });
+        });
+
+        describe(&apos;if no auth proxy URL is set&apos;, () =&gt; {
+            beforeEach(() =&gt; {
+                NprOne.config = { authProxyBaseUrl: &apos;&apos; };
+            });
+
+            it(&apos;should throw a TypeError&apos;, () =&gt; {
+                chai.expect(() =&gt; {
+                    authorization.logout();
+                }).to.throw(&apos;OAuth proxy not configured. Unable to securely log out the user.&apos;);
+            });
+        });
+    });
+
+
+    /** @test {Authorization#getDeviceCode} */
+    describe(&apos;getDeviceCode&apos;, () =&gt; {
+        it(&apos;should throw an error if not configured properly&apos;, () =&gt; {
+            NprOne.config = { authProxyBaseUrl: &apos;&apos; };
+            chai.expect(() =&gt; {
+                authorization.getDeviceCode();
+            }).to.throw(&apos;OAuth proxy not configured. Unable to use the device code.&apos;);
+        });
+
+        it(&apos;should make a request to authProxyUrl when called&apos;, (done) =&gt; {
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(newDeviceCodeUrl, &apos;POST&apos;, DEVICE_CODE_RESPONSE)
+                .getMock());
+
+            authorization.getDeviceCode()
+                .then((deviceCode) =&gt; {
+                    fetchMock.called(newDeviceCodeUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    deviceCode.userCode.should.equal(DEVICE_CODE_RESPONSE.user_code);
+                    done();
+                })
+                .catch(done);
+        });
+
+        it(&apos;should make a request to authProxyUrl with additional scopes when scopes are passed in&apos;, (done) =&gt; {
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(newDeviceCodeUrl, &apos;POST&apos;, DEVICE_CODE_RESPONSE)
+                .getMock());
+
+            authorization.getDeviceCode([&apos;listening.readonly&apos;, &apos;identity.readonly&apos;])
+                .then(() =&gt; {
+                    fetchMock.called(newDeviceCodeUrl).should.be.true;
+                    const options = fetchMock.lastOptions(newDeviceCodeUrl);
+                    options.body.indexOf(&apos;listening.readonly&apos;).should.not.equal(-1);
+                    options.body.indexOf(&apos;identity.readonly&apos;).should.not.equal(-1);
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+
+    /** @test {Authorization#pollDeviceCode} */
+    describe(&apos;pollDeviceCode&apos;, function () { // intentionally can&apos;t use arrow function here
+        // see: https://github.com/mochajs/mocha/issues/1763
+        this.timeout(16000);
+
+        it(&apos;should throw an error if not configured properly&apos;, () =&gt; {
+            NprOne.config = { authProxyBaseUrl: &apos;&apos; };
+            chai.expect(() =&gt; {
+                authorization.pollDeviceCode();
+            }).to.throw(&apos;OAuth proxy not configured. Unable to use the device code.&apos;);
+        });
+
+        it(&apos;should throw an error if no active device code exists&apos;, () =&gt; {
+            chai.expect(() =&gt; {
+                authorization.pollDeviceCode();
+            }).to.throw(&apos;No active device code set. Please call getDeviceCode() before calling this function.&apos;);
+        });
+
+        it(&apos;should return a Promise that rejects if the active device code is expired&apos;, (done) =&gt; {
+            const deviceCodeClone = JSON.parse(JSON.stringify(DEVICE_CODE_RESPONSE));
+            deviceCodeClone.expires_in = 0;
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(newDeviceCodeUrl, &apos;POST&apos;, deviceCodeClone)
+                .getMock());
+
+            authorization.getDeviceCode()
+                .then(() =&gt; {
+                    authorization.pollDeviceCode().should.be.rejectedWith(&apos;The device code has expired. Please generate a new one before continuing.&apos;).notify(done);
+                });
+        });
+
+        it(&apos;should return a Promise that resolves to a valid access token if device code is valid&apos;, (done) =&gt; {
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(newDeviceCodeUrl, &apos;POST&apos;, DEVICE_CODE_RESPONSE)
+                .mock(deviceCodePollUrl, &apos;POST&apos;, ACCESS_TOKEN_RESPONSE)
+                .getMock());
+
+            authorization.getDeviceCode()
+                .then(() =&gt; {
+                    return authorization.pollDeviceCode();
+                })
+                .then((accessToken) =&gt; {
+                    NprOne.accessToken.should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                    accessToken.toString().should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                })
+                .then(done)
+                .catch(done);
+        });
+
+        it(&apos;should return a Promise that rejects if the active device code is invalid (or possibly expired)&apos;, (done) =&gt; {
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(newDeviceCodeUrl, &apos;POST&apos;, DEVICE_CODE_RESPONSE)
+                .mock(deviceCodePollUrl, &apos;POST&apos;, {
+                    status: 400,
+                    body: DEVICE_CODE_EXPIRED_RESPONSE,
+                })
+                .getMock());
+
+            authorization.getDeviceCode()
+                .then(() =&gt; {
+                    authorization.pollDeviceCode().should.be.rejectedWith(&apos;Response status: 400 Bad Request&apos;).notify(done);
+                });
+        });
+
+        it(&apos;should return a Promise that rejects if the active device code is valid but the user went to log in and denied the app access&apos;, (done) =&gt; {
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(newDeviceCodeUrl, &apos;POST&apos;, DEVICE_CODE_RESPONSE)
+                .mock(deviceCodePollUrl, &apos;POST&apos;, {
+                    status: 401,
+                    body: DEVICE_CODE_DENIED_RESPONSE,
+                })
+                .getMock());
+
+            authorization.getDeviceCode()
+                .then(() =&gt; {
+                    authorization.pollDeviceCode().should.be.rejectedWith(&apos;Response status: 401 Unauthorized&apos;).notify(done);
+                });
+        });
+
+        it(&apos;should return a Promise that resolves to valid access token after polling a number of times if the user logs in&apos;, (done) =&gt; {
+            let numTries = 0;
+
+            const responses = () =&gt; {
+                numTries += 1;
+
+                if (numTries &lt; 3) {
+                    return {
+                        status: 401,
+                        body: DEVICE_CODE_POLL_RESPONSE,
+                    };
+                } else {
+                    return ACCESS_TOKEN_RESPONSE; // a.k.a. the user logged in
+                }
+            };
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(newDeviceCodeUrl, &apos;POST&apos;, DEVICE_CODE_RESPONSE)
+                .mock(deviceCodePollUrl, &apos;POST&apos;, responses)
+                .getMock());
+
+            authorization.getDeviceCode()
+                .then(() =&gt; {
+                    return authorization.pollDeviceCode();
+                })
+                .then((accessToken) =&gt; {
+                    fetchMock.called(deviceCodePollUrl).should.be.true;
+                    fetchMock.calls().matched.length.should.be.greaterThan(1);
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    NprOne.accessToken.should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                    accessToken.toString().should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                })
+                .then(done)
+                .catch(done);
+        });
+
+        it(&apos;should return a Promise that rejects if the returned access token is invalid&apos;, (done) =&gt; {
+            const accessTokenClone = JSON.parse(JSON.stringify(ACCESS_TOKEN_RESPONSE));
+            delete accessTokenClone.expires_in;
+
+            mockery.registerMock(&apos;fetch&apos;, fetchMock
+                .mock(newDeviceCodeUrl, &apos;POST&apos;, DEVICE_CODE_RESPONSE)
+                .mock(deviceCodePollUrl, &apos;POST&apos;, accessTokenClone)
+                .getMock());
+
+            authorization.getDeviceCode()
+                .then(() =&gt; {
+                    authorization.pollDeviceCode().should.be.rejectedWith(`TypeError: &apos;expires_in&apos; is missing and is required. :${JSON.stringify(accessTokenClone)}`).notify(done);
+                });
+        });
+    });
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

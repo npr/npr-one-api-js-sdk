@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">unit/model/recommendation.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">unit/model/recommendation.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import fetchMock from &apos;fetch-mock&apos;;
+import mockery from &apos;mockery&apos;;
+import chai from &apos;chai&apos;;
+import NprOne from &apos;../../../src/index&apos;;
+import Recommendation from &apos;../../../src/model/recommendation&apos;;
+import { LISTENING_V2_RECOMMENDATIONS_RESPONSE } from &apos;../../test-data&apos;;
+
+
+/** @test {Recommendation} */
+describe(&apos;Recommendation&apos;, () =&gt; {
+    const response = LISTENING_V2_RECOMMENDATIONS_RESPONSE;
+    const adsWizzUrl = &apos;^https://demo.adswizz.com&apos;;
+    const doubleClickUrl = &apos;^https://ad.doubleclick.net&apos;;
+    /** @type {Recommendation} */
+    let recStationId;
+    /** @type {Recommendation} */
+    let recNewscast;
+    /** @type {Recommendation} */
+    let recStoryA;
+    /** @type {Recommendation} */
+    let recAd;
+    /** @type {Recommendation} */
+    let recPromo;
+    /** @type {Recommendation} */
+    let recStoryB;
+
+    const setupMockery = () =&gt; {
+        mockery.registerMock(&apos;fetch&apos;, fetchMock
+            .mock(adsWizzUrl, &apos;GET&apos;)
+            .mock(doubleClickUrl, &apos;GET&apos;)
+            .getMock());
+    };
+
+    beforeEach(() =&gt; {
+        setupMockery();
+
+        recStationId = new Recommendation(response.items[0]);
+        recNewscast = new Recommendation(response.items[1]);
+        recStoryA = new Recommendation(response.items[2]);
+        recAd = new Recommendation(response.items[3]);
+        recPromo = new Recommendation(response.items[4]);
+        recStoryB = new Recommendation(response.items[5]);
+    });
+
+    afterEach(() =&gt; {
+        fetchMock.restore();
+        mockery.deregisterMock(&apos;fetch&apos;);
+    });
+
+    /** @test {Recommendation#constructor} */
+    describe(&apos;constructor&apos;, () =&gt; {
+        let responseClone;
+
+        beforeEach(() =&gt; {
+            responseClone = JSON.parse(JSON.stringify(response.items[0]));
+        });
+
+
+        it(&apos;should throw an error if audio doesn\&apos;t exist&apos;, () =&gt; {
+            delete responseClone.links.audio;
+            chai.expect(() =&gt; {
+                new Recommendation(responseClone);
+            }).to.throw(&apos;Audio must exist within links.&apos;);
+        });
+
+        it(&apos;should throw an error if recommendations doesn\&apos;t exist&apos;, () =&gt; {
+            delete responseClone.links.recommendations;
+            chai.expect(() =&gt; {
+                new Recommendation(responseClone);
+            }).to.throw(&apos;Recommendation (contains URL) must exist within links.&apos;);
+        });
+
+        it(&apos;should throw an error if attributes.rating doesn\&apos;t exist&apos;, () =&gt; {
+            delete responseClone.attributes.rating;
+            chai.expect(() =&gt; {
+                new Recommendation(responseClone);
+            }).to.throw(&apos;Attributes must contain a rating object.&apos;);
+        });
+    });
+
+    /** @test {Recommendation#getImages} */
+    describe(&apos;getImages&apos;, () =&gt; {
+        it(&apos;should match the API response&apos;, () =&gt; {
+            recAd.getImages().should.equal(response.items[3].links.image);
+        });
+    });
+
+    /** @test {Recommendation#getAudio} */
+    describe(&apos;getAudio&apos;, () =&gt; {
+        it(&apos;should match the API response&apos;, () =&gt; {
+            recStoryA.getAudio().should.equal(response.items[2].links.audio);
+        });
+    });
+
+    /** @test {Recommendation#getWeb} */
+    describe(&apos;getWeb&apos;, () =&gt; {
+        it(&apos;should match the API response&apos;, () =&gt; {
+            recStoryA.getWeb().should.equal(response.items[2].links.web);
+        });
+    });
+
+    /** @test {Recommendation#getOnRamps} */
+    describe(&apos;getOnRamps&apos;, () =&gt; {
+        it(&apos;should match the API response&apos;, () =&gt; {
+            recStoryA.getOnRamps().should.equal(response.items[2].links.onramps);
+        });
+    });
+
+    /** @test {Recommendation#getImpressions} */
+    describe(&apos;getImpressions&apos;, () =&gt; {
+        it(&apos;should match the API response&apos;, () =&gt; {
+            recAd.getImpressions().should.equal(response.items[3].links.impression);
+        });
+    });
+
+    /** @test {Recommendation#getCallsToAction} */
+    describe(&apos;getCallsToAction&apos;, () =&gt; {
+        it(&apos;should match the API response&apos;, () =&gt; {
+            recPromo.getCallsToAction().should.equal(response.items[4].links.action);
+        });
+    });
+
+    /** @test {Recommendation#getRelateds} */
+    describe(&apos;getRelateds&apos;, () =&gt; {
+        it(&apos;should match the API response&apos;, () =&gt; {
+            recAd.getRelateds().should.equal(response.items[3].links.related);
+        });
+    });
+
+    /** @test {Recommendation#getRelatedImpressions} */
+    describe(&apos;getRelatedImpressions&apos;, () =&gt; {
+        it(&apos;should match the API response&apos;, () =&gt; {
+            recAd.getRelatedImpressions().should.equal(response.items[3].links[&apos;related-impression&apos;]);
+        });
+    });
+
+    /** @test {Recommendation#getRatings} */
+    describe(&apos;getRatings&apos;, () =&gt; {
+        it(&apos;should return a ratings object&apos;, () =&gt; {
+            recStationId.getRatings().should.be.ok;
+        });
+    });
+
+    /** @test {Recommendation#getRecommendationUrl} */
+    describe(&apos;getRecommendationUrl&apos;, () =&gt; {
+        it(&apos;should match the API response&apos;, () =&gt; {
+            recStationId.getRecommendationUrl().should.equal(response.items[0].links.recommendations[0].href);
+        });
+    });
+
+    /** @test {Recommendation#getActionRecommendationUrl} */
+    describe(&apos;getActionRecommendationUrl&apos;, () =&gt; {
+        const actionRecUrl = &apos;https://listening.api.npr.org/v2/ratings?sharedMediaId=458726244%3A458726246&amp;flow=5&amp;channel=npr&amp;prevStories=1&amp;recommend=true&apos;;
+
+        it(&apos;should match the API response&apos;, () =&gt; {
+            recPromo.getActionRecommendationUrl().should.not.equal(response.items[4].links.action[0].href);
+            recPromo.getActionRecommendationUrl().should.equal(actionRecUrl);
+        });
+
+        it(&apos;should only use urls that start with nprone://&apos;, () =&gt; {
+            const promoClone = JSON.parse(JSON.stringify(response.items[4]));
+            promoClone.links.action.unshift({ &apos;href&apos;: &apos;nprtwo://should-not?be-used&apos; });
+            const promo = new Recommendation(promoClone);
+            promo.getActionRecommendationUrl().should.equal(actionRecUrl);
+        });
+    });
+
+    /** @test {Recommendation#isSponsorship} */
+    describe(&apos;isSponsorship&apos;, () =&gt; {
+        it(&apos;should be true for an ad&apos;, () =&gt; {
+            recAd.isSponsorship().should.be.true;
+        });
+        it(&apos;should be false for non ads&apos;, () =&gt; {
+            recStationId.isSponsorship().should.be.false;
+            recNewscast.isSponsorship().should.be.false;
+            recStoryA.isSponsorship().should.be.false;
+            recPromo.isSponsorship().should.be.false;
+            recStoryB.isSponsorship().should.be.false;
+        });
+    });
+
+    /** @test {Recommendation#isShareable} */
+    describe(&apos;isShareable&apos;, () =&gt; {
+        it(&apos;should be true for recommendations with onramps&apos;, () =&gt; {
+            recStoryA.isShareable().should.be.true;
+            recPromo.isShareable().should.be.true;
+            recStoryB.isShareable().should.be.true;
+        });
+        it(&apos;should be false for recommendations without onramps&apos;, () =&gt; {
+            recStationId.isShareable().should.be.false;
+            recNewscast.isShareable().should.be.false;
+            recAd.isShareable().should.be.false;
+        });
+    });
+
+    /** @test {Recommendation#toString} */
+    describe(&apos;toString&apos;, () =&gt; {
+        it(&apos;should match the format specified&apos;, () =&gt; {
+            recStoryA.toString().should.equal(&apos;[UID=466898631:466898632, R=]&apos;);
+        });
+    });
+
+    /** @test {Recommendation#recordAction} */
+    describe(&apos;recordAction&apos;, () =&gt; {
+        it(&apos;should only allow valid ratings&apos;, () =&gt; {
+            recNewscast.setRatingReceivedCallback(() =&gt; {});
+
+            recNewscast.recordAction(NprOne.Action.START, 0);
+            recNewscast.getRatings()[0].rating.should.equal(&apos;START&apos;);
+            recNewscast.recordAction(NprOne.Action.COMPLETED, 10);
+            recNewscast.getRatings()[1].rating.should.equal(&apos;COMPLETED&apos;);
+
+            chai.expect(() =&gt; {
+                recNewscast.recordAction(&apos;BAD_VALUE&apos;, 0);
+            }).to.throw(&apos;BAD_VALUE action is invalid. See Action class for valid actions.&apos;);
+        });
+
+        it(&apos;should require elapsed time to be an integer&apos;, () =&gt; {
+            recStationId.setRatingReceivedCallback(() =&gt; {});
+
+            chai.expect(() =&gt; {
+                recStationId.recordAction(NprOne.Action.START);
+            }).to.throw(&apos;Elapsed time must be supplied and be a positive integer value.&apos;);
+
+            chai.expect(() =&gt; {
+                recStationId.recordAction(NprOne.Action.SKIP, &apos;bad value&apos;);
+            }).to.throw(&apos;Elapsed time must be supplied and be a positive integer value.&apos;);
+        });
+
+        it(&apos;should auto-correct bad elapsed time values&apos;, () =&gt; {
+            recStationId.setRatingReceivedCallback(() =&gt; {});
+
+            recStationId.recordAction(NprOne.Action.START, -10);
+            recStationId.getRatings()[0].elapsed.should.equal(0);
+            recStationId.recordAction(NprOne.Action.START, 99999);
+            recStationId.getRatings()[1].elapsed.should.equal(recStationId.attributes.duration);
+        });
+
+        it(&apos;should auto-correct bad elapsed time values but only if duration is greater than 0&apos;, () =&gt; {
+            const clone = JSON.parse(JSON.stringify(response.items[0]));
+            clone.attributes.duration = 0;
+
+            const rec = new Recommendation(clone);
+
+            rec.setRatingReceivedCallback(() =&gt; {});
+
+            const largeDuration = 10000;
+
+            rec.recordAction(NprOne.Action.COMPLETED, largeDuration);
+            rec.getRatings()[0].elapsed.should.equal(largeDuration);
+        });
+
+        it(&apos;should warn developers when a zero elapsed time is given for a COMPLETED or SKIP&apos;, () =&gt; {
+            recStationId.recordAction(NprOne.Action.COMPLETED, 0);
+        });
+
+        it(&apos;should warn developers when a non-START rating is received before START&apos;, () =&gt; {
+            const clone = JSON.parse(JSON.stringify(response.items[0]));
+            clone.attributes.duration = 0;
+
+            const rec = new Recommendation(clone);
+
+            rec.setRatingReceivedCallback(() =&gt; {});
+            rec.recordAction(NprOne.Action.COMPLETED, 30);
+        });
+
+        it(&apos;should auto-correct bad elapsed time values if the difference is more than 30&apos;, () =&gt; {
+            recStoryA.setRatingReceivedCallback(() =&gt; {});
+
+            const moderatelyWrongDuration = recStoryA.attributes.duration + 20;
+
+            recStoryA.recordAction(NprOne.Action.COMPLETED, moderatelyWrongDuration);
+            recStoryA.getRatings()[0].elapsed.should.equal(recStoryA.attributes.duration);
+        });
+
+        it(&apos;should execute a GET request against all impression URLs&apos;, () =&gt; {
+            recAd.setRatingReceivedCallback(() =&gt; {});
+
+            recAd.recordAction(NprOne.Action.START, 0);
+
+            fetchMock.called(adsWizzUrl).should.be.true;
+            fetchMock.called(doubleClickUrl).should.be.true;
+            fetchMock.calls().unmatched.length.should.equal(0);
+        });
+
+        it(&apos;but only on the first START rating and not subsequent STARTs&apos;, () =&gt; {
+            recAd.setRatingReceivedCallback(() =&gt; {});
+            recAd.recordAction(NprOne.Action.START, 0);
+
+            fetchMock.restore();
+            mockery.deregisterMock(&apos;fetch&apos;);
+            setupMockery();
+
+            recAd.recordAction(NprOne.Action.START, 0);
+
+            fetchMock.called(adsWizzUrl).should.be.false;
+            fetchMock.called(doubleClickUrl).should.be.false;
+        });
+
+        it(&apos;should call the callback set via setRatingReceivedCallback&apos;, done =&gt; {
+            recStationId.setRatingReceivedCallback(() =&gt; {
+                done();
+            });
+            recStationId.recordAction(NprOne.Action.START, 0);
+        });
+    });
+
+    /** @test {Recommendation#hasAction} */
+    describe(&apos;hasAction&apos;, () =&gt; {
+        it(&apos;should be true when a recommendation actually has that rating&apos;, () =&gt; {
+            recStoryA.setRatingReceivedCallback(() =&gt; {});
+            recStoryA.recordAction(NprOne.Action.START, 0);
+            recStoryA.hasAction(NprOne.Action.START).should.be.true;
+        });
+
+        it(&apos;should be false when a recommendation does not have that rating&apos;, () =&gt; {
+            recStoryA.setRatingReceivedCallback(() =&gt; {});
+            recStoryA.recordAction(NprOne.Action.COMPLETED, 0);
+
+            recStoryA.hasAction(NprOne.Action.START).should.be.false;
+        });
+    });
+
+    /** @test {Recommendation#hasEndAction} */
+    describe(&apos;hasEndAction&apos;, () =&gt; {
+        it(&apos;should be true when a recommendation has a finished rating&apos;, () =&gt; {
+            recStoryA.setRatingReceivedCallback(() =&gt; {});
+            recStoryA.recordAction(NprOne.Action.START, 0);
+            recStoryA.recordAction(NprOne.Action.SHARE, 0);
+
+            recStoryA.hasEndAction().should.be.false;
+
+            recStoryA.recordAction(NprOne.Action.COMPLETED, 0);
+
+            recStoryA.hasEndAction().should.be.true;
+        });
+    });
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/controller/identity.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/npr/npr-one-api-js-sdk.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~NprOneSDK.html">NprOneSDK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Config">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers">Headers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/jonnyreeves/js-logger">JsLogger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">controller</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/authorization.js~Authorization.html">Authorization</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/listening.js~Listening.html">Listening</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/controller/station-finder.js~StationFinder.html">StationFinder</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/error/api-error.js~ApiError.html">ApiError</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">model</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/access-token.js~AccessToken.html">AccessToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/collection-doc.js~CollectionDoc.html">CollectionDoc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/device-code.js~DeviceCode.html">DeviceCode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/rating.js~Rating.html">Rating</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/recommendation.js~Recommendation.html">Recommendation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/station.js~Station.html">Station</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/user.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CollectionDocJSON">CollectionDocJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Link">Link</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FormFactorLink">FormFactorLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ImageLink">ImageLink</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RecommendationAttributes">RecommendationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationAttributes">StationAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationBrandData">StationBrandData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationEligibilityData">StationEligibilityData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetwork">StationNetwork</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierOne">StationNetworkTierOne</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierThree">StationNetworkTierThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNetworkTierTwo">StationNetworkTierTwo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StationNewscastData">StationNewscastData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAffiliation">UserAffiliation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserAttributes">UserAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserCohort">UserCohort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserOrganization">UserOrganization</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/fetch-util.js~FetchUtil.html">FetchUtil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/validator.js~Validator.html">Validator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createRecommendations">createRecommendations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Logger">Logger</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/controller/identity.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import NPROneSDK from &apos;./../index&apos;;
+import FetchUtil from &apos;./../util/fetch-util&apos;;
+import User from &apos;./../model/user&apos;;
+import Logger from &apos;./../util/logger&apos;;
+import AccessToken from &apos;./../model/access-token&apos;;
+import StationFinder from &apos;./station-finder&apos;;
+
+
+/**
+ * Encapsulates all of the logic for communication with the [Identity Service](https://dev.npr.org/api/#/identity)
+ * in the NPR One API.
+ *
+ * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
+ * functions in the main {@link NprOneSDK} class.
+ *
+ * @example &lt;caption&gt;How to change a user&apos;s station using station search&lt;/caption&gt;
+ * const nprOneSDK = new NprOneSDK();
+ * nprOneSDK.config = { ... };
+ * nprOneSDK.getUser() // optional; verifies that you have a logged-in user
+ *     .then(() =&gt; {
+ *        return nprOneSDK.searchStations(&apos;wnyc&apos;);
+ *     })
+ *     .then((stations) =&gt; {
+ *         const stationId = stations[0].id; // in reality, you&apos;d probably have the user select a station, see the StationFinder for detail
+ *         nprOneSDK.setUserStation(stationId);
+ *     });
+ */
+export default class Identity {
+    /**
+     * Gets user metadata, such as first and last name, programs they have shown an affinity for, and preferred NPR One
+     * station.
+     *
+     * @returns {Promise&lt;User&gt;}
+     */
+    getUser() {
+        const url = `${NPROneSDK.getServiceUrl(&apos;identity&apos;)}/user`;
+
+        return FetchUtil.nprApiFetch(url).then(json =&gt; new User(json));
+    }
+
+    /**
+     * Sets a user&apos;s favorite NPR station. Note that this function will first validate whether the station with the given
+     * ID actually exists, and will return a promise that rejects if not.
+     *
+     * @param {number|string} stationId   The station&apos;s ID, which is either an integer or a numeric string (e.g. `123` or `&apos;123&apos;`)
+     * @returns {Promise&lt;User&gt;}
+     */
+    setUserStation(stationId) {
+        return StationFinder.validateStation(stationId)
+            .then(() =&gt; {
+                const url = `${NPROneSDK.getServiceUrl(&apos;identity&apos;)}/stations`;
+                const options = {
+                    method: &apos;PUT&apos;,
+                    body: JSON.stringify([stationId]),
+                };
+                return FetchUtil.nprApiFetch(url, options).then(json =&gt; new User(json));
+            })
+            .catch((e) =&gt; {
+                Logger.debug(&apos;setUserStation failed, message: &apos;, e);
+                return Promise.reject(e);
+            });
+    }
+
+    /**
+     * Indicates that the user wishes to follow, or subscribe to, the show, program, or podcast with the given numeric
+     * ID. Followed shows will appear more frequently in a user&apos;s list of recommendations.
+     *
+     * Note that at this time, because we have not yet implemented search in this SDK, there is no way to retrieve a list
+     * of aggregation (show) IDs through this SDK. You can either add functionality to your own app that makes an API call
+     * to `GET https://api.npr.org/listening/v2/search/recommendations` with a program name or other search parameters, or
+     * wait until we implement search in this SDK (hopefully later this year).
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `&apos;123&apos;`)
+     * @returns {Promise&lt;User&gt;}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     */
+    followShow(aggregationId) {
+        return this._setFollowingStatusForShow(aggregationId, true);
+    }
+
+    /**
+     * Indicates that the user wishes to unfollow, or unsubscribe from, the show, program, or podcast with the given
+     * numeric ID. See {@link followShow} for more information.
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `&apos;123&apos;`)
+     * @returns {Promise&lt;User&gt;}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     */
+    unfollowShow(aggregationId) {
+        return this._setFollowingStatusForShow(aggregationId, false);
+    }
+
+    /**
+     * Primary workhorse for {@link followShow} and {@link unfollowShow}.
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `&apos;123&apos;`)
+     * @param {boolean} shouldFollow           Whether or not the aggregation should be followed (`true`) or unfollowed (`false`)
+     * @returns {Promise&lt;User&gt;}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     * @private
+     */
+    _setFollowingStatusForShow(aggregationId, shouldFollow) {
+        const n = parseInt(aggregationId, 10);
+        if (isNaN(n) || !isFinite(n)) {
+            throw new TypeError(&apos;Aggregation (show) ID must be an integer greater than 0&apos;);
+        }
+
+        const data = {
+            id: aggregationId,
+            following: shouldFollow,
+        };
+
+        const url = `${NPROneSDK.getServiceUrl(&apos;identity&apos;)}/following`;
+        const options = {
+            method: &apos;POST&apos;,
+            body: JSON.stringify(data),
+        };
+
+        return FetchUtil.nprApiFetch(url, options).then(json =&gt; new User(json));
+    }
+
+    /**
+     * Creates a temporary user from the NPR One API and use that user&apos;s access token for
+     * subsequent API requests.
+     *
+     * Caution: most clients are not authorized to use temporary users.
+     *
+     * @returns {Promise&lt;User&gt;}
+     * @throws {TypeError} if an OAuth proxy is not configured or no client ID is set
+     */
+    createTemporaryUser() {
+        if (!NPROneSDK.config.authProxyBaseUrl) {
+            throw new TypeError(&apos;OAuth proxy not configured. Unable to create temporary users.&apos;);
+        }
+        if (!NPROneSDK.config.clientId) {
+            throw new TypeError(&apos;A client ID must be set for temporary user requests.&apos;);
+        }
+
+        let url = `${NPROneSDK.config.authProxyBaseUrl}${NPROneSDK.config.tempUserPath}`;
+        const glueCharacter = url.indexOf(&apos;?&apos;) &gt;= 0 ? &apos;&amp;&apos; : &apos;?&apos;;
+        url = `${url}${glueCharacter}clientId=${NPROneSDK.config.clientId}`;
+
+        const options = {
+            credentials: &apos;include&apos;,
+        };
+
+        return FetchUtil.nprApiFetch(url, options)
+            .then((json) =&gt; {
+                const tokenModel = new AccessToken(json);
+                tokenModel.validate(); // throws exception if invalid
+                NPROneSDK.accessToken = tokenModel.token;
+                return tokenModel; // never directly consumed, but useful for testing
+            });
+    }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
