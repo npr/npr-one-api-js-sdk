@@ -112,4 +112,4 @@ docs/
 
 # Custom testing/CI folders
 test-reports/
-badges/
+.coveralls.yml

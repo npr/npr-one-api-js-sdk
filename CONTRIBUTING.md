@@ -107,7 +107,8 @@ As this is a [UMD](https://github.com/umdjs/umd), the eventual goal is that test
 
 - `npm run test`: Executes all tests and displays output to the screen. Quick and efficient, this entry point is most useful when developing new tests.
 - `npm run test:debug`: The same as the unit script, with logging enabled at the debug level. Useful for troubleshooting failed tests.
-- `npm run coverage`: Executes all of the unit tests once, reports the results, and creates badges.
+- `npm run coverage`: Executes all of the unit tests once and calculates code coverage.
+- `npm run coverage:upload`: Executes all of the unit tests once, calculates code coverage, and uploads the results to [coveralls.io](https://coveralls.io/github/npr/npr-one-api-js-sdk). This is typically done automatically by [Travis-CI](https://travis-ci.org/npr/npr-one-api-js-sdk) and should rarely need to be done on the command line.
 
 The test coverage report can be found at `test-reports/coverage/index.html` and is purposely excluded from source control.
 
