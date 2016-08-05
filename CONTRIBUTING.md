@@ -74,7 +74,7 @@ A few other nifty tools we use as part of our development, CI and release proces
 
 #### Prerequisites
 
-A recent version of [node.js](http://nodejs.org) (v0.12.x or newer) and [npm](http://npmjs.org) installed globally on your system.
+A recent version of [node.js](http://nodejs.org) (v4.x or newer) and [npm](http://npmjs.org) installed globally on your system. (Note that to consume the SDK, only Node v0.12.x or higher is required, but because of some of our dev-dependencies, contributors need to use at least v4.x in order to produce a stable build.)
 
 Running unit tests is possible without an NPR One API key; however, actual interaction with the NPR One API requires an OAuth2 `client_id` and a valid access token, which can be obtained by registering for an account within the [NPR One Developer Center](http://dev.npr.org/apply/).
 
