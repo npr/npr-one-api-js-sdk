@@ -16,6 +16,7 @@ dist/browser/* binary
 /.gitignore export-ignore
 /.npmignore export-ignore
 /.npmrc export-ignore
+/.travis.yml export-ignore
 /esdoc.json export-ignore
 /webpack.config.js export-ignore
 /CODE_OF_CONDUCT.md export-ignore
