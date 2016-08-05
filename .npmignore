@@ -1,0 +1,16 @@
+badges/
+docs/
+examples/
+hooks/
+test/
+test-reports/
+.editorconfig
+.eslintrc
+.gitattributes
+.gitignore
+bower.json
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+esdoc.json
+webpack.config.js
+*.log

@@ -1,0 +1,21 @@
+{
+    "source": "./src",
+    "destination": "./docs",
+    "test": {
+        "type": "mocha",
+        "source": "./test/unit",
+        "includes": [
+            "\\.js$"
+        ]
+    },
+    "plugins": [
+        {
+            "name": "esdoc-importpath-plugin",
+            "option": {
+                "replaces": [
+                    {"from": "^src/", "to": ""}
+                ]
+            }
+        }
+    ]
+}
