@@ -2,23 +2,25 @@ sudo: false
 language: node_js
 cache:
   directories:
-    - node_modules
+  - node_modules
 notifications:
   email: false
+  slack:
+    secure: COQ40x1z3XQVLTX/mjIpPB0itdBt3apWcLAlmfBKWD4xHos0kfv2pK4tDiiHt+lz0kuEsJV6BC7AHw482kRTl6qJvDWO5fCNHYokBgKDLE1Iiz85qn8aMZ1TJCGxPVEiAk7IwtGgkckJIVUVZGJ5+pQkMx8EvKpE3tHwcUcI+c0pBNLIrmXEcwyisVxd+2doEJMsJn2vp8Nf+m1RJlYF3jsr2xr1FVeHO+iDbSny20smnSr1mdkYRIqNJ63mkyn7ORtsgwo+5sS84RU63KkvPbmQcAQM5YDuxWJiwQDp/dBv9+Nm0JFjeVxILK+9EVt9+FPc62rEmSyl0oKvaYVxo/ajGij7nP1bDKIg8J3vpjIh/EHaSz1jvxNEW+oUBLr1YKh+KP3p3aLYsDJq+iaCGOSkV0UL9qeY655aZV+Log4bNkAzEptmmGxX2P2nYoEAwGYqOnFSXQvFtL3eV7cXhfqWgbrmDF6fona+v2VvOScemZmT7pkm+IcL7oDykRvLayGGtZ7XgUeTHXJGepZptBhQxkMfC/xV8K+9F9mUkcZEry1RxdA+XDBZ0aWno63/DltyXYgZ7rbIr2LIpEECKPM8EZzMLLq2BZSp/TKJa/X/2pLM/p8FVhj1qn9vH+9paIkriZ+qwxBVALFBTjzAc+myOnrhKPhhUilhdKzhvkg=
 node_js:
-  - 5
-  - 4
+- 5
+- 4
 before_install:
-  - npm i -g npm@^2.0.0
+- npm i -g npm@^2.0.0
 before_script:
-  - npm prune
+- npm prune
 after_success:
-  - 'curl -Lo travis_after_all.py https://git.io/travis_after_all'
-  - python travis_after_all.py
-  - export $(cat .to_export_back) &> /dev/null
-  - npm run coverage:upload
-  - npm run semantic-release
+- curl -Lo travis_after_all.py https://git.io/travis_after_all
+- python travis_after_all.py
+- export $(cat .to_export_back) &> /dev/null
+- npm run coverage:upload
+- npm run semantic-release
 branches:
   except:
-    - /^v\d+\.\d+\.\d+$/
-    - gh-pages
+  - /^v\d+\.\d+\.\d+$/
+  - gh-pages
