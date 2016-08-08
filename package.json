@@ -1,6 +1,6 @@
 {
   "name": "npr-one-sdk",
-  "version": "0.0.0-semantically-released",
+  "version": "1.0.0",
   "homepage": "http://npr.github.io/npr-one-api-js-sdk/",
   "description": "An SDK for interfacing with the NPR One API, designed as a Universal Javascript Module",
   "keywords": [
