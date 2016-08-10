@@ -96,6 +96,72 @@ describe('Identity', () => {
     });
 
 
+    /** @test {Identity#followShow} */
+    describe('followShow', () => {
+        const identityUrl = `^${testConfig.apiBaseUrl}/identity/${testConfig.apiVersion}/following`;
+        const aggregationId = 123;
+
+        it('should validate the aggregation, and then make a POST request to identity/following', (done) => {
+            const userClone = JSON.parse(JSON.stringify(IDENTITY_V2_USER_RESPONSE));
+
+            mockery.registerMock('fetch', fetchMock
+                .mock(identityUrl, 'POST', userClone)
+                .getMock());
+
+            identity.followShow(aggregationId)
+                .then(() => {
+                    fetchMock.called(identityUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    JSON.parse(fetchMock.lastOptions(identityUrl).body).should.deep.equal({
+                        id: aggregationId,
+                        following: true,
+                    });
+                    done();
+                })
+                .catch(done);
+        });
+
+        it('should throw a TypeError if a non-numeric aggregation ID is passed in', () => {
+            chai.expect(() => {
+                identity.followShow('bad-aggregation-id');
+            }).to.throw('Aggregation (show) ID must be an integer greater than 0');
+        });
+    });
+
+
+    /** @test {Identity#unfollowShow} */
+    describe('unfollowShow', () => {
+        const identityUrl = `^${testConfig.apiBaseUrl}/identity/${testConfig.apiVersion}/following`;
+        const aggregationId = 456;
+
+        it('should validate the aggregation, and then make a POST request to identity/following', (done) => {
+            const userClone = JSON.parse(JSON.stringify(IDENTITY_V2_USER_RESPONSE));
+
+            mockery.registerMock('fetch', fetchMock
+                .mock(identityUrl, 'POST', userClone)
+                .getMock());
+
+            identity.unfollowShow(aggregationId)
+                .then(() => {
+                    fetchMock.called(identityUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    JSON.parse(fetchMock.lastOptions(identityUrl).body).should.deep.equal({
+                        id: aggregationId,
+                        following: false,
+                    });
+                    done();
+                })
+                .catch(done);
+        });
+
+        it('should throw a TypeError if a non-numeric aggregation ID is passed in', () => {
+            chai.expect(() => {
+                identity.unfollowShow('bad-aggregation-id');
+            }).to.throw('Aggregation (show) ID must be an integer greater than 0');
+        });
+    });
+
+
     /** @test {Identity#createTemporaryUser} */
     describe('createTemporaryUser', () => {
         let tempUrl;

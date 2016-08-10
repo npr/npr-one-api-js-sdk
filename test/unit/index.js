@@ -274,6 +274,26 @@ describe('NprOneSDK', () => {
     });
 
 
+    /** @test {NprOneSDK#followShow} */
+    describe('followShow', () => {
+        it('should call the correct service controller method', () => {
+            const stub = sinon.stub(nprOne._identity, 'followShow');
+            nprOne.followShow('123');
+            stub.should.have.been.calledWith('123');
+        });
+    });
+
+
+    /** @test {NprOneSDK#unfollowShow} */
+    describe('unfollowShow', () => {
+        it('should call the correct service controller method', () => {
+            const stub = sinon.stub(nprOne._identity, 'unfollowShow');
+            nprOne.unfollowShow('456');
+            stub.should.have.been.calledWith('456');
+        });
+    });
+
+
     /** @test {NprOneSDK#createTemporaryUser} */
     describe('createTemporaryUser', () => {
         it('should call the correct service controller method', () => {

@@ -252,6 +252,32 @@ var NprOneSDK = function () {
     };
 
     /**
+     * See {@link Identity#followShow} for description.
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+     * @returns {Promise<User>}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     */
+
+
+    NprOneSDK.prototype.followShow = function followShow(aggregationId) {
+        return this._identity.followShow(aggregationId);
+    };
+
+    /**
+     * See {@link Identity#unfollowShow} for description.
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+     * @returns {Promise<User>}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     */
+
+
+    NprOneSDK.prototype.unfollowShow = function unfollowShow(aggregationId) {
+        return this._identity.unfollowShow(aggregationId);
+    };
+
+    /**
      * See {@link Identity#createTemporaryUser} for description.
      *
      * @returns {Promise<User>}

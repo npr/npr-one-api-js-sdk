@@ -93,6 +93,72 @@ var Identity = function () {
     };
 
     /**
+     * Indicates that the user wishes to follow, or subscribe to, the show, program, or podcast with the given numeric
+     * ID. Followed shows will appear more frequently in a user's list of recommendations.
+     *
+     * Note that at this time, because we have not yet implemented search in this SDK, there is no way to retrieve a list
+     * of aggregation (show) IDs through this SDK. You can either add functionality to your own app that makes an API call
+     * to `GET https://api.npr.org/listening/v2/search/recommendations` with a program name or other search parameters, or
+     * wait until we implement search in this SDK (hopefully later this year).
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+     * @returns {Promise<User>}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     */
+
+
+    Identity.prototype.followShow = function followShow(aggregationId) {
+        return this._setFollowingStatusForShow(aggregationId, true);
+    };
+
+    /**
+     * Indicates that the user wishes to unfollow, or unsubscribe from, the show, program, or podcast with the given
+     * numeric ID. See {@link followShow} for more information.
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+     * @returns {Promise<User>}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     */
+
+
+    Identity.prototype.unfollowShow = function unfollowShow(aggregationId) {
+        return this._setFollowingStatusForShow(aggregationId, false);
+    };
+
+    /**
+     * Primary workhorse for {@link followShow} and {@link unfollowShow}.
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+     * @param {boolean} shouldFollow           Whether or not the aggregation should be followed (`true`) or unfollowed (`false`)
+     * @returns {Promise<User>}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     * @private
+     */
+
+
+    Identity.prototype._setFollowingStatusForShow = function _setFollowingStatusForShow(aggregationId, shouldFollow) {
+        var n = parseInt(aggregationId, 10);
+        if (isNaN(n) || !isFinite(n)) {
+            throw new TypeError('Aggregation (show) ID must be an integer greater than 0');
+        }
+
+        var data = {
+            id: aggregationId,
+            following: shouldFollow
+        };
+
+        var url = _index2.default.getServiceUrl('identity') + '/following';
+        var options = {
+            method: 'POST',
+            body: JSON.stringify(data)
+        };
+
+        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
+            return new _user2.default(json);
+        });
+    };
+
+    /**
      * Creates a temporary user from the NPR One API and use that user's access token for
      * subsequent API requests.
      *
