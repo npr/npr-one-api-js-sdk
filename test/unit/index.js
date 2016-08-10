@@ -68,7 +68,7 @@ describe('NprOneSDK', () => {
                 NprOneSDK.config.accessToken.should.equal('abcdefgh123456');
             });
 
-            it('should call the registered callback if one is set', done => {
+            it('should call the registered callback if one is set', (done) => {
                 NprOneSDK.onAccessTokenChanged = () => {
                     NprOneSDK.config.accessToken.should.equal('abcdefgh123456789abced');
                     done();

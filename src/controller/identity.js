@@ -54,7 +54,7 @@ export default class Identity {
                 };
                 return FetchUtil.nprApiFetch(url, options).then(json => new User(json));
             })
-            .catch(e => {
+            .catch((e) => {
                 Logger.debug('setUserStation failed, message: ', e);
                 return Promise.reject(e);
             });
@@ -144,7 +144,7 @@ export default class Identity {
         };
 
         return FetchUtil.nprApiFetch(url, options)
-            .then(json => {
+            .then((json) => {
                 const tokenModel = new AccessToken(json);
                 tokenModel.validate(); // throws exception if invalid
                 NPROneSDK.accessToken = tokenModel.token;
