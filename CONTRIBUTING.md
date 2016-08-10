@@ -125,10 +125,11 @@ To update the documentation on the site:
 ```
 git checkout gh-pages       # check out the gh-pages branch
 git rebase master           # make sure you have the latest changes from master
+                            # at this point there are likely merge conflicts for you to resolve; resolve them first
 npm run update              # make sure you also pull in all necessary dependency updates
 npm run docs                # actually generate the new doc files
-git add -A 
-git commit -m 'Update docs'
+git add -A
+git rebase --continue
 git push origin gh-pages    # ...and finally push the changes to the server 
 ```
 
