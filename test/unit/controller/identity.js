@@ -39,7 +39,7 @@ describe('Identity', () => {
                 .getMock());
         });
 
-        it('should make a request to /user', done => {
+        it('should make a request to /user', (done) => {
             identity.getUser()
                 .then((user) => {
                     fetchMock.called(userUrl).should.be.true;
@@ -58,7 +58,7 @@ describe('Identity', () => {
         const stationFinderUrl = `^${testConfig.apiBaseUrl}/stationfinder/${testConfig.apiVersion}/organizations`;
         const stationId = 305;
 
-        it('should validate the station, and then make a PUT request to identity/stations', done => {
+        it('should validate the station, and then make a PUT request to identity/stations', (done) => {
             const userClone = JSON.parse(JSON.stringify(IDENTITY_V2_USER_RESPONSE));
 
             mockery.registerMock('fetch', fetchMock
@@ -77,12 +77,12 @@ describe('Identity', () => {
                 .catch(done);
         });
 
-        it('should fail if a non-numeric station ID is passed in', done => {
+        it('should fail if a non-numeric station ID is passed in', (done) => {
             const error = 'Error: Station ID must be an integer greater than 0';
             identity.setUserStation('bad-station-id').should.be.rejectedWith(error).notify(done);
         });
 
-        it('should reject the promise if station finder returns a 404', done => {
+        it('should reject the promise if station finder returns a 404', (done) => {
             mockery.registerMock('fetch', fetchMock
                 .mock(stationFinderUrl, 'GET', 404)
                 .getMock());
@@ -92,6 +92,72 @@ describe('Identity', () => {
                 fetchMock.calls().unmatched.length.should.equal(0);
                 done();
             });
+        });
+    });
+
+
+    /** @test {Identity#followShow} */
+    describe('followShow', () => {
+        const identityUrl = `^${testConfig.apiBaseUrl}/identity/${testConfig.apiVersion}/following`;
+        const aggregationId = 123;
+
+        it('should validate the aggregation, and then make a POST request to identity/following', (done) => {
+            const userClone = JSON.parse(JSON.stringify(IDENTITY_V2_USER_RESPONSE));
+
+            mockery.registerMock('fetch', fetchMock
+                .mock(identityUrl, 'POST', userClone)
+                .getMock());
+
+            identity.followShow(aggregationId)
+                .then(() => {
+                    fetchMock.called(identityUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    JSON.parse(fetchMock.lastOptions(identityUrl).body).should.deep.equal({
+                        id: aggregationId,
+                        following: true,
+                    });
+                    done();
+                })
+                .catch(done);
+        });
+
+        it('should throw a TypeError if a non-numeric aggregation ID is passed in', () => {
+            chai.expect(() => {
+                identity.followShow('bad-aggregation-id');
+            }).to.throw('Aggregation (show) ID must be an integer greater than 0');
+        });
+    });
+
+
+    /** @test {Identity#unfollowShow} */
+    describe('unfollowShow', () => {
+        const identityUrl = `^${testConfig.apiBaseUrl}/identity/${testConfig.apiVersion}/following`;
+        const aggregationId = 456;
+
+        it('should validate the aggregation, and then make a POST request to identity/following', (done) => {
+            const userClone = JSON.parse(JSON.stringify(IDENTITY_V2_USER_RESPONSE));
+
+            mockery.registerMock('fetch', fetchMock
+                .mock(identityUrl, 'POST', userClone)
+                .getMock());
+
+            identity.unfollowShow(aggregationId)
+                .then(() => {
+                    fetchMock.called(identityUrl).should.be.true;
+                    fetchMock.calls().unmatched.length.should.equal(0);
+                    JSON.parse(fetchMock.lastOptions(identityUrl).body).should.deep.equal({
+                        id: aggregationId,
+                        following: false,
+                    });
+                    done();
+                })
+                .catch(done);
+        });
+
+        it('should throw a TypeError if a non-numeric aggregation ID is passed in', () => {
+            chai.expect(() => {
+                identity.unfollowShow('bad-aggregation-id');
+            }).to.throw('Aggregation (show) ID must be an integer greater than 0');
         });
     });
 
@@ -108,7 +174,7 @@ describe('Identity', () => {
                 .getMock());
         });
 
-        it('should make a request to NPR proxy when called', done => {
+        it('should make a request to NPR proxy when called', (done) => {
             identity.createTemporaryUser()
                 .then(() => {
                     fetchMock.called(tempUrl).should.be.true;
@@ -119,7 +185,7 @@ describe('Identity', () => {
                 .catch(done);
         });
 
-        it('should make a request to NPR proxy when called using the correct query param character', done => {
+        it('should make a request to NPR proxy when called using the correct query param character', (done) => {
             NprOne.config.tempUserPath = `${NprOne.config.tempUserPath}?test=true`;
 
             identity.createTemporaryUser()

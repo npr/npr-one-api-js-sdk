@@ -269,11 +269,33 @@ export default class NprOneSDK
     /**
      * See {@link Identity#setUserStation} for description.
      *
-     * @param {number|string} stationId
+     * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
      * @returns {Promise<User>}
      */
     setUserStation(stationId) {
         return this._identity.setUserStation(stationId);
+    }
+
+    /**
+     * See {@link Identity#followShow} for description.
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+     * @returns {Promise<User>}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     */
+    followShow(aggregationId) {
+        return this._identity.followShow(aggregationId);
+    }
+
+    /**
+     * See {@link Identity#unfollowShow} for description.
+     *
+     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+     * @returns {Promise<User>}
+     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+     */
+    unfollowShow(aggregationId) {
+        return this._identity.unfollowShow(aggregationId);
     }
 
     /**

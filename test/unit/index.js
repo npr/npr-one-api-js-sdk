@@ -68,7 +68,7 @@ describe('NprOneSDK', () => {
                 NprOneSDK.config.accessToken.should.equal('abcdefgh123456');
             });
 
-            it('should call the registered callback if one is set', done => {
+            it('should call the registered callback if one is set', (done) => {
                 NprOneSDK.onAccessTokenChanged = () => {
                     NprOneSDK.config.accessToken.should.equal('abcdefgh123456789abced');
                     done();
@@ -270,6 +270,26 @@ describe('NprOneSDK', () => {
             const stub = sinon.stub(nprOne._identity, 'setUserStation');
             nprOne.setUserStation('404');
             stub.should.have.been.calledWith('404');
+        });
+    });
+
+
+    /** @test {NprOneSDK#followShow} */
+    describe('followShow', () => {
+        it('should call the correct service controller method', () => {
+            const stub = sinon.stub(nprOne._identity, 'followShow');
+            nprOne.followShow('123');
+            stub.should.have.been.calledWith('123');
+        });
+    });
+
+
+    /** @test {NprOneSDK#unfollowShow} */
+    describe('unfollowShow', () => {
+        it('should call the correct service controller method', () => {
+            const stub = sinon.stub(nprOne._identity, 'unfollowShow');
+            nprOne.unfollowShow('456');
+            stub.should.have.been.calledWith('456');
         });
     });
 
