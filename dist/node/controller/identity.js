@@ -69,9 +69,10 @@ var Identity = function () {
     };
 
     /**
-     * Sets a user's station preference
+     * Sets a user's favorite NPR station. Note that this function will first validate whether the station with the given
+     * ID actually exists, and will return a promise that rejects if not.
      *
-     * @param {number|string} stationId
+     * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
      * @returns {Promise<User>}
      */
 
