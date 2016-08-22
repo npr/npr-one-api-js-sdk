@@ -139,7 +139,7 @@ Because node.js already takes care of loading dependencies, the only prerequisit
 In ES5 (most common):
 
 ```javascript
-var NprOneSDK = require('/path/to/npr-one-sdk/dist/node/index').default;
+var NprOneSDK = require('npr-one-sdk').default;
 var nprOneSDK = new NprOneSDK();
 
 nprOneSDK.config = {
@@ -151,7 +151,7 @@ nprOneSDK.config = {
 In ES6 (less common):
 
 ```javascript
-import NprOneSDK from 'npr-one-sdk';
+const NprOneSDK = require('npr-one-sdk').default;
 const nprOneSDK = new NprOneSDK();
 
 nprOneSDK.config = {
