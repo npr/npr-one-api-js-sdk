@@ -108,7 +108,7 @@ If you're using ES6, we are generally assuming that you are already using [npm](
 import NprOneSDK from 'npr-one-sdk';
 const nprOneSDK = new NprOneSDK();
 
-nprOneSDK.config = {
+NprOneSDK.config = {
     authProxyBaseUrl: 'http://one.example.com/oauth2',
     accessToken: 'aaaabbbbcccc12345678'
 };
@@ -124,7 +124,7 @@ The ES5 syntax and process for loading the SDK is a little less pretty. Using a 
     var NprOneSDK = NprOneSDK.default;
     var nprOneSDK = new NprOneSDK();
 
-    nprOneSDK.config = {
+    NprOneSDK.config = {
         authProxyBaseUrl: 'http://one.example.com/oauth2',
         accessToken: 'aaaabbbbcccc12345678'
     };
@@ -142,7 +142,7 @@ In ES5 (most common):
 var NprOneSDK = require('npr-one-sdk').default;
 var nprOneSDK = new NprOneSDK();
 
-nprOneSDK.config = {
+NprOneSDK.config = {
     authProxyBaseUrl: 'http://one.example.com/oauth2',
     accessToken: 'aaaabbbbcccc12345678'
 };
@@ -154,7 +154,7 @@ In ES6 (less common):
 const NprOneSDK = require('npr-one-sdk').default;
 const nprOneSDK = new NprOneSDK();
 
-nprOneSDK.config = {
+NprOneSDK.config = {
     authProxyBaseUrl: 'http://one.example.com/oauth2',
     accessToken: 'aaaabbbbcccc12345678'
 };
@@ -184,7 +184,7 @@ The recommended approach (if you are using this SDK in a client-side project) is
 In order to configure the SDK to use the proxy, there are a few config variables you need to set:
 
 ```javascript
-nprOneSDK.config = {
+NprOneSDK.config = {
     authProxyBaseUrl: 'http://one.example.com/oauth2',
     refreshTokenPath: '/refresh'
 };
@@ -200,7 +200,7 @@ If you are using the [Authorization Code Grant](http://dev.npr.org/guide/service
 If you are using the [Device Code Grant](http://dev.npr.org/guide/services/authorization/#device_code) instead, this SDK offers additional support. If you add the following endpoints to the config:
 
 ```javascript
-nprOneSDK.config = {
+NprOneSDK.config = {
     authProxyBaseUrl: 'http://one.example.com/oauth2',
     refreshTokenPath: '/refresh',
     newDeviceCodePath: '/device',
@@ -230,13 +230,13 @@ Note that the above functions have been optimized to work with the [npr-one-back
 It is important to note that the **SDK** (and not your app) should be considered the single source of truth as to what the current access token is because the SDK is configured to refresh tokens behind-the-scenes when they expire, allowing the desired API calls to go through uninterrupted. As such, **the access token may change at any time**. If your app is not storing or otherwise consuming access tokens outside of the SDK, you have nothing to worry about. However, if you are persisting access tokens across sessions (which is left entirely up to your app to implement), then we recommend using the callback provided below to notify your app when the access token changes:
 
 ```javascript
-nprOneSDK.onAccessTokenChanged = function (newToken) {
+NprOneSDK.onAccessTokenChanged = function (newToken) {
     console.log('Access token has changed! New token:', newToken);
     // in production, replace console.log() with code to update your token in memory/localStorage/wherever
 };
 ```
 
-The alternative is to check the value of `nprOneSDK.accessToken` after each API call to see whether the token has changed, but the callback approach offers a simpler method.
+The alternative is to check the value of `NprOneSDK.accessToken` after each API call to see whether the token has changed, but the callback approach offers a simpler method.
 
 #### Do-It-Yourself
 
@@ -249,7 +249,7 @@ Once you have obtained your access token, you have two ways of communicating tha
 ...either through the `.config` setting:
 
 ```javascript
-nprOneSDK.config = {
+NprOneSDK.config = {
     accessToken: 'aaaabbbbcccc12345678'
 };
 ```
@@ -257,7 +257,7 @@ nprOneSDK.config = {
 ...or using the `.accessToken` shortcut:
 
 ```javascript
-nprOneSDK.accessToken = 'aaaabbbbcccc12345678';
+NprOneSDK.accessToken = 'aaaabbbbcccc12345678';
 ```
 
 Neither of these is considered preferable over the other, but if all you are changing is the access token, the second option offers shorter syntax.

@@ -5,7 +5,7 @@ var nprOneSDK = new NprOneSDK();
 
 console.log('NPR One API SDK loaded!');
 
-nprOneSDK.config = {
+NprOneSDK.config = {
     accessToken: 'aaaabbbbcccc12345678' // this access token is fake/will not work; replace this with your real access token
 };
 

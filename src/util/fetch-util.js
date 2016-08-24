@@ -117,7 +117,7 @@ export default class FetchUtil
      * @private
      */
     static _requestUrlIsAuthorizationCall(url) {
-        return (url.indexOf(NPROneSDK.config.authProxyBaseUrl) > -1)
+        return (NPROneSDK.config.authProxyBaseUrl && (url.indexOf(NPROneSDK.config.authProxyBaseUrl) > -1))
             || new RegExp(`/authorization/${NPROneSDK.config.apiVersion}`).test(url);
     }
 }
