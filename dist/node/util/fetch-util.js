@@ -148,7 +148,7 @@ var FetchUtil = function () {
 
 
     FetchUtil._requestUrlIsAuthorizationCall = function _requestUrlIsAuthorizationCall(url) {
-        return url.indexOf(_index2.default.config.authProxyBaseUrl) > -1 || new RegExp('/authorization/' + _index2.default.config.apiVersion).test(url);
+        return _index2.default.config.authProxyBaseUrl && url.indexOf(_index2.default.config.authProxyBaseUrl) > -1 || new RegExp('/authorization/' + _index2.default.config.apiVersion).test(url);
     };
 
     return FetchUtil;

@@ -746,7 +746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	    FetchUtil._requestUrlIsAuthorizationCall = function _requestUrlIsAuthorizationCall(url) {
-	        return url.indexOf(_index2.default.config.authProxyBaseUrl) > -1 || new RegExp('/authorization/' + _index2.default.config.apiVersion).test(url);
+	        return _index2.default.config.authProxyBaseUrl && url.indexOf(_index2.default.config.authProxyBaseUrl) > -1 || new RegExp('/authorization/' + _index2.default.config.apiVersion).test(url);
 	    };
 	
 	    return FetchUtil;
@@ -1629,7 +1629,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  , lolcation = __webpack_require__(25)
 	  , qs = __webpack_require__(23)
 	  , relativere = /^\/(?!\/)/
-	  , protocolre = /^([a-z0-9.+-]+:)?(\/\/)?(.*)$/i; // actual protocol is first match
+	  , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i;
 	
 	/**
 	 * These are the parse instructions for the URL parsers, it informs the parser
@@ -1649,7 +1649,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  ['/', 'pathname'],                    // Extract from the back.
 	  ['@', 'auth', 1],                     // Extract from the front.
 	  [NaN, 'host', undefined, 1, 1],       // Set left over value.
-	  [/\:(\d+)$/, 'port'],                 // RegExp the back.
+	  [/:(\d+)$/, 'port'],                  // RegExp the back.
 	  [NaN, 'hostname', undefined, 1, 1]    // Set left over.
 	];
 	
@@ -1666,10 +1666,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  *
 	  * @param  {String} address   URL we want to extract from.
 	  * @return {ProtocolExtract}  Extracted information
-	  * @private
+	  * @api private
 	  */
 	function extractProtocol(address) {
 	  var match = protocolre.exec(address);
+	
 	  return {
 	    protocol: match[1] ? match[1].toLowerCase() : '',
 	    slashes: !!match[2],
@@ -1680,7 +1681,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * The actual URL instance. Instead of returning an object we've opted-in to
 	 * create an actual constructor as it's much more memory efficient and
-	 * faster and it pleases my CDO.
+	 * faster and it pleases my OCD.
 	 *
 	 * @constructor
 	 * @param {String} address URL we want to parse.
@@ -1697,6 +1698,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    , parse, instruction, index, key
 	    , type = typeof location
 	    , url = this
+	    , extracted
 	    , i = 0;
 	
 	  //
@@ -1721,8 +1723,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  location = lolcation(location);
 	
+	  //
 	  // extract protocol information before running the instructions
-	  var extracted = extractProtocol(address);
+	  //
+	  extracted = extractProtocol(address);
 	  url.protocol = extracted.protocol || location.protocol || '';
 	  url.slashes = extracted.slashes || location.slashes;
 	  address = extracted.rest;
@@ -1790,6 +1794,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  //
 	  // The href is just the compiled result.
 	  //
+	  url.origin = url.protocol && url.host && url.protocol !== 'file:' ? url.protocol +'//'+ url.host : 'null';
 	  url.href = url.toString();
 	}
 	
@@ -1797,7 +1802,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * This is convenience method for changing properties in the URL instance to
 	 * insure that they all propagate correctly.
 	 *
-	 * @param {String} prop          Property we need to adjust.
+	 * @param {String} part          Property we need to adjust.
 	 * @param {Mixed} value          The newly assigned value.
 	 * @param {Boolean|Function} fn  When setting the query, it will be the function used to parse
 	 *                               the query.
@@ -1832,19 +1837,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	  } else if ('host' === part) {
 	    url[part] = value;
 	
-	    if (/\:\d+/.test(value)) {
+	    if (/:\d+$/.test(value)) {
 	      value = value.split(':');
-	      url.hostname = value[0];
-	      url.port = value[1];
+	      url.port = value.pop();
+	      url.hostname = value.join(':');
+	    } else {
+	      url.hostname = value;
+	      url.port = '';
 	    }
 	  } else if ('protocol' === part) {
-	    url.protocol = value;
+	    url.protocol = value.toLowerCase();
 	    url.slashes = !fn;
 	  } else {
 	    url[part] = value;
 	  }
 	
+	  for (var i = 0; i < instructions.length; i++) {
+	    var ins = instructions[i];
+	
+	    if (ins[4]) {
+	      url[ins[1]] = url[ins[1]].toLowerCase();
+	    }
+	  }
+	
+	  url.origin = url.protocol && url.host && url.protocol !== 'file:' ? url.protocol +'//'+ url.host : 'null';
 	  url.href = url.toString();
+	
 	  return url;
 	};
 	
@@ -1872,10 +1890,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    result += '@';
 	  }
 	
-	  result += url.hostname;
-	  if (url.port) result += ':'+ url.port;
-	
-	  result += url.pathname;
+	  result += url.host + url.pathname;
 	
 	  query = 'object' === typeof url.query ? stringify(url.query) : url.query;
 	  if (query) result += '?' !== query.charAt(0) ? '?'+ query : query;
@@ -1887,10 +1902,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	//
 	// Expose the URL parser and some additional properties that might be useful for
-	// others.
+	// others or testing.
 	//
-	URL.qs = qs;
+	URL.extractProtocol = extractProtocol;
 	URL.location = lolcation;
+	URL.qs = qs;
+	
 	module.exports = URL;
 
 
@@ -4602,7 +4619,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @api public
 	 */
 	function querystring(query) {
-	  var parser = /([^=?&]+)=([^&]*)/g
+	  var parser = /([^=?&]+)=?([^&]*)/g
 	    , result = {}
 	    , part;
 	
