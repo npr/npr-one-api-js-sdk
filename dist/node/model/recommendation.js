@@ -375,7 +375,7 @@ var Recommendation = function (_CollectionDoc) {
     /**
      * Returns whether this recommendation has a given action
      *
-     * @param {string} action    Which action to look up; should be one of the static string constants returnd by {@link Action}
+     * @param {string} action    Which action to look up; should be one of the static string constants returned by {@link Action}
      * @returns {boolean}
      */
 
@@ -437,7 +437,7 @@ var Recommendation = function (_CollectionDoc) {
     /**
      * Record a user action taken and the time it was taken against this recommendation
      *
-     * @param {string} action                  Which action to record; should be one of the static string constants returnd by {@link Action}
+     * @param {string} action                  Which action to record; should be one of the static string constants returned by {@link Action}
      * @param {number} elapsedTimeInSeconds    The number of seconds this piece of audio has been playing for
      */
 
@@ -534,9 +534,8 @@ var Recommendation = function (_CollectionDoc) {
      * @property {string} provider The provider of the story, usually `NPR`. Can also be a member station or third-party podcast provider.
      * @property {string} [program] The program as part of which this recommendation aired
      * @property {number} duration The duration of the audio according to the API; note that the actual duration can differ
-     * @property {string} date The date at which the story was first published
+     * @property {string} date ISO-8601 formatted date/time; the date at which the story was first published
      * @property {string} [description] A short description of the recommendation
-     *
      * @property {string} rationale The reason for recommending this piece to the listener
      * @property {string} [button] The text to display in a clickable button on a feature card
      */

@@ -12,5 +12,6 @@ bower.json
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
 esdoc.json
+tsconfig.json
 webpack.config.js
 *.log

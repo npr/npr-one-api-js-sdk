@@ -113,3 +113,6 @@ docs/
 # Custom testing/CI folders
 test-reports/
 .coveralls.yml
+
+# TypeScript stuff
+typings/

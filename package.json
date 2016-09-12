@@ -25,7 +25,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "typings.json"
   ],
   "main": "./dist/node/index.js",
   "browser": "./dist/browser/npr-one-sdk.js",
@@ -34,6 +35,7 @@
     "test": "test",
     "example": "examples"
   },
+  "typings": "./src/index.d.ts",
   "scripts": {
     "update": "npm prune && npm cache clean && npm install",
     "lint": "eslint 'src/**/*.js'",

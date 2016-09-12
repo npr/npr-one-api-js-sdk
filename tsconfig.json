@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "removeComments": false,
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "declaration": true
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "docs",
+        "examples",
+        "hooks",
+        "test",
+        "test-reports",
+        "webpack.config.js"
+    ]
+}

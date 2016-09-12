@@ -4,7 +4,7 @@
 # Full credit to Andy Ray: http://blog.andrewray.me/dealing-with-compiled-files-in-git/
 
 # Find source files that are marked as modified
-sources=`git status -s | grep 'M.*src\/.*'`
+sources=`git status -s | grep 'M.*src\/.*\.js'`
 
 # Find built files that have changed (we don't use M because they could be deleted, etc)
 built=`git status -s | grep 'dist\/.*'`

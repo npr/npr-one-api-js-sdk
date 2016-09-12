@@ -44,19 +44,20 @@ export default class NprOneSDK
     /**
      * @typedef {Object} Config
      * @property {string} [apiBaseUrl='https://api.npr.org'] The NPR One API hostname and protocol, typically `https://api.npr.org`; in most cases, this does not need to be manually set by clients
-     * @property {string} [apiVersion='v2']  The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients
-     * @property {string} authProxyBaseUrl The full URL to your OAuth proxy, e.g. `http://one.example.com/oauth2/`
+     * @property {string} [apiVersion='v2'] The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients
+     * @property {string} [authProxyBaseUrl] The full URL to your OAuth proxy, e.g. `http://one.example.com/oauth2/`
      * @property {string} [newDeviceCodePath='/device'] The path to your proxy for starting a `device_code` grant (relative to `authProxyBaseUrl`)
      * @property {string} [pollDeviceCodePath='/device/poll'] The path to your proxy for polling a `device_code` grant (relative to `authProxyBaseUrl`)
      * @property {string} [refreshTokenPath='/refresh'] The path to your proxy for the `refresh_token` grant (relative to `authProxyBaseUrl`)
      * @property {string} [tempUserPath='/temporary'] The path to your proxy for the `temporary_user` grant (relative to `authProxyBaseUrl`), not available to third-party clients
      * @property {string} [logoutPath='/logout'] The path to your proxy for the `POST /authorization/v2/token/revoke` endpoint (relative to `authProxyBaseUrl`)
-     * @property {string} accessToken The access token to use if not using the auth proxy
+     * @property {string} [accessToken] The access token to use if not using the auth proxy
      * @property {string} [clientId] The NPR One API `client_id` to use, only required if using the auth proxy with the `temporary_user` grant type
      * @property {string} [advertisingId] The custom X-Advertising-ID header to send with most requests, not typically used by third-party clients
      * @property {string} [advertisingTarget] The custom X-Advertising-Target header to send with most requests, not typically used by third-party clients
-     *
-     * @returns {Config}
+     */
+    /**
+     * @type {Config}
      */
     static get config() {
         if (!NprOneSDK._config) {
@@ -83,7 +84,6 @@ export default class NprOneSDK
     /**
      * Updates private `_config` member attributes but does not overwrite entire `_config` object
      *
-     * @param {Object} value
      * @type {Config}
      */
     static set config(value) {
@@ -129,7 +129,7 @@ export default class NprOneSDK
     }
 
     /**
-     * Expose the Action class for clients to record actions
+     * Exposes the Action class for clients to record actions
      *
      * @type {Action}
      */
@@ -138,7 +138,7 @@ export default class NprOneSDK
     }
 
     /**
-     * Expose the Logger class for clients to adjust logging if desired
+     * Exposes the Logger class for clients to adjust logging if desired
      *
      * @type {src/util/logger.js~Logger}
      */

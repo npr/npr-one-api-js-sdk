@@ -146,14 +146,16 @@ var User = function (_CollectionDoc) {
    * @property {string} call Station call letters
    * @property {string} city A short description of the station's main market city
    * @property {string} [logo] Station logo image URL
+   * @property {string} [donationUrl] The URL to a website where users may make a donation to support the station
    */
   /**
    * @typedef {Object} UserAffiliation
    * @property {number} id A unique identifier for the aggregation (program)
-   * @property {number} [rating] The user's average rating for this affiliation on a scale of 0-1. Absent if user never listened to the aggregation.
-   * @property {string} href A link to more details about the program from the NPR Story API
-   * @property {number} [daysSinceLastListen] The number of days since a user last listened to a story from this aggregation. Absent if user never listened to the aggregation.
+   * @property {string} [title] The display name of the aggregation (program)
+   * @property {string} href A link that can be followed to get content from this aggregation (program)
    * @property {boolean} following Whether or not the user is following the aggregation. When changing affiliation status, the client is expected to toggle this value and then send the entire object back.
+   * @property {number} [rating] The user's average rating for this affiliation on a scale of 0-1. Absent if user never listened to the aggregation.
+   * @property {number} [daysSinceLastListen] The number of days since a user last listened to a story from this aggregation. Absent if user never listened to the aggregation.
    */
 
 
