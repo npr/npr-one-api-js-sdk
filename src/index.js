@@ -5,7 +5,6 @@ import Authorization from './controller/authorization';
 import Listening from './controller/listening';
 import Identity from './controller/identity';
 import StationFinder from './controller/station-finder';
-import Recommendation from './model/recommendation';
 
 Logger.setLevel(Logger.WARN);
 
@@ -144,16 +143,6 @@ export default class NprOneSDK
     static get Logger() {
         return Logger;
     }
-
-    /**
-     * Exposes the Recommendation class for clients who wish to resume the flow from a Recommendation
-     *
-     * @type {Recommendation}
-     */
-    static get Recommendation() {
-        return Recommendation;
-    }
-
 
     /* Authorization */
 
