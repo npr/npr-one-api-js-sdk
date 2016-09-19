@@ -291,6 +291,26 @@ var Listening = function () {
     };
 
     /**
+     * Given a valid JSON recommendation object, the flow will advance as
+     * normal from this recommendation. This method has been created for
+     * a special case (Chromecast sharing) and is not intended for use
+     * in a traditional SDK implementation.
+     *
+     * NOTE: this function will overwrite ALL existing flow
+     * recommendations.
+     *
+     * @param {Object} json   Recommendation JSON Object (CDoc+JSON)
+     * @returns {Recommendation}
+     */
+
+
+    Listening.prototype.resumeFlowFromRecommendation = function resumeFlowFromRecommendation(json) {
+        var recommendations = this._createRecommendations(json);
+        this._flowRecommendations = recommendations;
+        return this._flowRecommendations[0];
+    };
+
+    /**
      * Advances the flow (retrieves new recommendations from the API).
      *
      * @param {string} channel

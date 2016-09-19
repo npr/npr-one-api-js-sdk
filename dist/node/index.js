@@ -30,6 +30,10 @@ var _stationFinder = require('./controller/station-finder');
 
 var _stationFinder2 = _interopRequireDefault(_stationFinder);
 
+var _recommendation = require('./model/recommendation');
+
+var _recommendation2 = _interopRequireDefault(_recommendation);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -159,6 +163,18 @@ var NprOneSDK = function () {
     var channel = arguments.length <= 1 || arguments[1] === undefined ? 'npr' : arguments[1];
 
     return this._listening.getRecommendation(uid, channel);
+  };
+
+  /**
+   * See {@link Listening#resumeFlowFromRecommendation} for description.
+   *
+   * @param {Object} json JSON object representation of a recommendation
+   * @returns {Recommendation}
+   */
+
+
+  NprOneSDK.prototype.resumeFlowFromRecommendation = function resumeFlowFromRecommendation(json) {
+    return this._listening.resumeFlowFromRecommendation(json);
   };
 
   /**
@@ -481,6 +497,18 @@ var NprOneSDK = function () {
     key: 'Logger',
     get: function get() {
       return _logger2.default;
+    }
+
+    /**
+     * Exposes the Recommendation class for clients who wish to resume the flow from a Recommendation
+     *
+     * @type {Recommendation}
+     */
+
+  }, {
+    key: 'Recommendation',
+    get: function get() {
+      return _recommendation2.default;
     }
   }]);
 

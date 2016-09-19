@@ -96,7 +96,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(11);
+	__webpack_require__(12);
 	
 	var _action = __webpack_require__(5);
 	
@@ -106,21 +106,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _logger2 = _interopRequireDefault(_logger);
 	
-	var _authorization = __webpack_require__(13);
+	var _authorization = __webpack_require__(14);
 	
 	var _authorization2 = _interopRequireDefault(_authorization);
 	
-	var _listening = __webpack_require__(15);
+	var _listening = __webpack_require__(16);
 	
 	var _listening2 = _interopRequireDefault(_listening);
 	
-	var _identity = __webpack_require__(14);
+	var _identity = __webpack_require__(15);
 	
 	var _identity2 = _interopRequireDefault(_identity);
 	
 	var _stationFinder = __webpack_require__(7);
 	
 	var _stationFinder2 = _interopRequireDefault(_stationFinder);
+	
+	var _recommendation = __webpack_require__(11);
+	
+	var _recommendation2 = _interopRequireDefault(_recommendation);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -251,6 +255,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var channel = arguments.length <= 1 || arguments[1] === undefined ? 'npr' : arguments[1];
 	
 	    return this._listening.getRecommendation(uid, channel);
+	  };
+	
+	  /**
+	   * See {@link Listening#resumeFlowFromRecommendation} for description.
+	   *
+	   * @param {Object} json JSON object representation of a recommendation
+	   * @returns {Recommendation}
+	   */
+	
+	
+	  NprOneSDK.prototype.resumeFlowFromRecommendation = function resumeFlowFromRecommendation(json) {
+	    return this._listening.resumeFlowFromRecommendation(json);
 	  };
 	
 	  /**
@@ -573,6 +589,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'Logger',
 	    get: function get() {
 	      return _logger2.default;
+	    }
+	
+	    /**
+	     * Exposes the Recommendation class for clients who wish to resume the flow from a Recommendation
+	     *
+	     * @type {Recommendation}
+	     */
+	
+	  }, {
+	    key: 'Recommendation',
+	    get: function get() {
+	      return _recommendation2.default;
 	    }
 	  }]);
 	
@@ -1611,1555 +1639,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// the whatwg-fetch polyfill installs the fetch() function
-	// on the global object (window or self)
-	//
-	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(26);
-	module.exports = self.fetch.bind(self);
-
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var required = __webpack_require__(24)
-	  , lolcation = __webpack_require__(25)
-	  , qs = __webpack_require__(23)
-	  , relativere = /^\/(?!\/)/
-	  , protocolre = /^([a-z0-9.+-]+:)?(\/\/)?(.*)$/i; // actual protocol is first match
-	
-	/**
-	 * These are the parse instructions for the URL parsers, it informs the parser
-	 * about:
-	 *
-	 * 0. The char it Needs to parse, if it's a string it should be done using
-	 *    indexOf, RegExp using exec and NaN means set as current value.
-	 * 1. The property we should set when parsing this value.
-	 * 2. Indication if it's backwards or forward parsing, when set as number it's
-	 *    the value of extra chars that should be split off.
-	 * 3. Inherit from location if non existing in the parser.
-	 * 4. `toLowerCase` the resulting value.
-	 */
-	var instructions = [
-	  ['#', 'hash'],                        // Extract from the back.
-	  ['?', 'query'],                       // Extract from the back.
-	  ['/', 'pathname'],                    // Extract from the back.
-	  ['@', 'auth', 1],                     // Extract from the front.
-	  [NaN, 'host', undefined, 1, 1],       // Set left over value.
-	  [/\:(\d+)$/, 'port'],                 // RegExp the back.
-	  [NaN, 'hostname', undefined, 1, 1]    // Set left over.
-	];
-	
-	 /**
-	 * @typedef ProtocolExtract
-	 * @type Object
-	 * @property {String} protocol Protocol matched in the URL, in lowercase
-	 * @property {Boolean} slashes Indicates whether the protocol is followed by double slash ("//")
-	 * @property {String} rest     Rest of the URL that is not part of the protocol
-	 */
-	
-	 /**
-	  * Extract protocol information from a URL with/without double slash ("//")
-	  *
-	  * @param  {String} address   URL we want to extract from.
-	  * @return {ProtocolExtract}  Extracted information
-	  * @private
-	  */
-	function extractProtocol(address) {
-	  var match = protocolre.exec(address);
-	  return {
-	    protocol: match[1] ? match[1].toLowerCase() : '',
-	    slashes: !!match[2],
-	    rest: match[3] ? match[3] : ''
-	  };
-	}
-	
-	/**
-	 * The actual URL instance. Instead of returning an object we've opted-in to
-	 * create an actual constructor as it's much more memory efficient and
-	 * faster and it pleases my CDO.
-	 *
-	 * @constructor
-	 * @param {String} address URL we want to parse.
-	 * @param {Object|String} location Location defaults for relative paths.
-	 * @param {Boolean|Function} parser Parser for the query string.
-	 * @api public
-	 */
-	function URL(address, location, parser) {
-	  if (!(this instanceof URL)) {
-	    return new URL(address, location, parser);
-	  }
-	
-	  var relative = relativere.test(address)
-	    , parse, instruction, index, key
-	    , type = typeof location
-	    , url = this
-	    , i = 0;
-	
-	  //
-	  // The following if statements allows this module two have compatibility with
-	  // 2 different API:
-	  //
-	  // 1. Node.js's `url.parse` api which accepts a URL, boolean as arguments
-	  //    where the boolean indicates that the query string should also be parsed.
-	  //
-	  // 2. The `URL` interface of the browser which accepts a URL, object as
-	  //    arguments. The supplied object will be used as default values / fall-back
-	  //    for relative paths.
-	  //
-	  if ('object' !== type && 'string' !== type) {
-	    parser = location;
-	    location = null;
-	  }
-	
-	  if (parser && 'function' !== typeof parser) {
-	    parser = qs.parse;
-	  }
-	
-	  location = lolcation(location);
-	
-	  // extract protocol information before running the instructions
-	  var extracted = extractProtocol(address);
-	  url.protocol = extracted.protocol || location.protocol || '';
-	  url.slashes = extracted.slashes || location.slashes;
-	  address = extracted.rest;
-	
-	  for (; i < instructions.length; i++) {
-	    instruction = instructions[i];
-	    parse = instruction[0];
-	    key = instruction[1];
-	
-	    if (parse !== parse) {
-	      url[key] = address;
-	    } else if ('string' === typeof parse) {
-	      if (~(index = address.indexOf(parse))) {
-	        if ('number' === typeof instruction[2]) {
-	          url[key] = address.slice(0, index);
-	          address = address.slice(index + instruction[2]);
-	        } else {
-	          url[key] = address.slice(index);
-	          address = address.slice(0, index);
-	        }
-	      }
-	    } else if (index = parse.exec(address)) {
-	      url[key] = index[1];
-	      address = address.slice(0, address.length - index[0].length);
-	    }
-	
-	    url[key] = url[key] || (instruction[3] || ('port' === key && relative) ? location[key] || '' : '');
-	
-	    //
-	    // Hostname, host and protocol should be lowercased so they can be used to
-	    // create a proper `origin`.
-	    //
-	    if (instruction[4]) {
-	      url[key] = url[key].toLowerCase();
-	    }
-	  }
-	
-	  //
-	  // Also parse the supplied query string in to an object. If we're supplied
-	  // with a custom parser as function use that instead of the default build-in
-	  // parser.
-	  //
-	  if (parser) url.query = parser(url.query);
-	
-	  //
-	  // We should not add port numbers if they are already the default port number
-	  // for a given protocol. As the host also contains the port number we're going
-	  // override it with the hostname which contains no port number.
-	  //
-	  if (!required(url.port, url.protocol)) {
-	    url.host = url.hostname;
-	    url.port = '';
-	  }
-	
-	  //
-	  // Parse down the `auth` for the username and password.
-	  //
-	  url.username = url.password = '';
-	  if (url.auth) {
-	    instruction = url.auth.split(':');
-	    url.username = instruction[0] || '';
-	    url.password = instruction[1] || '';
-	  }
-	
-	  //
-	  // The href is just the compiled result.
-	  //
-	  url.href = url.toString();
-	}
-	
-	/**
-	 * This is convenience method for changing properties in the URL instance to
-	 * insure that they all propagate correctly.
-	 *
-	 * @param {String} prop          Property we need to adjust.
-	 * @param {Mixed} value          The newly assigned value.
-	 * @param {Boolean|Function} fn  When setting the query, it will be the function used to parse
-	 *                               the query.
-	 *                               When setting the protocol, double slash will be removed from
-	 *                               the final url if it is true.
-	 * @returns {URL}
-	 * @api public
-	 */
-	URL.prototype.set = function set(part, value, fn) {
-	  var url = this;
-	
-	  if ('query' === part) {
-	    if ('string' === typeof value && value.length) {
-	      value = (fn || qs.parse)(value);
-	    }
-	
-	    url[part] = value;
-	  } else if ('port' === part) {
-	    url[part] = value;
-	
-	    if (!required(value, url.protocol)) {
-	      url.host = url.hostname;
-	      url[part] = '';
-	    } else if (value) {
-	      url.host = url.hostname +':'+ value;
-	    }
-	  } else if ('hostname' === part) {
-	    url[part] = value;
-	
-	    if (url.port) value += ':'+ url.port;
-	    url.host = value;
-	  } else if ('host' === part) {
-	    url[part] = value;
-	
-	    if (/\:\d+/.test(value)) {
-	      value = value.split(':');
-	      url.hostname = value[0];
-	      url.port = value[1];
-	    }
-	  } else if ('protocol' === part) {
-	    url.protocol = value;
-	    url.slashes = !fn;
-	  } else {
-	    url[part] = value;
-	  }
-	
-	  url.href = url.toString();
-	  return url;
-	};
-	
-	/**
-	 * Transform the properties back in to a valid and full URL string.
-	 *
-	 * @param {Function} stringify Optional query stringify function.
-	 * @returns {String}
-	 * @api public
-	 */
-	URL.prototype.toString = function toString(stringify) {
-	  if (!stringify || 'function' !== typeof stringify) stringify = qs.stringify;
-	
-	  var query
-	    , url = this
-	    , protocol = url.protocol;
-	
-	  if (protocol && protocol.charAt(protocol.length - 1) !== ':') protocol += ':';
-	
-	  var result = protocol + (url.slashes ? '//' : '');
-	
-	  if (url.username) {
-	    result += url.username;
-	    if (url.password) result += ':'+ url.password;
-	    result += '@';
-	  }
-	
-	  result += url.hostname;
-	  if (url.port) result += ':'+ url.port;
-	
-	  result += url.pathname;
-	
-	  query = 'object' === typeof url.query ? stringify(url.query) : url.query;
-	  if (query) result += '?' !== query.charAt(0) ? '?'+ query : query;
-	
-	  if (url.hash) result += url.hash;
-	
-	  return result;
-	};
-	
-	//
-	// Expose the URL parser and some additional properties that might be useful for
-	// others.
-	//
-	URL.qs = qs;
-	URL.location = lolcation;
-	module.exports = URL;
-
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _index = __webpack_require__(2);
+	__webpack_require__(12);
 	
-	var _index2 = _interopRequireDefault(_index);
-	
-	var _accessToken = __webpack_require__(9);
-	
-	var _accessToken2 = _interopRequireDefault(_accessToken);
-	
-	var _deviceCode = __webpack_require__(16);
-	
-	var _deviceCode2 = _interopRequireDefault(_deviceCode);
-	
-	var _logger = __webpack_require__(1);
-	
-	var _logger2 = _interopRequireDefault(_logger);
-	
-	var _fetchUtil = __webpack_require__(3);
-	
-	var _fetchUtil2 = _interopRequireDefault(_fetchUtil);
-	
-	var _apiError = __webpack_require__(8);
-	
-	var _apiError2 = _interopRequireDefault(_apiError);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	/**
-	 * Simulates a delay by wrapping a Promise around JavaScript's native `setTimeout` function.
-	 *
-	 * @param {number} ms The amount of time to delay for, in milliseconds
-	 * @returns {Promise}
-	 * @private
-	 */
-	var delay = function delay(ms) {
-	    return new Promise(function (r) {
-	        return setTimeout(r, ms);
-	    });
-	};
-	
-	/**
-	 * Encapsulates all of the logic for communication with the [Authorization Service](http://dev.npr.org/api/#/authorization)
-	 * in the NPR One API.
-	 *
-	 * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
-	 * functions in the main {@link NprOneSDK} class.
-	 *
-	 * @example <caption>Rudimentary example of implementing the Device Code flow</caption>
-	 * const nprOneSDK = new NprOneSDK();
-	 * nprOneSDK.config = { ... };
-	 * const scopes = ['identity.readonly', 'identity.write', 'listening.readonly', 'listening.write'];
-	 * nprOneSDK.getDeviceCode(scopes)
-	 *     .then((deviceCodeModel) => {
-	 *         // display code to user on the screen
-	 *         nprOneSDK.pollDeviceCode()
-	 *             .then(() => {
-	 *                 nprOneSDK.getRecommendation();
-	 *             });
-	 *      })
-	 *     .catch(() => {
-	 *         nprOneSDK.getDeviceCode(scopes).then(...); // repeat ad infinitum until `pollDeviceCode()` resolves successfully
-	 *         // In actual use, it may be preferable to refactor this into a recursive function
-	 *     ));
-	 */
-	
-	var Authorization = function () {
-	    /**
-	     * Initializes the controller class with private variables needed later on.
-	     */
-	    function Authorization() {
-	        _classCallCheck(this, Authorization);
-	
-	        /** @type {null|DeviceCode} The device code model for the currently-active device code grant
-	         * @private */
-	        this._activeDeviceCodeModel = null;
-	    }
-	
-	    /**
-	     * Attempts to swap the existing access token for a new one using the refresh token endpoint in the OAuth proxy
-	     *
-	     * @param {number} [numRetries=0]   The number of times this function has been tried. Will retry up to 3 times.
-	     * @returns {Promise<AccessToken>}
-	     * @throws {TypeError} if an OAuth proxy is not configured or no access token is set
-	     */
-	
-	
-	    Authorization.refreshExistingAccessToken = function refreshExistingAccessToken() {
-	        var _this = this;
-	
-	        var numRetries = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
-	
-	        if (!_index2.default.config.authProxyBaseUrl) {
-	            throw new TypeError('OAuth proxy not configured. Unable to refresh the access token.');
-	        }
-	        if (!_index2.default.accessToken) {
-	            throw new TypeError('An access token must be set in order to attempt a refresh.');
-	        }
-	
-	        _logger2.default.debug('Access token appears to have expired. Attempting to generate a fresh one.');
-	
-	        var url = '' + _index2.default.config.authProxyBaseUrl + _index2.default.config.refreshTokenPath;
-	        var options = {
-	            method: 'POST',
-	            credentials: 'include'
-	        };
-	
-	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
-	            var tokenModel = new _accessToken2.default(json);
-	            tokenModel.validate(); // throws exception if invalid
-	            _logger2.default.debug('Access token refresh was successful, new token:', tokenModel.toString());
-	            _index2.default.accessToken = tokenModel.token;
-	            return tokenModel; // never directly consumed, but useful for testing
-	        }).catch(function (err) {
-	            _logger2.default.debug('Error generating a new token in refreshExistingAccessToken()');
-	            _logger2.default.debug(err);
-	
-	            if (numRetries < 2) {
-	                _logger2.default.debug('refreshExistingAccessToken() will make another attempt');
-	                return delay(5000).then(Authorization.refreshExistingAccessToken.bind(_this, numRetries + 1));
-	            }
-	
-	            // rethrow
-	            _logger2.default.debug('refreshExistingAccessToken() has made too many attempts, aborting');
-	            return Promise.reject(err);
-	        });
-	    };
-	
-	    /**
-	     * Logs out the user, revoking their access token from the authorization server and removing the refresh token from
-	     * the secure storage in the backend proxy (if a backend proxy is configured). Note that the consuming client is
-	     * still responsible for removing the access token anywhere else it might be stored outside of this SDK (e.g. in
-	     * localStorage or elsewhere in application memory).
-	     *
-	     * @returns {Promise}
-	     * @throws {TypeError} if an OAuth proxy is not configured or no access token is currently set
-	     */
-	
-	
-	    Authorization.prototype.logout = function logout() {
-	        if (!_index2.default.accessToken) {
-	            throw new TypeError('An access token must be set in order to attempt a logout.');
-	        }
-	        if (!_index2.default.config.authProxyBaseUrl) {
-	            throw new TypeError('OAuth proxy not configured. Unable to securely log out the user.');
-	        }
-	
-	        var url = '' + _index2.default.config.authProxyBaseUrl + _index2.default.config.logoutPath;
-	        var options = {
-	            method: 'POST',
-	            credentials: 'include',
-	            body: 'token=' + _index2.default.accessToken,
-	            headers: {
-	                Accept: 'application/json, application/xml, text/plain, text/html, *.*',
-	                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-	            }
-	        };
-	
-	        return fetch(url, options) // we cannot use FetchUtil.nprApiFetch() here because the success response has an empty body
-	        .then(function (response) {
-	            if (response.ok) {
-	                _index2.default.accessToken = '';
-	                return true;
-	            }
-	            return _fetchUtil2.default.formatErrorResponse(response);
-	        });
-	    };
-	
-	    /**
-	     * Uses the OAuth proxy to start a `device_code` grant flow. This function _just_ makes an API call that produces a
-	     * device code/user code pair, and should be followed up with a call to {@link pollDeviceCode} in order to complete
-	     * the process.
-	     *
-	     * Note that device code/user code pairs do expire after a set time, so the consuming client may need to call these
-	     * 2 functions multiple times before the user logs in. It is a good idea to encapsulate them in a function which
-	     * can be called recursively on errors; see the example below for details.
-	     *
-	     * @example
-	     * function logInViaDeviceCode(scopes) {
-	     *     nprOneSDK.getDeviceCode(scopes)
-	     *         .then((deviceCodeModel) => {
-	     *             displayCodeToUser(deviceCodeModel); // display code to user on the screen
-	     *             nprOneSDK.pollDeviceCode()
-	     *                 .then(() => {
-	     *                     startPlayingAudio(); // you're now ready to call `nprOneSDK.getRecommendation()` elsewhere in your app
-	     *                 }).catch(logInViaDeviceCode.bind(this, scopes)); // recursively call this function until the user logs in
-	     *         });
-	     * }
-	     *
-	     * @see http://dev.npr.org/guide/services/authorization/#device_code
-	     *
-	     * @param {Array<string>} [scopes=[]]   The scopes (as strings) that should be associated with the resulting access token
-	     * @returns {Promise<DeviceCode>}
-	     * @throws {TypeError} if an OAuth proxy is not configured
-	     */
-	
-	
-	    Authorization.prototype.getDeviceCode = function getDeviceCode() {
-	        var _this2 = this;
-	
-	        var scopes = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-	
-	        if (!_index2.default.config.authProxyBaseUrl) {
-	            throw new TypeError('OAuth proxy not configured. Unable to use the device code.');
-	        }
-	
-	        var url = '' + _index2.default.config.authProxyBaseUrl + _index2.default.config.newDeviceCodePath;
-	        var options = {
-	            method: 'POST',
-	            credentials: 'include',
-	            body: 'scope=' + encodeURIComponent(scopes.join(' ')).replace('%20', '+'),
-	            headers: {
-	                Accept: 'application/json, application/xml, text/plain, text/html, *.*',
-	                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-	            }
-	        };
-	
-	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
-	            var deviceCodeModel = new _deviceCode2.default(json);
-	            deviceCodeModel.validate(); // throws exception if invalid
-	            _this2._activeDeviceCodeModel = deviceCodeModel;
-	            return deviceCodeModel;
-	        });
-	    };
-	
-	    /**
-	     * Uses the OAuth proxy to poll the access token endpoint as part of a `device_code` grant flow. This endpoint will
-	     * continue to poll until the user successfully logs in, _or_ the user goes to log in but then denies the request
-	     * for access to their account by this client, _or_ the device code/user code pair expires, whichever comes first.
-	     * In the first case, it will automatically set {@link NPROneSDK.accessToken} to the newly-generated access token,
-	     * and the consuming client can proceed to play recommendations immediately; in the other 2 cases, it will return
-	     * a Promise that rejects with a debugging message, but the next course of action would generally be to call
-	     * {@link getDeviceCode} again and start the whole process from the top.
-	     *
-	     * @example
-	     * function logInViaDeviceCode(scopes) {
-	     *     nprOneSDK.getDeviceCode(scopes)
-	     *         .then((deviceCodeModel) => {
-	     *             displayCodeToUser(deviceCodeModel); // display code to user on the screen
-	     *             nprOneSDK.pollDeviceCode()
-	     *                 .then(() => {
-	     *                     startPlayingAudio(); // you're now ready to call `nprOneSDK.getRecommendation()` elsewhere in your app
-	     *                 }).catch(logInViaDeviceCode.bind(this, scopes)); // recursively call this function until the user logs in
-	     *         });
-	     * }
-	     *
-	     * @see http://dev.npr.org/guide/services/authorization/#device_code
-	     *
-	     * @returns {Promise<AccessToken>}
-	     * @throws {TypeError} if an OAuth proxy is not configured or `getDeviceCode()` was not previously called
-	     */
-	
-	
-	    Authorization.prototype.pollDeviceCode = function pollDeviceCode() {
-	        _logger2.default.debug('Starting to poll device code. Will poll until user logs in or code expires'); // eslint-disable-line max-len
-	
-	        if (!_index2.default.config.authProxyBaseUrl) {
-	            throw new TypeError('OAuth proxy not configured. Unable to use the device code.');
-	        }
-	        if (!this._activeDeviceCodeModel) {
-	            throw new TypeError('No active device code set. Please call getDeviceCode() before calling this function.'); // eslint-disable-line max-len
-	        }
-	
-	        return this._pollDeviceCodeOnce();
-	    };
-	
-	    /**
-	     * Polls the device code once. If the result is an error of type `'authorization_pending'`, this will recurse,
-	     * calling itself after a delay equal to the interval specified in the original call to {@link getDeviceCode}.
-	     *
-	     * @returns {Promise<AccessToken>}
-	     * @private
-	     */
-	
-	
-	    Authorization.prototype._pollDeviceCodeOnce = function _pollDeviceCodeOnce() {
-	        var _this3 = this;
-	
-	        _logger2.default.debug('Polling device code once');
-	
-	        if (this._activeDeviceCodeModel.isExpired()) {
-	            return Promise.reject('The device code has expired. Please generate a new one before continuing.'); // eslint-disable-line max-len
-	        }
-	
-	        var url = '' + _index2.default.config.authProxyBaseUrl + _index2.default.config.pollDeviceCodePath;
-	        var options = {
-	            method: 'POST',
-	            credentials: 'include'
-	        };
-	
-	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
-	            _logger2.default.debug('Device code poll returned successfully! An access token was returned.'); // eslint-disable-line max-len
-	
-	            var tokenModel = new _accessToken2.default(json);
-	            tokenModel.validate(); // throws exception if invalid
-	            _index2.default.accessToken = tokenModel.token;
-	            return tokenModel; // never directly consumed, but useful for testing
-	        }).catch(function (error) {
-	            if (error instanceof _apiError2.default) {
-	                if (error.statusCode === 401) {
-	                    if (error.json.type === 'authorization_pending') {
-	                        return delay(_this3._activeDeviceCodeModel.interval).then(_this3._pollDeviceCodeOnce.bind(_this3));
-	                    }
-	                    _logger2.default.debug('The response was a 401, but not of type "authorization_pending". The user presumably denied the app access; rejecting.'); // eslint-disable-line max-len
-	                } else {
-	                    _logger2.default.debug('Response was not a 401. The device code has probably expired; rejecting.'); // eslint-disable-line max-len
-	                }
-	            } else {
-	                _logger2.default.debug('An unknown type of error was received. Unsure of how to respond; rejecting.'); // eslint-disable-line max-len
-	            }
-	            return Promise.reject(error);
-	        });
-	    };
-	
-	    return Authorization;
-	}();
-	
-	exports.default = Authorization;
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _index = __webpack_require__(2);
-	
-	var _index2 = _interopRequireDefault(_index);
-	
-	var _fetchUtil = __webpack_require__(3);
-	
-	var _fetchUtil2 = _interopRequireDefault(_fetchUtil);
-	
-	var _user = __webpack_require__(19);
-	
-	var _user2 = _interopRequireDefault(_user);
-	
-	var _logger = __webpack_require__(1);
-	
-	var _logger2 = _interopRequireDefault(_logger);
-	
-	var _accessToken = __webpack_require__(9);
-	
-	var _accessToken2 = _interopRequireDefault(_accessToken);
-	
-	var _stationFinder = __webpack_require__(7);
-	
-	var _stationFinder2 = _interopRequireDefault(_stationFinder);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	/**
-	 * Encapsulates all of the logic for communication with the [Identity Service](http://dev.npr.org/api/#/identity)
-	 * in the NPR One API.
-	 *
-	 * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
-	 * functions in the main {@link NprOneSDK} class.
-	 *
-	 * @example <caption>How to change a user's station using station search</caption>
-	 * const nprOneSDK = new NprOneSDK();
-	 * nprOneSDK.config = { ... };
-	 * nprOneSDK.getUser() // optional; verifies that you have a logged-in user
-	 *     .then(() => {
-	 *        return nprOneSDK.searchStations('wnyc');
-	 *     })
-	 *     .then((stations) => {
-	 *         const stationId = stations[0].id; // in reality, you'd probably have the user select a station, see the StationFinder for detail
-	 *         nprOneSDK.setUserStation(stationId);
-	 *     });
-	 */
-	var Identity = function () {
-	    function Identity() {
-	        _classCallCheck(this, Identity);
-	    }
-	
-	    /**
-	     * Gets user metadata, such as first and last name, programs they have shown an affinity for, and preferred NPR One
-	     * station.
-	     *
-	     * @returns {Promise<User>}
-	     */
-	    Identity.prototype.getUser = function getUser() {
-	        var url = _index2.default.getServiceUrl('identity') + '/user';
-	
-	        return _fetchUtil2.default.nprApiFetch(url).then(function (json) {
-	            return new _user2.default(json);
-	        });
-	    };
-	
-	    /**
-	     * Sets a user's favorite NPR station. Note that this function will first validate whether the station with the given
-	     * ID actually exists, and will return a promise that rejects if not.
-	     *
-	     * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
-	     * @returns {Promise<User>}
-	     */
-	
-	
-	    Identity.prototype.setUserStation = function setUserStation(stationId) {
-	        return _stationFinder2.default.validateStation(stationId).then(function () {
-	            var url = _index2.default.getServiceUrl('identity') + '/stations';
-	            var options = {
-	                method: 'PUT',
-	                body: JSON.stringify([stationId])
-	            };
-	            return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
-	                return new _user2.default(json);
-	            });
-	        }).catch(function (e) {
-	            _logger2.default.debug('setUserStation failed, message: ', e);
-	            return Promise.reject(e);
-	        });
-	    };
-	
-	    /**
-	     * Indicates that the user wishes to follow, or subscribe to, the show, program, or podcast with the given numeric
-	     * ID. Followed shows will appear more frequently in a user's list of recommendations.
-	     *
-	     * Note that at this time, because we have not yet implemented search in this SDK, there is no way to retrieve a list
-	     * of aggregation (show) IDs through this SDK. You can either add functionality to your own app that makes an API call
-	     * to `GET https://api.npr.org/listening/v2/search/recommendations` with a program name or other search parameters, or
-	     * wait until we implement search in this SDK (hopefully later this year).
-	     *
-	     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
-	     * @returns {Promise<User>}
-	     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
-	     */
-	
-	
-	    Identity.prototype.followShow = function followShow(aggregationId) {
-	        return this._setFollowingStatusForShow(aggregationId, true);
-	    };
-	
-	    /**
-	     * Indicates that the user wishes to unfollow, or unsubscribe from, the show, program, or podcast with the given
-	     * numeric ID. See {@link followShow} for more information.
-	     *
-	     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
-	     * @returns {Promise<User>}
-	     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
-	     */
-	
-	
-	    Identity.prototype.unfollowShow = function unfollowShow(aggregationId) {
-	        return this._setFollowingStatusForShow(aggregationId, false);
-	    };
-	
-	    /**
-	     * Primary workhorse for {@link followShow} and {@link unfollowShow}.
-	     *
-	     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
-	     * @param {boolean} shouldFollow           Whether or not the aggregation should be followed (`true`) or unfollowed (`false`)
-	     * @returns {Promise<User>}
-	     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
-	     * @private
-	     */
-	
-	
-	    Identity.prototype._setFollowingStatusForShow = function _setFollowingStatusForShow(aggregationId, shouldFollow) {
-	        var n = parseInt(aggregationId, 10);
-	        if (isNaN(n) || !isFinite(n)) {
-	            throw new TypeError('Aggregation (show) ID must be an integer greater than 0');
-	        }
-	
-	        var data = {
-	            id: aggregationId,
-	            following: shouldFollow
-	        };
-	
-	        var url = _index2.default.getServiceUrl('identity') + '/following';
-	        var options = {
-	            method: 'POST',
-	            body: JSON.stringify(data)
-	        };
-	
-	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
-	            return new _user2.default(json);
-	        });
-	    };
-	
-	    /**
-	     * Creates a temporary user from the NPR One API and use that user's access token for
-	     * subsequent API requests.
-	     *
-	     * Caution: most clients are not authorized to use temporary users.
-	     *
-	     * @returns {Promise<User>}
-	     * @throws {TypeError} if an OAuth proxy is not configured or no client ID is set
-	     */
-	
-	
-	    Identity.prototype.createTemporaryUser = function createTemporaryUser() {
-	        if (!_index2.default.config.authProxyBaseUrl) {
-	            throw new TypeError('OAuth proxy not configured. Unable to create temporary users.');
-	        }
-	        if (!_index2.default.config.clientId) {
-	            throw new TypeError('A client ID must be set for temporary user requests.');
-	        }
-	
-	        var url = '' + _index2.default.config.authProxyBaseUrl + _index2.default.config.tempUserPath;
-	        var glueCharacter = url.indexOf('?') >= 0 ? '&' : '?';
-	        url = '' + url + glueCharacter + 'clientId=' + _index2.default.config.clientId;
-	
-	        var options = {
-	            credentials: 'include'
-	        };
-	
-	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
-	            var tokenModel = new _accessToken2.default(json);
-	            tokenModel.validate(); // throws exception if invalid
-	            _index2.default.accessToken = tokenModel.token;
-	            return tokenModel; // never directly consumed, but useful for testing
-	        });
-	    };
-	
-	    return Identity;
-	}();
-	
-	exports.default = Identity;
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-	
-	var _index = __webpack_require__(2);
-	
-	var _index2 = _interopRequireDefault(_index);
-	
-	var _recommendationCreator = __webpack_require__(20);
-	
-	var _recommendationCreator2 = _interopRequireDefault(_recommendationCreator);
-	
-	var _action = __webpack_require__(5);
-	
-	var _action2 = _interopRequireDefault(_action);
-	
-	var _rating2 = __webpack_require__(10);
-	
-	var _rating3 = _interopRequireDefault(_rating2);
-	
-	var _logger = __webpack_require__(1);
-	
-	var _logger2 = _interopRequireDefault(_logger);
-	
-	var _fetchUtil = __webpack_require__(3);
-	
-	var _fetchUtil2 = _interopRequireDefault(_fetchUtil);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	/**
-	 * Encapsulates all of the logic for communication with the [Listening Service](http://dev.npr.org/api/#/listening)
-	 * in the NPR One API.
-	 *
-	 * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
-	 * functions in the main {@link NprOneSDK} class.
-	 *
-	 * @example <caption>Implementing a rudimentary 'Explore' view</caption>
-	 * const nprOneSDK = new NprOneSDK();
-	 * nprOneSDK.config = { ... };
-	 * nprOneSDK.getRecommendationsFromChannel('recommended')
-	 *     .then((recommendations) => {
-	 *         // in a real app, the user would select a piece; here we've simulated them selecting one at index 3
-	 *         const selectedRecommendationId = recommendations[3].attributes.uid;
-	 *         return nprOneSDK.queueRecommendationFromChannel('recommended', selectedRecommendationId);
-	 *      })
-	 *     .then(() => {
-	 *         nprOneSDK.getRecommendation(); // proceed to play the recommendation
-	 *     });
-	 */
-	var Listening = function () {
-	    /**
-	     * Initializes the controller class with private variables needed later on.
-	     */
-	    function Listening() {
-	        var _this = this;
-	
-	        _classCallCheck(this, Listening);
-	
-	        /** @type {Rating[]} Ratings which are queued to be sent to NPR
-	         * @private */
-	        this._queuedRatings = [];
-	        /** @type {Rating[]} Ratings which have already been sent, for debugging purposes
-	         * @private */
-	        this._sentRatings = [];
-	        /** @type {Array<Recommendation>} Unrated recommendations which represent the latest
-	         *  recommendations from the API, relies heavily upon numeric key/index
-	         * @private */
-	        this._flowRecommendations = [];
-	        /** @type {boolean} Flow fetches need to be synchronous
-	         * @private */
-	        this._flowFetchActive = false;
-	        /** @type {Promise<Recommendation>}
-	         * @private */
-	        this._flowPromise = null;
-	        /** @type {boolean} Whether ads are blocked by the browser.
-	         * @private */
-	        this._adsBlocked = false;
-	        /** @type {Object} Cached recommendations from channels other than the main flow channel of 'npr'.
-	         * A key-value store where the key is the name of the channel and the value is an array of recommendations.
-	         * @private */
-	        this._channelRecommendations = {};
-	
-	        // Ad-blocker detection, used when/if we encounter sponsorship in the flow
-	        fetch('http://adswizz.com', { mode: 'no-cors' }).catch(function () {
-	            fetch('http://delivery-s3.adswizz.com', { mode: 'no-cors' }).catch(function (e) {
-	                _logger2.default.debug('Ads are blocked. ', e);
-	                _this._adsBlocked = true;
-	            });
-	        });
-	    }
-	
-	    /**
-	     * Get a recommendation from NPR.
-	     *
-	     * Caution: the resulting recommendation may have been returned previously and must be checked
-	     * to ensure the same recommendation is not played twice.
-	     *
-	     * @param {string} [uid='']           Optional; a UID for a specific recommendation to play. In 99% of use cases, this is not needed.
-	     * @param {string} [channel='npr']    Optional; a channel to pull the recommendation from; the main flow channel of `npr` is used as the default. In 99% of use cases, this does not need to be changed.
-	     * @returns {Promise<Recommendation>}
-	     */
-	
-	
-	    Listening.prototype.getRecommendation = function getRecommendation() {
-	        var uid = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-	        var channel = arguments.length <= 1 || arguments[1] === undefined ? 'npr' : arguments[1];
-	
-	        this._flowPromise = this._advanceFlowRecommendations(channel, uid);
-	
-	        return this._flowPromise;
-	    };
-	
-	    /**
-	     * Return possible recommendations that may come next in the flow. Useful for
-	     * pre-caching audio and displaying upcoming recommendations.
-	     *
-	     * Recommendations returned are not guaranteed to always come next in the flow.
-	     *
-	     * @experimental
-	     * @param {string} [channel='npr']   A channel to pull the next recommendation from
-	     * @returns {Promise<Array<Recommendation>>}
-	     */
-	
-	
-	    Listening.prototype.getUpcomingFlowRecommendations = function getUpcomingFlowRecommendations() {
-	        var channel = arguments.length <= 0 || arguments[0] === undefined ? 'npr' : arguments[0];
-	
-	        if (this._flowRecommendations.length > 0) {
-	            return Promise.resolve(this._flowRecommendations);
-	        }
-	
-	        return this._getChannelRecommendations(channel);
-	    };
-	
-	    /**
-	     * Makes a new API call to get a list of recommendations. This is NOT intended for regular piece-by-piece consumption;
-	     * this function is designed to be used for consumers implementing e.g. the Explore view from the NPR One apps,
-	     * where the client displays a list or grid of content, and the user can select a piece to listen to next.
-	     * It is hard-coded to use the "recommended" channel by default, although other channels can be used also. That said,
-	     * you should really never use this with channel "npr" (the main flow channel), as this is not how that content is
-	     * intended to be consumed.
-	     *
-	     * @param {string} [channel='recommended']   A non-flow (i.e. non-`npr`) channel to retrieve a list of recommendations from
-	     * @returns {Promise<Array<Recommendation>>}
-	     */
-	
-	
-	    Listening.prototype.getRecommendationsFromChannel = function getRecommendationsFromChannel() {
-	        var _this2 = this;
-	
-	        var channel = arguments.length <= 0 || arguments[0] === undefined ? 'recommended' : arguments[0];
-	
-	        var _channel = !channel || typeof channel !== 'string' ? 'recommended' : channel;
-	
-	        var prerequisitePromise = Promise.resolve(true);
-	        // Send any pending ratings we have first, just in case it impacts the results from the upcoming recommendations call
-	        if (this._queuedRatings.length > 0) {
-	            prerequisitePromise = this._sendRatings();
-	        }
-	
-	        return prerequisitePromise.then(this._getChannelRecommendations.bind(this, _channel, null)).then(function (recommendations) {
-	            /* istanbul ignore if: defensive coding; should never really happen */
-	            if (!_this2._channelRecommendations) {
-	                _this2._channelRecommendations = {};
-	            }
-	            _this2._channelRecommendations[_channel] = recommendations;
-	            return recommendations;
-	        });
-	    };
-	
-	    /**
-	     * This synchronous method is intended to be used alongside {@link getRecommendationsFromChannel}.
-	     * Once you have a list of recommendations from a channel and an audio story has been selected to play, this method
-	     * ensures that the correct ratings (actions) will be sent and the flow of audio will continue appropriately with
-	     * the necessary API calls.
-	     * If the recommendation with the given UID can be found, it is delivered immediately to be played.
-	     * Importantly, this function also returns the selected recommendation on a subsequent call to getRecommendation
-	     * (assuming no other ratings are sent in between), so that the consumer can assume that the correct recommendation
-	     * will be played next.
-	     *
-	     * @param {string} channel   The channel used in the original call to `getRecommendationsFromChannel()`
-	     * @param {string} uid       The unique ID of the item to queue up for the user
-	     * @returns {Recommendation}
-	     * @throws {TypeError} If no valid channel or UID is passed in
-	     * @throws {Error} If no recommendations for this channel were previously cached, or if the UID was not found in that cached list
-	     */
-	
-	
-	    Listening.prototype.queueRecommendationFromChannel = function queueRecommendationFromChannel(channel, uid) {
-	        if (!channel || typeof channel !== 'string') {
-	            throw new TypeError('Must pass in a valid channel to queueRecommendationFromChannel()');
-	        }
-	        if (!uid || typeof uid !== 'string') {
-	            throw new TypeError('Must pass in a valid uid to queueRecommendationFromChannel()');
-	        }
-	        if (!(channel in this._channelRecommendations) || this._channelRecommendations[channel].length === 0) {
-	            throw new Error('Results from channel "' + channel + '" are not cached. ' + 'You must call getRecommendationsFromChannel() first.');
-	        }
-	
-	        for (var _iterator = this._channelRecommendations[channel], _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-	            var _ref;
-	
-	            if (_isArray) {
-	                if (_i >= _iterator.length) break;
-	                _ref = _iterator[_i++];
-	            } else {
-	                _i = _iterator.next();
-	                if (_i.done) break;
-	                _ref = _i.value;
-	            }
-	
-	            var recommendation = _ref;
-	
-	            if (recommendation.attributes.uid === uid) {
-	                /* istanbul ignore if: defensive coding; should never really happen */
-	                if (!this._flowRecommendations) {
-	                    this._flowRecommendations = [recommendation];
-	                } else {
-	                    this._flowRecommendations = [recommendation].concat(this._flowRecommendations);
-	                }
-	                return recommendation;
-	            }
-	        }
-	        throw new Error('Unable to find story with uid ' + uid + ' ' + ('in cached list of recommendations from channel "' + channel + '".'));
-	    };
-	
-	    /**
-	     * Retrieves a user's history as an array of recommendation objects.
-	     *
-	     * @returns {Promise<Array<Recommendation>>}
-	     */
-	
-	
-	    Listening.prototype.getHistory = function getHistory() {
-	        var url = _index2.default.getServiceUrl('listening') + '/history';
-	
-	        return _fetchUtil2.default.nprApiFetch(url).then(this._createRecommendations.bind(this));
-	    };
-	
-	    /**
-	     * Resets the current flow for the user. Note that 99% of the time, clients will never have to do this (and it is
-	     * generally considered an undesirable user experience), but in a few rare cases it might be needed. The best example
-	     * is after calling `setUserStation()` if the current recommendation is of `type === 'stationId'`; in this case,
-	     * resetting the flow may be necessary in order to make the user aware that they successfully changed their station.
-	     *
-	     * @example
-	     * let currentRecommendation = nprOneSDK.getRecommendation();
-	     * playAudio(currentRecommendation); // given a hypothetical playAudio() function in your app
-	     * ...
-	     * nprOneSDK.setUserStation(123)
-	     *     .then(() => {
-	     *         if (currentRecommendation.attributes.type === 'stationId') {
-	     *             nprOneSDK.resetFlow()
-	     *                 .then(() => {
-	     *                     currentRecommendation = nprOneSDK.getRecommendation();
-	     *                     playAudio(currentRecommendation);
-	     *                 });
-	     *         }
-	     *     });
-	     *
-	     * @returns {Promise}
-	     */
-	
-	
-	    Listening.prototype.resetFlow = function resetFlow() {
-	        var _this3 = this;
-	
-	        var prerequisitePromise = Promise.resolve(true);
-	
-	        if (this._flowRecommendations && this._flowRecommendations.length) {
-	            // Send any pending ratings we have first, just in case it impacts the results from the upcoming recommendations call
-	            if (this._queuedRatings.length > 0) {
-	                prerequisitePromise = this._sendRatings(false);
-	            }
-	
-	            return prerequisitePromise.then(function () {
-	                _this3._flowRecommendations = [];
-	                _this3._flowFetchActive = false;
-	                _this3._flowPromise = null;
-	
-	                return true;
-	            });
-	        }
-	
-	        return prerequisitePromise;
-	    };
-	
-	    /**
-	     * Advances the flow (retrieves new recommendations from the API).
-	     *
-	     * @param {string} channel
-	     * @param {string} uid
-	     * @returns {Promise<Array<Recommendation>>}
-	     * @throws {Error} If there are no recommendations to return
-	     * @private
-	     */
-	
-	
-	    Listening.prototype._advanceFlowRecommendations = function _advanceFlowRecommendations(channel, uid) {
-	        var _this4 = this;
-	
-	        if (this._flowFetchActive) {
-	            _logger2.default.debug('A listening service API request is already active, ' + 'returning existing promise if one exists.');
-	
-	            /* istanbul ignore else: defensive coding */
-	            if (this._flowPromise) {
-	                return this._flowPromise;
-	            }
-	            /* istanbul ignore next: defensive coding */
-	            return Promise.reject(new Error('No recommendations available. Try again later.'));
-	        }
-	
-	        // if given a UID, we check first to see if we already have the recommendation cached
-	        if (uid && !!this._flowRecommendations && this._flowRecommendations.length > 0) {
-	            var _ret = function () {
-	                var isRecommendationFound = false;
-	                _this4._flowRecommendations.forEach(function (recommendation, index) {
-	                    if (!isRecommendationFound && recommendation.attributes.uid === uid) {
-	                        _this4._flowRecommendations = _this4._flowRecommendations.slice(index);
-	                        isRecommendationFound = true;
-	                    }
-	                });
-	                if (isRecommendationFound) {
-	                    _logger2.default.debug('Recommendation with UID ' + uid + ' was already queued up. ' + 'Returning the cached version instead of making a new API call.');
-	                    return {
-	                        v: Promise.resolve(_this4._flowRecommendations[0])
-	                    };
-	                }
-	            }();
-	
-	            if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-	        }
-	
-	        this._flowFetchActive = true;
-	        return this._getFlowRecommendations(channel, uid).then(function (recommendations) {
-	            _this4._flowFetchActive = false;
-	            if (recommendations.length <= 0) {
-	                _logger2.default.error('API returned no recommendations.');
-	            }
-	            _this4._flowRecommendations = _this4._filterIncomingRecommendations(recommendations);
-	            if (!_this4._flowRecommendations[0]) {
-	                throw new Error('All recommendations exhausted!');
-	            }
-	            return _this4._flowRecommendations[0];
-	        }).catch(function (error) {
-	            _this4._flowFetchActive = false;
-	            throw error;
-	        });
-	    };
-	
-	    /**
-	     * Provide any necessary filter to incoming recommendations if needed
-	     *
-	     * @param {Array<Recommendation>} recommendations
-	     * @private
-	     */
-	
-	
-	    Listening.prototype._filterIncomingRecommendations = function _filterIncomingRecommendations(recommendations) {
-	        if (this._adsBlocked) {
-	            var unfilteredCount = recommendations.length;
-	            var _recommendations = recommendations.filter(function (rec) {
-	                return !rec.isSponsorship();
-	            });
-	            var filteredCount = unfilteredCount - _recommendations.length;
-	            if (filteredCount > 0) {
-	                _logger2.default.debug('Filtered ' + filteredCount + ' ad(s).');
-	            }
-	            return _recommendations;
-	        }
-	
-	        return recommendations;
-	    };
-	
-	    /**
-	     * Private method to facilitate communication of a rated recommendation.
-	     *
-	     * @param {Rating} rating
-	     * @private
-	     */
-	
-	
-	    Listening.prototype._recordRating = function _recordRating(rating) {
-	        if (this._queuedRatingsContainsRating(rating)) {
-	            return; // no need to take action for the same rating twice
-	        }
-	
-	        _logger2.default.debug('Queued rating: ' + rating);
-	        this._queuedRatings.push(rating);
-	
-	        // Only one of these should ever fire, but this is easiest way to do the lookup
-	        for (var _iterator2 = _action2.default.getFlowAdvancingActions(), _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-	            var _ref2;
-	
-	            if (_isArray2) {
-	                if (_i2 >= _iterator2.length) break;
-	                _ref2 = _iterator2[_i2++];
-	            } else {
-	                _i2 = _iterator2.next();
-	                if (_i2.done) break;
-	                _ref2 = _i2.value;
-	            }
-	
-	            var action = _ref2;
-	
-	            if (rating.rating === action) {
-	                this.getRecommendation();
-	                break;
-	            }
-	        }
-	    };
-	
-	    /**
-	     * Request for recommendations from NPR specifically for the flow as opposed to
-	     * other channels which will not change the current flow.
-	     *
-	     * @param {string} channel
-	     * @param {string} uid
-	     * @returns {Promise<Array<Recommendation>>}
-	     */
-	
-	
-	    Listening.prototype._getFlowRecommendations = function _getFlowRecommendations(channel, uid) {
-	        for (var _iterator3 = _action2.default.getFlowAdvancingActions(), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-	            var _ref3;
-	
-	            if (_isArray3) {
-	                if (_i3 >= _iterator3.length) break;
-	                _ref3 = _iterator3[_i3++];
-	            } else {
-	                _i3 = _iterator3.next();
-	                if (_i3.done) break;
-	                _ref3 = _i3.value;
-	            }
-	
-	            var action = _ref3;
-	
-	            if (this._queuedRatingsContainsAction(action)) {
-	                return this._sendRatings();
-	            }
-	        }
-	
-	        if (!uid) {
-	            // Only perform the initial recommendation call if all flow recommendations are exhausted
-	            if (this._flowRecommendations.length > 0) {
-	                return Promise.resolve(this._flowRecommendations);
-	            }
-	        }
-	
-	        return this._getChannelRecommendations(channel, uid);
-	    };
-	
-	    /**
-	     * @param {string} channel
-	     * @param {string} [uid='']
-	     * @returns {Promise<Array<Recommendation>>}
-	     * @private
-	     */
-	
-	
-	    Listening.prototype._getChannelRecommendations = function _getChannelRecommendations(channel) {
-	        var uid = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
-	
-	        var _channel = !channel || typeof channel !== 'string' ? 'npr' : channel;
-	
-	        var url = _index2.default.getServiceUrl('listening') + '/recommendations?channel=' + _channel;
-	        url += uid ? '&sharedMediaId=' + uid : '';
-	
-	        return _fetchUtil2.default.nprApiFetch(url).then(this._createRecommendations.bind(this));
-	    };
-	
-	    /**
-	     * Create recommendation objects from collection doc
-	     *
-	     * @param {Object} json - collection doc
-	     * @returns {Array<Recommendation>}
-	     * @private
-	     */
-	
-	
-	    Listening.prototype._createRecommendations = function _createRecommendations(json) {
-	        var recommendations = (0, _recommendationCreator2.default)(json);
-	        var recordRating = this._recordRating.bind(this);
-	        recommendations.map(function (rec) {
-	            return rec.setRatingReceivedCallback(recordRating);
-	        });
-	
-	        return recommendations;
-	    };
-	
-	    /**
-	     * Send batched ratings
-	     *
-	     * @param {boolean} [recommendMore=true] - determines if additional recommendations should be returned
-	     * @returns {Promise<Array<Recommendation>>}
-	     * @private
-	     */
-	
-	
-	    Listening.prototype._sendRatings = function _sendRatings() {
-	        var _this5 = this;
-	
-	        var recommendMore = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
-	
-	        /* istanbul ignore if: defensive coding */
-	        if (this._queuedRatings.length === 0) {
-	            _logger2.default.error('Things have gone drastically wrong, this: ', this);
-	            return Promise.reject(new Error('No queued ratings to send.'));
-	        }
-	
-	        var url = _index2.default.getServiceUrl('listening');
-	        url += '/ratings?recommend=' + recommendMore.toString();
-	        if (recommendMore) {
-	            var latestRating = this._queuedRatings.slice(-1).pop();
-	            if (latestRating._actionUrl && latestRating.rating === _action2.default.TAPTHRU) {
-	                url = latestRating._actionUrl;
-	            } else {
-	                url = latestRating._recommendationUrl;
-	            }
-	        }
-	
-	        var ratingsToSend = [];
-	        this._queuedRatings.forEach(function (rating) {
-	            /* istanbul ignore else: defensive coding */
-	            if (!rating._hasSent) {
-	                ratingsToSend.push(rating);
-	            }
-	        });
-	
-	        var options = {
-	            method: 'POST',
-	            body: JSON.stringify(ratingsToSend, _rating3.default.privateMemberReplacer)
-	        };
-	
-	        _logger2.default.debug('Sending Ratings: ', ratingsToSend.join(', '));
-	
-	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
-	            // Loop through all queued ratings and mark as sent
-	            ratingsToSend.forEach(function (rating) {
-	                var _rating = rating;
-	                _rating._hasSent = true;
-	                _this5._sentRatings.push(_rating);
-	                _this5._queuedRatings.splice(_this5._queuedRatings.indexOf(_rating), 1);
-	            });
-	            return _this5._createRecommendations(json);
-	        });
-	    };
-	
-	    /**
-	     * Returns whether currently queued ratings contain a specific rating
-	     *
-	     * This is not a deep copy check and relies on mediaId & rating string
-	     *
-	     * @param {Rating} rating
-	     * @returns {boolean}
-	     * @private
-	     */
-	
-	
-	    Listening.prototype._queuedRatingsContainsRating = function _queuedRatingsContainsRating(rating) {
-	        return this._queuedRatings.some(function (qr) {
-	            return qr.rating === rating.rating && qr.mediaId === rating.mediaId;
-	        }); // eslint-disable-line
-	    };
-	
-	    /**
-	     * Returns whether the currently queued ratings contains a specific action
-	     *
-	     * @param {string} action
-	     * @returns {boolean}
-	     * @private
-	     */
-	
-	
-	    Listening.prototype._queuedRatingsContainsAction = function _queuedRatingsContainsAction(action) {
-	        return this._queuedRatings.some(function (qr) {
-	            return qr.rating === action;
-	        });
-	    };
-	
-	    return Listening;
-	}();
-	
-	exports.default = Listening;
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _validator = __webpack_require__(4);
-	
-	var _validator2 = _interopRequireDefault(_validator);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	/**
-	 * A thin wrapper around the raw JSON returned from the authorization server to represent a device code/user code pair
-	 */
-	var DeviceCode = function () {
-	    /**
-	     * @param {Object} json    The decoded JSON object that should be used as the basis for this model
-	     */
-	    function DeviceCode(json) {
-	        _classCallCheck(this, DeviceCode);
-	
-	        this._raw = json;
-	
-	        this._expiryDate = null;
-	        if (!isNaN(this._raw.expires_in)) {
-	            this._expiryDate = new Date(Date.now() + this.ttl);
-	        }
-	    }
-	
-	    /**
-	     * Ensure that the given device code model is valid
-	     *
-	     * @throws {TypeError} if device code model is invalid
-	     */
-	
-	
-	    DeviceCode.prototype.validate = function validate() {
-	        _validator2.default.validateDeviceCode(this._raw);
-	    };
-	
-	    /**
-	     * Returns whether or not this device code/user code pair has expired.
-	     * Note that due to network latency, etc., it's possible that the internally-stored expiry date could be about a
-	     * second or so behind, and so this function is not guaranteed to be perfectly accurate.
-	     *
-	     * @returns {boolean}
-	     */
-	
-	
-	    DeviceCode.prototype.isExpired = function isExpired() {
-	        return this._expiryDate !== null && new Date() >= this._expiryDate;
-	    };
-	
-	    /**
-	     * Returns the user code (8-character alphanumeric string)
-	     *
-	     * @type {string}
-	     */
-	
-	
-	    /**
-	     * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
-	     * In this case, we return the raw JSON string representing the entire object.
-	     *
-	     * @returns {string}
-	     */
-	    DeviceCode.prototype.toString = function toString() {
-	        return JSON.stringify(this._raw);
-	    };
-	
-	    _createClass(DeviceCode, [{
-	        key: 'userCode',
-	        get: function get() {
-	            return this._raw.user_code;
-	        }
-	
-	        /**
-	         * Returns the verification URL (the place where the user should go on their mobile device or laptop to log in)
-	         *
-	         * @type {string}
-	         */
-	
-	    }, {
-	        key: 'verificationUri',
-	        get: function get() {
-	            return this._raw.verification_uri;
-	        }
-	
-	        /**
-	         * Returns the TTL (in milliseconds) until this device code/user code pair expires. The SDK will automatically generate
-	         * a new key pair upon expiry, so consumers of the SDK will generally not have to use this value directly; however,
-	         * you may opt to display on the screen how much time the user has left to log in before a new code is generated.
-	         *
-	         * @type {number}
-	         */
-	
-	    }, {
-	        key: 'ttl',
-	        get: function get() {
-	            return this._raw.expires_in * 1000;
-	        }
-	
-	        /**
-	         * Returns the interval (in milliseconds) at which the client (in this case the SDK) should poll the `POST /token`
-	         * endpoint (or the OAuth proxy that lies in between). Consumers of the SDK should generally not have to use this
-	         * value directly.
-	         *
-	         * @type {number}
-	         */
-	
-	    }, {
-	        key: 'interval',
-	        get: function get() {
-	            return this._raw.interval * 1000;
-	        }
-	    }]);
-	
-	    return DeviceCode;
-	}();
-	
-	exports.default = DeviceCode;
-
-/***/ },
-/* 17 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	__webpack_require__(11);
-	
-	var _urlParse = __webpack_require__(12);
+	var _urlParse = __webpack_require__(13);
 	
 	var _urlParse2 = _interopRequireDefault(_urlParse);
 	
@@ -3712,6 +2198,1527 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Recommendation;
 
 /***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// the whatwg-fetch polyfill installs the fetch() function
+	// on the global object (window or self)
+	//
+	// Return that as the export for use in Webpack, Browserify etc.
+	__webpack_require__(26);
+	module.exports = self.fetch.bind(self);
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var required = __webpack_require__(24)
+	  , lolcation = __webpack_require__(25)
+	  , qs = __webpack_require__(23)
+	  , relativere = /^\/(?!\/)/;
+	
+	/**
+	 * These are the parse instructions for the URL parsers, it informs the parser
+	 * about:
+	 *
+	 * 0. The char it Needs to parse, if it's a string it should be done using
+	 *    indexOf, RegExp using exec and NaN means set as current value.
+	 * 1. The property we should set when parsing this value.
+	 * 2. Indication if it's backwards or forward parsing, when set as number it's
+	 *    the value of extra chars that should be split off.
+	 * 3. Inherit from location if non existing in the parser.
+	 * 4. `toLowerCase` the resulting value.
+	 */
+	var instructions = [
+	  ['#', 'hash'],                        // Extract from the back.
+	  ['?', 'query'],                       // Extract from the back.
+	  ['//', 'protocol', 2, 1, 1],          // Extract from the front.
+	  ['/', 'pathname'],                    // Extract from the back.
+	  ['@', 'auth', 1],                     // Extract from the front.
+	  [NaN, 'host', undefined, 1, 1],       // Set left over value.
+	  [/\:(\d+)$/, 'port'],                 // RegExp the back.
+	  [NaN, 'hostname', undefined, 1, 1]    // Set left over.
+	];
+	
+	/**
+	 * The actual URL instance. Instead of returning an object we've opted-in to
+	 * create an actual constructor as it's much more memory efficient and
+	 * faster and it pleases my CDO.
+	 *
+	 * @constructor
+	 * @param {String} address URL we want to parse.
+	 * @param {Boolean|function} parser Parser for the query string.
+	 * @param {Object} location Location defaults for relative paths.
+	 * @api public
+	 */
+	function URL(address, location, parser) {
+	  if (!(this instanceof URL)) {
+	    return new URL(address, location, parser);
+	  }
+	
+	  var relative = relativere.test(address)
+	    , parse, instruction, index, key
+	    , type = typeof location
+	    , url = this
+	    , i = 0;
+	
+	  //
+	  // The following if statements allows this module two have compatibility with
+	  // 2 different API:
+	  //
+	  // 1. Node.js's `url.parse` api which accepts a URL, boolean as arguments
+	  //    where the boolean indicates that the query string should also be parsed.
+	  //
+	  // 2. The `URL` interface of the browser which accepts a URL, object as
+	  //    arguments. The supplied object will be used as default values / fall-back
+	  //    for relative paths.
+	  //
+	  if ('object' !== type && 'string' !== type) {
+	    parser = location;
+	    location = null;
+	  }
+	
+	  if (parser && 'function' !== typeof parser) {
+	    parser = qs.parse;
+	  }
+	
+	  location = lolcation(location);
+	
+	  for (; i < instructions.length; i++) {
+	    instruction = instructions[i];
+	    parse = instruction[0];
+	    key = instruction[1];
+	
+	    if (parse !== parse) {
+	      url[key] = address;
+	    } else if ('string' === typeof parse) {
+	      if (~(index = address.indexOf(parse))) {
+	        if ('number' === typeof instruction[2]) {
+	          url[key] = address.slice(0, index);
+	          address = address.slice(index + instruction[2]);
+	        } else {
+	          url[key] = address.slice(index);
+	          address = address.slice(0, index);
+	        }
+	      }
+	    } else if (index = parse.exec(address)) {
+	      url[key] = index[1];
+	      address = address.slice(0, address.length - index[0].length);
+	    }
+	
+	    url[key] = url[key] || (instruction[3] || ('port' === key && relative) ? location[key] || '' : '');
+	
+	    //
+	    // Hostname, host and protocol should be lowercased so they can be used to
+	    // create a proper `origin`.
+	    //
+	    if (instruction[4]) {
+	      url[key] = url[key].toLowerCase();
+	    }
+	  }
+	
+	  //
+	  // Also parse the supplied query string in to an object. If we're supplied
+	  // with a custom parser as function use that instead of the default build-in
+	  // parser.
+	  //
+	  if (parser) url.query = parser(url.query);
+	
+	  //
+	  // We should not add port numbers if they are already the default port number
+	  // for a given protocol. As the host also contains the port number we're going
+	  // override it with the hostname which contains no port number.
+	  //
+	  if (!required(url.port, url.protocol)) {
+	    url.host = url.hostname;
+	    url.port = '';
+	  }
+	
+	  //
+	  // Parse down the `auth` for the username and password.
+	  //
+	  url.username = url.password = '';
+	  if (url.auth) {
+	    instruction = url.auth.split(':');
+	    url.username = instruction[0] || '';
+	    url.password = instruction[1] || '';
+	  }
+	
+	  //
+	  // The href is just the compiled result.
+	  //
+	  url.href = url.toString();
+	}
+	
+	/**
+	 * This is convenience method for changing properties in the URL instance to
+	 * insure that they all propagate correctly.
+	 *
+	 * @param {String} prop Property we need to adjust.
+	 * @param {Mixed} value The newly assigned value.
+	 * @returns {URL}
+	 * @api public
+	 */
+	URL.prototype.set = function set(part, value, fn) {
+	  var url = this;
+	
+	  if ('query' === part) {
+	    if ('string' === typeof value && value.length) {
+	      value = (fn || qs.parse)(value);
+	    }
+	
+	    url[part] = value;
+	  } else if ('port' === part) {
+	    url[part] = value;
+	
+	    if (!required(value, url.protocol)) {
+	      url.host = url.hostname;
+	      url[part] = '';
+	    } else if (value) {
+	      url.host = url.hostname +':'+ value;
+	    }
+	  } else if ('hostname' === part) {
+	    url[part] = value;
+	
+	    if (url.port) value += ':'+ url.port;
+	    url.host = value;
+	  } else if ('host' === part) {
+	    url[part] = value;
+	
+	    if (/\:\d+/.test(value)) {
+	      value = value.split(':');
+	      url.hostname = value[0];
+	      url.port = value[1];
+	    }
+	  } else {
+	    url[part] = value;
+	  }
+	
+	  url.href = url.toString();
+	  return url;
+	};
+	
+	/**
+	 * Transform the properties back in to a valid and full URL string.
+	 *
+	 * @param {Function} stringify Optional query stringify function.
+	 * @returns {String}
+	 * @api public
+	 */
+	URL.prototype.toString = function toString(stringify) {
+	  if (!stringify || 'function' !== typeof stringify) stringify = qs.stringify;
+	
+	  var query
+	    , url = this
+	    , result = url.protocol +'//';
+	
+	  if (url.username) {
+	    result += url.username;
+	    if (url.password) result += ':'+ url.password;
+	    result += '@';
+	  }
+	
+	  result += url.hostname;
+	  if (url.port) result += ':'+ url.port;
+	
+	  result += url.pathname;
+	
+	  query = 'object' === typeof url.query ? stringify(url.query) : url.query;
+	  if (query) result += '?' !== query.charAt(0) ? '?'+ query : query;
+	
+	  if (url.hash) result += url.hash;
+	
+	  return result;
+	};
+	
+	//
+	// Expose the URL parser and some additional properties that might be useful for
+	// others.
+	//
+	URL.qs = qs;
+	URL.location = lolcation;
+	module.exports = URL;
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _index = __webpack_require__(2);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	var _accessToken = __webpack_require__(9);
+	
+	var _accessToken2 = _interopRequireDefault(_accessToken);
+	
+	var _deviceCode = __webpack_require__(17);
+	
+	var _deviceCode2 = _interopRequireDefault(_deviceCode);
+	
+	var _logger = __webpack_require__(1);
+	
+	var _logger2 = _interopRequireDefault(_logger);
+	
+	var _fetchUtil = __webpack_require__(3);
+	
+	var _fetchUtil2 = _interopRequireDefault(_fetchUtil);
+	
+	var _apiError = __webpack_require__(8);
+	
+	var _apiError2 = _interopRequireDefault(_apiError);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	/**
+	 * Simulates a delay by wrapping a Promise around JavaScript's native `setTimeout` function.
+	 *
+	 * @param {number} ms The amount of time to delay for, in milliseconds
+	 * @returns {Promise}
+	 * @private
+	 */
+	var delay = function delay(ms) {
+	    return new Promise(function (r) {
+	        return setTimeout(r, ms);
+	    });
+	};
+	
+	/**
+	 * Encapsulates all of the logic for communication with the [Authorization Service](http://dev.npr.org/api/#/authorization)
+	 * in the NPR One API.
+	 *
+	 * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
+	 * functions in the main {@link NprOneSDK} class.
+	 *
+	 * @example <caption>Rudimentary example of implementing the Device Code flow</caption>
+	 * const nprOneSDK = new NprOneSDK();
+	 * nprOneSDK.config = { ... };
+	 * const scopes = ['identity.readonly', 'identity.write', 'listening.readonly', 'listening.write'];
+	 * nprOneSDK.getDeviceCode(scopes)
+	 *     .then((deviceCodeModel) => {
+	 *         // display code to user on the screen
+	 *         nprOneSDK.pollDeviceCode()
+	 *             .then(() => {
+	 *                 nprOneSDK.getRecommendation();
+	 *             });
+	 *      })
+	 *     .catch(() => {
+	 *         nprOneSDK.getDeviceCode(scopes).then(...); // repeat ad infinitum until `pollDeviceCode()` resolves successfully
+	 *         // In actual use, it may be preferable to refactor this into a recursive function
+	 *     ));
+	 */
+	
+	var Authorization = function () {
+	    /**
+	     * Initializes the controller class with private variables needed later on.
+	     */
+	    function Authorization() {
+	        _classCallCheck(this, Authorization);
+	
+	        /** @type {null|DeviceCode} The device code model for the currently-active device code grant
+	         * @private */
+	        this._activeDeviceCodeModel = null;
+	    }
+	
+	    /**
+	     * Attempts to swap the existing access token for a new one using the refresh token endpoint in the OAuth proxy
+	     *
+	     * @param {number} [numRetries=0]   The number of times this function has been tried. Will retry up to 3 times.
+	     * @returns {Promise<AccessToken>}
+	     * @throws {TypeError} if an OAuth proxy is not configured or no access token is set
+	     */
+	
+	
+	    Authorization.refreshExistingAccessToken = function refreshExistingAccessToken() {
+	        var _this = this;
+	
+	        var numRetries = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+	
+	        if (!_index2.default.config.authProxyBaseUrl) {
+	            throw new TypeError('OAuth proxy not configured. Unable to refresh the access token.');
+	        }
+	        if (!_index2.default.accessToken) {
+	            throw new TypeError('An access token must be set in order to attempt a refresh.');
+	        }
+	
+	        _logger2.default.debug('Access token appears to have expired. Attempting to generate a fresh one.');
+	
+	        var url = '' + _index2.default.config.authProxyBaseUrl + _index2.default.config.refreshTokenPath;
+	        var options = {
+	            method: 'POST',
+	            credentials: 'include'
+	        };
+	
+	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
+	            var tokenModel = new _accessToken2.default(json);
+	            tokenModel.validate(); // throws exception if invalid
+	            _logger2.default.debug('Access token refresh was successful, new token:', tokenModel.toString());
+	            _index2.default.accessToken = tokenModel.token;
+	            return tokenModel; // never directly consumed, but useful for testing
+	        }).catch(function (err) {
+	            _logger2.default.debug('Error generating a new token in refreshExistingAccessToken()');
+	            _logger2.default.debug(err);
+	
+	            if (numRetries < 2) {
+	                _logger2.default.debug('refreshExistingAccessToken() will make another attempt');
+	                return delay(5000).then(Authorization.refreshExistingAccessToken.bind(_this, numRetries + 1));
+	            }
+	
+	            // rethrow
+	            _logger2.default.debug('refreshExistingAccessToken() has made too many attempts, aborting');
+	            return Promise.reject(err);
+	        });
+	    };
+	
+	    /**
+	     * Logs out the user, revoking their access token from the authorization server and removing the refresh token from
+	     * the secure storage in the backend proxy (if a backend proxy is configured). Note that the consuming client is
+	     * still responsible for removing the access token anywhere else it might be stored outside of this SDK (e.g. in
+	     * localStorage or elsewhere in application memory).
+	     *
+	     * @returns {Promise}
+	     * @throws {TypeError} if an OAuth proxy is not configured or no access token is currently set
+	     */
+	
+	
+	    Authorization.prototype.logout = function logout() {
+	        if (!_index2.default.accessToken) {
+	            throw new TypeError('An access token must be set in order to attempt a logout.');
+	        }
+	        if (!_index2.default.config.authProxyBaseUrl) {
+	            throw new TypeError('OAuth proxy not configured. Unable to securely log out the user.');
+	        }
+	
+	        var url = '' + _index2.default.config.authProxyBaseUrl + _index2.default.config.logoutPath;
+	        var options = {
+	            method: 'POST',
+	            credentials: 'include',
+	            body: 'token=' + _index2.default.accessToken,
+	            headers: {
+	                Accept: 'application/json, application/xml, text/plain, text/html, *.*',
+	                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+	            }
+	        };
+	
+	        return fetch(url, options) // we cannot use FetchUtil.nprApiFetch() here because the success response has an empty body
+	        .then(function (response) {
+	            if (response.ok) {
+	                _index2.default.accessToken = '';
+	                return true;
+	            }
+	            return _fetchUtil2.default.formatErrorResponse(response);
+	        });
+	    };
+	
+	    /**
+	     * Uses the OAuth proxy to start a `device_code` grant flow. This function _just_ makes an API call that produces a
+	     * device code/user code pair, and should be followed up with a call to {@link pollDeviceCode} in order to complete
+	     * the process.
+	     *
+	     * Note that device code/user code pairs do expire after a set time, so the consuming client may need to call these
+	     * 2 functions multiple times before the user logs in. It is a good idea to encapsulate them in a function which
+	     * can be called recursively on errors; see the example below for details.
+	     *
+	     * @example
+	     * function logInViaDeviceCode(scopes) {
+	     *     nprOneSDK.getDeviceCode(scopes)
+	     *         .then((deviceCodeModel) => {
+	     *             displayCodeToUser(deviceCodeModel); // display code to user on the screen
+	     *             nprOneSDK.pollDeviceCode()
+	     *                 .then(() => {
+	     *                     startPlayingAudio(); // you're now ready to call `nprOneSDK.getRecommendation()` elsewhere in your app
+	     *                 }).catch(logInViaDeviceCode.bind(this, scopes)); // recursively call this function until the user logs in
+	     *         });
+	     * }
+	     *
+	     * @see http://dev.npr.org/guide/services/authorization/#device_code
+	     *
+	     * @param {Array<string>} [scopes=[]]   The scopes (as strings) that should be associated with the resulting access token
+	     * @returns {Promise<DeviceCode>}
+	     * @throws {TypeError} if an OAuth proxy is not configured
+	     */
+	
+	
+	    Authorization.prototype.getDeviceCode = function getDeviceCode() {
+	        var _this2 = this;
+	
+	        var scopes = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	
+	        if (!_index2.default.config.authProxyBaseUrl) {
+	            throw new TypeError('OAuth proxy not configured. Unable to use the device code.');
+	        }
+	
+	        var url = '' + _index2.default.config.authProxyBaseUrl + _index2.default.config.newDeviceCodePath;
+	        var options = {
+	            method: 'POST',
+	            credentials: 'include',
+	            body: 'scope=' + encodeURIComponent(scopes.join(' ')).replace('%20', '+'),
+	            headers: {
+	                Accept: 'application/json, application/xml, text/plain, text/html, *.*',
+	                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+	            }
+	        };
+	
+	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
+	            var deviceCodeModel = new _deviceCode2.default(json);
+	            deviceCodeModel.validate(); // throws exception if invalid
+	            _this2._activeDeviceCodeModel = deviceCodeModel;
+	            return deviceCodeModel;
+	        });
+	    };
+	
+	    /**
+	     * Uses the OAuth proxy to poll the access token endpoint as part of a `device_code` grant flow. This endpoint will
+	     * continue to poll until the user successfully logs in, _or_ the user goes to log in but then denies the request
+	     * for access to their account by this client, _or_ the device code/user code pair expires, whichever comes first.
+	     * In the first case, it will automatically set {@link NPROneSDK.accessToken} to the newly-generated access token,
+	     * and the consuming client can proceed to play recommendations immediately; in the other 2 cases, it will return
+	     * a Promise that rejects with a debugging message, but the next course of action would generally be to call
+	     * {@link getDeviceCode} again and start the whole process from the top.
+	     *
+	     * @example
+	     * function logInViaDeviceCode(scopes) {
+	     *     nprOneSDK.getDeviceCode(scopes)
+	     *         .then((deviceCodeModel) => {
+	     *             displayCodeToUser(deviceCodeModel); // display code to user on the screen
+	     *             nprOneSDK.pollDeviceCode()
+	     *                 .then(() => {
+	     *                     startPlayingAudio(); // you're now ready to call `nprOneSDK.getRecommendation()` elsewhere in your app
+	     *                 }).catch(logInViaDeviceCode.bind(this, scopes)); // recursively call this function until the user logs in
+	     *         });
+	     * }
+	     *
+	     * @see http://dev.npr.org/guide/services/authorization/#device_code
+	     *
+	     * @returns {Promise<AccessToken>}
+	     * @throws {TypeError} if an OAuth proxy is not configured or `getDeviceCode()` was not previously called
+	     */
+	
+	
+	    Authorization.prototype.pollDeviceCode = function pollDeviceCode() {
+	        _logger2.default.debug('Starting to poll device code. Will poll until user logs in or code expires'); // eslint-disable-line max-len
+	
+	        if (!_index2.default.config.authProxyBaseUrl) {
+	            throw new TypeError('OAuth proxy not configured. Unable to use the device code.');
+	        }
+	        if (!this._activeDeviceCodeModel) {
+	            throw new TypeError('No active device code set. Please call getDeviceCode() before calling this function.'); // eslint-disable-line max-len
+	        }
+	
+	        return this._pollDeviceCodeOnce();
+	    };
+	
+	    /**
+	     * Polls the device code once. If the result is an error of type `'authorization_pending'`, this will recurse,
+	     * calling itself after a delay equal to the interval specified in the original call to {@link getDeviceCode}.
+	     *
+	     * @returns {Promise<AccessToken>}
+	     * @private
+	     */
+	
+	
+	    Authorization.prototype._pollDeviceCodeOnce = function _pollDeviceCodeOnce() {
+	        var _this3 = this;
+	
+	        _logger2.default.debug('Polling device code once');
+	
+	        if (this._activeDeviceCodeModel.isExpired()) {
+	            return Promise.reject('The device code has expired. Please generate a new one before continuing.'); // eslint-disable-line max-len
+	        }
+	
+	        var url = '' + _index2.default.config.authProxyBaseUrl + _index2.default.config.pollDeviceCodePath;
+	        var options = {
+	            method: 'POST',
+	            credentials: 'include'
+	        };
+	
+	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
+	            _logger2.default.debug('Device code poll returned successfully! An access token was returned.'); // eslint-disable-line max-len
+	
+	            var tokenModel = new _accessToken2.default(json);
+	            tokenModel.validate(); // throws exception if invalid
+	            _index2.default.accessToken = tokenModel.token;
+	            return tokenModel; // never directly consumed, but useful for testing
+	        }).catch(function (error) {
+	            if (error instanceof _apiError2.default) {
+	                if (error.statusCode === 401) {
+	                    if (error.json.type === 'authorization_pending') {
+	                        return delay(_this3._activeDeviceCodeModel.interval).then(_this3._pollDeviceCodeOnce.bind(_this3));
+	                    }
+	                    _logger2.default.debug('The response was a 401, but not of type "authorization_pending". The user presumably denied the app access; rejecting.'); // eslint-disable-line max-len
+	                } else {
+	                    _logger2.default.debug('Response was not a 401. The device code has probably expired; rejecting.'); // eslint-disable-line max-len
+	                }
+	            } else {
+	                _logger2.default.debug('An unknown type of error was received. Unsure of how to respond; rejecting.'); // eslint-disable-line max-len
+	            }
+	            return Promise.reject(error);
+	        });
+	    };
+	
+	    return Authorization;
+	}();
+	
+	exports.default = Authorization;
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _index = __webpack_require__(2);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	var _fetchUtil = __webpack_require__(3);
+	
+	var _fetchUtil2 = _interopRequireDefault(_fetchUtil);
+	
+	var _user = __webpack_require__(19);
+	
+	var _user2 = _interopRequireDefault(_user);
+	
+	var _logger = __webpack_require__(1);
+	
+	var _logger2 = _interopRequireDefault(_logger);
+	
+	var _accessToken = __webpack_require__(9);
+	
+	var _accessToken2 = _interopRequireDefault(_accessToken);
+	
+	var _stationFinder = __webpack_require__(7);
+	
+	var _stationFinder2 = _interopRequireDefault(_stationFinder);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	/**
+	 * Encapsulates all of the logic for communication with the [Identity Service](http://dev.npr.org/api/#/identity)
+	 * in the NPR One API.
+	 *
+	 * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
+	 * functions in the main {@link NprOneSDK} class.
+	 *
+	 * @example <caption>How to change a user's station using station search</caption>
+	 * const nprOneSDK = new NprOneSDK();
+	 * nprOneSDK.config = { ... };
+	 * nprOneSDK.getUser() // optional; verifies that you have a logged-in user
+	 *     .then(() => {
+	 *        return nprOneSDK.searchStations('wnyc');
+	 *     })
+	 *     .then((stations) => {
+	 *         const stationId = stations[0].id; // in reality, you'd probably have the user select a station, see the StationFinder for detail
+	 *         nprOneSDK.setUserStation(stationId);
+	 *     });
+	 */
+	var Identity = function () {
+	    function Identity() {
+	        _classCallCheck(this, Identity);
+	    }
+	
+	    /**
+	     * Gets user metadata, such as first and last name, programs they have shown an affinity for, and preferred NPR One
+	     * station.
+	     *
+	     * @returns {Promise<User>}
+	     */
+	    Identity.prototype.getUser = function getUser() {
+	        var url = _index2.default.getServiceUrl('identity') + '/user';
+	
+	        return _fetchUtil2.default.nprApiFetch(url).then(function (json) {
+	            return new _user2.default(json);
+	        });
+	    };
+	
+	    /**
+	     * Sets a user's favorite NPR station. Note that this function will first validate whether the station with the given
+	     * ID actually exists, and will return a promise that rejects if not.
+	     *
+	     * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+	     * @returns {Promise<User>}
+	     */
+	
+	
+	    Identity.prototype.setUserStation = function setUserStation(stationId) {
+	        return _stationFinder2.default.validateStation(stationId).then(function () {
+	            var url = _index2.default.getServiceUrl('identity') + '/stations';
+	            var options = {
+	                method: 'PUT',
+	                body: JSON.stringify([stationId])
+	            };
+	            return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
+	                return new _user2.default(json);
+	            });
+	        }).catch(function (e) {
+	            _logger2.default.debug('setUserStation failed, message: ', e);
+	            return Promise.reject(e);
+	        });
+	    };
+	
+	    /**
+	     * Indicates that the user wishes to follow, or subscribe to, the show, program, or podcast with the given numeric
+	     * ID. Followed shows will appear more frequently in a user's list of recommendations.
+	     *
+	     * Note that at this time, because we have not yet implemented search in this SDK, there is no way to retrieve a list
+	     * of aggregation (show) IDs through this SDK. You can either add functionality to your own app that makes an API call
+	     * to `GET https://api.npr.org/listening/v2/search/recommendations` with a program name or other search parameters, or
+	     * wait until we implement search in this SDK (hopefully later this year).
+	     *
+	     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+	     * @returns {Promise<User>}
+	     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+	     */
+	
+	
+	    Identity.prototype.followShow = function followShow(aggregationId) {
+	        return this._setFollowingStatusForShow(aggregationId, true);
+	    };
+	
+	    /**
+	     * Indicates that the user wishes to unfollow, or unsubscribe from, the show, program, or podcast with the given
+	     * numeric ID. See {@link followShow} for more information.
+	     *
+	     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+	     * @returns {Promise<User>}
+	     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+	     */
+	
+	
+	    Identity.prototype.unfollowShow = function unfollowShow(aggregationId) {
+	        return this._setFollowingStatusForShow(aggregationId, false);
+	    };
+	
+	    /**
+	     * Primary workhorse for {@link followShow} and {@link unfollowShow}.
+	     *
+	     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+	     * @param {boolean} shouldFollow           Whether or not the aggregation should be followed (`true`) or unfollowed (`false`)
+	     * @returns {Promise<User>}
+	     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+	     * @private
+	     */
+	
+	
+	    Identity.prototype._setFollowingStatusForShow = function _setFollowingStatusForShow(aggregationId, shouldFollow) {
+	        var n = parseInt(aggregationId, 10);
+	        if (isNaN(n) || !isFinite(n)) {
+	            throw new TypeError('Aggregation (show) ID must be an integer greater than 0');
+	        }
+	
+	        var data = {
+	            id: aggregationId,
+	            following: shouldFollow
+	        };
+	
+	        var url = _index2.default.getServiceUrl('identity') + '/following';
+	        var options = {
+	            method: 'POST',
+	            body: JSON.stringify(data)
+	        };
+	
+	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
+	            return new _user2.default(json);
+	        });
+	    };
+	
+	    /**
+	     * Creates a temporary user from the NPR One API and use that user's access token for
+	     * subsequent API requests.
+	     *
+	     * Caution: most clients are not authorized to use temporary users.
+	     *
+	     * @returns {Promise<User>}
+	     * @throws {TypeError} if an OAuth proxy is not configured or no client ID is set
+	     */
+	
+	
+	    Identity.prototype.createTemporaryUser = function createTemporaryUser() {
+	        if (!_index2.default.config.authProxyBaseUrl) {
+	            throw new TypeError('OAuth proxy not configured. Unable to create temporary users.');
+	        }
+	        if (!_index2.default.config.clientId) {
+	            throw new TypeError('A client ID must be set for temporary user requests.');
+	        }
+	
+	        var url = '' + _index2.default.config.authProxyBaseUrl + _index2.default.config.tempUserPath;
+	        var glueCharacter = url.indexOf('?') >= 0 ? '&' : '?';
+	        url = '' + url + glueCharacter + 'clientId=' + _index2.default.config.clientId;
+	
+	        var options = {
+	            credentials: 'include'
+	        };
+	
+	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
+	            var tokenModel = new _accessToken2.default(json);
+	            tokenModel.validate(); // throws exception if invalid
+	            _index2.default.accessToken = tokenModel.token;
+	            return tokenModel; // never directly consumed, but useful for testing
+	        });
+	    };
+	
+	    return Identity;
+	}();
+	
+	exports.default = Identity;
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
+	var _index = __webpack_require__(2);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	var _recommendationCreator = __webpack_require__(20);
+	
+	var _recommendationCreator2 = _interopRequireDefault(_recommendationCreator);
+	
+	var _action = __webpack_require__(5);
+	
+	var _action2 = _interopRequireDefault(_action);
+	
+	var _rating2 = __webpack_require__(10);
+	
+	var _rating3 = _interopRequireDefault(_rating2);
+	
+	var _logger = __webpack_require__(1);
+	
+	var _logger2 = _interopRequireDefault(_logger);
+	
+	var _fetchUtil = __webpack_require__(3);
+	
+	var _fetchUtil2 = _interopRequireDefault(_fetchUtil);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	/**
+	 * Encapsulates all of the logic for communication with the [Listening Service](http://dev.npr.org/api/#/listening)
+	 * in the NPR One API.
+	 *
+	 * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
+	 * functions in the main {@link NprOneSDK} class.
+	 *
+	 * @example <caption>Implementing a rudimentary 'Explore' view</caption>
+	 * const nprOneSDK = new NprOneSDK();
+	 * nprOneSDK.config = { ... };
+	 * nprOneSDK.getRecommendationsFromChannel('recommended')
+	 *     .then((recommendations) => {
+	 *         // in a real app, the user would select a piece; here we've simulated them selecting one at index 3
+	 *         const selectedRecommendationId = recommendations[3].attributes.uid;
+	 *         return nprOneSDK.queueRecommendationFromChannel('recommended', selectedRecommendationId);
+	 *      })
+	 *     .then(() => {
+	 *         nprOneSDK.getRecommendation(); // proceed to play the recommendation
+	 *     });
+	 */
+	var Listening = function () {
+	    /**
+	     * Initializes the controller class with private variables needed later on.
+	     */
+	    function Listening() {
+	        var _this = this;
+	
+	        _classCallCheck(this, Listening);
+	
+	        /** @type {Rating[]} Ratings which are queued to be sent to NPR
+	         * @private */
+	        this._queuedRatings = [];
+	        /** @type {Rating[]} Ratings which have already been sent, for debugging purposes
+	         * @private */
+	        this._sentRatings = [];
+	        /** @type {Array<Recommendation>} Unrated recommendations which represent the latest
+	         *  recommendations from the API, relies heavily upon numeric key/index
+	         * @private */
+	        this._flowRecommendations = [];
+	        /** @type {boolean} Flow fetches need to be synchronous
+	         * @private */
+	        this._flowFetchActive = false;
+	        /** @type {Promise<Recommendation>}
+	         * @private */
+	        this._flowPromise = null;
+	        /** @type {boolean} Whether ads are blocked by the browser.
+	         * @private */
+	        this._adsBlocked = false;
+	        /** @type {Object} Cached recommendations from channels other than the main flow channel of 'npr'.
+	         * A key-value store where the key is the name of the channel and the value is an array of recommendations.
+	         * @private */
+	        this._channelRecommendations = {};
+	
+	        // Ad-blocker detection, used when/if we encounter sponsorship in the flow
+	        fetch('http://adswizz.com', { mode: 'no-cors' }).catch(function () {
+	            fetch('http://delivery-s3.adswizz.com', { mode: 'no-cors' }).catch(function (e) {
+	                _logger2.default.debug('Ads are blocked. ', e);
+	                _this._adsBlocked = true;
+	            });
+	        });
+	    }
+	
+	    /**
+	     * Get a recommendation from NPR.
+	     *
+	     * Caution: the resulting recommendation may have been returned previously and must be checked
+	     * to ensure the same recommendation is not played twice.
+	     *
+	     * @param {string} [uid='']           Optional; a UID for a specific recommendation to play. In 99% of use cases, this is not needed.
+	     * @param {string} [channel='npr']    Optional; a channel to pull the recommendation from; the main flow channel of `npr` is used as the default. In 99% of use cases, this does not need to be changed.
+	     * @returns {Promise<Recommendation>}
+	     */
+	
+	
+	    Listening.prototype.getRecommendation = function getRecommendation() {
+	        var uid = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+	        var channel = arguments.length <= 1 || arguments[1] === undefined ? 'npr' : arguments[1];
+	
+	        this._flowPromise = this._advanceFlowRecommendations(channel, uid);
+	
+	        return this._flowPromise;
+	    };
+	
+	    /**
+	     * Return possible recommendations that may come next in the flow. Useful for
+	     * pre-caching audio and displaying upcoming recommendations.
+	     *
+	     * Recommendations returned are not guaranteed to always come next in the flow.
+	     *
+	     * @experimental
+	     * @param {string} [channel='npr']   A channel to pull the next recommendation from
+	     * @returns {Promise<Array<Recommendation>>}
+	     */
+	
+	
+	    Listening.prototype.getUpcomingFlowRecommendations = function getUpcomingFlowRecommendations() {
+	        var channel = arguments.length <= 0 || arguments[0] === undefined ? 'npr' : arguments[0];
+	
+	        if (this._flowRecommendations.length > 0) {
+	            return Promise.resolve(this._flowRecommendations);
+	        }
+	
+	        return this._getChannelRecommendations(channel);
+	    };
+	
+	    /**
+	     * Makes a new API call to get a list of recommendations. This is NOT intended for regular piece-by-piece consumption;
+	     * this function is designed to be used for consumers implementing e.g. the Explore view from the NPR One apps,
+	     * where the client displays a list or grid of content, and the user can select a piece to listen to next.
+	     * It is hard-coded to use the "recommended" channel by default, although other channels can be used also. That said,
+	     * you should really never use this with channel "npr" (the main flow channel), as this is not how that content is
+	     * intended to be consumed.
+	     *
+	     * @param {string} [channel='recommended']   A non-flow (i.e. non-`npr`) channel to retrieve a list of recommendations from
+	     * @returns {Promise<Array<Recommendation>>}
+	     */
+	
+	
+	    Listening.prototype.getRecommendationsFromChannel = function getRecommendationsFromChannel() {
+	        var _this2 = this;
+	
+	        var channel = arguments.length <= 0 || arguments[0] === undefined ? 'recommended' : arguments[0];
+	
+	        var _channel = !channel || typeof channel !== 'string' ? 'recommended' : channel;
+	
+	        var prerequisitePromise = Promise.resolve(true);
+	        // Send any pending ratings we have first, just in case it impacts the results from the upcoming recommendations call
+	        if (this._queuedRatings.length > 0) {
+	            prerequisitePromise = this._sendRatings();
+	        }
+	
+	        return prerequisitePromise.then(this._getChannelRecommendations.bind(this, _channel, null)).then(function (recommendations) {
+	            /* istanbul ignore if: defensive coding; should never really happen */
+	            if (!_this2._channelRecommendations) {
+	                _this2._channelRecommendations = {};
+	            }
+	            _this2._channelRecommendations[_channel] = recommendations;
+	            return recommendations;
+	        });
+	    };
+	
+	    /**
+	     * This synchronous method is intended to be used alongside {@link getRecommendationsFromChannel}.
+	     * Once you have a list of recommendations from a channel and an audio story has been selected to play, this method
+	     * ensures that the correct ratings (actions) will be sent and the flow of audio will continue appropriately with
+	     * the necessary API calls.
+	     * If the recommendation with the given UID can be found, it is delivered immediately to be played.
+	     * Importantly, this function also returns the selected recommendation on a subsequent call to getRecommendation
+	     * (assuming no other ratings are sent in between), so that the consumer can assume that the correct recommendation
+	     * will be played next.
+	     *
+	     * @param {string} channel   The channel used in the original call to `getRecommendationsFromChannel()`
+	     * @param {string} uid       The unique ID of the item to queue up for the user
+	     * @returns {Recommendation}
+	     * @throws {TypeError} If no valid channel or UID is passed in
+	     * @throws {Error} If no recommendations for this channel were previously cached, or if the UID was not found in that cached list
+	     */
+	
+	
+	    Listening.prototype.queueRecommendationFromChannel = function queueRecommendationFromChannel(channel, uid) {
+	        if (!channel || typeof channel !== 'string') {
+	            throw new TypeError('Must pass in a valid channel to queueRecommendationFromChannel()');
+	        }
+	        if (!uid || typeof uid !== 'string') {
+	            throw new TypeError('Must pass in a valid uid to queueRecommendationFromChannel()');
+	        }
+	        if (!(channel in this._channelRecommendations) || this._channelRecommendations[channel].length === 0) {
+	            throw new Error('Results from channel "' + channel + '" are not cached. ' + 'You must call getRecommendationsFromChannel() first.');
+	        }
+	
+	        for (var _iterator = this._channelRecommendations[channel], _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+	            var _ref;
+	
+	            if (_isArray) {
+	                if (_i >= _iterator.length) break;
+	                _ref = _iterator[_i++];
+	            } else {
+	                _i = _iterator.next();
+	                if (_i.done) break;
+	                _ref = _i.value;
+	            }
+	
+	            var recommendation = _ref;
+	
+	            if (recommendation.attributes.uid === uid) {
+	                /* istanbul ignore if: defensive coding; should never really happen */
+	                if (!this._flowRecommendations) {
+	                    this._flowRecommendations = [recommendation];
+	                } else {
+	                    this._flowRecommendations = [recommendation].concat(this._flowRecommendations);
+	                }
+	                return recommendation;
+	            }
+	        }
+	        throw new Error('Unable to find story with uid ' + uid + ' ' + ('in cached list of recommendations from channel "' + channel + '".'));
+	    };
+	
+	    /**
+	     * Retrieves a user's history as an array of recommendation objects.
+	     *
+	     * @returns {Promise<Array<Recommendation>>}
+	     */
+	
+	
+	    Listening.prototype.getHistory = function getHistory() {
+	        var url = _index2.default.getServiceUrl('listening') + '/history';
+	
+	        return _fetchUtil2.default.nprApiFetch(url).then(this._createRecommendations.bind(this));
+	    };
+	
+	    /**
+	     * Resets the current flow for the user. Note that 99% of the time, clients will never have to do this (and it is
+	     * generally considered an undesirable user experience), but in a few rare cases it might be needed. The best example
+	     * is after calling `setUserStation()` if the current recommendation is of `type === 'stationId'`; in this case,
+	     * resetting the flow may be necessary in order to make the user aware that they successfully changed their station.
+	     *
+	     * @example
+	     * let currentRecommendation = nprOneSDK.getRecommendation();
+	     * playAudio(currentRecommendation); // given a hypothetical playAudio() function in your app
+	     * ...
+	     * nprOneSDK.setUserStation(123)
+	     *     .then(() => {
+	     *         if (currentRecommendation.attributes.type === 'stationId') {
+	     *             nprOneSDK.resetFlow()
+	     *                 .then(() => {
+	     *                     currentRecommendation = nprOneSDK.getRecommendation();
+	     *                     playAudio(currentRecommendation);
+	     *                 });
+	     *         }
+	     *     });
+	     *
+	     * @returns {Promise}
+	     */
+	
+	
+	    Listening.prototype.resetFlow = function resetFlow() {
+	        var _this3 = this;
+	
+	        var prerequisitePromise = Promise.resolve(true);
+	
+	        if (this._flowRecommendations && this._flowRecommendations.length) {
+	            // Send any pending ratings we have first, just in case it impacts the results from the upcoming recommendations call
+	            if (this._queuedRatings.length > 0) {
+	                prerequisitePromise = this._sendRatings(false);
+	            }
+	
+	            return prerequisitePromise.then(function () {
+	                _this3._flowRecommendations = [];
+	                _this3._flowFetchActive = false;
+	                _this3._flowPromise = null;
+	
+	                return true;
+	            });
+	        }
+	
+	        return prerequisitePromise;
+	    };
+	
+	    /**
+	     * Given a valid JSON recommendation object, the flow will advance as
+	     * normal from this recommendation. This method has been created for
+	     * a special case (Chromecast sharing) and is not intended for use
+	     * in a traditional SDK implementation.
+	     *
+	     * NOTE: this function will overwrite ALL existing flow
+	     * recommendations.
+	     *
+	     * @param {Object} json   Recommendation JSON Object (CDoc+JSON)
+	     * @returns {Recommendation}
+	     */
+	
+	
+	    Listening.prototype.resumeFlowFromRecommendation = function resumeFlowFromRecommendation(json) {
+	        var recommendations = this._createRecommendations(json);
+	        this._flowRecommendations = recommendations;
+	        return this._flowRecommendations[0];
+	    };
+	
+	    /**
+	     * Advances the flow (retrieves new recommendations from the API).
+	     *
+	     * @param {string} channel
+	     * @param {string} uid
+	     * @returns {Promise<Array<Recommendation>>}
+	     * @throws {Error} If there are no recommendations to return
+	     * @private
+	     */
+	
+	
+	    Listening.prototype._advanceFlowRecommendations = function _advanceFlowRecommendations(channel, uid) {
+	        var _this4 = this;
+	
+	        if (this._flowFetchActive) {
+	            _logger2.default.debug('A listening service API request is already active, ' + 'returning existing promise if one exists.');
+	
+	            /* istanbul ignore else: defensive coding */
+	            if (this._flowPromise) {
+	                return this._flowPromise;
+	            }
+	            /* istanbul ignore next: defensive coding */
+	            return Promise.reject(new Error('No recommendations available. Try again later.'));
+	        }
+	
+	        // if given a UID, we check first to see if we already have the recommendation cached
+	        if (uid && !!this._flowRecommendations && this._flowRecommendations.length > 0) {
+	            var _ret = function () {
+	                var isRecommendationFound = false;
+	                _this4._flowRecommendations.forEach(function (recommendation, index) {
+	                    if (!isRecommendationFound && recommendation.attributes.uid === uid) {
+	                        _this4._flowRecommendations = _this4._flowRecommendations.slice(index);
+	                        isRecommendationFound = true;
+	                    }
+	                });
+	                if (isRecommendationFound) {
+	                    _logger2.default.debug('Recommendation with UID ' + uid + ' was already queued up. ' + 'Returning the cached version instead of making a new API call.');
+	                    return {
+	                        v: Promise.resolve(_this4._flowRecommendations[0])
+	                    };
+	                }
+	            }();
+	
+	            if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	        }
+	
+	        this._flowFetchActive = true;
+	        return this._getFlowRecommendations(channel, uid).then(function (recommendations) {
+	            _this4._flowFetchActive = false;
+	            if (recommendations.length <= 0) {
+	                _logger2.default.error('API returned no recommendations.');
+	            }
+	            _this4._flowRecommendations = _this4._filterIncomingRecommendations(recommendations);
+	            if (!_this4._flowRecommendations[0]) {
+	                throw new Error('All recommendations exhausted!');
+	            }
+	            return _this4._flowRecommendations[0];
+	        }).catch(function (error) {
+	            _this4._flowFetchActive = false;
+	            throw error;
+	        });
+	    };
+	
+	    /**
+	     * Provide any necessary filter to incoming recommendations if needed
+	     *
+	     * @param {Array<Recommendation>} recommendations
+	     * @private
+	     */
+	
+	
+	    Listening.prototype._filterIncomingRecommendations = function _filterIncomingRecommendations(recommendations) {
+	        if (this._adsBlocked) {
+	            var unfilteredCount = recommendations.length;
+	            var _recommendations = recommendations.filter(function (rec) {
+	                return !rec.isSponsorship();
+	            });
+	            var filteredCount = unfilteredCount - _recommendations.length;
+	            if (filteredCount > 0) {
+	                _logger2.default.debug('Filtered ' + filteredCount + ' ad(s).');
+	            }
+	            return _recommendations;
+	        }
+	
+	        return recommendations;
+	    };
+	
+	    /**
+	     * Private method to facilitate communication of a rated recommendation.
+	     *
+	     * @param {Rating} rating
+	     * @private
+	     */
+	
+	
+	    Listening.prototype._recordRating = function _recordRating(rating) {
+	        if (this._queuedRatingsContainsRating(rating)) {
+	            return; // no need to take action for the same rating twice
+	        }
+	
+	        _logger2.default.debug('Queued rating: ' + rating);
+	        this._queuedRatings.push(rating);
+	
+	        // Only one of these should ever fire, but this is easiest way to do the lookup
+	        for (var _iterator2 = _action2.default.getFlowAdvancingActions(), _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+	            var _ref2;
+	
+	            if (_isArray2) {
+	                if (_i2 >= _iterator2.length) break;
+	                _ref2 = _iterator2[_i2++];
+	            } else {
+	                _i2 = _iterator2.next();
+	                if (_i2.done) break;
+	                _ref2 = _i2.value;
+	            }
+	
+	            var action = _ref2;
+	
+	            if (rating.rating === action) {
+	                this.getRecommendation();
+	                break;
+	            }
+	        }
+	    };
+	
+	    /**
+	     * Request for recommendations from NPR specifically for the flow as opposed to
+	     * other channels which will not change the current flow.
+	     *
+	     * @param {string} channel
+	     * @param {string} uid
+	     * @returns {Promise<Array<Recommendation>>}
+	     */
+	
+	
+	    Listening.prototype._getFlowRecommendations = function _getFlowRecommendations(channel, uid) {
+	        for (var _iterator3 = _action2.default.getFlowAdvancingActions(), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+	            var _ref3;
+	
+	            if (_isArray3) {
+	                if (_i3 >= _iterator3.length) break;
+	                _ref3 = _iterator3[_i3++];
+	            } else {
+	                _i3 = _iterator3.next();
+	                if (_i3.done) break;
+	                _ref3 = _i3.value;
+	            }
+	
+	            var action = _ref3;
+	
+	            if (this._queuedRatingsContainsAction(action)) {
+	                return this._sendRatings();
+	            }
+	        }
+	
+	        if (!uid) {
+	            // Only perform the initial recommendation call if all flow recommendations are exhausted
+	            if (this._flowRecommendations.length > 0) {
+	                return Promise.resolve(this._flowRecommendations);
+	            }
+	        }
+	
+	        return this._getChannelRecommendations(channel, uid);
+	    };
+	
+	    /**
+	     * @param {string} channel
+	     * @param {string} [uid='']
+	     * @returns {Promise<Array<Recommendation>>}
+	     * @private
+	     */
+	
+	
+	    Listening.prototype._getChannelRecommendations = function _getChannelRecommendations(channel) {
+	        var uid = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+	
+	        var _channel = !channel || typeof channel !== 'string' ? 'npr' : channel;
+	
+	        var url = _index2.default.getServiceUrl('listening') + '/recommendations?channel=' + _channel;
+	        url += uid ? '&sharedMediaId=' + uid : '';
+	
+	        return _fetchUtil2.default.nprApiFetch(url).then(this._createRecommendations.bind(this));
+	    };
+	
+	    /**
+	     * Create recommendation objects from collection doc
+	     *
+	     * @param {Object} json - collection doc
+	     * @returns {Array<Recommendation>}
+	     * @private
+	     */
+	
+	
+	    Listening.prototype._createRecommendations = function _createRecommendations(json) {
+	        var recommendations = (0, _recommendationCreator2.default)(json);
+	        var recordRating = this._recordRating.bind(this);
+	        recommendations.map(function (rec) {
+	            return rec.setRatingReceivedCallback(recordRating);
+	        });
+	
+	        return recommendations;
+	    };
+	
+	    /**
+	     * Send batched ratings
+	     *
+	     * @param {boolean} [recommendMore=true] - determines if additional recommendations should be returned
+	     * @returns {Promise<Array<Recommendation>>}
+	     * @private
+	     */
+	
+	
+	    Listening.prototype._sendRatings = function _sendRatings() {
+	        var _this5 = this;
+	
+	        var recommendMore = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+	
+	        /* istanbul ignore if: defensive coding */
+	        if (this._queuedRatings.length === 0) {
+	            _logger2.default.error('Things have gone drastically wrong, this: ', this);
+	            return Promise.reject(new Error('No queued ratings to send.'));
+	        }
+	
+	        var url = _index2.default.getServiceUrl('listening');
+	        url += '/ratings?recommend=' + recommendMore.toString();
+	        if (recommendMore) {
+	            var latestRating = this._queuedRatings.slice(-1).pop();
+	            if (latestRating._actionUrl && latestRating.rating === _action2.default.TAPTHRU) {
+	                url = latestRating._actionUrl;
+	            } else {
+	                url = latestRating._recommendationUrl;
+	            }
+	        }
+	
+	        var ratingsToSend = [];
+	        this._queuedRatings.forEach(function (rating) {
+	            /* istanbul ignore else: defensive coding */
+	            if (!rating._hasSent) {
+	                ratingsToSend.push(rating);
+	            }
+	        });
+	
+	        var options = {
+	            method: 'POST',
+	            body: JSON.stringify(ratingsToSend, _rating3.default.privateMemberReplacer)
+	        };
+	
+	        _logger2.default.debug('Sending Ratings: ', ratingsToSend.join(', '));
+	
+	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
+	            // Loop through all queued ratings and mark as sent
+	            ratingsToSend.forEach(function (rating) {
+	                var _rating = rating;
+	                _rating._hasSent = true;
+	                _this5._sentRatings.push(_rating);
+	                _this5._queuedRatings.splice(_this5._queuedRatings.indexOf(_rating), 1);
+	            });
+	            return _this5._createRecommendations(json);
+	        });
+	    };
+	
+	    /**
+	     * Returns whether currently queued ratings contain a specific rating
+	     *
+	     * This is not a deep copy check and relies on mediaId & rating string
+	     *
+	     * @param {Rating} rating
+	     * @returns {boolean}
+	     * @private
+	     */
+	
+	
+	    Listening.prototype._queuedRatingsContainsRating = function _queuedRatingsContainsRating(rating) {
+	        return this._queuedRatings.some(function (qr) {
+	            return qr.rating === rating.rating && qr.mediaId === rating.mediaId;
+	        }); // eslint-disable-line
+	    };
+	
+	    /**
+	     * Returns whether the currently queued ratings contains a specific action
+	     *
+	     * @param {string} action
+	     * @returns {boolean}
+	     * @private
+	     */
+	
+	
+	    Listening.prototype._queuedRatingsContainsAction = function _queuedRatingsContainsAction(action) {
+	        return this._queuedRatings.some(function (qr) {
+	            return qr.rating === action;
+	        });
+	    };
+	
+	    return Listening;
+	}();
+	
+	exports.default = Listening;
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _validator = __webpack_require__(4);
+	
+	var _validator2 = _interopRequireDefault(_validator);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	/**
+	 * A thin wrapper around the raw JSON returned from the authorization server to represent a device code/user code pair
+	 */
+	var DeviceCode = function () {
+	    /**
+	     * @param {Object} json    The decoded JSON object that should be used as the basis for this model
+	     */
+	    function DeviceCode(json) {
+	        _classCallCheck(this, DeviceCode);
+	
+	        this._raw = json;
+	
+	        this._expiryDate = null;
+	        if (!isNaN(this._raw.expires_in)) {
+	            this._expiryDate = new Date(Date.now() + this.ttl);
+	        }
+	    }
+	
+	    /**
+	     * Ensure that the given device code model is valid
+	     *
+	     * @throws {TypeError} if device code model is invalid
+	     */
+	
+	
+	    DeviceCode.prototype.validate = function validate() {
+	        _validator2.default.validateDeviceCode(this._raw);
+	    };
+	
+	    /**
+	     * Returns whether or not this device code/user code pair has expired.
+	     * Note that due to network latency, etc., it's possible that the internally-stored expiry date could be about a
+	     * second or so behind, and so this function is not guaranteed to be perfectly accurate.
+	     *
+	     * @returns {boolean}
+	     */
+	
+	
+	    DeviceCode.prototype.isExpired = function isExpired() {
+	        return this._expiryDate !== null && new Date() >= this._expiryDate;
+	    };
+	
+	    /**
+	     * Returns the user code (8-character alphanumeric string)
+	     *
+	     * @type {string}
+	     */
+	
+	
+	    /**
+	     * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
+	     * In this case, we return the raw JSON string representing the entire object.
+	     *
+	     * @returns {string}
+	     */
+	    DeviceCode.prototype.toString = function toString() {
+	        return JSON.stringify(this._raw);
+	    };
+	
+	    _createClass(DeviceCode, [{
+	        key: 'userCode',
+	        get: function get() {
+	            return this._raw.user_code;
+	        }
+	
+	        /**
+	         * Returns the verification URL (the place where the user should go on their mobile device or laptop to log in)
+	         *
+	         * @type {string}
+	         */
+	
+	    }, {
+	        key: 'verificationUri',
+	        get: function get() {
+	            return this._raw.verification_uri;
+	        }
+	
+	        /**
+	         * Returns the TTL (in milliseconds) until this device code/user code pair expires. The SDK will automatically generate
+	         * a new key pair upon expiry, so consumers of the SDK will generally not have to use this value directly; however,
+	         * you may opt to display on the screen how much time the user has left to log in before a new code is generated.
+	         *
+	         * @type {number}
+	         */
+	
+	    }, {
+	        key: 'ttl',
+	        get: function get() {
+	            return this._raw.expires_in * 1000;
+	        }
+	
+	        /**
+	         * Returns the interval (in milliseconds) at which the client (in this case the SDK) should poll the `POST /token`
+	         * endpoint (or the OAuth proxy that lies in between). Consumers of the SDK should generally not have to use this
+	         * value directly.
+	         *
+	         * @type {number}
+	         */
+	
+	    }, {
+	        key: 'interval',
+	        get: function get() {
+	            return this._raw.interval * 1000;
+	        }
+	    }]);
+	
+	    return DeviceCode;
+	}();
+	
+	exports.default = DeviceCode;
+
+/***/ },
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -4206,7 +4213,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _validator2 = _interopRequireDefault(_validator);
 	
-	var _recommendation = __webpack_require__(17);
+	var _recommendation = __webpack_require__(11);
 	
 	var _recommendation2 = _interopRequireDefault(_recommendation);
 	
@@ -4340,7 +4347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		var Logger = { };
 	
 		// For those that are at home that are keeping score.
-		Logger.VERSION = "1.3.0";
+		Logger.VERSION = "1.2.0";
 	
 		// Function which handles all incoming log messages.
 		var logHandler;
@@ -4489,10 +4496,9 @@ return /******/ (function(modules) { // webpackBootstrap
 				(contextualLoggersByNameMap[name] = new ContextualLogger(merge({ name: name }, globalLogger.context)));
 		};
 	
-		// CreateDefaultHandler returns a handler function which can be passed to `Logger.setHandler()` which will
-		// write to the window's console object (if present); the optional options object can be used to customise the
-		// formatter used to format each log message.
-		Logger.createDefaultHandler = function (options) {
+		// Configure and example a Default implementation which writes to the `window.console` (if present).  The
+		// `options` hash can be used to configure the default logLevel and provide a custom message formatter.
+		Logger.useDefaults = function(options) {
 			options = options || {};
 	
 			options.formatter = options.formatter || function defaultMessageFormatter(messages, context) {
@@ -4501,6 +4507,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					messages.unshift("[" + context.name + "]");
 				}
 			};
+	
+			// Check for the presence of a logger.
+			if (typeof console === "undefined") {
+				return;
+			}
 	
 			// Map of timestamps by timer labels used to track `#time` and `#timeEnd()` invocations in environments
 			// that don't offer a native console method.
@@ -4511,12 +4522,8 @@ return /******/ (function(modules) { // webpackBootstrap
 				Function.prototype.apply.call(hdlr, console, messages);
 			};
 	
-			// Check for the presence of a logger.
-			if (typeof console === "undefined") {
-				return function () { /* no console */ };
-			}
-	
-			return function(messages, context) {
+			Logger.setLevel(options.defaultLevel || Logger.DEBUG);
+			Logger.setHandler(function(messages, context) {
 				// Convert arguments object to Array.
 				messages = Array.prototype.slice.call(messages);
 	
@@ -4557,14 +4564,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					options.formatter(messages, context);
 					invokeConsoleMethod(hdlr, messages);
 				}
-			};
-		};
-	
-		// Configure and example a Default implementation which writes to the `window.console` (if present).  The
-		// `options` hash can be used to configure the default logLevel and provide a custom message formatter.
-		Logger.useDefaults = function(options) {
-			Logger.setLevel(options && options.defaultLevel || Logger.DEBUG);
-			Logger.setHandler(Logger.createDefaultHandler(options));
+			});
 		};
 	
 		// Export to popular environments boilerplate.
@@ -4704,11 +4704,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 	
-	var slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
-	
 	/**
 	 * These properties should not be copied or inherited from. This is only needed
-	 * for all non blob URL's as a blob URL does not include a hash, only the
+	 * for all non blob URL's as the a blob URL does not include a hash, only the
 	 * origin.
 	 *
 	 * @type {Object}
@@ -4725,13 +4723,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * encoded in the `pathname` so we can thankfully generate a good "default"
 	 * location from it so we can generate proper relative URL's again.
 	 *
-	 * @param {Object|String} loc Optional default location object.
+	 * @param {Object} loc Optional default location object.
 	 * @returns {Object} lolcation object.
 	 * @api public
 	 */
 	module.exports = function lolcation(loc) {
 	  loc = loc || global.location || {};
-	  URL = URL || __webpack_require__(12);
+	  URL = URL || __webpack_require__(13);
 	
 	  var finaldestination = {}
 	    , type = typeof loc
@@ -4742,15 +4740,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  } else if ('string' === type) {
 	    finaldestination = new URL(loc, {});
 	    for (key in ignore) delete finaldestination[key];
-	  } else if ('object' === type) {
-	    for (key in loc) {
-	      if (key in ignore) continue;
-	      finaldestination[key] = loc[key];
-	    }
-	
-	    if (finaldestination.slashes === undefined) {
-	      finaldestination.slashes = slashes.test(loc.href);
-	    }
+	  } else if ('object' === type) for (key in loc) {
+	    if (key in ignore) continue;
+	    finaldestination[key] = loc[key];
 	  }
 	
 	  return finaldestination;
@@ -4769,21 +4761,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return
 	  }
 	
-	  var support = {
-	    searchParams: 'URLSearchParams' in self,
-	    iterable: 'Symbol' in self && 'iterator' in Symbol,
-	    blob: 'FileReader' in self && 'Blob' in self && (function() {
-	      try {
-	        new Blob()
-	        return true
-	      } catch(e) {
-	        return false
-	      }
-	    })(),
-	    formData: 'FormData' in self,
-	    arrayBuffer: 'ArrayBuffer' in self
-	  }
-	
 	  function normalizeName(name) {
 	    if (typeof name !== 'string') {
 	      name = String(name)
@@ -4799,24 +4776,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      value = String(value)
 	    }
 	    return value
-	  }
-	
-	  // Build a destructive iterator for the value list
-	  function iteratorFor(items) {
-	    var iterator = {
-	      next: function() {
-	        var value = items.shift()
-	        return {done: value === undefined, value: value}
-	      }
-	    }
-	
-	    if (support.iterable) {
-	      iterator[Symbol.iterator] = function() {
-	        return iterator
-	      }
-	    }
-	
-	    return iterator
 	  }
 	
 	  function Headers(headers) {
@@ -4874,28 +4833,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, this)
 	  }
 	
-	  Headers.prototype.keys = function() {
-	    var items = []
-	    this.forEach(function(value, name) { items.push(name) })
-	    return iteratorFor(items)
-	  }
-	
-	  Headers.prototype.values = function() {
-	    var items = []
-	    this.forEach(function(value) { items.push(value) })
-	    return iteratorFor(items)
-	  }
-	
-	  Headers.prototype.entries = function() {
-	    var items = []
-	    this.forEach(function(value, name) { items.push([name, value]) })
-	    return iteratorFor(items)
-	  }
-	
-	  if (support.iterable) {
-	    Headers.prototype[Symbol.iterator] = Headers.prototype.entries
-	  }
-	
 	  function consumed(body) {
 	    if (body.bodyUsed) {
 	      return Promise.reject(new TypeError('Already read'))
@@ -4926,8 +4863,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return fileReaderReady(reader)
 	  }
 	
+	  var support = {
+	    blob: 'FileReader' in self && 'Blob' in self && (function() {
+	      try {
+	        new Blob();
+	        return true
+	      } catch(e) {
+	        return false
+	      }
+	    })(),
+	    formData: 'FormData' in self,
+	    arrayBuffer: 'ArrayBuffer' in self
+	  }
+	
 	  function Body() {
 	    this.bodyUsed = false
+	
 	
 	    this._initBody = function(body) {
 	      this._bodyInit = body
@@ -4937,8 +4888,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._bodyBlob = body
 	      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
 	        this._bodyFormData = body
-	      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
-	        this._bodyText = body.toString()
 	      } else if (!body) {
 	        this._bodyText = ''
 	      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
@@ -4953,8 +4902,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          this.headers.set('content-type', 'text/plain;charset=UTF-8')
 	        } else if (this._bodyBlob && this._bodyBlob.type) {
 	          this.headers.set('content-type', this._bodyBlob.type)
-	        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
-	          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
 	        }
 	      }
 	    }
@@ -5076,7 +5023,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  function headers(xhr) {
 	    var head = new Headers()
-	    var pairs = (xhr.getAllResponseHeaders() || '').trim().split('\n')
+	    var pairs = xhr.getAllResponseHeaders().trim().split('\n')
 	    pairs.forEach(function(header) {
 	      var split = header.trim().split(':')
 	      var key = split.shift().trim()
@@ -5129,9 +5076,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return new Response(null, {status: status, headers: {location: url}})
 	  }
 	
-	  self.Headers = Headers
-	  self.Request = Request
-	  self.Response = Response
+	  self.Headers = Headers;
+	  self.Request = Request;
+	  self.Response = Response;
 	
 	  self.fetch = function(input, init) {
 	    return new Promise(function(resolve, reject) {
@@ -5154,25 +5101,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	          return xhr.getResponseHeader('X-Request-URL')
 	        }
 	
-	        return
+	        return;
 	      }
 	
 	      xhr.onload = function() {
+	        var status = (xhr.status === 1223) ? 204 : xhr.status
+	        if (status < 100 || status > 599) {
+	          reject(new TypeError('Network request failed'))
+	          return
+	        }
 	        var options = {
-	          status: xhr.status,
+	          status: status,
 	          statusText: xhr.statusText,
 	          headers: headers(xhr),
 	          url: responseURL()
 	        }
-	        var body = 'response' in xhr ? xhr.response : xhr.responseText
+	        var body = 'response' in xhr ? xhr.response : xhr.responseText;
 	        resolve(new Response(body, options))
 	      }
 	
 	      xhr.onerror = function() {
-	        reject(new TypeError('Network request failed'))
-	      }
-	
-	      xhr.ontimeout = function() {
 	        reject(new TypeError('Network request failed'))
 	      }
 	
