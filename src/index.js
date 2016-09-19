@@ -6,9 +6,7 @@ import Listening from './controller/listening';
 import Identity from './controller/identity';
 import StationFinder from './controller/station-finder';
 
-
 Logger.setLevel(Logger.WARN);
-
 
 /**
  * This SDK attempts to abstract away most of the interaction with the NPR One API.
@@ -201,6 +199,16 @@ export default class NprOneSDK
      */
     getRecommendation(uid = '', channel = 'npr') {
         return this._listening.getRecommendation(uid, channel);
+    }
+
+    /**
+     * See {@link Listening#resumeFlowFromRecommendation} for description.
+     *
+     * @param {Object} json JSON object representation of a recommendation
+     * @returns {Recommendation}
+     */
+    resumeFlowFromRecommendation(json) {
+        return this._listening.resumeFlowFromRecommendation(json);
     }
 
     /**

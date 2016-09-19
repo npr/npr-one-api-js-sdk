@@ -647,7 +647,7 @@ export default class NprOneSDK {
 
     /** Exposes the Logger class for clients to adjust logging if desired */
     static Logger: Logger;
-
+    
     /**
      * Attempts to swap the existing access token for a new one using the refresh token endpoint in the OAuth proxy
      *
@@ -772,6 +772,17 @@ export default class NprOneSDK {
      * @returns {Promise}
      */
     resetFlow(): Promise<void>;
+
+    /**
+     * Given a valid JSON recommendation object, the flow will advance as normal from this recommendation. This method
+     * has been created for a special case (Chromecast sharing) and is not intended for use in a traditional SDK implementation.
+     *
+     * NOTE: this function will overwrite ALL existing flow recommendations.
+     *
+     * @param {Object} json   Recommendation JSON Object (CDoc+JSON)
+     * @returns {Recommendation}
+     */
+    resumeFlowFromRecommendation(json: any): Recommendation;
 
     /**
      * Gets user metadata, such as first and last name, programs they have shown an affinity for, and preferred NPR One

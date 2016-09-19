@@ -254,6 +254,15 @@ describe('NprOneSDK', () => {
     });
 
 
+    /** @test {NprOneSDK#resumeFlowFromRecommendation} */
+    describe('resumeFlowFromRecommendation', () => {
+        it('should call the correct service controller method', () => {
+            const stub = sinon.stub(nprOne._listening, 'resumeFlowFromRecommendation');
+            nprOne.resumeFlowFromRecommendation();
+            stub.should.have.been.calledOnce;
+        });
+    });
+
     /** @test {NprOneSDK#getUser} */
     describe('getUser', () => {
         it('should call the correct service controller method', () => {

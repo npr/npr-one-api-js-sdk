@@ -254,6 +254,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	
 	  /**
+	   * See {@link Listening#resumeFlowFromRecommendation} for description.
+	   *
+	   * @param {Object} json JSON object representation of a recommendation
+	   * @returns {Recommendation}
+	   */
+	
+	
+	  NprOneSDK.prototype.resumeFlowFromRecommendation = function resumeFlowFromRecommendation(json) {
+	    return this._listening.resumeFlowFromRecommendation(json);
+	  };
+	
+	  /**
 	   * See {@link Listening#getUpcomingFlowRecommendations} for description.
 	   *
 	   * @experimental
@@ -1628,8 +1640,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var required = __webpack_require__(24)
 	  , lolcation = __webpack_require__(25)
 	  , qs = __webpack_require__(23)
-	  , relativere = /^\/(?!\/)/
-	  , protocolre = /^([a-z0-9.+-]+:)?(\/\/)?(.*)$/i; // actual protocol is first match
+	  , relativere = /^\/(?!\/)/;
 	
 	/**
 	 * These are the parse instructions for the URL parsers, it informs the parser
@@ -1646,36 +1657,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	var instructions = [
 	  ['#', 'hash'],                        // Extract from the back.
 	  ['?', 'query'],                       // Extract from the back.
+	  ['//', 'protocol', 2, 1, 1],          // Extract from the front.
 	  ['/', 'pathname'],                    // Extract from the back.
 	  ['@', 'auth', 1],                     // Extract from the front.
 	  [NaN, 'host', undefined, 1, 1],       // Set left over value.
 	  [/\:(\d+)$/, 'port'],                 // RegExp the back.
 	  [NaN, 'hostname', undefined, 1, 1]    // Set left over.
 	];
-	
-	 /**
-	 * @typedef ProtocolExtract
-	 * @type Object
-	 * @property {String} protocol Protocol matched in the URL, in lowercase
-	 * @property {Boolean} slashes Indicates whether the protocol is followed by double slash ("//")
-	 * @property {String} rest     Rest of the URL that is not part of the protocol
-	 */
-	
-	 /**
-	  * Extract protocol information from a URL with/without double slash ("//")
-	  *
-	  * @param  {String} address   URL we want to extract from.
-	  * @return {ProtocolExtract}  Extracted information
-	  * @private
-	  */
-	function extractProtocol(address) {
-	  var match = protocolre.exec(address);
-	  return {
-	    protocol: match[1] ? match[1].toLowerCase() : '',
-	    slashes: !!match[2],
-	    rest: match[3] ? match[3] : ''
-	  };
-	}
 	
 	/**
 	 * The actual URL instance. Instead of returning an object we've opted-in to
@@ -1684,8 +1672,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @constructor
 	 * @param {String} address URL we want to parse.
-	 * @param {Object|String} location Location defaults for relative paths.
-	 * @param {Boolean|Function} parser Parser for the query string.
+	 * @param {Boolean|function} parser Parser for the query string.
+	 * @param {Object} location Location defaults for relative paths.
 	 * @api public
 	 */
 	function URL(address, location, parser) {
@@ -1720,12 +1708,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  location = lolcation(location);
-	
-	  // extract protocol information before running the instructions
-	  var extracted = extractProtocol(address);
-	  url.protocol = extracted.protocol || location.protocol || '';
-	  url.slashes = extracted.slashes || location.slashes;
-	  address = extracted.rest;
 	
 	  for (; i < instructions.length; i++) {
 	    instruction = instructions[i];
@@ -1797,12 +1779,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * This is convenience method for changing properties in the URL instance to
 	 * insure that they all propagate correctly.
 	 *
-	 * @param {String} prop          Property we need to adjust.
-	 * @param {Mixed} value          The newly assigned value.
-	 * @param {Boolean|Function} fn  When setting the query, it will be the function used to parse
-	 *                               the query.
-	 *                               When setting the protocol, double slash will be removed from
-	 *                               the final url if it is true.
+	 * @param {String} prop Property we need to adjust.
+	 * @param {Mixed} value The newly assigned value.
 	 * @returns {URL}
 	 * @api public
 	 */
@@ -1837,9 +1815,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      url.hostname = value[0];
 	      url.port = value[1];
 	    }
-	  } else if ('protocol' === part) {
-	    url.protocol = value;
-	    url.slashes = !fn;
 	  } else {
 	    url[part] = value;
 	  }
@@ -1860,11 +1835,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  var query
 	    , url = this
-	    , protocol = url.protocol;
-	
-	  if (protocol && protocol.charAt(protocol.length - 1) !== ':') protocol += ':';
-	
-	  var result = protocol + (url.slashes ? '//' : '');
+	    , result = url.protocol +'//';
 	
 	  if (url.username) {
 	    result += url.username;
@@ -2720,6 +2691,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	        return prerequisitePromise;
+	    };
+	
+	    /**
+	     * Given a valid JSON recommendation object, the flow will advance as
+	     * normal from this recommendation. This method has been created for
+	     * a special case (Chromecast sharing) and is not intended for use
+	     * in a traditional SDK implementation.
+	     *
+	     * NOTE: this function will overwrite ALL existing flow
+	     * recommendations.
+	     *
+	     * @param {Object} json   Recommendation JSON Object (CDoc+JSON)
+	     * @returns {Recommendation}
+	     */
+	
+	
+	    Listening.prototype.resumeFlowFromRecommendation = function resumeFlowFromRecommendation(json) {
+	        var recommendations = this._createRecommendations(json);
+	        this._flowRecommendations = recommendations;
+	        return this._flowRecommendations[0];
 	    };
 	
 	    /**
@@ -4340,7 +4331,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		var Logger = { };
 	
 		// For those that are at home that are keeping score.
-		Logger.VERSION = "1.3.0";
+		Logger.VERSION = "1.2.0";
 	
 		// Function which handles all incoming log messages.
 		var logHandler;
@@ -4489,10 +4480,9 @@ return /******/ (function(modules) { // webpackBootstrap
 				(contextualLoggersByNameMap[name] = new ContextualLogger(merge({ name: name }, globalLogger.context)));
 		};
 	
-		// CreateDefaultHandler returns a handler function which can be passed to `Logger.setHandler()` which will
-		// write to the window's console object (if present); the optional options object can be used to customise the
-		// formatter used to format each log message.
-		Logger.createDefaultHandler = function (options) {
+		// Configure and example a Default implementation which writes to the `window.console` (if present).  The
+		// `options` hash can be used to configure the default logLevel and provide a custom message formatter.
+		Logger.useDefaults = function(options) {
 			options = options || {};
 	
 			options.formatter = options.formatter || function defaultMessageFormatter(messages, context) {
@@ -4501,6 +4491,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					messages.unshift("[" + context.name + "]");
 				}
 			};
+	
+			// Check for the presence of a logger.
+			if (typeof console === "undefined") {
+				return;
+			}
 	
 			// Map of timestamps by timer labels used to track `#time` and `#timeEnd()` invocations in environments
 			// that don't offer a native console method.
@@ -4511,12 +4506,8 @@ return /******/ (function(modules) { // webpackBootstrap
 				Function.prototype.apply.call(hdlr, console, messages);
 			};
 	
-			// Check for the presence of a logger.
-			if (typeof console === "undefined") {
-				return function () { /* no console */ };
-			}
-	
-			return function(messages, context) {
+			Logger.setLevel(options.defaultLevel || Logger.DEBUG);
+			Logger.setHandler(function(messages, context) {
 				// Convert arguments object to Array.
 				messages = Array.prototype.slice.call(messages);
 	
@@ -4557,14 +4548,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					options.formatter(messages, context);
 					invokeConsoleMethod(hdlr, messages);
 				}
-			};
-		};
-	
-		// Configure and example a Default implementation which writes to the `window.console` (if present).  The
-		// `options` hash can be used to configure the default logLevel and provide a custom message formatter.
-		Logger.useDefaults = function(options) {
-			Logger.setLevel(options && options.defaultLevel || Logger.DEBUG);
-			Logger.setHandler(Logger.createDefaultHandler(options));
+			});
 		};
 	
 		// Export to popular environments boilerplate.
@@ -4704,11 +4688,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 	
-	var slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
-	
 	/**
 	 * These properties should not be copied or inherited from. This is only needed
-	 * for all non blob URL's as a blob URL does not include a hash, only the
+	 * for all non blob URL's as the a blob URL does not include a hash, only the
 	 * origin.
 	 *
 	 * @type {Object}
@@ -4725,7 +4707,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * encoded in the `pathname` so we can thankfully generate a good "default"
 	 * location from it so we can generate proper relative URL's again.
 	 *
-	 * @param {Object|String} loc Optional default location object.
+	 * @param {Object} loc Optional default location object.
 	 * @returns {Object} lolcation object.
 	 * @api public
 	 */
@@ -4742,15 +4724,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  } else if ('string' === type) {
 	    finaldestination = new URL(loc, {});
 	    for (key in ignore) delete finaldestination[key];
-	  } else if ('object' === type) {
-	    for (key in loc) {
-	      if (key in ignore) continue;
-	      finaldestination[key] = loc[key];
-	    }
-	
-	    if (finaldestination.slashes === undefined) {
-	      finaldestination.slashes = slashes.test(loc.href);
-	    }
+	  } else if ('object' === type) for (key in loc) {
+	    if (key in ignore) continue;
+	    finaldestination[key] = loc[key];
 	  }
 	
 	  return finaldestination;
@@ -4769,21 +4745,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return
 	  }
 	
-	  var support = {
-	    searchParams: 'URLSearchParams' in self,
-	    iterable: 'Symbol' in self && 'iterator' in Symbol,
-	    blob: 'FileReader' in self && 'Blob' in self && (function() {
-	      try {
-	        new Blob()
-	        return true
-	      } catch(e) {
-	        return false
-	      }
-	    })(),
-	    formData: 'FormData' in self,
-	    arrayBuffer: 'ArrayBuffer' in self
-	  }
-	
 	  function normalizeName(name) {
 	    if (typeof name !== 'string') {
 	      name = String(name)
@@ -4799,24 +4760,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      value = String(value)
 	    }
 	    return value
-	  }
-	
-	  // Build a destructive iterator for the value list
-	  function iteratorFor(items) {
-	    var iterator = {
-	      next: function() {
-	        var value = items.shift()
-	        return {done: value === undefined, value: value}
-	      }
-	    }
-	
-	    if (support.iterable) {
-	      iterator[Symbol.iterator] = function() {
-	        return iterator
-	      }
-	    }
-	
-	    return iterator
 	  }
 	
 	  function Headers(headers) {
@@ -4874,28 +4817,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, this)
 	  }
 	
-	  Headers.prototype.keys = function() {
-	    var items = []
-	    this.forEach(function(value, name) { items.push(name) })
-	    return iteratorFor(items)
-	  }
-	
-	  Headers.prototype.values = function() {
-	    var items = []
-	    this.forEach(function(value) { items.push(value) })
-	    return iteratorFor(items)
-	  }
-	
-	  Headers.prototype.entries = function() {
-	    var items = []
-	    this.forEach(function(value, name) { items.push([name, value]) })
-	    return iteratorFor(items)
-	  }
-	
-	  if (support.iterable) {
-	    Headers.prototype[Symbol.iterator] = Headers.prototype.entries
-	  }
-	
 	  function consumed(body) {
 	    if (body.bodyUsed) {
 	      return Promise.reject(new TypeError('Already read'))
@@ -4926,8 +4847,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return fileReaderReady(reader)
 	  }
 	
+	  var support = {
+	    blob: 'FileReader' in self && 'Blob' in self && (function() {
+	      try {
+	        new Blob();
+	        return true
+	      } catch(e) {
+	        return false
+	      }
+	    })(),
+	    formData: 'FormData' in self,
+	    arrayBuffer: 'ArrayBuffer' in self
+	  }
+	
 	  function Body() {
 	    this.bodyUsed = false
+	
 	
 	    this._initBody = function(body) {
 	      this._bodyInit = body
@@ -4937,8 +4872,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._bodyBlob = body
 	      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
 	        this._bodyFormData = body
-	      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
-	        this._bodyText = body.toString()
 	      } else if (!body) {
 	        this._bodyText = ''
 	      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
@@ -4953,8 +4886,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          this.headers.set('content-type', 'text/plain;charset=UTF-8')
 	        } else if (this._bodyBlob && this._bodyBlob.type) {
 	          this.headers.set('content-type', this._bodyBlob.type)
-	        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
-	          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
 	        }
 	      }
 	    }
@@ -5076,7 +5007,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  function headers(xhr) {
 	    var head = new Headers()
-	    var pairs = (xhr.getAllResponseHeaders() || '').trim().split('\n')
+	    var pairs = xhr.getAllResponseHeaders().trim().split('\n')
 	    pairs.forEach(function(header) {
 	      var split = header.trim().split(':')
 	      var key = split.shift().trim()
@@ -5129,9 +5060,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return new Response(null, {status: status, headers: {location: url}})
 	  }
 	
-	  self.Headers = Headers
-	  self.Request = Request
-	  self.Response = Response
+	  self.Headers = Headers;
+	  self.Request = Request;
+	  self.Response = Response;
 	
 	  self.fetch = function(input, init) {
 	    return new Promise(function(resolve, reject) {
@@ -5154,25 +5085,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	          return xhr.getResponseHeader('X-Request-URL')
 	        }
 	
-	        return
+	        return;
 	      }
 	
 	      xhr.onload = function() {
+	        var status = (xhr.status === 1223) ? 204 : xhr.status
+	        if (status < 100 || status > 599) {
+	          reject(new TypeError('Network request failed'))
+	          return
+	        }
 	        var options = {
-	          status: xhr.status,
+	          status: status,
 	          statusText: xhr.statusText,
 	          headers: headers(xhr),
 	          url: responseURL()
 	        }
-	        var body = 'response' in xhr ? xhr.response : xhr.responseText
+	        var body = 'response' in xhr ? xhr.response : xhr.responseText;
 	        resolve(new Response(body, options))
 	      }
 	
 	      xhr.onerror = function() {
-	        reject(new TypeError('Network request failed'))
-	      }
-	
-	      xhr.ontimeout = function() {
 	        reject(new TypeError('Network request failed'))
 	      }
 	

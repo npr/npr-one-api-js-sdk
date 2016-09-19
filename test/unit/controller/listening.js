@@ -685,4 +685,27 @@ describe('Listening', () => {
             });
         });
     });
+
+    /** @test {Listening#resumeFlowFromRecommendation} */
+    describe('resumeFlowFromRecommendation', () => {
+        describe('no recommendations have been requested yet', () => {
+            it('should set the recommendations to the active recommendation ' + 
+               'and the flow should advance as normal when actions are received', done => {
+                testDataClone.items.splice(0, 1); // remove stationId, should be newscast
+
+                const rec = listening.resumeFlowFromRecommendation(testDataClone);
+                rec.recordAction(NprOne.Action.START, 0);
+
+                listening.getRecommendation()
+                    .then(recommendation => {
+                        fetchMock.called(ratingUrl).should.be.true;
+                        fetchMock.calls().unmatched.length.should.equal(0);
+                        listening._flowRecommendations.length.should.equal(5);  // testDataClone
+                        recommendation.attributes.uid !== testDataClone.items[0].attributes.uid;
+                        done();
+                    })
+                    .catch(done);
+            });
+        });
+    });
 });

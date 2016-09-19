@@ -162,6 +162,18 @@ var NprOneSDK = function () {
   };
 
   /**
+   * See {@link Listening#resumeFlowFromRecommendation} for description.
+   *
+   * @param {Object} json JSON object representation of a recommendation
+   * @returns {Recommendation}
+   */
+
+
+  NprOneSDK.prototype.resumeFlowFromRecommendation = function resumeFlowFromRecommendation(json) {
+    return this._listening.resumeFlowFromRecommendation(json);
+  };
+
+  /**
    * See {@link Listening#getUpcomingFlowRecommendations} for description.
    *
    * @experimental
