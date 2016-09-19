@@ -647,10 +647,7 @@ export default class NprOneSDK {
 
     /** Exposes the Logger class for clients to adjust logging if desired */
     static Logger: Logger;
-
-    /** Exposes the Recommendation class for resume flow from recommendation */
-    static Recommendation: Recommendation;
-
+    
     /**
      * Attempts to swap the existing access token for a new one using the refresh token endpoint in the OAuth proxy
      *
@@ -785,7 +782,7 @@ export default class NprOneSDK {
      * @param {Object} json   Recommendation JSON Object (CDoc+JSON)
      * @returns {Recommendation}
      */
-    resumeFlowFromRecommendation(json: any): Recommendation
+    resumeFlowFromRecommendation(json: any): Recommendation;
 
     /**
      * Gets user metadata, such as first and last name, programs they have shown an affinity for, and preferred NPR One
