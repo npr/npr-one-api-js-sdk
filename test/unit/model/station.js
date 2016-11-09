@@ -23,51 +23,33 @@ describe('Station', () => {
     /** @test {Station.id} */
     describe('id', () => {
         it('should exist and equal the value from the test data', () => {
-            station.id.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.org_id);
+            station.id.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.orgId);
         });
     });
 
 
     /** @test {Station.displayName} */
     describe('displayName', () => {
-        it('should equal name if name exists', () => {
-            station.displayName.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.name);
-        });
-
-        it('should equal call if name does not exist', () => {
-            delete responseClone.attributes.name;
-            station = new Station(responseClone);
-            station.displayName.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.call);
+        it('should equal name from the test data', () => {
+            station.displayName.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.brand.name);
         });
     });
 
 
     /** @test {Station.logo} */
     describe('logo', () => {
-        it('should equal NPR One logo if NPR One logo exists', () => {
-            station.logo.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.apps.npr_one.logo);
+        it('should equal rel="logo" brand link if it exists', () => {
+            station.logo.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.brand[1].href);
         });
 
-        it('should attempt to find a logo if NPR One log does not exist', () => {
-            delete responseClone.attributes.apps;
-            station = new Station(responseClone);
-            station.logo.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.image[0].href);
-
-            responseClone.links.image.shift();
-            station = new Station(responseClone);
-            station.logo.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.image[1].href);
+        it('should equal rel="small-logo" brand link if equal rel="logo" brand link does not exist', () => {
+            responseClone.links.brand.shift(); // homepage
+            responseClone.links.brand.shift(); // logo
+            station.logo.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.brand[2].href);
         });
 
-        it('should be null logos exist but not of the correct type_id', () => {
-            delete responseClone.attributes.apps;
-            responseClone.links.image.shift();
-            responseClone.links.image.shift();
-            chai.expect(station.logo).to.not.be.ok;
-        });
-
-        it('should be null if no logos are found', () => {
-            delete responseClone.attributes.apps;
-            delete responseClone.links.image;
+        it('should be null if none of the above exist', () => {
+            delete responseClone.links.brand;
             chai.expect(station.logo).to.not.be.ok;
         });
     });
@@ -76,11 +58,11 @@ describe('Station', () => {
     /** @test {Station.tagline} */
     describe('tagline', () => {
         it('should exist on test data', () => {
-            station.tagline.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.tagline);
+            station.tagline.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.brand.tagline);
         });
 
         it('should be an empty string if it does not exist', () => {
-            delete responseClone.attributes.tagline;
+            delete responseClone.attributes.brand.tagline;
             station = new Station(responseClone);
             chai.expect(station.tagline).to.not.be.ok;
         });
@@ -94,24 +76,24 @@ describe('Station', () => {
         });
 
         it('should omit call if it does not exist on test data', () => {
-            delete responseClone.attributes.call;
+            delete responseClone.attributes.brand.call;
             station.callSignAndFrequency.should.equal('FM 90.9');
         });
 
         it('should omit band if it does not exist on test data', () => {
-            delete responseClone.attributes.band;
+            delete responseClone.attributes.brand.band;
             station.callSignAndFrequency.should.equal('WBUR 90.9');
         });
 
         it('should omit frequency if it does not exist on test data', () => {
-            delete responseClone.attributes.frequency;
+            delete responseClone.attributes.brand.frequency;
             station.callSignAndFrequency.should.equal('WBUR FM');
         });
 
         it('should return null if all attempted data is missing', () => {
-            delete responseClone.attributes.call;
-            delete responseClone.attributes.band;
-            delete responseClone.attributes.frequency;
+            delete responseClone.attributes.brand.call;
+            delete responseClone.attributes.brand.band;
+            delete responseClone.attributes.brand.frequency;
             chai.expect(station.callSignAndFrequency).to.be.null;
         });
     });
@@ -128,16 +110,16 @@ describe('Station', () => {
     /** @test {Station.homepageUrl} */
     describe('homepageUrl', () => {
         it('should exist on test data', () => {
-            station.homepageUrl.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.web[0].href);
+            station.homepageUrl.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.brand[0].href);
         });
 
-        it('should be null if only non-type_id 1 web links exist', () => {
-            responseClone.links.web.shift();
+        it('should be null if only non-rel="homepage" links exist', () => {
+            responseClone.links.brand.shift();
             chai.expect(station.homepageUrl).to.not.be.ok;
         });
 
         it('should be null if none of the above exist', () => {
-            delete responseClone.links.web;
+            delete responseClone.links.brand;
             chai.expect(station.homepageUrl).to.not.be.ok;
         });
     });
@@ -145,25 +127,19 @@ describe('Station', () => {
 
     /** @test {Station.donationUrl} */
     describe('donationUrl', () => {
-        it('should equal NPR One donation URL if it exists', () => {
-            station.donationUrl.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.attributes.apps.npr_one.donation_url);
+        it('should equal type 27 donation link if it exists', () => {
+            station.donationUrl.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.donation[1].href);
         });
 
-        it('should equal type 4 web link if NPR One donation URL does not exist', () => {
-            delete responseClone.attributes.apps;
-            station.donationUrl.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.web[1].href);
-        });
-
-        it('should equal type 27 web link if NPR One donation URL and type 4 web does not exist', () => {
-            delete responseClone.attributes.apps;
-            responseClone.links.web.shift();
-            responseClone.links.web.shift();
-            station.donationUrl.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.web[2].href);
+        it('should equal type 4 donation link if type 27 donation does not exist', () => {
+            const donationAudio = responseClone.links.donation.pop(); // donation audio
+            responseClone.links.donation.pop(); // type 27
+            responseClone.links.donation.push(donationAudio);
+            station.donationUrl.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.donation[0].href);
         });
 
         it('should be null if none of the above exist', () => {
-            delete responseClone.attributes.apps;
-            delete responseClone.links.web;
+            delete responseClone.links.donation;
             chai.expect(station.donationUrl).to.not.be.ok;
         });
     });

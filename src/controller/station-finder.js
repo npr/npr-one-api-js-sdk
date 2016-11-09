@@ -103,18 +103,16 @@ export default class StationFinder {
      * @returns {Promise<Station>}
      */
     getStationDetails(stationId) {
-        return StationFinder.validateStation(stationId)
-            .then(searchResult => new Station(searchResult));
+        return StationFinder.validateStation(stationId);
     }
 
     /**
      * Ensures a station ID is associated with a valid NPR station. While this technically returns the raw JSON for
      * this station if it exists, these results are not meant to be consumed directly; if you need the station details to display to your end-user,
-     * use {@link getStationDetails} instead, which calls this function under-the-hood and returns the results parsed
-     * into a {@link Station} model.
+     * use {@link getStationDetails} instead.
      *
      * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
-     * @returns {Promise}
+     * @returns {Promise<Station>}
      */
     static validateStation(stationId) {
         const n = parseInt(stationId, 10);
@@ -122,9 +120,16 @@ export default class StationFinder {
             return Promise.reject(new Error('Station ID must be an integer greater than 0'));
         }
 
-        const url = `${NPROneSDK.getServiceUrl('stationfinder')}/organizations/${stationId}`;
+        const url = `${NPROneSDK.getServiceUrl('stationfinder')}/stations/${stationId}`;
 
-        return FetchUtil.nprApiFetch(url);
+        return FetchUtil.nprApiFetch(url)
+            .then((searchResult) => {
+                const station = new Station(searchResult);
+                if (!station.isNprOneEligible) {
+                    throw new Error(`The station ${station.id} is not eligible for NPR One.`);
+                }
+                return station;
+            });
     }
 
     /**
@@ -139,7 +144,7 @@ export default class StationFinder {
      * @private
      */
     _performStationSearch(query, lat = null, long = null, city = null, state = null) {
-        const url = `${NPROneSDK.getServiceUrl('stationfinder')}/organizations`;
+        const url = `${NPROneSDK.getServiceUrl('stationfinder')}/stations`;
 
         let queryString = '';
         if (query) {
@@ -151,7 +156,7 @@ export default class StationFinder {
             if (typeof lat !== 'number' || typeof long !== 'number') {
                 throw new TypeError('Latitude and longitude must both be valid numbers (floats)');
             }
-            queryString = `lat=${lat}&long=${long}`;
+            queryString = `lat=${lat}&lon=${long}`;
         } else {
             if (city) {
                 if (typeof city !== 'string') {
@@ -174,7 +179,9 @@ export default class StationFinder {
                 if (searchResults && searchResults.items && searchResults.items.length) {
                     for (const searchResult of searchResults.items) {
                         const station = new Station(searchResult);
-                        stations.push(station);
+                        if (station.isNprOneEligible) {
+                            stations.push(station);
+                        }
                     }
                 }
 

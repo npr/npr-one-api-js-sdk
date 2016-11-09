@@ -1,5 +1,5 @@
 import chai from 'chai';
-import { ACCESS_TOKEN_RESPONSE, IDENTITY_V2_USER_RESPONSE } from '../../test-data';
+import { ACCESS_TOKEN_RESPONSE, IDENTITY_V2_USER_RESPONSE, STATION_FINDER_RESPONSE } from '../../test-data';
 import mockery from 'mockery';
 import fetchMock from 'fetch-mock';
 import Identity from './../../../src/controller/identity';
@@ -8,6 +8,7 @@ import { testConfig } from '../../test';
 
 
 const should = chai.should();
+const STATION_FINDER_SINGLE_ORG_RESPONSE = STATION_FINDER_RESPONSE.items[0];
 
 
 /** @test {Identity} */
@@ -55,14 +56,14 @@ describe('Identity', () => {
     /** @test {Identity#setUserStation} */
     describe('setUserStation', () => {
         const identityUrl = `^${testConfig.apiBaseUrl}/identity/${testConfig.apiVersion}/stations`;
-        const stationFinderUrl = `^${testConfig.apiBaseUrl}/stationfinder/${testConfig.apiVersion}/organizations`;
+        const stationFinderUrl = `^${testConfig.apiBaseUrl}/stationfinder/v3/stations`;
         const stationId = 305;
 
         it('should validate the station, and then make a PUT request to identity/stations', (done) => {
             const userClone = JSON.parse(JSON.stringify(IDENTITY_V2_USER_RESPONSE));
 
             mockery.registerMock('fetch', fetchMock
-                .mock(stationFinderUrl, 'GET', '[]')
+                .mock(stationFinderUrl, 'GET', STATION_FINDER_SINGLE_ORG_RESPONSE)
                 .mock(identityUrl, 'PUT', userClone)
                 .getMock());
 

@@ -135,460 +135,464 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	
 	var NprOneSDK = function () {
-	  /**
-	   * Instantiates the NPR One SDK.
-	   */
-	  function NprOneSDK() {
-	    _classCallCheck(this, NprOneSDK);
-	
-	    /** @type {null|Function} A callback that gets triggered whenever the access token has changed
-	     * @private */
-	    this._accessTokenChangedCallback = null;
-	    /** @type {Authorization}
-	     * @private */
-	    this._authorization = new _authorization2.default();
-	    /** @type {Listening}
-	     * @private */
-	    this._listening = new _listening2.default();
-	    /** @type {Identity}
-	     * @private */
-	    this._identity = new _identity2.default();
-	    /** @type {StationFinder}
-	     * @private */
-	    this._stationfinder = new _stationFinder2.default();
-	
-	    // setup the default config
-	    NprOneSDK.config; // eslint-disable-line
-	  }
-	
-	  /**
-	   * @typedef {Object} Config
-	   * @property {string} [apiBaseUrl='https://api.npr.org'] The NPR One API hostname and protocol, typically `https://api.npr.org`; in most cases, this does not need to be manually set by clients
-	   * @property {string} [apiVersion='v2'] The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients
-	   * @property {string} [authProxyBaseUrl] The full URL to your OAuth proxy, e.g. `http://one.example.com/oauth2/`
-	   * @property {string} [newDeviceCodePath='/device'] The path to your proxy for starting a `device_code` grant (relative to `authProxyBaseUrl`)
-	   * @property {string} [pollDeviceCodePath='/device/poll'] The path to your proxy for polling a `device_code` grant (relative to `authProxyBaseUrl`)
-	   * @property {string} [refreshTokenPath='/refresh'] The path to your proxy for the `refresh_token` grant (relative to `authProxyBaseUrl`)
-	   * @property {string} [tempUserPath='/temporary'] The path to your proxy for the `temporary_user` grant (relative to `authProxyBaseUrl`), not available to third-party clients
-	   * @property {string} [logoutPath='/logout'] The path to your proxy for the `POST /authorization/v2/token/revoke` endpoint (relative to `authProxyBaseUrl`)
-	   * @property {string} [accessToken] The access token to use if not using the auth proxy
-	   * @property {string} [clientId] The NPR One API `client_id` to use, only required if using the auth proxy with the `temporary_user` grant type
-	   * @property {string} [advertisingId] The custom X-Advertising-ID header to send with most requests, not typically used by third-party clients
-	   * @property {string} [advertisingTarget] The custom X-Advertising-Target header to send with most requests, not typically used by third-party clients
-	   */
-	  /**
-	   * @type {Config}
-	   */
-	
-	
-	  /* Authorization */
-	
-	  /**
-	   * See {@link Authorization.refreshExistingAccessToken} for description.
-	   *
-	   * @param {number} [numRetries=0]   The number of times this function has been tried. Will retry up to 3 times.
-	   * @returns {Promise<AccessToken>}
-	   * @throws {TypeError} if an OAuth proxy is not configured or no access token is set
-	   */
-	  NprOneSDK.refreshExistingAccessToken = function refreshExistingAccessToken() {
-	    var numRetries = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
-	
-	    return _authorization2.default.refreshExistingAccessToken(numRetries);
-	  };
-	
-	  /**
-	   * See {@link Authorization#logout} for description.
-	   *
-	   * @returns {Promise}
-	   * @throws {TypeError} if an OAuth proxy is not configured or no access token is currently set
-	   */
-	
-	
-	  NprOneSDK.prototype.logout = function logout() {
-	    return this._authorization.logout();
-	  };
-	
-	  /**
-	   * See {@link Authorization#getDeviceCode} for description.
-	   *
-	   * @param {Array<string>} [scopes=[]]   The scopes (as strings) that should be associated with the resulting access token
-	   * @returns {Promise<DeviceCode>}
-	   * @throws {TypeError} if an OAuth proxy is not configured
-	   */
-	
-	
-	  NprOneSDK.prototype.getDeviceCode = function getDeviceCode() {
-	    var scopes = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-	
-	    return this._authorization.getDeviceCode(scopes);
-	  };
-	
-	  /**
-	   * See {@link Authorization#pollDeviceCode} for description.
-	   *
-	   * @returns {Promise<AccessToken>}
-	   * @throws {TypeError} if an OAuth proxy is not configured or `getDeviceCode()` was not previously called
-	   */
-	
-	
-	  NprOneSDK.prototype.pollDeviceCode = function pollDeviceCode() {
-	    return this._authorization.pollDeviceCode();
-	  };
-	
-	  /* Listening */
-	
-	  /**
-	   * See {@link Listening#getRecommendation} for description.
-	   *
-	   * @param {string} [uid='']           Optional; a UID for a specific recommendation to play. In 99% of use cases, this is not needed.
-	   * @param {string} [channel='npr']    Optional; a channel to pull the recommendation from; the main flow channel of `npr` is used as the default. In 99% of use cases, this does not need to be changed.
-	   * @returns {Promise<Recommendation>}
-	   */
-	
-	
-	  NprOneSDK.prototype.getRecommendation = function getRecommendation() {
-	    var uid = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-	    var channel = arguments.length <= 1 || arguments[1] === undefined ? 'npr' : arguments[1];
-	
-	    return this._listening.getRecommendation(uid, channel);
-	  };
-	
-	  /**
-	   * See {@link Listening#resumeFlowFromRecommendation} for description.
-	   *
-	   * @param {Object} json JSON object representation of a recommendation
-	   * @returns {Recommendation}
-	   */
-	
-	
-	  NprOneSDK.prototype.resumeFlowFromRecommendation = function resumeFlowFromRecommendation(json) {
-	    return this._listening.resumeFlowFromRecommendation(json);
-	  };
-	
-	  /**
-	   * See {@link Listening#getUpcomingFlowRecommendations} for description.
-	   *
-	   * @experimental
-	   * @param {string} [channel='npr']   A channel to pull the next recommendation from
-	   * @returns {Promise<Array<Recommendation>>}
-	   */
-	
-	
-	  NprOneSDK.prototype.getUpcomingFlowRecommendations = function getUpcomingFlowRecommendations() {
-	    var channel = arguments.length <= 0 || arguments[0] === undefined ? 'npr' : arguments[0];
-	
-	    return this._listening.getUpcomingFlowRecommendations(channel);
-	  };
-	
-	  /**
-	   * See {@link Listening#getRecommendationsFromChannel} for description.
-	   *
-	   * @param {string} [channel='recommended']   A non-flow (i.e. non-`npr`) channel to retrieve a list of recommendations from
-	   * @returns {Promise<Array<Recommendation>>}
-	   */
-	
-	
-	  NprOneSDK.prototype.getRecommendationsFromChannel = function getRecommendationsFromChannel() {
-	    var channel = arguments.length <= 0 || arguments[0] === undefined ? 'recommended' : arguments[0];
-	
-	    return this._listening.getRecommendationsFromChannel(channel);
-	  };
-	
-	  /**
-	   * See {@link Listening#queueRecommendationFromChannel} for description.
-	   *
-	   * @param {string} channel   The channel used in the original call to `getRecommendationsFromChannel()`
-	   * @param {string} uid       The unique ID of the item to queue up for the user
-	   * @returns {Recommendation}
-	   * @throws {TypeError} If no valid channel or UID is passed in
-	   * @throws {Error} If no recommendations for this channel were previously cached, or if the UID was not found in that cached list
-	   */
-	
-	
-	  NprOneSDK.prototype.queueRecommendationFromChannel = function queueRecommendationFromChannel(channel, uid) {
-	    return this._listening.queueRecommendationFromChannel(channel, uid);
-	  };
-	
-	  /**
-	   * See {@link Listening#getHistory} for description.
-	   *
-	   * @returns {Promise<Array<Recommendation>>}
-	   */
-	
-	
-	  NprOneSDK.prototype.getHistory = function getHistory() {
-	    return this._listening.getHistory();
-	  };
-	
-	  /**
-	   * See {@link Listening#resetFlow} for description.
-	   *
-	   * @returns {Promise}
-	   */
-	
-	
-	  NprOneSDK.prototype.resetFlow = function resetFlow() {
-	    return this._listening.resetFlow();
-	  };
-	
-	  /* Identity */
-	
-	  /**
-	   * See {@link Identity#getUser} for description.
-	   *
-	   * @returns {Promise<User>}
-	   */
-	
-	
-	  NprOneSDK.prototype.getUser = function getUser() {
-	    return this._identity.getUser();
-	  };
-	
-	  /**
-	   * See {@link Identity#setUserStation} for description.
-	   *
-	   * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
-	   * @returns {Promise<User>}
-	   */
-	
-	
-	  NprOneSDK.prototype.setUserStation = function setUserStation(stationId) {
-	    return this._identity.setUserStation(stationId);
-	  };
-	
-	  /**
-	   * See {@link Identity#followShow} for description.
-	   *
-	   * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
-	   * @returns {Promise<User>}
-	   * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
-	   */
-	
-	
-	  NprOneSDK.prototype.followShow = function followShow(aggregationId) {
-	    return this._identity.followShow(aggregationId);
-	  };
-	
-	  /**
-	   * See {@link Identity#unfollowShow} for description.
-	   *
-	   * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
-	   * @returns {Promise<User>}
-	   * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
-	   */
-	
-	
-	  NprOneSDK.prototype.unfollowShow = function unfollowShow(aggregationId) {
-	    return this._identity.unfollowShow(aggregationId);
-	  };
-	
-	  /**
-	   * See {@link Identity#createTemporaryUser} for description.
-	   *
-	   * @returns {Promise<User>}
-	   * @throws {TypeError} if an OAuth proxy is not configured or no client ID is set
-	   */
-	
-	
-	  NprOneSDK.prototype.createTemporaryUser = function createTemporaryUser() {
-	    return this._identity.createTemporaryUser();
-	  };
-	
-	  /* Station Finder */
-	
-	  /**
-	   * See {@link StationFinder#searchStations} for description.
-	   *
-	   * @param {null|string} [query]   An optional query, which can be a station name, network name, or zip code
-	   * @returns {Promise<Array<Station>>}
-	   */
-	
-	
-	  NprOneSDK.prototype.searchStations = function searchStations() {
-	    var query = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
-	
-	    return this._stationfinder.searchStations(query);
-	  };
-	
-	  /**
-	   * See {@link StationFinder#searchStationsByLatLongCoordinates} for description.
-	   *
-	   * @param {number} lat    A float representing the latitude value of the geographic coordinates
-	   * @param {number} long   A float representing the longitude value of the geographic coordinates
-	   * @returns {Promise<Array<Station>>}
-	   */
-	
-	
-	  NprOneSDK.prototype.searchStationsByLatLongCoordinates = function searchStationsByLatLongCoordinates(lat, long) {
-	    return this._stationfinder.searchStationsByLatLongCoordinates(lat, long);
-	  };
-	
-	  /**
-	   * See {@link StationFinder#searchStationsByCityAndState} for description.
-	   *
-	   * @param {string} city     A full city name (e.g. "New York", "San Francisco", "Phoenix")
-	   * @param {string} state    A state name (e.g. "Maryland") or abbreviation (e.g. "MD")
-	   * @returns {Promise<Array<Station>>}
-	   */
-	
-	
-	  NprOneSDK.prototype.searchStationsByCityAndState = function searchStationsByCityAndState(city, state) {
-	    return this._stationfinder.searchStationsByCityAndState(city, state);
-	  };
-	
-	  /**
-	   * See {@link StationFinder#searchStationsByCity} for description.
-	   *
-	   * @param {string} city   A full city name (e.g. "New York", "San Francisco", "Phoenix")
-	   * @returns {Promise<Array<Station>>}
-	   */
-	
-	
-	  NprOneSDK.prototype.searchStationsByCity = function searchStationsByCity(city) {
-	    return this._stationfinder.searchStationsByCity(city);
-	  };
-	
-	  /**
-	   * See {@link StationFinder#searchStationsByState} for description.
-	   *
-	   * @param {string} state    A state name (e.g. "Maryland") or abbreviation (e.g. "MD")
-	   * @returns {Promise<Array<Station>>}
-	   */
-	
-	
-	  NprOneSDK.prototype.searchStationsByState = function searchStationsByState(state) {
-	    return this._stationfinder.searchStationsByState(state);
-	  };
-	
-	  /**
-	   * See {@link StationFinder#getStationDetails} for description.
-	   *
-	   * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
-	   * @returns {Promise<Station>}
-	   */
-	
-	
-	  NprOneSDK.prototype.getStationDetails = function getStationDetails(stationId) {
-	    return this._stationfinder.getStationDetails(stationId);
-	  };
-	
-	  /**
-	   * Returns the foundational path for a given service
-	   *
-	   * @param {string} service
-	   * @returns {string}
-	   */
-	
-	
-	  NprOneSDK.getServiceUrl = function getServiceUrl(service) {
-	    return NprOneSDK.config.apiBaseUrl + '/' + service + '/' + NprOneSDK.config.apiVersion;
-	  };
-	
-	  _createClass(NprOneSDK, null, [{
-	    key: 'config',
-	    get: function get() {
-	      if (!NprOneSDK._config) {
-	        NprOneSDK._config = {
-	          apiBaseUrl: 'https://api.npr.org',
-	          apiVersion: 'v2',
-	          authProxyBaseUrl: '',
-	          newDeviceCodePath: '/device',
-	          pollDeviceCodePath: '/device/poll',
-	          refreshTokenPath: '/refresh',
-	          tempUserPath: '/temporary',
-	          logoutPath: '/logout',
-	          accessToken: '',
-	          clientId: '',
-	          advertisingId: '',
-	          advertisingTarget: ''
-	        };
-	      }
-	
-	      /** @type {Config} */
-	      return NprOneSDK._config;
+	    /**
+	     * Instantiates the NPR One SDK.
+	     */
+	    function NprOneSDK() {
+	        _classCallCheck(this, NprOneSDK);
+	
+	        /** @type {null|Function} A callback that gets triggered whenever the access token has changed
+	         * @private */
+	        this._accessTokenChangedCallback = null;
+	        /** @type {Authorization}
+	         * @private */
+	        this._authorization = new _authorization2.default();
+	        /** @type {Listening}
+	         * @private */
+	        this._listening = new _listening2.default();
+	        /** @type {Identity}
+	         * @private */
+	        this._identity = new _identity2.default();
+	        /** @type {StationFinder}
+	         * @private */
+	        this._stationfinder = new _stationFinder2.default();
+	
+	        // setup the default config
+	        NprOneSDK.config; // eslint-disable-line
 	    }
 	
 	    /**
-	     * Updates private `_config` member attributes but does not overwrite entire `_config` object
-	     *
+	     * @typedef {Object} Config
+	     * @property {string} [apiBaseUrl='https://api.npr.org'] The NPR One API hostname and protocol, typically `https://api.npr.org`; in most cases, this does not need to be manually set by clients
+	     * @property {string} [apiVersion='v2'] The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients
+	     * @property {string} [authProxyBaseUrl] The full URL to your OAuth proxy, e.g. `http://one.example.com/oauth2/`
+	     * @property {string} [newDeviceCodePath='/device'] The path to your proxy for starting a `device_code` grant (relative to `authProxyBaseUrl`)
+	     * @property {string} [pollDeviceCodePath='/device/poll'] The path to your proxy for polling a `device_code` grant (relative to `authProxyBaseUrl`)
+	     * @property {string} [refreshTokenPath='/refresh'] The path to your proxy for the `refresh_token` grant (relative to `authProxyBaseUrl`)
+	     * @property {string} [tempUserPath='/temporary'] The path to your proxy for the `temporary_user` grant (relative to `authProxyBaseUrl`), not available to third-party clients
+	     * @property {string} [logoutPath='/logout'] The path to your proxy for the `POST /authorization/v2/token/revoke` endpoint (relative to `authProxyBaseUrl`)
+	     * @property {string} [accessToken] The access token to use if not using the auth proxy
+	     * @property {string} [clientId] The NPR One API `client_id` to use, only required if using the auth proxy with the `temporary_user` grant type
+	     * @property {string} [advertisingId] The custom X-Advertising-ID header to send with most requests, not typically used by third-party clients
+	     * @property {string} [advertisingTarget] The custom X-Advertising-Target header to send with most requests, not typically used by third-party clients
+	     */
+	    /**
 	     * @type {Config}
 	     */
-	    ,
-	    set: function set(value) {
-	      if (!NprOneSDK._config) {
-	        NprOneSDK.config; // eslint-disable-line
-	      }
-	      Object.assign(NprOneSDK._config, value);
-	    }
 	
-	    /** @type {string} */
 	
-	  }, {
-	    key: 'accessToken',
-	    get: function get() {
-	      return NprOneSDK.config.accessToken;
-	    }
-	
-	    /** @type {string} */
-	    ,
-	    set: function set(token) {
-	      if (typeof token !== 'string') {
-	        throw new TypeError('Value for accessToken must be a string');
-	      }
-	
-	      var oldToken = NprOneSDK.accessToken;
-	      NprOneSDK.config.accessToken = token;
-	
-	      if (oldToken !== token && typeof NprOneSDK._accessTokenChangedCallback === 'function') {
-	        NprOneSDK._accessTokenChangedCallback(token);
-	      }
-	    }
+	    /* Authorization */
 	
 	    /**
-	     * Sets a callback to be triggered whenever the SDK rotates the access token for a new one, usually when
-	     * the old token expires and a `refresh_token` is used to generate a fresh token. Clients who wish to persist
-	     * access tokens across sessions are urged to use this callback to be notified whenever a token change has
-	     * occurred; the only other alternative is to call `get accessToken()` after every API call.
+	     * See {@link Authorization.refreshExistingAccessToken} for description.
 	     *
-	     * @type {Function}
-	     * @throws {TypeError} if the passed-in value isn't a function
+	     * @param {number} [numRetries=0]   The number of times this function has been tried. Will retry up to 3 times.
+	     * @returns {Promise<AccessToken>}
+	     * @throws {TypeError} if an OAuth proxy is not configured or no access token is set
 	     */
+	    NprOneSDK.refreshExistingAccessToken = function refreshExistingAccessToken() {
+	        var numRetries = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
 	
-	  }, {
-	    key: 'onAccessTokenChanged',
-	    set: function set(callback) {
-	      if (typeof callback !== 'function') {
-	        throw new TypeError('Value for onAccessTokenChanged must be a function');
-	      }
-	      NprOneSDK._accessTokenChangedCallback = callback;
-	    }
+	        return _authorization2.default.refreshExistingAccessToken(numRetries);
+	    };
 	
 	    /**
-	     * Exposes the Action class for clients to record actions
+	     * See {@link Authorization#logout} for description.
 	     *
-	     * @type {Action}
+	     * @returns {Promise}
+	     * @throws {TypeError} if an OAuth proxy is not configured or no access token is currently set
 	     */
 	
-	  }, {
-	    key: 'Action',
-	    get: function get() {
-	      return _action2.default;
-	    }
+	
+	    NprOneSDK.prototype.logout = function logout() {
+	        return this._authorization.logout();
+	    };
 	
 	    /**
-	     * Exposes the Logger class for clients to adjust logging if desired
+	     * See {@link Authorization#getDeviceCode} for description.
 	     *
-	     * @type {src/util/logger.js~Logger}
+	     * @param {Array<string>} [scopes=[]]   The scopes (as strings) that should be associated with the resulting access token
+	     * @returns {Promise<DeviceCode>}
+	     * @throws {TypeError} if an OAuth proxy is not configured
 	     */
 	
-	  }, {
-	    key: 'Logger',
-	    get: function get() {
-	      return _logger2.default;
-	    }
-	  }]);
 	
-	  return NprOneSDK;
+	    NprOneSDK.prototype.getDeviceCode = function getDeviceCode() {
+	        var scopes = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	
+	        return this._authorization.getDeviceCode(scopes);
+	    };
+	
+	    /**
+	     * See {@link Authorization#pollDeviceCode} for description.
+	     *
+	     * @returns {Promise<AccessToken>}
+	     * @throws {TypeError} if an OAuth proxy is not configured or `getDeviceCode()` was not previously called
+	     */
+	
+	
+	    NprOneSDK.prototype.pollDeviceCode = function pollDeviceCode() {
+	        return this._authorization.pollDeviceCode();
+	    };
+	
+	    /* Listening */
+	
+	    /**
+	     * See {@link Listening#getRecommendation} for description.
+	     *
+	     * @param {string} [uid='']           Optional; a UID for a specific recommendation to play. In 99% of use cases, this is not needed.
+	     * @param {string} [channel='npr']    Optional; a channel to pull the recommendation from; the main flow channel of `npr` is used as the default. In 99% of use cases, this does not need to be changed.
+	     * @returns {Promise<Recommendation>}
+	     */
+	
+	
+	    NprOneSDK.prototype.getRecommendation = function getRecommendation() {
+	        var uid = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+	        var channel = arguments.length <= 1 || arguments[1] === undefined ? 'npr' : arguments[1];
+	
+	        return this._listening.getRecommendation(uid, channel);
+	    };
+	
+	    /**
+	     * See {@link Listening#resumeFlowFromRecommendation} for description.
+	     *
+	     * @param {Object} json JSON object representation of a recommendation
+	     * @returns {Recommendation}
+	     */
+	
+	
+	    NprOneSDK.prototype.resumeFlowFromRecommendation = function resumeFlowFromRecommendation(json) {
+	        return this._listening.resumeFlowFromRecommendation(json);
+	    };
+	
+	    /**
+	     * See {@link Listening#getUpcomingFlowRecommendations} for description.
+	     *
+	     * @experimental
+	     * @param {string} [channel='npr']   A channel to pull the next recommendation from
+	     * @returns {Promise<Array<Recommendation>>}
+	     */
+	
+	
+	    NprOneSDK.prototype.getUpcomingFlowRecommendations = function getUpcomingFlowRecommendations() {
+	        var channel = arguments.length <= 0 || arguments[0] === undefined ? 'npr' : arguments[0];
+	
+	        return this._listening.getUpcomingFlowRecommendations(channel);
+	    };
+	
+	    /**
+	     * See {@link Listening#getRecommendationsFromChannel} for description.
+	     *
+	     * @param {string} [channel='recommended']   A non-flow (i.e. non-`npr`) channel to retrieve a list of recommendations from
+	     * @returns {Promise<Array<Recommendation>>}
+	     */
+	
+	
+	    NprOneSDK.prototype.getRecommendationsFromChannel = function getRecommendationsFromChannel() {
+	        var channel = arguments.length <= 0 || arguments[0] === undefined ? 'recommended' : arguments[0];
+	
+	        return this._listening.getRecommendationsFromChannel(channel);
+	    };
+	
+	    /**
+	     * See {@link Listening#queueRecommendationFromChannel} for description.
+	     *
+	     * @param {string} channel   The channel used in the original call to `getRecommendationsFromChannel()`
+	     * @param {string} uid       The unique ID of the item to queue up for the user
+	     * @returns {Recommendation}
+	     * @throws {TypeError} If no valid channel or UID is passed in
+	     * @throws {Error} If no recommendations for this channel were previously cached, or if the UID was not found in that cached list
+	     */
+	
+	
+	    NprOneSDK.prototype.queueRecommendationFromChannel = function queueRecommendationFromChannel(channel, uid) {
+	        return this._listening.queueRecommendationFromChannel(channel, uid);
+	    };
+	
+	    /**
+	     * See {@link Listening#getHistory} for description.
+	     *
+	     * @returns {Promise<Array<Recommendation>>}
+	     */
+	
+	
+	    NprOneSDK.prototype.getHistory = function getHistory() {
+	        return this._listening.getHistory();
+	    };
+	
+	    /**
+	     * See {@link Listening#resetFlow} for description.
+	     *
+	     * @returns {Promise}
+	     */
+	
+	
+	    NprOneSDK.prototype.resetFlow = function resetFlow() {
+	        return this._listening.resetFlow();
+	    };
+	
+	    /* Identity */
+	
+	    /**
+	     * See {@link Identity#getUser} for description.
+	     *
+	     * @returns {Promise<User>}
+	     */
+	
+	
+	    NprOneSDK.prototype.getUser = function getUser() {
+	        return this._identity.getUser();
+	    };
+	
+	    /**
+	     * See {@link Identity#setUserStation} for description.
+	     *
+	     * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+	     * @returns {Promise<User>}
+	     */
+	
+	
+	    NprOneSDK.prototype.setUserStation = function setUserStation(stationId) {
+	        return this._identity.setUserStation(stationId);
+	    };
+	
+	    /**
+	     * See {@link Identity#followShow} for description.
+	     *
+	     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+	     * @returns {Promise<User>}
+	     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+	     */
+	
+	
+	    NprOneSDK.prototype.followShow = function followShow(aggregationId) {
+	        return this._identity.followShow(aggregationId);
+	    };
+	
+	    /**
+	     * See {@link Identity#unfollowShow} for description.
+	     *
+	     * @param {number|string} aggregationId    The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+	     * @returns {Promise<User>}
+	     * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
+	     */
+	
+	
+	    NprOneSDK.prototype.unfollowShow = function unfollowShow(aggregationId) {
+	        return this._identity.unfollowShow(aggregationId);
+	    };
+	
+	    /**
+	     * See {@link Identity#createTemporaryUser} for description.
+	     *
+	     * @returns {Promise<User>}
+	     * @throws {TypeError} if an OAuth proxy is not configured or no client ID is set
+	     */
+	
+	
+	    NprOneSDK.prototype.createTemporaryUser = function createTemporaryUser() {
+	        return this._identity.createTemporaryUser();
+	    };
+	
+	    /* Station Finder */
+	
+	    /**
+	     * See {@link StationFinder#searchStations} for description.
+	     *
+	     * @param {null|string} [query]   An optional query, which can be a station name, network name, or zip code
+	     * @returns {Promise<Array<Station>>}
+	     */
+	
+	
+	    NprOneSDK.prototype.searchStations = function searchStations() {
+	        var query = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	
+	        return this._stationfinder.searchStations(query);
+	    };
+	
+	    /**
+	     * See {@link StationFinder#searchStationsByLatLongCoordinates} for description.
+	     *
+	     * @param {number} lat    A float representing the latitude value of the geographic coordinates
+	     * @param {number} long   A float representing the longitude value of the geographic coordinates
+	     * @returns {Promise<Array<Station>>}
+	     */
+	
+	
+	    NprOneSDK.prototype.searchStationsByLatLongCoordinates = function searchStationsByLatLongCoordinates(lat, long) {
+	        return this._stationfinder.searchStationsByLatLongCoordinates(lat, long);
+	    };
+	
+	    /**
+	     * See {@link StationFinder#searchStationsByCityAndState} for description.
+	     *
+	     * @param {string} city     A full city name (e.g. "New York", "San Francisco", "Phoenix")
+	     * @param {string} state    A state name (e.g. "Maryland") or abbreviation (e.g. "MD")
+	     * @returns {Promise<Array<Station>>}
+	     */
+	
+	
+	    NprOneSDK.prototype.searchStationsByCityAndState = function searchStationsByCityAndState(city, state) {
+	        return this._stationfinder.searchStationsByCityAndState(city, state);
+	    };
+	
+	    /**
+	     * See {@link StationFinder#searchStationsByCity} for description.
+	     *
+	     * @param {string} city   A full city name (e.g. "New York", "San Francisco", "Phoenix")
+	     * @returns {Promise<Array<Station>>}
+	     */
+	
+	
+	    NprOneSDK.prototype.searchStationsByCity = function searchStationsByCity(city) {
+	        return this._stationfinder.searchStationsByCity(city);
+	    };
+	
+	    /**
+	     * See {@link StationFinder#searchStationsByState} for description.
+	     *
+	     * @param {string} state    A state name (e.g. "Maryland") or abbreviation (e.g. "MD")
+	     * @returns {Promise<Array<Station>>}
+	     */
+	
+	
+	    NprOneSDK.prototype.searchStationsByState = function searchStationsByState(state) {
+	        return this._stationfinder.searchStationsByState(state);
+	    };
+	
+	    /**
+	     * See {@link StationFinder#getStationDetails} for description.
+	     *
+	     * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+	     * @returns {Promise<Station>}
+	     */
+	
+	
+	    NprOneSDK.prototype.getStationDetails = function getStationDetails(stationId) {
+	        return this._stationfinder.getStationDetails(stationId);
+	    };
+	
+	    /**
+	     * Returns the foundational path for a given service
+	     *
+	     * @param {string} service
+	     * @returns {string}
+	     */
+	
+	
+	    NprOneSDK.getServiceUrl = function getServiceUrl(service) {
+	        // @TODO we need to figure out a better long-term solution for the individually-versioned services
+	        if (service === 'stationfinder') {
+	            return NprOneSDK.config.apiBaseUrl + '/' + service + '/v3';
+	        }
+	        return NprOneSDK.config.apiBaseUrl + '/' + service + '/' + NprOneSDK.config.apiVersion;
+	    };
+	
+	    _createClass(NprOneSDK, null, [{
+	        key: 'config',
+	        get: function get() {
+	            if (!NprOneSDK._config) {
+	                NprOneSDK._config = {
+	                    apiBaseUrl: 'https://api.npr.org',
+	                    apiVersion: 'v2',
+	                    authProxyBaseUrl: '',
+	                    newDeviceCodePath: '/device',
+	                    pollDeviceCodePath: '/device/poll',
+	                    refreshTokenPath: '/refresh',
+	                    tempUserPath: '/temporary',
+	                    logoutPath: '/logout',
+	                    accessToken: '',
+	                    clientId: '',
+	                    advertisingId: '',
+	                    advertisingTarget: ''
+	                };
+	            }
+	
+	            /** @type {Config} */
+	            return NprOneSDK._config;
+	        }
+	
+	        /**
+	         * Updates private `_config` member attributes but does not overwrite entire `_config` object
+	         *
+	         * @type {Config}
+	         */
+	        ,
+	        set: function set(value) {
+	            if (!NprOneSDK._config) {
+	                NprOneSDK.config; // eslint-disable-line
+	            }
+	            Object.assign(NprOneSDK._config, value);
+	        }
+	
+	        /** @type {string} */
+	
+	    }, {
+	        key: 'accessToken',
+	        get: function get() {
+	            return NprOneSDK.config.accessToken;
+	        }
+	
+	        /** @type {string} */
+	        ,
+	        set: function set(token) {
+	            if (typeof token !== 'string') {
+	                throw new TypeError('Value for accessToken must be a string');
+	            }
+	
+	            var oldToken = NprOneSDK.accessToken;
+	            NprOneSDK.config.accessToken = token;
+	
+	            if (oldToken !== token && typeof NprOneSDK._accessTokenChangedCallback === 'function') {
+	                NprOneSDK._accessTokenChangedCallback(token);
+	            }
+	        }
+	
+	        /**
+	         * Sets a callback to be triggered whenever the SDK rotates the access token for a new one, usually when
+	         * the old token expires and a `refresh_token` is used to generate a fresh token. Clients who wish to persist
+	         * access tokens across sessions are urged to use this callback to be notified whenever a token change has
+	         * occurred; the only other alternative is to call `get accessToken()` after every API call.
+	         *
+	         * @type {Function}
+	         * @throws {TypeError} if the passed-in value isn't a function
+	         */
+	
+	    }, {
+	        key: 'onAccessTokenChanged',
+	        set: function set(callback) {
+	            if (typeof callback !== 'function') {
+	                throw new TypeError('Value for onAccessTokenChanged must be a function');
+	            }
+	            NprOneSDK._accessTokenChangedCallback = callback;
+	        }
+	
+	        /**
+	         * Exposes the Action class for clients to record actions
+	         *
+	         * @type {Action}
+	         */
+	
+	    }, {
+	        key: 'Action',
+	        get: function get() {
+	            return _action2.default;
+	        }
+	
+	        /**
+	         * Exposes the Logger class for clients to adjust logging if desired
+	         *
+	         * @type {src/util/logger.js~Logger}
+	         */
+	
+	    }, {
+	        key: 'Logger',
+	        get: function get() {
+	            return _logger2.default;
+	        }
+	    }]);
+	
+	    return NprOneSDK;
 	}();
 	
 	/**
@@ -1241,19 +1245,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	    StationFinder.prototype.getStationDetails = function getStationDetails(stationId) {
-	        return StationFinder.validateStation(stationId).then(function (searchResult) {
-	            return new _station2.default(searchResult);
-	        });
+	        return StationFinder.validateStation(stationId);
 	    };
 	
 	    /**
 	     * Ensures a station ID is associated with a valid NPR station. While this technically returns the raw JSON for
 	     * this station if it exists, these results are not meant to be consumed directly; if you need the station details to display to your end-user,
-	     * use {@link getStationDetails} instead, which calls this function under-the-hood and returns the results parsed
-	     * into a {@link Station} model.
+	     * use {@link getStationDetails} instead.
 	     *
 	     * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
-	     * @returns {Promise}
+	     * @returns {Promise<Station>}
 	     */
 	
 	
@@ -1263,9 +1264,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return Promise.reject(new Error('Station ID must be an integer greater than 0'));
 	        }
 	
-	        var url = _index2.default.getServiceUrl('stationfinder') + '/organizations/' + stationId;
+	        var url = _index2.default.getServiceUrl('stationfinder') + '/stations/' + stationId;
 	
-	        return _fetchUtil2.default.nprApiFetch(url);
+	        return _fetchUtil2.default.nprApiFetch(url).then(function (searchResult) {
+	            var station = new _station2.default(searchResult);
+	            if (!station.isNprOneEligible) {
+	                throw new Error('The station ' + station.id + ' is not eligible for NPR One.');
+	            }
+	            return station;
+	        });
 	    };
 	
 	    /**
@@ -1287,7 +1294,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var city = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 	        var state = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
 	
-	        var url = _index2.default.getServiceUrl('stationfinder') + '/organizations';
+	        var url = _index2.default.getServiceUrl('stationfinder') + '/stations';
 	
 	        var queryString = '';
 	        if (query) {
@@ -1299,7 +1306,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (typeof lat !== 'number' || typeof long !== 'number') {
 	                throw new TypeError('Latitude and longitude must both be valid numbers (floats)');
 	            }
-	            queryString = 'lat=' + lat + '&long=' + long;
+	            queryString = 'lat=' + lat + '&lon=' + long;
 	        } else {
 	            if (city) {
 	                if (typeof city !== 'string') {
@@ -1334,7 +1341,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var searchResult = _ref;
 	
 	                    var station = new _station2.default(searchResult);
-	                    stations.push(station);
+	                    if (station.isNprOneEligible) {
+	                        stations.push(station);
+	                    }
 	                }
 	            }
 	
@@ -1640,7 +1649,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var required = __webpack_require__(24)
 	  , lolcation = __webpack_require__(25)
 	  , qs = __webpack_require__(23)
-	  , relativere = /^\/(?!\/)/;
+	  , relativere = /^\/(?!\/)/
+	  , protocolre = /^([a-z0-9.+-]+:)?(\/\/)?(.*)$/i; // actual protocol is first match
 	
 	/**
 	 * These are the parse instructions for the URL parsers, it informs the parser
@@ -1657,13 +1667,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	var instructions = [
 	  ['#', 'hash'],                        // Extract from the back.
 	  ['?', 'query'],                       // Extract from the back.
-	  ['//', 'protocol', 2, 1, 1],          // Extract from the front.
 	  ['/', 'pathname'],                    // Extract from the back.
 	  ['@', 'auth', 1],                     // Extract from the front.
 	  [NaN, 'host', undefined, 1, 1],       // Set left over value.
 	  [/\:(\d+)$/, 'port'],                 // RegExp the back.
 	  [NaN, 'hostname', undefined, 1, 1]    // Set left over.
 	];
+	
+	 /**
+	 * @typedef ProtocolExtract
+	 * @type Object
+	 * @property {String} protocol Protocol matched in the URL, in lowercase
+	 * @property {Boolean} slashes Indicates whether the protocol is followed by double slash ("//")
+	 * @property {String} rest     Rest of the URL that is not part of the protocol
+	 */
+	
+	 /**
+	  * Extract protocol information from a URL with/without double slash ("//")
+	  *
+	  * @param  {String} address   URL we want to extract from.
+	  * @return {ProtocolExtract}  Extracted information
+	  * @private
+	  */
+	function extractProtocol(address) {
+	  var match = protocolre.exec(address);
+	  return {
+	    protocol: match[1] ? match[1].toLowerCase() : '',
+	    slashes: !!match[2],
+	    rest: match[3] ? match[3] : ''
+	  };
+	}
 	
 	/**
 	 * The actual URL instance. Instead of returning an object we've opted-in to
@@ -1672,8 +1705,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @constructor
 	 * @param {String} address URL we want to parse.
-	 * @param {Boolean|function} parser Parser for the query string.
-	 * @param {Object} location Location defaults for relative paths.
+	 * @param {Object|String} location Location defaults for relative paths.
+	 * @param {Boolean|Function} parser Parser for the query string.
 	 * @api public
 	 */
 	function URL(address, location, parser) {
@@ -1708,6 +1741,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  location = lolcation(location);
+	
+	  // extract protocol information before running the instructions
+	  var extracted = extractProtocol(address);
+	  url.protocol = extracted.protocol || location.protocol || '';
+	  url.slashes = extracted.slashes || location.slashes;
+	  address = extracted.rest;
 	
 	  for (; i < instructions.length; i++) {
 	    instruction = instructions[i];
@@ -1779,8 +1818,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * This is convenience method for changing properties in the URL instance to
 	 * insure that they all propagate correctly.
 	 *
-	 * @param {String} prop Property we need to adjust.
-	 * @param {Mixed} value The newly assigned value.
+	 * @param {String} prop          Property we need to adjust.
+	 * @param {Mixed} value          The newly assigned value.
+	 * @param {Boolean|Function} fn  When setting the query, it will be the function used to parse
+	 *                               the query.
+	 *                               When setting the protocol, double slash will be removed from
+	 *                               the final url if it is true.
 	 * @returns {URL}
 	 * @api public
 	 */
@@ -1815,6 +1858,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      url.hostname = value[0];
 	      url.port = value[1];
 	    }
+	  } else if ('protocol' === part) {
+	    url.protocol = value;
+	    url.slashes = !fn;
 	  } else {
 	    url[part] = value;
 	  }
@@ -1835,7 +1881,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  var query
 	    , url = this
-	    , result = url.protocol +'//';
+	    , protocol = url.protocol;
+	
+	  if (protocol && protocol.charAt(protocol.length - 1) !== ':') protocol += ':';
+	
+	  var result = protocol + (url.slashes ? '//' : '');
 	
 	  if (url.username) {
 	    result += url.username;
@@ -3766,56 +3816,70 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    /**
 	     * @typedef {Object} StationAttributes
-	     * @property {StationAppsList} apps An associative array of application-specific metadata for this station
+	     * @property {string} orgId The system's unique ID for this station, used across NPR One Microservices and NPR's other APIs
 	     * @property {string} guid The system's internal unique identifier for a station, not typically used by other APIs or consumers
-	     * @property {string} org_id The system's unique ID for this station, used across NPR One Microservices and NPR's other APIs
+	     * @property {StationBrandData} brand An associative array of brand-related metadata for this station
+	     * @property {StationEligibilityData} eligibility An associative array of eligibility-related metadata for this station
+	     * @property {StationNewscastData} [newscast] Metadata about the newscast for this station; newscasts are handled internally by other microservices such as the NPR One Listening Service, so this data should typically not be used by consumers
+	     * @property {StationNetwork} Metadata about the network, if this station is part of a network
+	     */
+	    /**
+	     * @typedef {Object} StationBrandData
 	     * @property {string} name The display name for the station. In most cases, this will be the same as call letters combined with band. When returning networks, it will return the network name (e.g. Minnesota Public Radio).
-	     * @property {string} title An alternative display name for the station. Consumers are discouraged from using this and encouraged to use name instead.
-	     * @property {string} abbreviation An abbreviated name for the station. Consumers are discouraged from using this and encouraged to use name instead.
-	     * @property {string} call The three-to-four-letter identifying code for this station. Please use this with caution; most stations prefer to be identified by their name in client applications instead of call.
-	     * @property {string} frequency Where on the radio dial the station can be heard. If the band is AM, the frequency will be between 540 and 1600. If the band is FM, the frequency will be between 87.8 and 108.0.
-	     * @property {string} band The subsection of the radio spectrum -- 'AM' or 'FM' -- where this station can be heard
+	     * @property {string|null} call The three-to-four-letter identifying code for this station. Please use this with caution; most stations prefer to be identified by their name in client applications instead of call.
+	     * @property {string|null} frequency Where on the radio dial the station can be heard. If the band is AM, the frequency will be between 540 and 1600. If the band is FM, the frequency will be between 87.8 and 108.0.
+	     * @property {string|null} band The subsection of the radio spectrum -- 'AM' or 'FM' -- where this station can be heard
 	     * @property {string} tagline A short text-logo for the station
-	     * @property {Array<string>} address The address of the station's main office
-	     * @property {string} market_city The city that the station is most closely associated with. This may or may not be the city the station is licensed in and it may or may not be the city that the station or the station's antenna is located in.
-	     * @property {string} market_state The state that the station is most closely associated with. This may or may not be the state the station is licensed in and it may or may not be the state that the station or the station's antenna is located in.
+	     * @property {string} marketCity The city that the station is most closely associated with. This may or may not be the city the station is licensed in and it may or may not be the city that the station or the station's antenna is located in.
+	     * @property {string} marketState The state that the station is most closely associated with. This may or may not be the state the station is licensed in and it may or may not be the state that the station or the station's antenna is located in.
+	     */
+	    /**
+	     * @typedef {Object} StationEligibilityData
+	     * @property {boolean} nprOne Whether or not this organization is considered an NPR One station
+	     * @property {boolean} musicOnly Whether or not this station only plays music
 	     * @property {string} format The format of the programming on this station
-	     * @property {boolean} music_only Whether or not this station only plays music
 	     * @property {string} status The status of the station within NPR's system, not typically used by consumers
-	     * @property {string} status_name The semantic name corresponding to the status ID
-	     * @property {string} email The station's primary contact e-mail address
-	     * @property {string} area_code The area code for the station's main office
-	     * @property {string} phone The phone number for the station's main office
-	     * @property {string} phone_extension The phone extension for the station's main office
-	     * @property {string} fax The fax number for the station's main office
-	     * @property {StationNetwork} network The parent organization, if this station is part of a network
-	     * @property {boolean} npr_one Whether or not this organization is considered an NPR One station
 	     */
 	    /**
-	     * @typedef {Object} StationAppsList
-	     * @property {StationNprOneData} npr_one A list of metadata designed for use by NPR One clients
-	     */
-	    /**
-	     * @typedef {Object} StationNprOneData
-	     * @property {string} name The name to display for this station within NPR One clients
-	     * @property {string} logo The URL of an image associated with the station
-	     * @property {string} donation_url The URL to a website where users may make a donation to support the station
-	     * @property {string} donation_audio The audio to play inviting users to make a donation
-	     * @property {string} thankyou_audio The audio to play when users have successfully made an in-app donation
-	     * @property {Array<string>} sonic_id_audio The audio to play when users start a listening session, not typically used directly by consumers
-	     * @property {Array<string>} hello_id_audio The audio to play when users start a listening session, not typically used directly by consumers
+	     * @typedef {Object} StationNewscastData
+	     * @property {string} id The ID of the newscast that should be played for this station; this is handled internally by other microservices such as the NPR One Listening Service, so this field should typically not be used by consumers
+	     * @property {null|number} recency How often the newscast should be played, in minutes; a value of `null` implies no information is available, and sensible defaults should be used
 	     */
 	    /**
 	     * @typedef {Object} StationNetwork
-	     * @property {string} org_id The system's unique ID for the parent organization (network), used across NPR One Microservices and NPR's other APIs
-	     * @property {string} name The display name for the parent organization (network)
+	     * @property {string} currentOrgId The current station being viewed. Client applications should generally ignore this field.
+	     * @property {boolean} usesInheritance Whether or not the current station inherits from a parent organization, also referred to as a network
+	     * @property {string} [inheritingFrom] The system' unique ID for the organization that the current station is inheriting from, if inheritance is on
+	     * @property {string} name The display name for the current organization
+	     * @property {StationNetworkTierOne} [tier1] The top-level organization, if this station is part of a network
+	     */
+	    /**
+	     * @typedef {Object} StationNetworkTierOne
+	     * @property {string} id The unique identifier of the top-level organization in the network
+	     * @property {boolean} usesInheritance Whether or not this station inherits from a parent organization, also referred to as a network
+	     * @property {string} name The display name for the top-level organization in the network
+	     * @property {string} status The status of the top-level organization within NPR's system, not typically used by consumers
+	     * @property {Array<StationNetworkTierTwo>} [tier2] One or more stations that are hierarchical children of this organization
+	     */
+	    /**
+	     * @typedef {Object} StationNetworkTierTwo
+	     * @property {string} id The unique identifier of a tier 2 organization in the network
+	     * @property {boolean} usesInheritance Whether or not this station inherits from a parent organization, also referred to as a network
+	     * @property {string} name The display name for a tier 2 organization in the network
+	     * @property {Array<StationNetworkTierThree>} [tier3] One or more stations that are hierarchical children of this organization
+	     */
+	    /**
+	     * @typedef {Object} StationNetworkTierThree
+	     * @property {string} id The unique identifier of a tier 3 organization in the network
+	     * @property {boolean} usesInheritance Whether or not this station inherits from a parent organization, also referred to as a network
+	     * @property {string} name The display name for a tier 3 organization in the network
 	     */
 	
 	
 	    _createClass(Station, [{
 	        key: 'id',
 	        get: function get() {
-	            return this._raw.attributes.org_id;
+	            return this._raw.attributes.orgId;
 	        }
 	
 	        /**
@@ -3829,7 +3893,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'displayName',
 	        get: function get() {
-	            return this._raw.attributes.name ? this._raw.attributes.name : this._raw.attributes.call;
+	            return this._raw.attributes.brand.name;
 	        }
 	
 	        /**
@@ -3843,11 +3907,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'logo',
 	        get: function get() {
-	            if (this._raw.attributes.apps && this._raw.attributes.apps.npr_one && this._raw.attributes.apps.npr_one.logo) {
-	                return this._raw.attributes.apps.npr_one.logo;
-	            }
-	            if (this._raw.links.image) {
-	                for (var _iterator = this._raw.links.image, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+	            var primaryLogo = void 0;
+	            var fallbackLogo = void 0;
+	
+	            if (this._raw.links.brand) {
+	                for (var _iterator = this._raw.links.brand, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
 	                    var _ref;
 	
 	                    if (_isArray) {
@@ -3861,12 +3925,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	                    var link = _ref;
 	
-	                    if (link.type_id === '18' || link.type_id === '23') {
-	                        return link.href;
+	                    if (link.rel === 'logo') {
+	                        primaryLogo = link.href;
+	                        break;
+	                    } else if (link.rel === 'small-logo') {
+	                        fallbackLogo = link.href;
 	                    }
 	                }
 	            }
-	            return null;
+	
+	            return primaryLogo || fallbackLogo || null;
 	        }
 	
 	        /**
@@ -3880,7 +3948,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'tagline',
 	        get: function get() {
-	            return this._raw.attributes.tagline || '';
+	            return this._raw.attributes.brand.tagline || '';
 	        }
 	
 	        /**
@@ -3897,15 +3965,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'callSignAndFrequency',
 	        get: function get() {
+	            var brand = this._raw.attributes.brand;
 	            var callSignAndFrequency = '';
-	            if (this._raw.attributes.call) {
-	                callSignAndFrequency += this._raw.attributes.call;
+	            if (brand.call) {
+	                callSignAndFrequency += brand.call;
 	            }
-	            if (this._raw.attributes.band) {
-	                callSignAndFrequency += ' ' + this._raw.attributes.band;
+	            if (brand.band) {
+	                callSignAndFrequency += ' ' + brand.band;
 	            }
-	            if (this._raw.attributes.frequency) {
-	                callSignAndFrequency += ' ' + this._raw.attributes.frequency;
+	            if (brand.frequency) {
+	                callSignAndFrequency += ' ' + brand.frequency;
 	            }
 	            return callSignAndFrequency.trim() || null;
 	        }
@@ -3923,7 +3992,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'location',
 	        get: function get() {
-	            return this._raw.attributes.market_city + ', ' + this._raw.attributes.market_state;
+	            var brand = this._raw.attributes.brand;
+	            return brand.marketCity + ', ' + brand.marketState;
 	        }
 	
 	        /**
@@ -3935,8 +4005,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'homepageUrl',
 	        get: function get() {
-	            if (this._raw.links.web) {
-	                for (var _iterator2 = this._raw.links.web, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+	            if (this._raw.links.brand) {
+	                for (var _iterator2 = this._raw.links.brand, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
 	                    var _ref2;
 	
 	                    if (_isArray2) {
@@ -3950,7 +4020,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	                    var link = _ref2;
 	
-	                    if (link.type_id === '1') {
+	                    if (link.rel === 'homepage') {
 	                        return link.href;
 	                    }
 	                }
@@ -3959,7 +4029,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	        /**
-	         * Returns the URL to the station's online pledge page, if available.
+	         * Returns the URL to the station's online donation page, if available.
 	         *
 	         * @type {null|string}
 	         */
@@ -3967,11 +4037,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'donationUrl',
 	        get: function get() {
-	            if (this._raw.attributes.apps && this._raw.attributes.apps.npr_one && this._raw.attributes.apps.npr_one.donation_url) {
-	                return this._raw.attributes.apps.npr_one.donation_url;
-	            }
-	            if (this._raw.links.web) {
-	                for (var _iterator3 = this._raw.links.web, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+	            var preferredUrl = void 0;
+	            var fallbackUrl = void 0;
+	
+	            if (this._raw.links.donation) {
+	                for (var _iterator3 = this._raw.links.donation, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
 	                    var _ref3;
 	
 	                    if (_isArray3) {
@@ -3985,19 +4055,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	                    var link = _ref3;
 	
-	                    if (link.type_id === '4' || link.type_id === '27') {
-	                        return link.href;
+	                    if (link.typeId === '27') {
+	                        preferredUrl = link.href;
+	                        break;
+	                    } else if (link.typeId === '4') {
+	                        fallbackUrl = link.href;
 	                    }
 	                }
 	            }
-	            return null;
+	
+	            return preferredUrl || fallbackUrl || null;
+	        }
+	
+	        /**
+	         * Returns whether or not the station is eligible for inclusion in NPR One applications.
+	         *
+	         * @type {boolean}
+	         */
+	
+	    }, {
+	        key: 'isNprOneEligible',
+	        get: function get() {
+	            return this._raw.attributes.eligibility.nprOne;
 	        }
 	
 	        /**
 	         * Returns the raw attributes that represent this station. Please use this with caution; the public accessor methods
 	         * in this class should be sufficient for most use cases, and consumers should rarely need to use this additional
-	         * metadata. These attributes will also be changing in version 3 of the Station Finder Service, so we are
-	         * discouraging clients from writing code against these.
+	         * metadata.
 	         *
 	         * @type {StationAttributes}
 	         */
@@ -4331,7 +4416,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		var Logger = { };
 	
 		// For those that are at home that are keeping score.
-		Logger.VERSION = "1.2.0";
+		Logger.VERSION = "1.3.0";
 	
 		// Function which handles all incoming log messages.
 		var logHandler;
@@ -4480,9 +4565,10 @@ return /******/ (function(modules) { // webpackBootstrap
 				(contextualLoggersByNameMap[name] = new ContextualLogger(merge({ name: name }, globalLogger.context)));
 		};
 	
-		// Configure and example a Default implementation which writes to the `window.console` (if present).  The
-		// `options` hash can be used to configure the default logLevel and provide a custom message formatter.
-		Logger.useDefaults = function(options) {
+		// CreateDefaultHandler returns a handler function which can be passed to `Logger.setHandler()` which will
+		// write to the window's console object (if present); the optional options object can be used to customise the
+		// formatter used to format each log message.
+		Logger.createDefaultHandler = function (options) {
 			options = options || {};
 	
 			options.formatter = options.formatter || function defaultMessageFormatter(messages, context) {
@@ -4491,11 +4577,6 @@ return /******/ (function(modules) { // webpackBootstrap
 					messages.unshift("[" + context.name + "]");
 				}
 			};
-	
-			// Check for the presence of a logger.
-			if (typeof console === "undefined") {
-				return;
-			}
 	
 			// Map of timestamps by timer labels used to track `#time` and `#timeEnd()` invocations in environments
 			// that don't offer a native console method.
@@ -4506,8 +4587,12 @@ return /******/ (function(modules) { // webpackBootstrap
 				Function.prototype.apply.call(hdlr, console, messages);
 			};
 	
-			Logger.setLevel(options.defaultLevel || Logger.DEBUG);
-			Logger.setHandler(function(messages, context) {
+			// Check for the presence of a logger.
+			if (typeof console === "undefined") {
+				return function () { /* no console */ };
+			}
+	
+			return function(messages, context) {
 				// Convert arguments object to Array.
 				messages = Array.prototype.slice.call(messages);
 	
@@ -4548,7 +4633,14 @@ return /******/ (function(modules) { // webpackBootstrap
 					options.formatter(messages, context);
 					invokeConsoleMethod(hdlr, messages);
 				}
-			});
+			};
+		};
+	
+		// Configure and example a Default implementation which writes to the `window.console` (if present).  The
+		// `options` hash can be used to configure the default logLevel and provide a custom message formatter.
+		Logger.useDefaults = function(options) {
+			Logger.setLevel(options && options.defaultLevel || Logger.DEBUG);
+			Logger.setHandler(Logger.createDefaultHandler(options));
 		};
 	
 		// Export to popular environments boilerplate.
@@ -4688,9 +4780,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 	
+	var slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
+	
 	/**
 	 * These properties should not be copied or inherited from. This is only needed
-	 * for all non blob URL's as the a blob URL does not include a hash, only the
+	 * for all non blob URL's as a blob URL does not include a hash, only the
 	 * origin.
 	 *
 	 * @type {Object}
@@ -4707,7 +4801,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * encoded in the `pathname` so we can thankfully generate a good "default"
 	 * location from it so we can generate proper relative URL's again.
 	 *
-	 * @param {Object} loc Optional default location object.
+	 * @param {Object|String} loc Optional default location object.
 	 * @returns {Object} lolcation object.
 	 * @api public
 	 */
@@ -4724,9 +4818,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  } else if ('string' === type) {
 	    finaldestination = new URL(loc, {});
 	    for (key in ignore) delete finaldestination[key];
-	  } else if ('object' === type) for (key in loc) {
-	    if (key in ignore) continue;
-	    finaldestination[key] = loc[key];
+	  } else if ('object' === type) {
+	    for (key in loc) {
+	      if (key in ignore) continue;
+	      finaldestination[key] = loc[key];
+	    }
+	
+	    if (finaldestination.slashes === undefined) {
+	      finaldestination.slashes = slashes.test(loc.href);
+	    }
 	  }
 	
 	  return finaldestination;
@@ -4745,6 +4845,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return
 	  }
 	
+	  var support = {
+	    searchParams: 'URLSearchParams' in self,
+	    iterable: 'Symbol' in self && 'iterator' in Symbol,
+	    blob: 'FileReader' in self && 'Blob' in self && (function() {
+	      try {
+	        new Blob()
+	        return true
+	      } catch(e) {
+	        return false
+	      }
+	    })(),
+	    formData: 'FormData' in self,
+	    arrayBuffer: 'ArrayBuffer' in self
+	  }
+	
 	  function normalizeName(name) {
 	    if (typeof name !== 'string') {
 	      name = String(name)
@@ -4760,6 +4875,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	      value = String(value)
 	    }
 	    return value
+	  }
+	
+	  // Build a destructive iterator for the value list
+	  function iteratorFor(items) {
+	    var iterator = {
+	      next: function() {
+	        var value = items.shift()
+	        return {done: value === undefined, value: value}
+	      }
+	    }
+	
+	    if (support.iterable) {
+	      iterator[Symbol.iterator] = function() {
+	        return iterator
+	      }
+	    }
+	
+	    return iterator
 	  }
 	
 	  function Headers(headers) {
@@ -4817,6 +4950,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, this)
 	  }
 	
+	  Headers.prototype.keys = function() {
+	    var items = []
+	    this.forEach(function(value, name) { items.push(name) })
+	    return iteratorFor(items)
+	  }
+	
+	  Headers.prototype.values = function() {
+	    var items = []
+	    this.forEach(function(value) { items.push(value) })
+	    return iteratorFor(items)
+	  }
+	
+	  Headers.prototype.entries = function() {
+	    var items = []
+	    this.forEach(function(value, name) { items.push([name, value]) })
+	    return iteratorFor(items)
+	  }
+	
+	  if (support.iterable) {
+	    Headers.prototype[Symbol.iterator] = Headers.prototype.entries
+	  }
+	
 	  function consumed(body) {
 	    if (body.bodyUsed) {
 	      return Promise.reject(new TypeError('Already read'))
@@ -4847,22 +5002,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return fileReaderReady(reader)
 	  }
 	
-	  var support = {
-	    blob: 'FileReader' in self && 'Blob' in self && (function() {
-	      try {
-	        new Blob();
-	        return true
-	      } catch(e) {
-	        return false
-	      }
-	    })(),
-	    formData: 'FormData' in self,
-	    arrayBuffer: 'ArrayBuffer' in self
-	  }
-	
 	  function Body() {
 	    this.bodyUsed = false
-	
 	
 	    this._initBody = function(body) {
 	      this._bodyInit = body
@@ -4872,6 +5013,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._bodyBlob = body
 	      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
 	        this._bodyFormData = body
+	      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+	        this._bodyText = body.toString()
 	      } else if (!body) {
 	        this._bodyText = ''
 	      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
@@ -4886,6 +5029,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          this.headers.set('content-type', 'text/plain;charset=UTF-8')
 	        } else if (this._bodyBlob && this._bodyBlob.type) {
 	          this.headers.set('content-type', this._bodyBlob.type)
+	        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+	          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
 	        }
 	      }
 	    }
@@ -5007,7 +5152,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  function headers(xhr) {
 	    var head = new Headers()
-	    var pairs = xhr.getAllResponseHeaders().trim().split('\n')
+	    var pairs = (xhr.getAllResponseHeaders() || '').trim().split('\n')
 	    pairs.forEach(function(header) {
 	      var split = header.trim().split(':')
 	      var key = split.shift().trim()
@@ -5060,9 +5205,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return new Response(null, {status: status, headers: {location: url}})
 	  }
 	
-	  self.Headers = Headers;
-	  self.Request = Request;
-	  self.Response = Response;
+	  self.Headers = Headers
+	  self.Request = Request
+	  self.Response = Response
 	
 	  self.fetch = function(input, init) {
 	    return new Promise(function(resolve, reject) {
@@ -5085,26 +5230,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	          return xhr.getResponseHeader('X-Request-URL')
 	        }
 	
-	        return;
+	        return
 	      }
 	
 	      xhr.onload = function() {
-	        var status = (xhr.status === 1223) ? 204 : xhr.status
-	        if (status < 100 || status > 599) {
-	          reject(new TypeError('Network request failed'))
-	          return
-	        }
 	        var options = {
-	          status: status,
+	          status: xhr.status,
 	          statusText: xhr.statusText,
 	          headers: headers(xhr),
 	          url: responseURL()
 	        }
-	        var body = 'response' in xhr ? xhr.response : xhr.responseText;
+	        var body = 'response' in xhr ? xhr.response : xhr.responseText
 	        resolve(new Response(body, options))
 	      }
 	
 	      xhr.onerror = function() {
+	        reject(new TypeError('Network request failed'))
+	      }
+	
+	      xhr.ontimeout = function() {
 	        reject(new TypeError('Network request failed'))
 	      }
 	

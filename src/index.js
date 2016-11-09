@@ -387,6 +387,10 @@ export default class NprOneSDK
      * @returns {string}
      */
     static getServiceUrl(service) {
+        // @TODO we need to figure out a better long-term solution for the individually-versioned services
+        if (service === 'stationfinder') {
+            return `${NprOneSDK.config.apiBaseUrl}/${service}/v3`;
+        }
         return `${NprOneSDK.config.apiBaseUrl}/${service}/${NprOneSDK.config.apiVersion}`;
     }
 }

@@ -134,19 +134,16 @@ var StationFinder = function () {
 
 
     StationFinder.prototype.getStationDetails = function getStationDetails(stationId) {
-        return StationFinder.validateStation(stationId).then(function (searchResult) {
-            return new _station2.default(searchResult);
-        });
+        return StationFinder.validateStation(stationId);
     };
 
     /**
      * Ensures a station ID is associated with a valid NPR station. While this technically returns the raw JSON for
      * this station if it exists, these results are not meant to be consumed directly; if you need the station details to display to your end-user,
-     * use {@link getStationDetails} instead, which calls this function under-the-hood and returns the results parsed
-     * into a {@link Station} model.
+     * use {@link getStationDetails} instead.
      *
      * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
-     * @returns {Promise}
+     * @returns {Promise<Station>}
      */
 
 
@@ -156,9 +153,15 @@ var StationFinder = function () {
             return Promise.reject(new Error('Station ID must be an integer greater than 0'));
         }
 
-        var url = _index2.default.getServiceUrl('stationfinder') + '/organizations/' + stationId;
+        var url = _index2.default.getServiceUrl('stationfinder') + '/stations/' + stationId;
 
-        return _fetchUtil2.default.nprApiFetch(url);
+        return _fetchUtil2.default.nprApiFetch(url).then(function (searchResult) {
+            var station = new _station2.default(searchResult);
+            if (!station.isNprOneEligible) {
+                throw new Error('The station ' + station.id + ' is not eligible for NPR One.');
+            }
+            return station;
+        });
     };
 
     /**
@@ -180,7 +183,7 @@ var StationFinder = function () {
         var city = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
         var state = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
 
-        var url = _index2.default.getServiceUrl('stationfinder') + '/organizations';
+        var url = _index2.default.getServiceUrl('stationfinder') + '/stations';
 
         var queryString = '';
         if (query) {
@@ -192,7 +195,7 @@ var StationFinder = function () {
             if (typeof lat !== 'number' || typeof long !== 'number') {
                 throw new TypeError('Latitude and longitude must both be valid numbers (floats)');
             }
-            queryString = 'lat=' + lat + '&long=' + long;
+            queryString = 'lat=' + lat + '&lon=' + long;
         } else {
             if (city) {
                 if (typeof city !== 'string') {
@@ -227,7 +230,9 @@ var StationFinder = function () {
                     var searchResult = _ref;
 
                     var station = new _station2.default(searchResult);
-                    stations.push(station);
+                    if (station.isNprOneEligible) {
+                        stations.push(station);
+                    }
                 }
             }
 
