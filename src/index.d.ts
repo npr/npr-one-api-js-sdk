@@ -397,9 +397,7 @@ export interface Station {
     displayName: string;
 
     /**
-     * The logo for this station, if one can be found. If it exists, the NPR One-specific logo will take
-     * precedence, but it will fall back to the regular station logo if not present. If no logo can be found at all,
-     * this will return `null`.
+     * The logo for this station, if one can be found. If no logo can be found at all, this will return `null`.
      */
     logo?: string;
 

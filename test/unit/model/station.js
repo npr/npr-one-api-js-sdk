@@ -42,10 +42,10 @@ describe('Station', () => {
             station.logo.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.brand[1].href);
         });
 
-        it('should equal rel="small-logo" brand link if equal rel="logo" brand link does not exist', () => {
+        it('should be null and NOT the rel="small-logo" brand link if equal rel="logo" brand link does not exist', () => {
             responseClone.links.brand.shift(); // homepage
             responseClone.links.brand.shift(); // logo
-            station.logo.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.brand[2].href);
+            chai.expect(station.logo).to.not.be.ok;
         });
 
         it('should be null if none of the above exist', () => {

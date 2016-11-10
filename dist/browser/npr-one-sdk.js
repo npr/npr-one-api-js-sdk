@@ -3897,9 +3897,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	        /**
-	         * Returns the logo for this station, if one can be found. If it exists, the NPR One-specific logo will take
-	         * precedence, but it will fall back to the regular station logo if not present. If no logo can be found at all,
-	         * this will return `null`.
+	         * Returns the logo for this station, if one can be found. If no logo can be found at all, this will return `null`.
 	         *
 	         * @type {null|string}
 	         */
@@ -3907,9 +3905,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'logo',
 	        get: function get() {
-	            var primaryLogo = void 0;
-	            var fallbackLogo = void 0;
-	
 	            if (this._raw.links.brand) {
 	                for (var _iterator = this._raw.links.brand, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
 	                    var _ref;
@@ -3926,15 +3921,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var link = _ref;
 	
 	                    if (link.rel === 'logo') {
-	                        primaryLogo = link.href;
-	                        break;
-	                    } else if (link.rel === 'small-logo') {
-	                        fallbackLogo = link.href;
+	                        return link.href;
 	                    }
 	                }
 	            }
-	
-	            return primaryLogo || fallbackLogo || null;
+	            return null;
 	        }
 	
 	        /**
@@ -3965,8 +3956,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'callSignAndFrequency',
 	        get: function get() {
-	            var brand = this._raw.attributes.brand;
 	            var callSignAndFrequency = '';
+	            var brand = this._raw.attributes.brand;
 	            if (brand.call) {
 	                callSignAndFrequency += brand.call;
 	            }

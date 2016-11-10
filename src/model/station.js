@@ -36,28 +36,19 @@ export default class Station extends CollectionDoc {
     }
 
     /**
-     * Returns the logo for this station, if one can be found. If it exists, the NPR One-specific logo will take
-     * precedence, but it will fall back to the regular station logo if not present. If no logo can be found at all,
-     * this will return `null`.
+     * Returns the logo for this station, if one can be found. If no logo can be found at all, this will return `null`.
      *
      * @type {null|string}
      */
     get logo() {
-        let primaryLogo;
-        let fallbackLogo;
-
         if (this._raw.links.brand) {
             for (const link of this._raw.links.brand) {
                 if (link.rel === 'logo') {
-                    primaryLogo = link.href;
-                    break;
-                } else if (link.rel === 'small-logo') {
-                    fallbackLogo = link.href;
+                    return link.href;
                 }
             }
         }
-
-        return primaryLogo || fallbackLogo || null;
+        return null;
     }
 
     /**

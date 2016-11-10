@@ -139,9 +139,7 @@ var Station = function (_CollectionDoc) {
         }
 
         /**
-         * Returns the logo for this station, if one can be found. If it exists, the NPR One-specific logo will take
-         * precedence, but it will fall back to the regular station logo if not present. If no logo can be found at all,
-         * this will return `null`.
+         * Returns the logo for this station, if one can be found. If no logo can be found at all, this will return `null`.
          *
          * @type {null|string}
          */
@@ -149,9 +147,6 @@ var Station = function (_CollectionDoc) {
     }, {
         key: 'logo',
         get: function get() {
-            var primaryLogo = void 0;
-            var fallbackLogo = void 0;
-
             if (this._raw.links.brand) {
                 for (var _iterator = this._raw.links.brand, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
                     var _ref;
@@ -168,15 +163,11 @@ var Station = function (_CollectionDoc) {
                     var link = _ref;
 
                     if (link.rel === 'logo') {
-                        primaryLogo = link.href;
-                        break;
-                    } else if (link.rel === 'small-logo') {
-                        fallbackLogo = link.href;
+                        return link.href;
                     }
                 }
             }
-
-            return primaryLogo || fallbackLogo || null;
+            return null;
         }
 
         /**
@@ -207,8 +198,8 @@ var Station = function (_CollectionDoc) {
     }, {
         key: 'callSignAndFrequency',
         get: function get() {
-            var brand = this._raw.attributes.brand;
             var callSignAndFrequency = '';
+            var brand = this._raw.attributes.brand;
             if (brand.call) {
                 callSignAndFrequency += brand.call;
             }
