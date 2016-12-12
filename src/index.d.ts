@@ -397,9 +397,7 @@ export interface Station {
     displayName: string;
 
     /**
-     * The logo for this station, if one can be found. If it exists, the NPR One-specific logo will take
-     * precedence, but it will fall back to the regular station logo if not present. If no logo can be found at all,
-     * this will return `null`.
+     * The logo for this station, if one can be found. If no logo can be found at all, this will return `null`.
      */
     logo?: string;
 
@@ -432,8 +430,11 @@ export interface Station {
     /** The URL to the station's website, if available. */
     homepageUrl?: string;
 
-    /** The URL to the station's online pledge page, if available. */
+    /** The URL to the station's online donation page, if available. */
     donationUrl?: string;
+
+    /** Whether or not the station is eligible for inclusion in NPR One applications. */
+    isNprOneEligible: boolean;
 
     /**
      * The raw attributes that represent this station. Please use this with caution; the public accessor methods
@@ -647,7 +648,7 @@ export default class NprOneSDK {
 
     /** Exposes the Logger class for clients to adjust logging if desired */
     static Logger: Logger;
-    
+
     /**
      * Attempts to swap the existing access token for a new one using the refresh token endpoint in the OAuth proxy
      *

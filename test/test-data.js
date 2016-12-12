@@ -516,378 +516,415 @@ export const DEVICE_CODE_EXPIRED_RESPONSE = {
 
 export const STATION_FINDER_RESPONSE = {
     "version": "1.0",
-    "href": "https://api.npr.org/stationfinder/v2/organizations",
+    "href": "https:\/\/api.npr.org\/stationfinder\/v3\/stations",
     "attributes": {
         "query": "boston"
     },
-    "items": [
-        {
-            "version": "1.0",
-            "href": "https://api.npr.org/stationfinder/v2/organizations/330",
-            "attributes": {
-                "apps": {
-                    "npr_one": {
-                        "logo": "http://media.npr.org/images/stations/nprone_logos/wbur_fm.png",
-                        "hello_id_audio": [
-                            "http://download.npr.org/npr-mp4/nprone/hello/amidst1/330.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/bitterthings1/330.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/bitterthings2/330.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/brother1/330.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/dechval1/330.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/halcyon1/330.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/halcyon2/330.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/lastwespoke1/330.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/magictime1/330.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/saromost1/330.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/scholars1/330.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/scholars2/330.mp4"
-                        ],
-                        "sonic_id_audio": [
-                            "http://download.npr.org/npr-mp4/sonicid/01/330.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/02/330.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/03/330.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/04/330.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/05/330.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/06/330.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/07/330.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/08/330.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/09/330.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/10/330.mp4"
-                        ],
-                        "thankyou_audio": null,
-                        "donation_audio": "http://download.npr.org/npr-mp4/donation/330_4a2e0ae9197a6c7f2891fe9025b60e6d.mp4",
-                        "name": "WBUR",
-                        "donation_url": "http://www.wbur.org/support"
-                    }
-                },
-                "guid": "4fcf70100aa8456b8ce1c8ffebbbccbf",
-                "org_id": "330",
-                "name": "WBUR",
-                "title": "WBUR-FM",
-                "abbreviation": "WBUR-FM",
+    "items": [{
+        "version": "1.0",
+        "href": "https:\/\/api.npr.org\/stationfinder\/v3\/stations\/330",
+        "attributes": {
+            "orgId": "330",
+            "guid": "4fcf70100aa8456b8ce1c8ffebbbccbf",
+            "eligibility": {
+                "nprOne": true,
+                "status": "1",
+                "musicOnly": false,
+                "format": "Public Radio"
+            },
+            "brand": {
+                "band": "FM",
                 "call": "WBUR",
                 "frequency": "90.9",
-                "band": "FM",
-                "tagline": "Boston's NPR News Station",
-                "address": [
-                    "890 Commonwealth Avenue",
-                    "Boston",
-                    "MA",
-                    "02215"
-                ],
-                "market_city": "Boston",
-                "market_state": "MA",
-                "format": "Public Radio",
-                "music_only": false,
-                "status": "1",
-                "status_name": "Member",
-                "email": "info@wbur.bu.edu",
-                "area_code": null,
-                "phone": "6173530909",
-                "phone_extension": null,
-                "fax": "6173534747",
-                "network": {
-                    "name": "WBUR",
-                    "org_id": "329"
-                },
-                "npr_one": true
+                "marketCity": "Boston",
+                "marketState": "MA",
+                "name": "WBUR",
+                "tagline": "Boston's NPR News Station"
             },
-            "items": [],
-            "links": {
-                "web": [
-                    {
-                        "type_id": "1",
-                        "type_name": "Organization Home Page",
-                        "title": "Home",
-                        "href": "http://www.wbur.org"
-                    },
-                    {
-                        "type_id": "4",
-                        "type_name": "Pledge Page",
-                        "title": "Support",
-                        "href": "http://www.wbur.org/support"
-                    },
-                    {
-                        "type_id": "27",
-                        "type_name": "Pledge Page FAKE FOR TESTING",
-                        "title": "Support FAKE FOR TESTING",
-                        "href": "http://www.wbur.org/support/fakefortesting"
-                    }
-                ],
-                "related": [
-                    {
-                        "type_id": "7",
-                        "type_name": "Audio Stream Landing Page",
-                        "title": "Listen Live",
-                        "href": "http://www.wbur.org/listen/"
-                    },
-                    {
-                        "type_id": "9",
-                        "type_name": "Podcast",
-                        "title": "WBUR: Daily News Podcast",
-                        "href": "http://feeds.feedburner.com/news/podcast"
-                    },
-                    {
-                        "type_id": "9",
-                        "type_name": "Podcast",
-                        "title": "Radio Boston Podcast",
-                        "href": "http://feeds.feedburner.com/radioboston/podcast"
-                    },
-                    {
-                        "type_id": "9",
-                        "type_name": "Podcast",
-                        "title": "Dear Sugar Radio",
-                        "href": "http://feeds.feedburner.com/dearsugar/podcast"
-                    },
-                    {
-                        "type_id": "9",
-                        "type_name": "Podcast",
-                        "title": "Modern Love",
-                        "href": "http://feeds.feedburner.com/modernlove/podcast"
-                    }
-                ],
-                "audio": [
-                    {
-                        "type_id": "10",
-                        "type_name": "Audio MP3 Stream",
-                        "title": "90.9 WBUR, Boston's NPR News Station",
-                        "href": "http://audio.wbur.org/stream/live_mp3.m3u",
-                        "stream_guid": null,
-                        "primary_stream": true
-                    },
-                    {
-                        "type_id": "10",
-                        "type_name": "Audio MP3 Stream",
-                        "title": "90.9 WBUR, Boston's NPR News Station",
-                        "href": "http://audio.wbur.org/stream/live_mp3.m3u",
-                        "stream_guid": "4fcf716b025e4953a43696cd3bc11900",
-                        "primary_stream": true
-                    },
-                    {
-                        "type_id": "13",
-                        "type_name": "Audio AAC Stream",
-                        "title": "90.9 WBUR, Boston's NPR News Station",
-                        "href": "http://audio.wbur.org/stream/live_aac.m3u",
-                        "stream_guid": null,
-                        "primary_stream": true
-                    },
-                    {
-                        "type_id": "13",
-                        "type_name": "Audio AAC Stream",
-                        "title": "90.9 WBUR, Boston's NPR News Station",
-                        "href": "http://audio.wbur.org/stream/live_aac.m3u",
-                        "stream_guid": "4fcf716b025e4953a43696cd3bc11900",
-                        "primary_stream": true
-                    }
-                ],
-                "image": [
-                    {
-                        "type_id": "18",
-                        "href": "https://placekitten.com/500/700"
-                    },
-                    {
-                        "type_id": "23",
-                        "href": "https://placekitten.com/400/700"
-                    },
-                    {
-                        "type_id": "99",
-                        "href": "https://invalid"
-                    }
-                ]
-            },
-            "errors": []
+            "network": {
+                "currentOrgId": "330",
+                "usesInheritance": false
+            }
         },
-        {
-            "version": "1.0",
-            "href": "https://api.npr.org/stationfinder/v2/organizations/396",
-            "attributes": {
-                "apps": {
-                    "npr_one": {
-                        "logo": "https://media.npr.org/images/stations/nprone_logos/wgbh_fm.png",
-                        "hello_id_audio": [
-                            "http://download.npr.org/npr-mp4/nprone/hello/amidst1/396.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/bitterthings1/396.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/bitterthings2/396.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/brother1/396.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/dechval1/396.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/halcyon1/396.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/halcyon2/396.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/lastwespoke1/396.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/magictime1/396.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/saromost1/396.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/scholars1/396.mp4",
-                            "http://download.npr.org/npr-mp4/nprone/hello/scholars2/396.mp4"
-                        ],
-                        "sonic_id_audio": [
-                            "http://download.npr.org/npr-mp4/sonicid/01/396.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/02/396.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/03/396.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/04/396.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/05/396.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/06/396.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/07/396.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/08/396.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/09/396.mp4",
-                            "http://download.npr.org/npr-mp4/sonicid/10/396.mp4"
-                        ],
-                        "thankyou_audio": "http://download.npr.org/npr-mp4/thankyou/396.mp4",
-                        "donation_audio": null,
-                        "name": "WGBH",
-                        "donation_url": "http://be.wgbh.org/donate/news/radio_donate.html"
-                    }
-                },
-                "guid": "4fcf70101c244d7686c748bb88a50795",
-                "org_id": "396",
-                "name": "WGBH News",
-                "title": "WGBH-FM",
-                "abbreviation": "WGBH-FM",
+        "items": [],
+        "links": {
+            "brand": [{
+                "rel": "homepage",
+                "href": "http:\/\/www.wbur.org",
+                "content-type": "text\/html"
+            }, {
+                "rel": "logo",
+                "href": "http:\/\/media.npr.org\/images\/stations\/nprone_logos\/wbur_fm.png",
+                "content-type": "image\/png"
+            }, {
+                "rel": "small-logo",
+                "href": "http:\/\/media.npr.org\/images\/stations\/logos\/wbur_fm.gif",
+                "content-type": "image\/gif"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/05\/330.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/10\/330.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/01\/330.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/06\/330.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/02\/330.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/07\/330.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/03\/330.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/08\/330.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/04\/330.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/09\/330.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "facebook",
+                "href": "http:\/\/www.facebook.com\/wburnews",
+                "content-type": "text\/html"
+            }, {
+                "rel": "twitter",
+                "href": "https:\/\/twitter.com\/wbur",
+                "content-type": "text\/html"
+            }],
+            "podcasts": [{
+                "guid": "0d027325710f4c7a90e9732fc4c0f287",
+                "href": "http:\/\/feeds.feedburner.com\/news\/podcast",
+                "title": "WBUR: Daily News Podcast",
+                "typeId": "9",
+                "typeName": "Podcast"
+            }, {
+                "guid": "f26a56c2dfae4e9eaae383865a2758c7",
+                "href": "http:\/\/feeds.feedburner.com\/radioboston\/podcast",
+                "title": "Radio Boston Podcast",
+                "typeId": "9",
+                "typeName": "Podcast"
+            }, {
+                "guid": "aa1e68193b244416adaf82f3a35b7e17",
+                "href": "http:\/\/feeds.feedburner.com\/dearsugar\/podcast",
+                "title": "Dear Sugar Radio",
+                "typeId": "9",
+                "typeName": "Podcast"
+            }, {
+                "guid": "80ae56e1a769436b9e09f2a1be13cdac",
+                "href": "http:\/\/feeds.feedburner.com\/modernlove\/podcast",
+                "title": "Modern Love",
+                "typeId": "9",
+                "typeName": "Podcast"
+            }],
+            "streams": [{
+                "guid": "e420ca7fa570417d91f1d3f384b72362",
+                "href": "http:\/\/audio.wbur.org\/stream\/live_mp3.m3u",
+                "isPrimaryStream": true,
+                "title": "90.9 WBUR, Boston's NPR News Station",
+                "typeId": "10",
+                "typeName": "Audio MP3 Stream"
+            }, {
+                "guid": "1ece4a1938054785affc0e49659b8eee",
+                "href": "http:\/\/audio.wbur.org\/stream\/live_aac.m3u",
+                "isPrimaryStream": true,
+                "title": "90.9 WBUR, Boston's NPR News Station",
+                "typeId": "13",
+                "typeName": "Audio AAC Stream"
+            }],
+            "donation": [{
+                "guid": "1e65eb2e4dcd4aa788c206d5189adc4a",
+                "href": "http:\/\/www.wbur.org\/support",
+                "title": "Support",
+                "typeId": "4",
+                "typeName": "Pledge Page"
+            }, {
+                "guid": "dd411a7352ab47108625b93addbfdcc4",
+                "href": "http:\/\/www.wbur.org\/support",
+                "title": "NPR One",
+                "typeId": "27",
+                "typeName": "Station NPR One Pledge Page"
+            }, {
+                "guid": "34872b96ca3848cd9c623a4ce8a61cd0",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/donation\/330_4a2e0ae9197a6c7f2891fe9025b60e6d.mp4",
+                "title": "Station Pledge Audio",
+                "typeId": "28",
+                "typeName": "Station Pledge Audio"
+            }]
+        },
+        "errors": []
+    }, {
+        "version": "1.0",
+        "href": "https:\/\/api.npr.org\/stationfinder\/v3\/stations\/396",
+        "attributes": {
+            "orgId": "396",
+            "guid": "4fcf70101c244d7686c748bb88a50795",
+            "newscast": {
+                "id": "396",
+                "recency": null
+            },
+            "eligibility": {
+                "nprOne": true,
+                "status": "1",
+                "musicOnly": false,
+                "format": "Public Radio"
+            },
+            "brand": {
+                "band": "FM",
                 "call": "WGBH",
                 "frequency": "89.7",
-                "band": "FM",
-                "tagline": "Boston's Local NPR",
-                "address": [
-                    "1 Guest Street",
-                    "Boston",
-                    "MA",
-                    "02135"
-                ],
-                "market_city": "Boston",
-                "market_state": "MA",
-                "format": "Public Radio",
-                "music_only": false,
+                "marketCity": "Boston",
+                "marketState": "MA",
+                "name": "WGBH News",
+                "tagline": "Boston's Local NPR"
+            },
+            "network": {
+                "currentOrgId": "396",
+                "usesInheritance": false
+            }
+        },
+        "items": [],
+        "links": {
+            "brand": [{
+                "rel": "homepage",
+                "href": "http:\/\/www.wgbh.org\/897",
+                "content-type": "text\/html"
+            }, {
+                "rel": "logo",
+                "href": "https:\/\/media.npr.org\/images\/stations\/nprone_logos\/wgbh_fm.png",
+                "content-type": "image\/png"
+            }, {
+                "rel": "small-logo",
+                "href": "https:\/\/media.npr.org\/images\/stations\/logos\/wgbh_fm.gif",
+                "content-type": "image\/gif"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/10\/396.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/01\/396.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/06\/396.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/02\/396.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/07\/396.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/03\/396.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/08\/396.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/04\/396.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/09\/396.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/05\/396.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "hello-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/stationid\/396.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "facebook",
+                "href": "http:\/\/www.facebook.com\/WGBHBoston",
+                "content-type": "text\/html"
+            }, {
+                "rel": "twitter",
+                "href": "https:\/\/twitter.com\/wgbh",
+                "content-type": "text\/html"
+            }],
+            "podcasts": [{
+                "guid": "d4b7d49cf72c46d892ca1f4658cf3075",
+                "href": "http:\/\/streams.wgbh.org\/online\/clas\/clas_performance.xml",
+                "title": "Classical Performance Podcast",
+                "typeId": "9",
+                "typeName": "Podcast"
+            }, {
+                "guid": "12200d5b972d44b087b2d61f94302439",
+                "href": "http:\/\/streams.wgbh.org\/online\/gb\/btp_audio\/btp_audio.xml",
+                "title": "Greater Boston's Beat the Press",
+                "typeId": "9",
+                "typeName": "Podcast"
+            }, {
+                "guid": "1154ef1867b1415788f942873d6badd7",
+                "href": "http:\/\/www.theworld.org\/rss\/health.xml",
+                "title": "The World's Global Health Podcast",
+                "typeId": "9",
+                "typeName": "Podcast"
+            }, {
+                "guid": "5cceff9b3b964e45beeb9ddfb5ef938c",
+                "href": "http:\/\/broadband.wgbh.org\/nova\/rss\/nova-podcast-ao.xml",
+                "title": "NOVA | PBS",
+                "typeId": "9",
+                "typeName": "Podcast"
+            }, {
+                "guid": "58032177c984491b93e8e679530e5c8d",
+                "href": "http:\/\/www.theworld.org\/rss\/glohit.xml",
+                "title": "The World's Global Hit Podcast",
+                "typeId": "9",
+                "typeName": "Podcast"
+            }, {
+                "guid": "8c95a6ee160048c6a74cdb44ec9e3a32",
+                "href": "http:\/\/www.theworld.org\/rss\/twiw.xml",
+                "title": "PRI's The World: The World in Words",
+                "typeId": "9",
+                "typeName": "Podcast"
+            }],
+            "streams": [{
+                "guid": "aa20904cb45540b388e8b7de52a1d998",
+                "href": "http:\/\/audio.wgbh.org:8100\/",
+                "isPrimaryStream": false,
+                "title": "Celtic Sojourn",
+                "typeId": "10",
+                "typeName": "Audio MP3 Stream"
+            }, {
+                "guid": "1413ee87652744769a61b7a1ca0d1c42",
+                "href": "http:\/\/audio.wgbh.org:8000\/",
+                "isPrimaryStream": true,
+                "title": "WGBH News",
+                "typeId": "10",
+                "typeName": "Audio MP3 Stream"
+            }, {
+                "guid": "c6cf9fb1ddd843e18ee963e3b0f20fa1",
+                "href": "http:\/\/audio.wgbh.org:8104\/",
+                "isPrimaryStream": false,
+                "title": "WGBH Jazz Decades",
+                "typeId": "10",
+                "typeName": "Audio MP3 Stream"
+            }],
+            "donation": [{
+                "guid": "fa29092244d744cc95e9c4a6617e4320",
+                "href": "http:\/\/be.wgbh.org\/donate\/news\/radio_donate.html",
+                "title": "Support 89.7 WGBH News",
+                "typeId": "4",
+                "typeName": "Pledge Page"
+            }, {
+                "guid": "dcf3b29a89234fa7b97ca30e3274f477",
+                "href": "http:\/\/be.wgbh.org\/donate\/news\/radio_donate.html",
+                "title": "Support 89.7 WGBH News",
+                "typeId": "27",
+                "typeName": "Station NPR One Pledge Page"
+            }]
+        },
+        "errors": []
+    }, {
+        "version": "1.0",
+        "href": "https:\/\/api.npr.org\/stationfinder\/v3\/stations\/1209",
+        "attributes": {
+            "orgId": "1209",
+            "guid": "4fcf701500274b4894ddc86639f47dab",
+            "eligibility": {
+                "nprOne": false,
                 "status": "1",
-                "status_name": "Member",
-                "email": "feedback@wgbh.org",
-                "area_code": null,
-                "phone": "6173002000",
-                "phone_extension": null,
-                "fax": "6173001025",
-                "network": {
-                    "name": "WGBH Radio",
-                    "org_id": "395"
-                },
-                "npr_one": true
+                "musicOnly": true,
+                "format": "Adult Album Alternative"
             },
-            "items": [],
-            "links": {
-                "web": [
-                    {
-                        "type_id": "1",
-                        "type_name": "Organization Home Page",
-                        "title": "89.7 WGBH News",
-                        "href": "http://www.wgbh.org/897"
-                    },
-                    {
-                        "type_id": "4",
-                        "type_name": "Pledge Page",
-                        "title": "Support 89.7 WGBH News",
-                        "href": "http://be.wgbh.org/donate/news/radio_donate.html"
-                    }
-                ],
-                "related": [
-                    {
-                        "type_id": "7",
-                        "type_name": "Audio Stream Landing Page",
-                        "title": "Celtic Sojourn",
-                        "href": "http://www.wgbh.org/listen/index.cfm"
-                    },
-                    {
-                        "type_id": "7",
-                        "type_name": "Audio Stream Landing Page",
-                        "title": "Classical New England",
-                        "href": "http://www.wgbh.org/listen/index.cfm"
-                    },
-                    {
-                        "type_id": "7",
-                        "type_name": "Audio Stream Landing Page",
-                        "title": "Jazz Decades",
-                        "href": "http://www.wgbh.org/listen/index.cfm"
-                    },
-                    {
-                        "type_id": "7",
-                        "type_name": "Audio Stream Landing Page",
-                        "title": "89.7 WGBH",
-                        "href": "http://www.wgbh.org/897"
-                    },
-                    {
-                        "type_id": "7",
-                        "type_name": "Audio Stream Landing Page",
-                        "title": "WCAI-FM",
-                        "href": "http://www.wgbh.org/wcai/"
-                    },
-                    {
-                        "type_id": "9",
-                        "type_name": "Podcast",
-                        "title": "Greater Boston's Beat the Press",
-                        "href": "http://streams.wgbh.org/online/gb/btp_audio/btp_audio.xml"
-                    },
-                    {
-                        "type_id": "9",
-                        "type_name": "Podcast",
-                        "title": "NOVA | PBS",
-                        "href": "http://broadband.wgbh.org/nova/rss/nova-podcast-ao.xml"
-                    },
-                    {
-                        "type_id": "9",
-                        "type_name": "Podcast",
-                        "title": "Classical Performance Podcast",
-                        "href": "http://streams.wgbh.org/online/clas/clas_performance.xml"
-                    },
-                    {
-                        "type_id": "9",
-                        "type_name": "Podcast",
-                        "title": "The World's Global Health Podcast",
-                        "href": "http://www.theworld.org/rss/health.xml"
-                    },
-                    {
-                        "type_id": "9",
-                        "type_name": "Podcast",
-                        "title": "The World's Global Hit Podcast",
-                        "href": "http://www.theworld.org/rss/glohit.xml"
-                    },
-                    {
-                        "type_id": "9",
-                        "type_name": "Podcast",
-                        "title": "PRI's The World: The World in Words",
-                        "href": "http://www.theworld.org/rss/twiw.xml"
-                    }
-                ],
-                "audio": [
-                    {
-                        "type_id": "10",
-                        "type_name": "Audio MP3 Stream",
-                        "title": "WGBH Jazz Decades",
-                        "href": "http://audio.wgbh.org/otherWaysToListen/jazzDecades.m3u",
-                        "stream_guid": "4fcf714c1f52460a93bcf1887593a22e",
-                        "primary_stream": false
-                    },
-                    {
-                        "type_id": "10",
-                        "type_name": "Audio MP3 Stream",
-                        "title": "Celtic Sojourn",
-                        "href": "http://audio.wgbh.org/otherWaysToListen/jazzDecades.m3u",
-                        "stream_guid": "4fcf714c234847488565090e6c05c038",
-                        "primary_stream": false
-                    },
-                    {
-                        "type_id": "10",
-                        "type_name": "Audio MP3 Stream",
-                        "title": "WGBH News",
-                        "href": "http://audio.wgbh.org:8000/",
-                        "stream_guid": "14b79c94bd1010146c592f11fc322a99",
-                        "primary_stream": true
-                    },
-                    {
-                        "type_id": "15",
-                        "type_name": "Newscast",
-                        "title": "WGBH News",
-                        "href": "http://news.wgbh.org"
-                    }
-                ]
+            "brand": {
+                "band": "FM",
+                "call": "WNKE",
+                "frequency": "104.1",
+                "marketCity": "New Boston",
+                "marketState": "OH",
+                "name": "WNKE-FM",
+                "tagline": "Public Radio that Rocks!"
             },
-            "errors": []
-        }
-    ],
+            "network": {
+                "currentOrgId": "1209",
+                "usesInheritance": false
+            }
+        },
+        "items": [],
+        "links": {
+            "brand": [{
+                "rel": "homepage",
+                "href": "http:\/\/www.wnku.org",
+                "content-type": "text\/html"
+            }, {
+                "rel": "small-logo",
+                "href": "http:\/\/media.npr.org\/images\/stations\/logos\/wnke_fm.gif",
+                "content-type": "image\/gif"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/05\/1209.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/10\/1209.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/01\/1209.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/06\/1209.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/02\/1209.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/07\/1209.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/03\/1209.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/08\/1209.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/04\/1209.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "sonic-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/09\/1209.mp4",
+                "content-type": "audio\/aac"
+            }, {
+                "rel": "hello-id-audio",
+                "href": "http:\/\/download.npr.org\/npr-mp4\/stationid\/1209.mp4",
+                "content-type": "audio\/aac"
+            }]
+        },
+        "errors": []
+    }],
     "links": {},
     "errors": []
 };
