@@ -43,7 +43,7 @@ export default class NprOneSDK
      * @typedef {Object} Config
      * @property {string} [apiBaseUrl='https://api.npr.org'] The NPR One API hostname and protocol, typically `https://api.npr.org`; in most cases, this does not need to be manually set by clients
      * @property {string} [apiVersion='v2'] The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients
-     * @property {string} [authProxyBaseUrl] The full URL to your OAuth proxy, e.g. `http://one.example.com/oauth2/`
+     * @property {string} [authProxyBaseUrl] The full URL to your OAuth proxy, e.g. `https://one.example.com/oauth2/`
      * @property {string} [newDeviceCodePath='/device'] The path to your proxy for starting a `device_code` grant (relative to `authProxyBaseUrl`)
      * @property {string} [pollDeviceCodePath='/device/poll'] The path to your proxy for polling a `device_code` grant (relative to `authProxyBaseUrl`)
      * @property {string} [refreshTokenPath='/refresh'] The path to your proxy for the `refresh_token` grant (relative to `authProxyBaseUrl`)

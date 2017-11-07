@@ -44,7 +44,7 @@ var delay = function delay(ms) {
 };
 
 /**
- * Encapsulates all of the logic for communication with the [Authorization Service](http://dev.npr.org/api/#/authorization)
+ * Encapsulates all of the logic for communication with the [Authorization Service](https://dev.npr.org/api/#/authorization)
  * in the NPR One API.
  *
  * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
@@ -191,7 +191,7 @@ var Authorization = function () {
      *         });
      * }
      *
-     * @see http://dev.npr.org/guide/services/authorization/#device_code
+     * @see https://dev.npr.org/guide/services/authorization/#device_code
      *
      * @param {Array<string>} [scopes=[]]   The scopes (as strings) that should be associated with the resulting access token
      * @returns {Promise<DeviceCode>}
@@ -248,7 +248,7 @@ var Authorization = function () {
      *         });
      * }
      *
-     * @see http://dev.npr.org/guide/services/authorization/#device_code
+     * @see https://dev.npr.org/guide/services/authorization/#device_code
      *
      * @returns {Promise<AccessToken>}
      * @throws {TypeError} if an OAuth proxy is not configured or `getDeviceCode()` was not previously called

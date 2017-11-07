@@ -65,18 +65,18 @@ For testing:
 
 A few other nifty tools we use as part of our development, CI and release processes:
 
-- [ESLint](http://eslint.org/) - The pluggable linting utility for JavaScript and JSX
+- [ESLint](https://eslint.org/) - The pluggable linting utility for JavaScript and JSX
 - [ESDoc](https://esdoc.org/) - A documentation generator for JavaScript (ES6)
 - [Semantic Release](https://github.com/semantic-release/semantic-release) - Fully automated package publishing
-- [Commitizen](http://commitizen.github.io/cz-cli/) - Simple commit conventions for internet citizens
+- [Commitizen](https://commitizen.github.io/cz-cli/) - Simple commit conventions for internet citizens
 
 ### Setup
 
 #### Prerequisites
 
-A recent version of [node.js](http://nodejs.org) (v4.x or newer) and [npm](http://npmjs.org) installed globally on your system. (Note that to consume the SDK, only Node v0.12.x or higher is required, but because of some of our dev-dependencies, contributors need to use at least v4.x in order to produce a stable build.)
+A recent version of [node.js](https://nodejs.org) (v4.x or newer) and [npm](https://npmjs.org) installed globally on your system. (Note that to consume the SDK, only Node v0.12.x or higher is required, but because of some of our dev-dependencies, contributors need to use at least v4.x in order to produce a stable build.)
 
-Running unit tests is possible without an NPR One API key; however, actual interaction with the NPR One API requires an OAuth2 `client_id` and a valid access token, which can be obtained by registering for an account within the [NPR One Developer Center](http://dev.npr.org/apply/).
+Running unit tests is possible without an NPR One API key; however, actual interaction with the NPR One API requires an OAuth2 `client_id` and a valid access token, which can be obtained by registering for an account within the [NPR One Developer Center](https://dev.npr.org/apply/).
 
 Finally, this project is [Commitizen-friendly](https://github.com/commitizen/cz-cli) (explained in more detail [below](#committing-your-changes)) and in order to make maximum use of the tooling, we recommend you install the Commitizen CLI globally:
 
@@ -87,8 +87,8 @@ Finally, this project is [Commitizen-friendly](https://github.com/commitizen/cz-
 Tasks are setup via [package.json](https://github.com/npr/npr-one-api-js-sdk/tree/master/package.json) to be run on the command line, which help automate all the common steps for building and development. They are:
 
 - `npm run update`: Updates all dependencies and prunes previously-installed, unused dependencies
-- `npm run lint`: Runs [ESLint](http://eslint.org/) to verify compliance of source code with our Javascript coding standards
-- `npm run lint:fix`: Runs [ESLint](http://eslint.org/) as above, and also fixes common problems (such as whitespace, dangling commas, etc.)
+- `npm run lint`: Runs [ESLint](https://eslint.org/) to verify compliance of source code with our Javascript coding standards
+- `npm run lint:fix`: Runs [ESLint](https://eslint.org/) as above, and also fixes common problems (such as whitespace, dangling commas, etc.)
 - `npm run compile`: Updates the compiled versions for both node and browser in the `dist` folder.
 - `npm run compile:node`: Updates only the compiled version for node in the `dist` folder.
 - `npm run compile:browser`: Updates only the compiled version for the browser in the `dist` folder.
@@ -114,7 +114,7 @@ The test coverage report can be found at `test-reports/coverage/index.html` and 
 
 ### Generating Documentation
 
-Our [full documentation](http://npr.github.io/npr-one-api-js-sdk/docs/) is generated from the ESDoc blocks within the source code files themselves using the command:
+Our [full documentation](https://npr.github.io/npr-one-api-js-sdk/docs/) is generated from the ESDoc blocks within the source code files themselves using the command:
 
     npm run docs
 
@@ -137,7 +137,7 @@ GitHub will automatically update the site once changes have been pushed to the `
 
 ### Committing Your Changes
 
-If you're committing code or documentation with the intention of submitting a pull request, we kindly request that you follow our Git commit style. We are using the [conventional changelog](https://github.com/conventional-changelog/conventional-changelog/blob/a5505865ff3dd710cf757f50530e73ef0ca641da/conventions/angular.md) style popularized by the [AngularJS](http://angularjs.org) community. To make it easier to enforce consistency, we are strongly recommending that all contributors install the [Commitizen CLI](https://github.com/commitizen/cz-cli):
+If you're committing code or documentation with the intention of submitting a pull request, we kindly request that you follow our Git commit style. We are using the [conventional changelog](https://github.com/conventional-changelog/conventional-changelog/blob/a5505865ff3dd710cf757f50530e73ef0ca641da/conventions/angular.md) style popularized by the [AngularJS](https://angularjs.org) community. To make it easier to enforce consistency, we are strongly recommending that all contributors install the [Commitizen CLI](https://github.com/commitizen/cz-cli):
 
     [sudo] npm install -g commitizen
 

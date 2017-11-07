@@ -7,7 +7,7 @@ import FetchUtil from './../util/fetch-util';
 
 
 /**
- * Encapsulates all of the logic for communication with the [Listening Service](http://dev.npr.org/api/#/listening)
+ * Encapsulates all of the logic for communication with the [Listening Service](https://dev.npr.org/api/#/listening)
  * in the NPR One API.
  *
  * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
@@ -56,9 +56,9 @@ export default class Listening {
         this._channelRecommendations = {};
 
         // Ad-blocker detection, used when/if we encounter sponsorship in the flow
-        fetch('http://adswizz.com', { mode: 'no-cors' })
+        fetch('https://adswizz.com', { mode: 'no-cors' })
             .catch(() => {
-                fetch('http://delivery-s3.adswizz.com', { mode: 'no-cors' })
+                fetch('https://delivery-s3.adswizz.com', { mode: 'no-cors' })
                     .catch(e => {
                         Logger.debug('Ads are blocked. ', e);
                         this._adsBlocked = true;

@@ -32,10 +32,10 @@ describe('NprOneSDK', () => {
         describe('setter', () => {
             it('should update specific config values when set', () => {
                 const previousUrl = NprOneSDK.config.apiBaseUrl;
-                NprOneSDK.config = { 'apiBaseUrl': 'http://test' };
+                NprOneSDK.config = { 'apiBaseUrl': 'https://test' };
                 const newUrl = NprOneSDK.config.apiBaseUrl;
                 NprOneSDK.config.apiBaseUrl = previousUrl;
-                newUrl.should.equal('http://test');
+                newUrl.should.equal('https://test');
             });
 
             it('should setup defaults if they haven\'t been set yet', () => {

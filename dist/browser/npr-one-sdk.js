@@ -165,7 +165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @typedef {Object} Config
 	     * @property {string} [apiBaseUrl='https://api.npr.org'] The NPR One API hostname and protocol, typically `https://api.npr.org`; in most cases, this does not need to be manually set by clients
 	     * @property {string} [apiVersion='v2'] The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients
-	     * @property {string} [authProxyBaseUrl] The full URL to your OAuth proxy, e.g. `http://one.example.com/oauth2/`
+	     * @property {string} [authProxyBaseUrl] The full URL to your OAuth proxy, e.g. `https://one.example.com/oauth2/`
 	     * @property {string} [newDeviceCodePath='/device'] The path to your proxy for starting a `device_code` grant (relative to `authProxyBaseUrl`)
 	     * @property {string} [pollDeviceCodePath='/device/poll'] The path to your proxy for polling a `device_code` grant (relative to `authProxyBaseUrl`)
 	     * @property {string} [refreshTokenPath='/refresh'] The path to your proxy for the `refresh_token` grant (relative to `authProxyBaseUrl`)
@@ -899,7 +899,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	/**
 	 * Actions that can be recorded for recommendations.
-	 * For more detail on user rating actions, see our narrative [Listening Service documentation](http://dev.npr.org/guide/services/listening/#Ratings)
+	 * For more detail on user rating actions, see our narrative [Listening Service documentation](https://dev.npr.org/guide/services/listening/#Ratings)
 	 */
 	var Action = function () {
 	    function Action() {
@@ -1130,7 +1130,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	/**
-	 * Encapsulates all of the logic for communication with the [Station Finder Service](http://dev.npr.org/api/#/stationfinder)
+	 * Encapsulates all of the logic for communication with the [Station Finder Service](https://dev.npr.org/api/#/stationfinder)
 	 * in the NPR One API.
 	 *
 	 * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
@@ -1965,7 +1965,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	/**
-	 * Encapsulates all of the logic for communication with the [Authorization Service](http://dev.npr.org/api/#/authorization)
+	 * Encapsulates all of the logic for communication with the [Authorization Service](https://dev.npr.org/api/#/authorization)
 	 * in the NPR One API.
 	 *
 	 * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
@@ -2112,7 +2112,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *         });
 	     * }
 	     *
-	     * @see http://dev.npr.org/guide/services/authorization/#device_code
+	     * @see https://dev.npr.org/guide/services/authorization/#device_code
 	     *
 	     * @param {Array<string>} [scopes=[]]   The scopes (as strings) that should be associated with the resulting access token
 	     * @returns {Promise<DeviceCode>}
@@ -2169,7 +2169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *         });
 	     * }
 	     *
-	     * @see http://dev.npr.org/guide/services/authorization/#device_code
+	     * @see https://dev.npr.org/guide/services/authorization/#device_code
 	     *
 	     * @returns {Promise<AccessToken>}
 	     * @throws {TypeError} if an OAuth proxy is not configured or `getDeviceCode()` was not previously called
@@ -2279,7 +2279,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	/**
-	 * Encapsulates all of the logic for communication with the [Identity Service](http://dev.npr.org/api/#/identity)
+	 * Encapsulates all of the logic for communication with the [Identity Service](https://dev.npr.org/api/#/identity)
 	 * in the NPR One API.
 	 *
 	 * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
@@ -2486,7 +2486,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	/**
-	 * Encapsulates all of the logic for communication with the [Listening Service](http://dev.npr.org/api/#/listening)
+	 * Encapsulates all of the logic for communication with the [Listening Service](https://dev.npr.org/api/#/listening)
 	 * in the NPR One API.
 	 *
 	 * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
@@ -2539,8 +2539,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._channelRecommendations = {};
 	
 	        // Ad-blocker detection, used when/if we encounter sponsorship in the flow
-	        fetch('http://adswizz.com', { mode: 'no-cors' }).catch(function () {
-	            fetch('http://delivery-s3.adswizz.com', { mode: 'no-cors' }).catch(function (e) {
+	        fetch('https://adswizz.com', { mode: 'no-cors' }).catch(function () {
+	            fetch('https://delivery-s3.adswizz.com', { mode: 'no-cors' }).catch(function (e) {
 	                _logger2.default.debug('Ads are blocked. ', e);
 	                _this._adsBlocked = true;
 	            });

@@ -1,8 +1,8 @@
 # NPR One API SDK
 
-A [Universal JavaScript Module](https://github.com/umdjs/umd) for interfacing with the [NPR One API](http://dev.npr.org/api/), suitable for both client-side and server-side projects.
+A [Universal JavaScript Module](https://github.com/umdjs/umd) for interfacing with the [NPR One API](https://dev.npr.org/api/), suitable for both client-side and server-side projects.
 
-[![npm](https://img.shields.io/npm/v/npr-one-sdk.svg)](https://www.npmjs.com/package/npr-one-sdk) [![Build Status](https://travis-ci.org/npr/npr-one-api-js-sdk.svg?branch=master)](https://travis-ci.org/npr/npr-one-api-js-sdk) [![Coverage Status](https://coveralls.io/repos/github/npr/npr-one-api-js-sdk/badge.svg?branch=master)](https://coveralls.io/github/npr/npr-one-api-js-sdk?branch=master) [![Documentation coverage](https://npr.github.io/npr-one-api-js-sdk/docs/badge.svg)](http://npr.github.io/npr-one-api-js-sdk/docs/) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![npm](https://img.shields.io/npm/v/npr-one-sdk.svg)](https://www.npmjs.com/package/npr-one-sdk) [![Build Status](https://travis-ci.org/npr/npr-one-api-js-sdk.svg?branch=master)](https://travis-ci.org/npr/npr-one-api-js-sdk) [![Coverage Status](https://coveralls.io/repos/github/npr/npr-one-api-js-sdk/badge.svg?branch=master)](https://coveralls.io/github/npr/npr-one-api-js-sdk?branch=master) [![Documentation coverage](https://npr.github.io/npr-one-api-js-sdk/docs/badge.svg)](https://npr.github.io/npr-one-api-js-sdk/docs/) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](https://commitizen.github.io/cz-cli/) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 
 ##### Table of Contents
@@ -35,14 +35,14 @@ A [Universal JavaScript Module](https://github.com/umdjs/umd) for interfacing wi
 
 Listening to NPR One is a simple and engaging experience. Developing your app should be too. That being said, developing an NPR One app requires a fair amount of business logic and a solid understanding of the sequence of API calls necessary to deliver audio to your users. Our API implements the [Collection.Doc+JSON Hypermedia Specification](http://cdoc.io/) and we've received feedback from our partner-developers that there is a learning curve to interacting with our services, especially when it comes to the concepts of "ratings" and "recommendations" that fuel the personalization of the NPR One user experience.
 
-This open-source SDK was designed in part as a companion to the [NPR Developer Center](http://dev.npr.org/develop/), part utility for partner-developers working in JavaScript, and part toy box for the general public. We've made it our goal to abstract away as much of the business logic as possible, leaving an API that's more intuitive and user-friendly. The end result is more time to spend on building a rich UI with delightful user interactions and less time worrying about when and how to send that rating or get the next recommendation.
+This open-source SDK was designed in part as a companion to the [NPR Developer Center](https://dev.npr.org/develop/), part utility for partner-developers working in JavaScript, and part toy box for the general public. We've made it our goal to abstract away as much of the business logic as possible, leaving an API that's more intuitive and user-friendly. The end result is more time to spend on building a rich UI with delightful user interactions and less time worrying about when and how to send that rating or get the next recommendation.
 
-And this isn't just an experimental project! This very minute, this very same SDK is powering all of the interaction with the NPR One API for the recently-rebuilt [NPR One for the Web](http://one.npr.org).
+And this isn't just an experimental project! This very minute, this very same SDK is powering all of the interaction with the NPR One API for the recently-rebuilt [NPR One for the Web](https://one.npr.org).
 
 
 ## Prerequisites
 
-Using this SDK requires a registered developer account with the [NPR One Developer Center](http://dev.npr.org/). If you do not already have a Dev Center account, you can [register for a personal account](http://dev.npr.org/apply/) to get started.
+Using this SDK requires a registered developer account with the [NPR One Developer Center](https://dev.npr.org/). If you do not already have a Dev Center account, you can [register for a personal account](https://dev.npr.org/apply/) to get started.
 
 Use of this SDK requires a valid `access_token`. This SDK is unable to talk to the NPR Authorization Service and generate access tokens, for reasons discussed [further below](#managing-access-tokens). If you have a server-side proxy to handle authentication for your app, it can be configured to hook into this SDK. To help with this requirement, we have separately provided [npr-one-backend-proxy-php](https://github.com/nprdm/npr-one-backend-proxy-php) as an open-source package that will securely proxy calls to the Authorization Service for your app.
 
@@ -53,7 +53,7 @@ Depending on your environment, there are various methods you can use to add this
 
 ### Using NPM
 
-Assuming a recent version of [node.js](http://nodejs.org) (v0.12.x or newer) and [npm](http://npmjs.org) are installed globally on your system, you can do:
+Assuming a recent version of [node.js](https://nodejs.org) (v0.12.x or newer) and [npm](https://npmjs.org) are installed globally on your system, you can do:
 
     npm install npr-one-sdk --save
 
@@ -67,7 +67,7 @@ If you do not already have an existing node.js project, you can start one with:
 
 ### Using Bower
 
-For those using [node.js](http://nodejs.org) with [Bower](http://bower.io/) as your frontend package manager, we've also made this SDK available there. Run:
+For those using [node.js](https://nodejs.org) with [Bower](https://bower.io/) as your frontend package manager, we've also made this SDK available there. Run:
 
     bower install npr-one-sdk --save
 
@@ -79,7 +79,7 @@ If you do not already have an existing Bower project, you can start one with:
 
 ...which will ask you some questions and generate a `bower.json` for you. You can then run `bower install npr-one-sdk --save` to save the SDK to your new project's list of dependencies.
 
-**Note:** Bower has been losing considerable market share to [npm](http://npmjs.org) as the JavaScript package manager of choice, so we may cease to support Bower in the future. Unless you plan to integrate this SDK into a project that is already using Bower, we highly recommend using npm.
+**Note:** Bower has been losing considerable market share to [npm](https://npmjs.org) as the JavaScript package manager of choice, so we may cease to support Bower in the future. Unless you plan to integrate this SDK into a project that is already using Bower, we highly recommend using npm.
 
 ### Using Downloaded Files
 
@@ -102,14 +102,14 @@ Your setup will depend slightly on whether you are using ES5 (the current mainst
 
 #### ES6
 
-If you're using ES6, we are generally assuming that you are already using [npm](http://npmjs.org) as your frontend package manager in combination with a modern JavaScript module bundler such as [Webpack](https://webpack.github.io/), [Browserify](http://browserify.org/) or [jspm](http://jspm.io/). Those tools will typically resolve your dependencies, pulling in our distribution files from the proper location, so all you need to do to import the SDK and use it is:
+If you're using ES6, we are generally assuming that you are already using [npm](https://npmjs.org) as your frontend package manager in combination with a modern JavaScript module bundler such as [Webpack](https://webpack.github.io/), [Browserify](https://browserify.org/) or [jspm](https://jspm.io/). Those tools will typically resolve your dependencies, pulling in our distribution files from the proper location, so all you need to do to import the SDK and use it is:
 
 ```javascript
 import NprOneSDK from 'npr-one-sdk';
 const nprOneSDK = new NprOneSDK();
 
 NprOneSDK.config = {
-    authProxyBaseUrl: 'http://one.example.com/oauth2',
+    authProxyBaseUrl: 'https://one.example.com/oauth2',
     accessToken: 'aaaabbbbcccc12345678'
 };
 ```
@@ -125,7 +125,7 @@ The ES5 syntax and process for loading the SDK is a little less pretty. Using a 
     var nprOneSDK = new NprOneSDK();
 
     NprOneSDK.config = {
-        authProxyBaseUrl: 'http://one.example.com/oauth2',
+        authProxyBaseUrl: 'https://one.example.com/oauth2',
         accessToken: 'aaaabbbbcccc12345678'
     };
 </script>
@@ -143,7 +143,7 @@ var NprOneSDK = require('npr-one-sdk').default;
 var nprOneSDK = new NprOneSDK();
 
 NprOneSDK.config = {
-    authProxyBaseUrl: 'http://one.example.com/oauth2',
+    authProxyBaseUrl: 'https://one.example.com/oauth2',
     accessToken: 'aaaabbbbcccc12345678'
 };
 ```
@@ -155,7 +155,7 @@ const NprOneSDK = require('npr-one-sdk').default;
 const nprOneSDK = new NprOneSDK();
 
 NprOneSDK.config = {
-    authProxyBaseUrl: 'http://one.example.com/oauth2',
+    authProxyBaseUrl: 'https://one.example.com/oauth2',
     accessToken: 'aaaabbbbcccc12345678'
 };
 ```
@@ -185,7 +185,7 @@ In order to configure the SDK to use the proxy, there are a few config variables
 
 ```javascript
 NprOneSDK.config = {
-    authProxyBaseUrl: 'http://one.example.com/oauth2',
+    authProxyBaseUrl: 'https://one.example.com/oauth2',
     refreshTokenPath: '/refresh'
 };
 ```
@@ -193,15 +193,15 @@ NprOneSDK.config = {
 * `authProxyBaseUrl` represents the root path for your auth proxy.
 * `refreshTokenPath` refers to the specific endpoint (or sub-path) corresponding to the `refresh_token` grant type in your auth proxy.
 
-So, if the full path to the `refresh_token` endpoint in your proxy is `http://one.example.com/oauth2/refresh`, then `http://one.example.com/oauth2` is your `authProxyBaseUrl` and `/refresh` is your `refreshTokenPath`.
+So, if the full path to the `refresh_token` endpoint in your proxy is `https://one.example.com/oauth2/refresh`, then `https://one.example.com/oauth2` is your `authProxyBaseUrl` and `/refresh` is your `refreshTokenPath`.
 
-If you are using the [Authorization Code Grant](http://dev.npr.org/guide/services/authorization/#Auth_Code), this SDK does not offer built-in support for sign-in; there isn't much that this SDK _could_ do for you, and the few implementation decisions that need to be made will vary across apps. Essentially, if you are using [npr-one-backend-proxy-php](https://github.com/nprdm/npr-one-backend-proxy-php) or a similar OAuth proxy, if a user clicks on a 'Sign In' link, all your app needs to do is redirect (most likely by setting `window.location.href`) to the same `authProxyBaseUrl` as above, followed by the path that corresponds to your Auth Code grant implementation. Once the proxy has obtained your authorization code, swaps it out for an access token, and is ready to redirect back to your app, it is up to your JavaScript app to figure out how to obtain that new access token. [npr-one-backend-proxy-php](https://github.com/nprdm/npr-one-backend-proxy-php) stores it in a cookie which can be read by client-side code (and for security purposes, this cookie should promptly be deleted after it is read and stored in the SDK), but other implementations are possible.
+If you are using the [Authorization Code Grant](https://dev.npr.org/guide/services/authorization/#Auth_Code), this SDK does not offer built-in support for sign-in; there isn't much that this SDK _could_ do for you, and the few implementation decisions that need to be made will vary across apps. Essentially, if you are using [npr-one-backend-proxy-php](https://github.com/nprdm/npr-one-backend-proxy-php) or a similar OAuth proxy, if a user clicks on a 'Sign In' link, all your app needs to do is redirect (most likely by setting `window.location.href`) to the same `authProxyBaseUrl` as above, followed by the path that corresponds to your Auth Code grant implementation. Once the proxy has obtained your authorization code, swaps it out for an access token, and is ready to redirect back to your app, it is up to your JavaScript app to figure out how to obtain that new access token. [npr-one-backend-proxy-php](https://github.com/nprdm/npr-one-backend-proxy-php) stores it in a cookie which can be read by client-side code (and for security purposes, this cookie should promptly be deleted after it is read and stored in the SDK), but other implementations are possible.
 
-If you are using the [Device Code Grant](http://dev.npr.org/guide/services/authorization/#device_code) instead, this SDK offers additional support. If you add the following endpoints to the config:
+If you are using the [Device Code Grant](https://dev.npr.org/guide/services/authorization/#device_code) instead, this SDK offers additional support. If you add the following endpoints to the config:
 
 ```javascript
 NprOneSDK.config = {
-    authProxyBaseUrl: 'http://one.example.com/oauth2',
+    authProxyBaseUrl: 'https://one.example.com/oauth2',
     refreshTokenPath: '/refresh',
     newDeviceCodePath: '/device',
     pollDeviceCodePath: '/device/poll',
@@ -302,7 +302,7 @@ Action                       | Usage
 `NprOneSDK.Action.THUMBUP`   | If your app has a "Mark as Interesting" button or a similar non-canonical "Like" or "Favorite" mechanism, send this action when the user explicitly presses that button/uses that feedback mechanism.
 `NprOneSDK.Action.SHARE`     | If your app has some type of social sharing integration, send this action when the user explicitly chooses to share a piece via social media.
 `NprOneSDK.Action.TAPTHRU`   | If a user explicitly interacts with a feature card or taps/clicks on the image for a sponsorship card, send this action.
-`NprOneSDK.Action.PASS`      | If your app displays a list of upcoming recommendations and the user explicitly chooses to skip multiple recommendations in favor of one much further down the list, send this action (see [here](http://dev.npr.org/develop/developer-documentation/examples/recommendation-examples/) for more info).
+`NprOneSDK.Action.PASS`      | If your app displays a list of upcoming recommendations and the user explicitly chooses to skip multiple recommendations in favor of one much further down the list, send this action (see [here](https://dev.npr.org/develop/developer-documentation/examples/recommendation-examples/) for more info).
 `NprOneSDK.Action.SRCHSTART` | If your app provides search functionality (not yet included in this SDK, but likely coming in a future update), send this action when the user has explicitly initiated search.
 `NprOneSDK.Action.SRCHCOMPL` | If your app provides search functionality (not yet included in this SDK, but likely coming in a future update), send this action when the user has finished searching (either by selecting something to listen to, or canceling out of search).
 
@@ -327,7 +327,7 @@ Call                                            | Usage
 `logout()`                                      | Can be used to perform cleanup as part of a logout process if you have a [backend auth proxy](#using-an-oauth-proxy-recommended) configured. If you are using [the DIY approach](#do-it-yourself) instead of a proxy, then you are responsible for your own cleanup.
 
 
-Search will be implemented at some later date; we don't typically add functionality to the SDK until we have a chance to dogfood our work ourselves, and [NPR One for the Web](http://one.npr.org) does not (yet) offer search functionality.
+Search will be implemented at some later date; we don't typically add functionality to the SDK until we have a chance to dogfood our work ourselves, and [NPR One for the Web](https://one.npr.org) does not (yet) offer search functionality.
 
 
 ## Examples
@@ -342,9 +342,9 @@ These example files will not run out-of-the-box because they require a valid OAu
 
 ## Documentation
 
-Further information about the public API of this package can be found [here](http://npr.github.io/npr-one-api-js-sdk/docs/).
+Further information about the public API of this package can be found [here](https://npr.github.io/npr-one-api-js-sdk/docs/).
 
-For background information about the NPR One API, please see the [developer guide](http://dev.npr.org/develop/) at the [NPR One Developer Center](http://dev.npr.org/).
+For background information about the NPR One API, please see the [developer guide](https://dev.npr.org/develop/) at the [NPR One Developer Center](https://dev.npr.org/).
 
 
 ## CHANGELOG
@@ -361,7 +361,7 @@ If you're interested in contributing to this project by submitting bug reports, 
 
 Copyright (c) 2016 NPR
 
-Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/License-2.0) (the “License”) with the following modification; You may not use this file except in compliance with the License as modified by the addition of Section 10, as follows:
+Licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/License-2.0) (the “License”) with the following modification; You may not use this file except in compliance with the License as modified by the addition of Section 10, as follows:
 
 ##### 10. Additional Prohibitions
 
@@ -369,10 +369,10 @@ When using the Work, You may not (or allow those acting on Your behalf to):
 
 a.	Perform any action with the intent of introducing to the Work, the NPR One API, the NPR servers or network infrastructure, or any NPR products and services any viruses, worms, defects, Trojan horses, malware or any items of a destructive or malicious nature; or obtaining unauthorized access to the NPR One API, the NPR servers or network infrastructure, or any NPR products or services;
 
-b.	Remove, obscure or alter any NPR terms of service, including the [NPR services Terms of Use](http://www.npr.org/about-npr/179876898/terms-of-use) and the [Developer API Terms of Use](http://dev.npr.org/terms-of-use/), or any links to or notices of those terms; or
+b.	Remove, obscure or alter any NPR terms of service, including the [NPR services Terms of Use](https://www.npr.org/about-npr/179876898/terms-of-use) and the [Developer API Terms of Use](https://dev.npr.org/terms-of-use/), or any links to or notices of those terms; or
 
-c.	Take any other action prohibited by any NPR terms of service, including the [NPR services Terms of Use](http://www.npr.org/about-npr/179876898/terms-of-use) and the [Developer API Terms of Use](http://dev.npr.org/terms-of-use/).
+c.	Take any other action prohibited by any NPR terms of service, including the [NPR services Terms of Use](https://www.npr.org/about-npr/179876898/terms-of-use) and the [Developer API Terms of Use](https://dev.npr.org/terms-of-use/).
 
-You may obtain a copy of the License at http://www.apache.org/licenses/License-2.0
+You may obtain a copy of the License at https://www.apache.org/licenses/License-2.0
 
 Unless required by applicable law or agreed to in writing, software distributed under the License with the above modification is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the specific language governing permissions and limitations under the License.

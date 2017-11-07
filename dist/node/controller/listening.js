@@ -33,7 +33,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Encapsulates all of the logic for communication with the [Listening Service](http://dev.npr.org/api/#/listening)
+ * Encapsulates all of the logic for communication with the [Listening Service](https://dev.npr.org/api/#/listening)
  * in the NPR One API.
  *
  * Note that consumers should not be accessing this class directly but should instead use the provided pass-through
@@ -86,8 +86,8 @@ var Listening = function () {
         this._channelRecommendations = {};
 
         // Ad-blocker detection, used when/if we encounter sponsorship in the flow
-        fetch('http://adswizz.com', { mode: 'no-cors' }).catch(function () {
-            fetch('http://delivery-s3.adswizz.com', { mode: 'no-cors' }).catch(function (e) {
+        fetch('https://adswizz.com', { mode: 'no-cors' }).catch(function () {
+            fetch('https://delivery-s3.adswizz.com', { mode: 'no-cors' }).catch(function (e) {
                 _logger2.default.debug('Ads are blocked. ', e);
                 _this._adsBlocked = true;
             });
