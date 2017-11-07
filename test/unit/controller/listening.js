@@ -16,9 +16,9 @@ describe('Listening', () => {
     const recommendUrl = `^${testConfig.apiBaseUrl}/listening/${testConfig.apiVersion}/recommendations`;
     // This hostname is set in TEST_DATA output
     const ratingUrl = `^https://api.npr.org/listening/${testConfig.apiVersion}/ratings`;
-    const adsWizzUrl = '^http://demo.adswizz.com';
-    const adsWizzWwwUrl = 'http://adswizz.com';
-    const adsWizzCdnUrl = '^http://delivery-s3.adswizz.com';
+    const adsWizzUrl = '^https://demo.adswizz.com';
+    const adsWizzWwwUrl = 'https://adswizz.com';
+    const adsWizzCdnUrl = '^https://delivery-s3.adswizz.com';
     const doubleClickUrl = '^https://ad.doubleclick.net';
     const historyUrl = `^${testConfig.apiBaseUrl}/listening/${testConfig.apiVersion}/history`;
 

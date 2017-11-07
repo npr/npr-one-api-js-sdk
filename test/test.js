@@ -18,7 +18,7 @@ before(() => {
 export const testConfig = {
     apiBaseUrl: 'https://api.npr.org',
     apiVersion: 'v2',
-    authProxyBaseUrl: 'http://one.example.com/oauth2',
+    authProxyBaseUrl: 'https://one.example.com/oauth2',
     newDeviceCodePath: '/device',
     pollDeviceCodePath: '/device/poll',
     refreshTokenPath: '/refresh',

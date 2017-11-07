@@ -4,7 +4,7 @@ import Station from './../model/station';
 
 
 /**
- * Encapsulates all of the logic for communication with the [Station Finder Service](http://dev.npr.org/api/#/stationfinder)
+ * Encapsulates all of the logic for communication with the [Station Finder Service](https://dev.npr.org/api/#/stationfinder)
  * in the NPR One API.
  *
  * Note that consumers should not be accessing this class directly but should instead use the provided pass-through

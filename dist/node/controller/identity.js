@@ -31,7 +31,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Encapsulates all of the logic for communication with the [Identity Service](http://dev.npr.org/api/#/identity)
+ * Encapsulates all of the logic for communication with the [Identity Service](https://dev.npr.org/api/#/identity)
  * in the NPR One API.
  *
  * Note that consumers should not be accessing this class directly but should instead use the provided pass-through

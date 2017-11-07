@@ -1,6 +1,6 @@
 /**
  * Actions that can be recorded for recommendations.
- * For more detail on user rating actions, see our narrative [Listening Service documentation](http://dev.npr.org/guide/services/listening/#Ratings)
+ * For more detail on user rating actions, see our narrative [Listening Service documentation](https://dev.npr.org/guide/services/listening/#Ratings)
  */
 export default class Action
 {

@@ -40,7 +40,7 @@ export interface AccessToken {
 
 /**
  * Actions that can be recorded for recommendations.
- * For more detail on user rating actions, see our narrative [Listening Service documentation](http://dev.npr.org/guide/services/listening/#Ratings)
+ * For more detail on user rating actions, see our narrative [Listening Service documentation](https://dev.npr.org/guide/services/listening/#Ratings)
  */
 export class Action {
     static COMPLETED: string;
@@ -565,7 +565,7 @@ export interface Config {
     /** The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients */
     apiVersion?: string;
 
-    /** The full URL to your OAuth proxy, e.g. `http://one.example.com/oauth2/` */
+    /** The full URL to your OAuth proxy, e.g. `https://one.example.com/oauth2/` */
     authProxyBaseUrl?: string;
 
     /** The path to your proxy for starting a `device_code` grant (relative to `authProxyBaseUrl`) */
@@ -678,7 +678,7 @@ export default class NprOneSDK {
      * 2 functions multiple times before the user logs in. It is a good idea to encapsulate them in a function which
      * can be called recursively on errors.
      *
-     * @see http://dev.npr.org/guide/services/authorization/#device_code
+     * @see https://dev.npr.org/guide/services/authorization/#device_code
      *
      * @param {Array<string>} [scopes=[]]   The scopes (as strings) that should be associated with the resulting access token
      * @returns {Promise<DeviceCode>}
@@ -695,7 +695,7 @@ export default class NprOneSDK {
      * a Promise that rejects with a debugging message, but the next course of action would generally be to call
      * {@link getDeviceCode} again and start the whole process from the top.
      *
-     * @see http://dev.npr.org/guide/services/authorization/#device_code
+     * @see https://dev.npr.org/guide/services/authorization/#device_code
      *
      * @returns {Promise<AccessToken>}
      * @throws {TypeError} if an OAuth proxy is not configured or `getDeviceCode()` was not previously called

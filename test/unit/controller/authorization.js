@@ -39,9 +39,15 @@ describe('Authorization', () => {
         // see: https://github.com/mochajs/mocha/issues/1763
         this.timeout(16000);
 
+        // @TODO this should not be necessary - quick-fix to deal with implicit dependency on Listening controller - see #8
+        const adsWizzWwwUrl = 'https://adswizz.com';
+        const adsWizzCdnUrl = '^https://delivery-s3.adswizz.com';
+
         it('should call the refresh token endpoint in the auth proxy', (done) => {
             mockery.registerMock('fetch', fetchMock
                 .mock(refreshTokenUrl, 'POST', ACCESS_TOKEN_RESPONSE)
+                .mock(adsWizzWwwUrl, 'GET', 200) // @TODO remove as part of fix for #8
+                .mock(adsWizzCdnUrl, 'GET', 200) // @TODO remove as part of fix for #8
                 .getMock());
 
             Authorization.refreshExistingAccessToken()
@@ -69,6 +75,8 @@ describe('Authorization', () => {
 
             mockery.registerMock('fetch', fetchMock
                 .mock(refreshTokenUrl, 'POST', responses)
+                .mock(adsWizzWwwUrl, 'GET', 200) // @TODO remove as part of fix for #8
+                .mock(adsWizzCdnUrl, 'GET', 200) // @TODO remove as part of fix for #8
                 .getMock());
 
             Authorization.refreshExistingAccessToken()
@@ -97,6 +105,8 @@ describe('Authorization', () => {
 
             mockery.registerMock('fetch', fetchMock
                 .mock(refreshTokenUrl, 'POST', responses)
+                .mock(adsWizzWwwUrl, 'GET', 200) // @TODO remove as part of fix for #8
+                .mock(adsWizzCdnUrl, 'GET', 200) // @TODO remove as part of fix for #8
                 .getMock());
 
             Authorization.refreshExistingAccessToken()

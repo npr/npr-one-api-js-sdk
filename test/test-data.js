@@ -35,13 +35,13 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "audio": [
                     {
                         "content-type": "audio/aac",
-                        "href": "http://download.npr.org/npr-mp4/whocares/stage/nprone/hello/bitterthings2/305.mp4"
+                        "href": "https://download.npr.org/npr-mp4/whocares/stage/nprone/hello/bitterthings2/305.mp4"
                     }
                 ],
                 "image": [
                     {
                         "content-type": "image/png",
-                        "href": "http://media.npr.org/images/stations/nprone_logos/wamu_fm.png",
+                        "href": "https://media.npr.org/images/stations/nprone_logos/wamu_fm.png",
                         "rel": "logo"
                     }
                 ],
@@ -84,11 +84,11 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "audio": [
                     {
                         "content-type": "audio/mp3",
-                        "href": "http://public.npr.org/anon.npr-mp3/npr/newscasts/2016/02/16/newscastShort090536.mp3"
+                        "href": "https://public.npr.org/anon.npr-mp3/npr/newscasts/2016/02/16/newscastShort090536.mp3"
                     },
                     {
                         "content-type": "audio/aac",
-                        "href": "http://public.npr.org/npr-mp4/npr/newscasts/2016/02/16/newscastShort090536.mp4"
+                        "href": "https://public.npr.org/npr-mp4/npr/newscasts/2016/02/16/newscastShort090536.mp4"
                     }
                 ],
                 "recommendations": [
@@ -134,39 +134,39 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "web": [
                     {
                         "content-type": "text/html",
-                        "href": "http://www.npr.org/2016/02/16/466898631/sudden-supreme-court-vacancy-dominates-political-spectrum"
+                        "href": "https://www.npr.org/2016/02/16/466898631/sudden-supreme-court-vacancy-dominates-political-spectrum"
                     },
                     {
                         "content-type": "application/xml",
-                        "href": "http://api.npr.org/query?id=466898631&apiKey=MDAzMzQ2MjAyMDEyMzk4MTU1MDg3ZmM3MQ010"
+                        "href": "https://api.npr.org/query?id=466898631&apiKey=MDAzMzQ2MjAyMDEyMzk4MTU1MDg3ZmM3MQ010"
                     },
                     {
                         "content-type": "text/html",
-                        "href": "http://n.pr/1PO9Jkk"
+                        "href": "https://n.pr/1PO9Jkk"
                     }
                 ],
                 "audio": [
                     {
                         "content-type": "audio/mp3",
-                        "href": "http://pd.npr.org/anon.npr-mp3/npr/me/2016/02/20160216_me_sudden_supreme_court_vacancy_dominates_political_spectrum.mp3?orgId=1&topicId=1014&d=262&p=3&story=466898631&t=progseg&e=466888688&seg=8&NPROne=true"
+                        "href": "https://pd.npr.org/anon.npr-mp3/npr/me/2016/02/20160216_me_sudden_supreme_court_vacancy_dominates_political_spectrum.mp3?orgId=1&topicId=1014&d=262&p=3&story=466898631&t=progseg&e=466888688&seg=8&NPROne=true"
                     },
                     {
                         "content-type": "audio/x-ms-wax",
-                        "href": "http://www.npr.org/templates/dmg/dmg_wmref_em.php?id=466898632&type=1&mtype=WM&orgId=1&topicId=1014&d=262&p=3&story=466898631&t=progseg&e=466888688&seg=8&NPROne=true"
+                        "href": "https://www.npr.org/templates/dmg/dmg_wmref_em.php?id=466898632&type=1&mtype=WM&orgId=1&topicId=1014&d=262&p=3&story=466898631&t=progseg&e=466888688&seg=8&NPROne=true"
                     },
                     {
                         "content-type": "audio/aac",
-                        "href": "http://pd.npr.org/npr-mp4/npr/me/2016/02/20160216_me_sudden_supreme_court_vacancy_dominates_political_spectrum.mp4?orgId=1&topicId=1014&d=262&p=3&story=466898631&t=progseg&e=466888688&seg=8&NPROne=true"
+                        "href": "https://pd.npr.org/npr-mp4/npr/me/2016/02/20160216_me_sudden_supreme_court_vacancy_dominates_political_spectrum.mp4?orgId=1&topicId=1014&d=262&p=3&story=466898631&t=progseg&e=466888688&seg=8&NPROne=true"
                     },
                     {
                         "content-type": "application/vnd.apple.mpegurl",
-                        "href": "http://hls.npr.org/nprhls//npr/me/2016/02/20160216_me_sudden_supreme_court_vacancy_dominates_political_spectrum/master.m3u8?NPROne=true"
+                        "href": "https://hls.npr.org/nprhls//npr/me/2016/02/20160216_me_sudden_supreme_court_vacancy_dominates_political_spectrum/master.m3u8?NPROne=true"
                     }
                 ],
                 "onramps": [
                     {
                         "content-type": "text/html",
-                        "href": "http://one.www.npr.org/i/466898631:466898632"
+                        "href": "https://one.www.npr.org/i/466898631:466898632"
                     }
                 ],
                 "recommendations": [
@@ -208,13 +208,13 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "audio": [
                     {
                         "content-type": "audio/aac",
-                        "href": "http://delivery-s3.adswizz.com/demo_newEnco/ad_13460_4e552aad18f368b107d76604ef14def0_26bd2a18-6118-4228-a15b-52c8fcd4657b.aac"
+                        "href": "https://delivery-s3.adswizz.com/demo_newEnco/ad_13460_4e552aad18f368b107d76604ef14def0_26bd2a18-6118-4228-a15b-52c8fcd4657b.aac"
                     }
                 ],
                 "impression": [
                     {
                         "content-type": "application/xml",
-                        "href": "http://demo.adswizz.com/www/delivery/daastIndex.php?&companion_zones_alias=nprone_display_demo&OAGEO=dXMlN0NtbyU3Q2NoZXN0ZXJmaWVsZCU3QzYzMDE3JTdDMzguNjQ5OTkzODk2NDg0Mzc1JTdDLTkwLjUzMzQwMTQ4OTI1NzgxJTdDNjA5JTdDMzE0JTdDJTdDJTNBJTNBZmZmZiUzQTIxNi4zNS4yMjEuODYlN0NzYXZ2aXM=&companionAds=true&adData=billing%3Ademo%2Cdemo%3B13460%3BUSD%3B0.0%3Bfalse%5ESSP%2Fi%3Ademo%3Bcid%3A0%3Bzone_id%3A5446%3Bri%3Ademo%3Bp%3A0.0%3Bcur%3AUSD%5Einstance%3Ademo%3Bad_id%3A13460%3Bzone_id%3A5446%3Bview_key%3A1455730883505%3Bduration%3A18274&sessionId=3cdeb894538153fb8e36cbd6554c950&listenerId=3446792&opportunity_tuple=redirect-tuples%3A%281%2C%5B%7B%22redirectZoneTuple%22%7C%7B%22iN%22%7C%22demo%22%2C%22zI%22%7C5446%2C%22zASD%22%7C0%2C%22sASD%22%7C0%2C%22aSCD%22%7C0%2C%22zSCD%22%7C0%2C%22iZMNOA%22%7C1%2C%22zNOAS%22%7C0%2C%22ssp%22%7C0%2C%22log%22%7C0%7D%7D%5D%29&zone_alias=%5B%7Bza%3Anprone_audio_demo%2Cn%3A1%7D%5D&companionZones=5445&cbs=2103035&placeholderDuration=18274&reqType=AdsAudioStarted&zoneid=%5B%7Bz%3A5446%2Cn%3A1%7D%5D&protocolVersion=1.0&protocolAnswer=2&tagsArray=clientId%253Dnprone_ios%2526channel%253Dnpr&cb=0.876382&partialOppReqId=1455730893393&protocolAnswer=2",
+                        "href": "https://demo.adswizz.com/www/delivery/daastIndex.php?&companion_zones_alias=nprone_display_demo&OAGEO=dXMlN0NtbyU3Q2NoZXN0ZXJmaWVsZCU3QzYzMDE3JTdDMzguNjQ5OTkzODk2NDg0Mzc1JTdDLTkwLjUzMzQwMTQ4OTI1NzgxJTdDNjA5JTdDMzE0JTdDJTdDJTNBJTNBZmZmZiUzQTIxNi4zNS4yMjEuODYlN0NzYXZ2aXM=&companionAds=true&adData=billing%3Ademo%2Cdemo%3B13460%3BUSD%3B0.0%3Bfalse%5ESSP%2Fi%3Ademo%3Bcid%3A0%3Bzone_id%3A5446%3Bri%3Ademo%3Bp%3A0.0%3Bcur%3AUSD%5Einstance%3Ademo%3Bad_id%3A13460%3Bzone_id%3A5446%3Bview_key%3A1455730883505%3Bduration%3A18274&sessionId=3cdeb894538153fb8e36cbd6554c950&listenerId=3446792&opportunity_tuple=redirect-tuples%3A%281%2C%5B%7B%22redirectZoneTuple%22%7C%7B%22iN%22%7C%22demo%22%2C%22zI%22%7C5446%2C%22zASD%22%7C0%2C%22sASD%22%7C0%2C%22aSCD%22%7C0%2C%22zSCD%22%7C0%2C%22iZMNOA%22%7C1%2C%22zNOAS%22%7C0%2C%22ssp%22%7C0%2C%22log%22%7C0%7D%7D%5D%29&zone_alias=%5B%7Bza%3Anprone_audio_demo%2Cn%3A1%7D%5D&companionZones=5445&cbs=2103035&placeholderDuration=18274&reqType=AdsAudioStarted&zoneid=%5B%7Bz%3A5446%2Cn%3A1%7D%5D&protocolVersion=1.0&protocolAnswer=2&tagsArray=clientId%253Dnprone_ios%2526channel%253Dnpr&cb=0.876382&partialOppReqId=1455730893393&protocolAnswer=2",
                         "form-factor": "audio"
                     },
                     {
@@ -229,14 +229,14 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                     },
                     {
                         "content-type": "application/xml",
-                        "href": "http://demo.adswizz.com/www/delivery/lg.php?adData=billing%3Ademo%2Cdemo%3B13459%3BUSD%3B0.0%3Bfalse%5ESSP%2Fi%3Ademo%3Bcid%3A0%3Bzone_id%3A5445%3Bri%3Ademo%3Bp%3A0.0%3Bcur%3AUSD%5Einstance%3Ademo%3Bad_id%3A13459%3Bzone_id%3A5445%3Bview_key%3A1455730883665%3Bduration%3A0&loc=&listenerId=3446792&sessionId=3cdeb894538153fb8e36cbd6554c950&ip=%3A%3Affff%3A216.35.221.86&OAGEO=dXMlN0NtbyU3Q2NoZXN0ZXJmaWVsZCU3QzYzMDE3JTdDMzguNjQ5OTkzODk2NDg0Mzc1JTdDLTkwLjUzMzQwMTQ4OTI1NzgxJTdDNjA5JTdDMzE0JTdDJTdDJTNBJTNBZmZmZiUzQTIxNi4zNS4yMjEuODYlN0NzYXZ2aXM=&user_agent=Mozilla%2F5.0+%28Macintosh%3B+Intel+Mac+OS+X+10_11_2%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F48.0.2564.109+Safari%2F537.36&cbs=3850126",
+                        "href": "https://demo.adswizz.com/www/delivery/lg.php?adData=billing%3Ademo%2Cdemo%3B13459%3BUSD%3B0.0%3Bfalse%5ESSP%2Fi%3Ademo%3Bcid%3A0%3Bzone_id%3A5445%3Bri%3Ademo%3Bp%3A0.0%3Bcur%3AUSD%5Einstance%3Ademo%3Bad_id%3A13459%3Bzone_id%3A5445%3Bview_key%3A1455730883665%3Bduration%3A0&loc=&listenerId=3446792&sessionId=3cdeb894538153fb8e36cbd6554c950&ip=%3A%3Affff%3A216.35.221.86&OAGEO=dXMlN0NtbyU3Q2NoZXN0ZXJmaWVsZCU3QzYzMDE3JTdDMzguNjQ5OTkzODk2NDg0Mzc1JTdDLTkwLjUzMzQwMTQ4OTI1NzgxJTdDNjA5JTdDMzE0JTdDJTdDJTNBJTNBZmZmZiUzQTIxNi4zNS4yMjEuODYlN0NzYXZ2aXM=&user_agent=Mozilla%2F5.0+%28Macintosh%3B+Intel+Mac+OS+X+10_11_2%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F48.0.2564.109+Safari%2F537.36&cbs=3850126",
                         "form-factor": "phone"
                     }
                 ],
                 "image": [
                     {
                         "content-type": "image/png",
-                        "href": "http://delivery-s3.adswizz.com/demo/promo600x500rev_1_ad_56ba1e4813c3c_1455038024.png",
+                        "href": "https://delivery-s3.adswizz.com/demo/promo600x500rev_1_ad_56ba1e4813c3c_1455038024.png",
                         "height": 500,
                         "width": 600,
                         "form-factor": "phone"
@@ -252,7 +252,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "related-impression": [
                     {
                         "content-type": "text/html",
-                        "href": "http://demo.adswizz.com/www/delivery/ck.php?oaparams=3___adData=2__billing%3Ddemo%2Cdemo__13459__USD__0.0__false%5ESSP%2Fi%3Ddemo__cid%3D0__zone_id%3D5445__ri%3Ddemo__p%3D0.0__cur%3DUSD%5Einstance%3Ddemo__ad_id%3D13459__zone_id%3D5445__view_key%3D1455730883665__duration%3D0___sessionId=3cdeb894538153fb8e36cbd6554c950___listenerId=3446792___cbs=5785166___url=nprone%3A%2F%2Flisten%3Fchannel%3DsponsoredChannelOne",
+                        "href": "https://demo.adswizz.com/www/delivery/ck.php?oaparams=3___adData=2__billing%3Ddemo%2Cdemo__13459__USD__0.0__false%5ESSP%2Fi%3Ddemo__cid%3D0__zone_id%3D5445__ri%3Ddemo__p%3D0.0__cur%3DUSD%5Einstance%3Ddemo__ad_id%3D13459__zone_id%3D5445__view_key%3D1455730883665__duration%3D0___sessionId=3cdeb894538153fb8e36cbd6554c950___listenerId=3446792___cbs=5785166___url=nprone%3A%2F%2Flisten%3Fchannel%3DsponsoredChannelOne",
                         "form-factor": "phone"
                     }
                 ],
@@ -294,23 +294,23 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "audio": [
                     {
                         "content-type": "audio/mp3",
-                        "href": "http://pd.npr.org/anon.npr-mp3/npr/specials/2015/12/20151208_specials_wlh_gunviolence.mp3?orgId=278&d=30&p=404742561&story=458726244&t=podcast&e=458726244&NPROne=true"
+                        "href": "https://pd.npr.org/anon.npr-mp3/npr/specials/2015/12/20151208_specials_wlh_gunviolence.mp3?orgId=278&d=30&p=404742561&story=458726244&t=podcast&e=458726244&NPROne=true"
                     },
                     {
                         "content-type": "audio/aac",
-                        "href": "http://pd.npr.org/npr-mp4/npr/specials/2015/12/20151208_specials_wlh_gunviolence.mp4?orgId=278&d=30&p=404742561&story=458726244&t=podcast&e=458726244&NPROne=true"
+                        "href": "https://pd.npr.org/npr-mp4/npr/specials/2015/12/20151208_specials_wlh_gunviolence.mp4?orgId=278&d=30&p=404742561&story=458726244&t=podcast&e=458726244&NPROne=true"
                     }
                 ],
                 "onramps": [
                     {
                         "content-type": "text/html",
-                        "href": "http://one.www-s1.npr.org/i/458726244:458726246-P"
+                        "href": "https://one.www-s1.npr.org/i/458726244:458726246-P"
                     }
                 ],
                 "image": [
                     {
                         "content-type": "image/jpeg",
-                        "href": "http://media.npr.org/images/podcasts/primary/icon_404742561-cc94cc516b6ce8976422492818c37d437a09defd.jpg?s=600",
+                        "href": "https://media.npr.org/images/podcasts/primary/icon_404742561-cc94cc516b6ce8976422492818c37d437a09defd.jpg?s=600",
                         "rel": "logo_square",
                         "image": "454769361"
                     }
@@ -362,39 +362,39 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "web": [
                     {
                         "content-type": "text/html",
-                        "href": "http://www.npr.org/2016/03/10/469897659/clinton-sanders-square-off-in-miami-ahead-of-primaries-on-tuesday"
+                        "href": "https://www.npr.org/2016/03/10/469897659/clinton-sanders-square-off-in-miami-ahead-of-primaries-on-tuesday"
                     },
                     {
                         "content-type": "application/xml",
-                        "href": "http://api.npr.org/query?id=469897659&apiKey=MDAzMzQ2MjAyMDEyMzk4MTU1MDg3ZmM3MQ010"
+                        "href": "https://api.npr.org/query?id=469897659&apiKey=MDAzMzQ2MjAyMDEyMzk4MTU1MDg3ZmM3MQ010"
                     },
                     {
                         "content-type": "text/html",
-                        "href": "http://n.pr/1RBjbIe"
+                        "href": "https://n.pr/1RBjbIe"
                     }
                 ],
                 "audio": [
                     {
                         "content-type": "audio/mp3",
-                        "href": "http://pd.npr.org/anon.npr-mp3/npr/me/2016/03/20160310_me_clinton_sanders_square_off_in_miami_ahead_of_primaries_on_tuesday.mp3?orgId=1&topicId=1014&d=268&p=3&story=469897659&t=progseg&e=469885954&seg=2&NPROne=true"
+                        "href": "https://pd.npr.org/anon.npr-mp3/npr/me/2016/03/20160310_me_clinton_sanders_square_off_in_miami_ahead_of_primaries_on_tuesday.mp3?orgId=1&topicId=1014&d=268&p=3&story=469897659&t=progseg&e=469885954&seg=2&NPROne=true"
                     },
                     {
                         "content-type": "audio/x-ms-wax",
-                        "href": "http://www.npr.org/templates/dmg/dmg_wmref_em.php?id=469897660&type=1&mtype=WM&orgId=1&topicId=1014&d=268&p=3&story=469897659&t=progseg&e=469885954&seg=2&NPROne=true"
+                        "href": "https://www.npr.org/templates/dmg/dmg_wmref_em.php?id=469897660&type=1&mtype=WM&orgId=1&topicId=1014&d=268&p=3&story=469897659&t=progseg&e=469885954&seg=2&NPROne=true"
                     },
                     {
                         "content-type": "audio/aac",
-                        "href": "http://pd.npr.org/npr-mp4/npr/me/2016/03/20160310_me_clinton_sanders_square_off_in_miami_ahead_of_primaries_on_tuesday.mp4?orgId=1&topicId=1014&d=268&p=3&story=469897659&t=progseg&e=469885954&seg=2&NPROne=true"
+                        "href": "https://pd.npr.org/npr-mp4/npr/me/2016/03/20160310_me_clinton_sanders_square_off_in_miami_ahead_of_primaries_on_tuesday.mp4?orgId=1&topicId=1014&d=268&p=3&story=469897659&t=progseg&e=469885954&seg=2&NPROne=true"
                     },
                     {
                         "content-type": "application/vnd.apple.mpegurl",
-                        "href": "http://hls.npr.org/nprhls//npr/me/2016/03/20160310_me_clinton_sanders_square_off_in_miami_ahead_of_primaries_on_tuesday/master.m3u8?NPROne=true"
+                        "href": "https://hls.npr.org/nprhls//npr/me/2016/03/20160310_me_clinton_sanders_square_off_in_miami_ahead_of_primaries_on_tuesday/master.m3u8?NPROne=true"
                     }
                 ],
                 "onramps": [
                     {
                         "content-type": "text/html",
-                        "href": "http://www.npr.org/one/i/469897659:469897660"
+                        "href": "https://www.npr.org/one/i/469897659:469897660"
                     }
                 ],
                 "recommendations": [
@@ -414,7 +414,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
 export const IDENTITY_V2_USER_RESPONSE =
 {
     "version": "1.0",
-    "href": "http://api.npr.org/identity/v2/user",
+    "href": "https://api.npr.org/identity/v2/user",
     "attributes": {
         "id": "98765432",
         "email": "testuser@npr-invalid.org",
@@ -429,7 +429,7 @@ export const IDENTITY_V2_USER_RESPONSE =
                 "type": "featureCardExternalLink",
                 "image": "PIGGYBANK",
                 "attributes": {
-                    "url": "http://wamu.org/support/donate"
+                    "url": "https://wamu.org/support/donate"
                 }
             }
         },
@@ -439,41 +439,41 @@ export const IDENTITY_V2_USER_RESPONSE =
                 "displayName": "WAMU",
                 "call": "WAMU",
                 "city": "Washington",
-                "logo": "http://media.npr.org/images/stations/nprone_logos/wamu_fm.png"
+                "logo": "https://media.npr.org/images/stations/nprone_logos/wamu_fm.png"
             },
             {
                 "id": "396",
                 "displayName": "WGBH",
                 "call": "WGBH",
                 "city": "Boston",
-                "logo": "http://media.npr.org/images/stations/nprone_logos/wgbh_fm.png"
+                "logo": "https://media.npr.org/images/stations/nprone_logos/wgbh_fm.png"
             },
             {
                 "id": "151",
                 "displayName": "KQED",
                 "call": "KQED",
                 "city": "San Francisco",
-                "logo": "http://media.npr.org/images/stations/nprone_logos/kqed_fm.png"
+                "logo": "https://media.npr.org/images/stations/nprone_logos/kqed_fm.png"
             }
         ],
         "affiliations": [
             {
                 "id": 35,
-                "href": "http://api.npr.org/listening/v2/aggregation/35/recommendations",
+                "href": "https://api.npr.org/listening/v2/aggregation/35/recommendations",
                 "following": false,
                 "rating": 1,
                 "daysSinceLastListen": 354
             },
             {
                 "id": 46,
-                "href": "http://api.npr.org/listening/v2/aggregation/46/recommendations",
+                "href": "https://api.npr.org/listening/v2/aggregation/46/recommendations",
                 "following": false,
                 "rating": 0.740000009537,
                 "daysSinceLastListen": 354
             },
             {
                 "id": 7,
-                "href": "http://api.npr.org/listening/v2/aggregation/7/recommendations",
+                "href": "https://api.npr.org/listening/v2/aggregation/7/recommendations",
                 "following": false,
                 "rating": 0.604911029339,
                 "daysSinceLastListen": 65
@@ -494,7 +494,7 @@ export const ACCESS_TOKEN_RESPONSE = {
 
 export const DEVICE_CODE_RESPONSE = {
     "user_code": "2OA7PP",
-    "verification_uri": "http:\/\/www.npr.org\/device",
+    "verification_uri": "https:\/\/www.npr.org\/device",
     "expires_in": 1800,
     "interval": 5
 };
@@ -550,59 +550,59 @@ export const STATION_FINDER_RESPONSE = {
         "links": {
             "brand": [{
                 "rel": "homepage",
-                "href": "http:\/\/www.wbur.org",
+                "href": "https:\/\/www.wbur.org",
                 "content-type": "text\/html"
             }, {
                 "rel": "logo",
-                "href": "http:\/\/media.npr.org\/images\/stations\/nprone_logos\/wbur_fm.png",
+                "href": "https:\/\/media.npr.org\/images\/stations\/nprone_logos\/wbur_fm.png",
                 "content-type": "image\/png"
             }, {
                 "rel": "small-logo",
-                "href": "http:\/\/media.npr.org\/images\/stations\/logos\/wbur_fm.gif",
+                "href": "https:\/\/media.npr.org\/images\/stations\/logos\/wbur_fm.gif",
                 "content-type": "image\/gif"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/05\/330.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/05\/330.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/10\/330.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/10\/330.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/01\/330.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/01\/330.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/06\/330.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/06\/330.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/02\/330.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/02\/330.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/07\/330.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/07\/330.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/03\/330.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/03\/330.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/08\/330.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/08\/330.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/04\/330.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/04\/330.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/09\/330.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/09\/330.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "facebook",
-                "href": "http:\/\/www.facebook.com\/wburnews",
+                "href": "https:\/\/www.facebook.com\/wburnews",
                 "content-type": "text\/html"
             }, {
                 "rel": "twitter",
@@ -611,39 +611,39 @@ export const STATION_FINDER_RESPONSE = {
             }],
             "podcasts": [{
                 "guid": "0d027325710f4c7a90e9732fc4c0f287",
-                "href": "http:\/\/feeds.feedburner.com\/news\/podcast",
+                "href": "https:\/\/feeds.feedburner.com\/news\/podcast",
                 "title": "WBUR: Daily News Podcast",
                 "typeId": "9",
                 "typeName": "Podcast"
             }, {
                 "guid": "f26a56c2dfae4e9eaae383865a2758c7",
-                "href": "http:\/\/feeds.feedburner.com\/radioboston\/podcast",
+                "href": "https:\/\/feeds.feedburner.com\/radioboston\/podcast",
                 "title": "Radio Boston Podcast",
                 "typeId": "9",
                 "typeName": "Podcast"
             }, {
                 "guid": "aa1e68193b244416adaf82f3a35b7e17",
-                "href": "http:\/\/feeds.feedburner.com\/dearsugar\/podcast",
+                "href": "https:\/\/feeds.feedburner.com\/dearsugar\/podcast",
                 "title": "Dear Sugar Radio",
                 "typeId": "9",
                 "typeName": "Podcast"
             }, {
                 "guid": "80ae56e1a769436b9e09f2a1be13cdac",
-                "href": "http:\/\/feeds.feedburner.com\/modernlove\/podcast",
+                "href": "https:\/\/feeds.feedburner.com\/modernlove\/podcast",
                 "title": "Modern Love",
                 "typeId": "9",
                 "typeName": "Podcast"
             }],
             "streams": [{
                 "guid": "e420ca7fa570417d91f1d3f384b72362",
-                "href": "http:\/\/audio.wbur.org\/stream\/live_mp3.m3u",
+                "href": "https:\/\/audio.wbur.org\/stream\/live_mp3.m3u",
                 "isPrimaryStream": true,
                 "title": "90.9 WBUR, Boston's NPR News Station",
                 "typeId": "10",
                 "typeName": "Audio MP3 Stream"
             }, {
                 "guid": "1ece4a1938054785affc0e49659b8eee",
-                "href": "http:\/\/audio.wbur.org\/stream\/live_aac.m3u",
+                "href": "https:\/\/audio.wbur.org\/stream\/live_aac.m3u",
                 "isPrimaryStream": true,
                 "title": "90.9 WBUR, Boston's NPR News Station",
                 "typeId": "13",
@@ -651,19 +651,19 @@ export const STATION_FINDER_RESPONSE = {
             }],
             "donation": [{
                 "guid": "1e65eb2e4dcd4aa788c206d5189adc4a",
-                "href": "http:\/\/www.wbur.org\/support",
+                "href": "https:\/\/www.wbur.org\/support",
                 "title": "Support",
                 "typeId": "4",
                 "typeName": "Pledge Page"
             }, {
                 "guid": "dd411a7352ab47108625b93addbfdcc4",
-                "href": "http:\/\/www.wbur.org\/support",
+                "href": "https:\/\/www.wbur.org\/support",
                 "title": "NPR One",
                 "typeId": "27",
                 "typeName": "Station NPR One Pledge Page"
             }, {
                 "guid": "34872b96ca3848cd9c623a4ce8a61cd0",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/donation\/330_4a2e0ae9197a6c7f2891fe9025b60e6d.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/donation\/330_4a2e0ae9197a6c7f2891fe9025b60e6d.mp4",
                 "title": "Station Pledge Audio",
                 "typeId": "28",
                 "typeName": "Station Pledge Audio"
@@ -704,7 +704,7 @@ export const STATION_FINDER_RESPONSE = {
         "links": {
             "brand": [{
                 "rel": "homepage",
-                "href": "http:\/\/www.wgbh.org\/897",
+                "href": "https:\/\/www.wgbh.org\/897",
                 "content-type": "text\/html"
             }, {
                 "rel": "logo",
@@ -716,51 +716,51 @@ export const STATION_FINDER_RESPONSE = {
                 "content-type": "image\/gif"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/10\/396.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/10\/396.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/01\/396.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/01\/396.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/06\/396.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/06\/396.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/02\/396.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/02\/396.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/07\/396.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/07\/396.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/03\/396.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/03\/396.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/08\/396.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/08\/396.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/04\/396.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/04\/396.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/09\/396.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/09\/396.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/05\/396.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/05\/396.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "hello-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/stationid\/396.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/stationid\/396.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "facebook",
-                "href": "http:\/\/www.facebook.com\/WGBHBoston",
+                "href": "https:\/\/www.facebook.com\/WGBHBoston",
                 "content-type": "text\/html"
             }, {
                 "rel": "twitter",
@@ -769,58 +769,58 @@ export const STATION_FINDER_RESPONSE = {
             }],
             "podcasts": [{
                 "guid": "d4b7d49cf72c46d892ca1f4658cf3075",
-                "href": "http:\/\/streams.wgbh.org\/online\/clas\/clas_performance.xml",
+                "href": "https:\/\/streams.wgbh.org\/online\/clas\/clas_performance.xml",
                 "title": "Classical Performance Podcast",
                 "typeId": "9",
                 "typeName": "Podcast"
             }, {
                 "guid": "12200d5b972d44b087b2d61f94302439",
-                "href": "http:\/\/streams.wgbh.org\/online\/gb\/btp_audio\/btp_audio.xml",
+                "href": "https:\/\/streams.wgbh.org\/online\/gb\/btp_audio\/btp_audio.xml",
                 "title": "Greater Boston's Beat the Press",
                 "typeId": "9",
                 "typeName": "Podcast"
             }, {
                 "guid": "1154ef1867b1415788f942873d6badd7",
-                "href": "http:\/\/www.theworld.org\/rss\/health.xml",
+                "href": "https:\/\/www.theworld.org\/rss\/health.xml",
                 "title": "The World's Global Health Podcast",
                 "typeId": "9",
                 "typeName": "Podcast"
             }, {
                 "guid": "5cceff9b3b964e45beeb9ddfb5ef938c",
-                "href": "http:\/\/broadband.wgbh.org\/nova\/rss\/nova-podcast-ao.xml",
+                "href": "https:\/\/broadband.wgbh.org\/nova\/rss\/nova-podcast-ao.xml",
                 "title": "NOVA | PBS",
                 "typeId": "9",
                 "typeName": "Podcast"
             }, {
                 "guid": "58032177c984491b93e8e679530e5c8d",
-                "href": "http:\/\/www.theworld.org\/rss\/glohit.xml",
+                "href": "https:\/\/www.theworld.org\/rss\/glohit.xml",
                 "title": "The World's Global Hit Podcast",
                 "typeId": "9",
                 "typeName": "Podcast"
             }, {
                 "guid": "8c95a6ee160048c6a74cdb44ec9e3a32",
-                "href": "http:\/\/www.theworld.org\/rss\/twiw.xml",
+                "href": "https:\/\/www.theworld.org\/rss\/twiw.xml",
                 "title": "PRI's The World: The World in Words",
                 "typeId": "9",
                 "typeName": "Podcast"
             }],
             "streams": [{
                 "guid": "aa20904cb45540b388e8b7de52a1d998",
-                "href": "http:\/\/audio.wgbh.org:8100\/",
+                "href": "https:\/\/audio.wgbh.org:8100\/",
                 "isPrimaryStream": false,
                 "title": "Celtic Sojourn",
                 "typeId": "10",
                 "typeName": "Audio MP3 Stream"
             }, {
                 "guid": "1413ee87652744769a61b7a1ca0d1c42",
-                "href": "http:\/\/audio.wgbh.org:8000\/",
+                "href": "https:\/\/audio.wgbh.org:8000\/",
                 "isPrimaryStream": true,
                 "title": "WGBH News",
                 "typeId": "10",
                 "typeName": "Audio MP3 Stream"
             }, {
                 "guid": "c6cf9fb1ddd843e18ee963e3b0f20fa1",
-                "href": "http:\/\/audio.wgbh.org:8104\/",
+                "href": "https:\/\/audio.wgbh.org:8104\/",
                 "isPrimaryStream": false,
                 "title": "WGBH Jazz Decades",
                 "typeId": "10",
@@ -828,13 +828,13 @@ export const STATION_FINDER_RESPONSE = {
             }],
             "donation": [{
                 "guid": "fa29092244d744cc95e9c4a6617e4320",
-                "href": "http:\/\/be.wgbh.org\/donate\/news\/radio_donate.html",
+                "href": "https:\/\/be.wgbh.org\/donate\/news\/radio_donate.html",
                 "title": "Support 89.7 WGBH News",
                 "typeId": "4",
                 "typeName": "Pledge Page"
             }, {
                 "guid": "dcf3b29a89234fa7b97ca30e3274f477",
-                "href": "http:\/\/be.wgbh.org\/donate\/news\/radio_donate.html",
+                "href": "https:\/\/be.wgbh.org\/donate\/news\/radio_donate.html",
                 "title": "Support 89.7 WGBH News",
                 "typeId": "27",
                 "typeName": "Station NPR One Pledge Page"
@@ -871,55 +871,55 @@ export const STATION_FINDER_RESPONSE = {
         "links": {
             "brand": [{
                 "rel": "homepage",
-                "href": "http:\/\/www.wnku.org",
+                "href": "https:\/\/www.wnku.org",
                 "content-type": "text\/html"
             }, {
                 "rel": "small-logo",
-                "href": "http:\/\/media.npr.org\/images\/stations\/logos\/wnke_fm.gif",
+                "href": "https:\/\/media.npr.org\/images\/stations\/logos\/wnke_fm.gif",
                 "content-type": "image\/gif"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/05\/1209.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/05\/1209.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/10\/1209.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/10\/1209.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/01\/1209.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/01\/1209.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/06\/1209.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/06\/1209.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/02\/1209.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/02\/1209.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/07\/1209.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/07\/1209.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/03\/1209.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/03\/1209.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/08\/1209.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/08\/1209.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/04\/1209.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/04\/1209.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "sonic-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/sonicid\/09\/1209.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/sonicid\/09\/1209.mp4",
                 "content-type": "audio\/aac"
             }, {
                 "rel": "hello-id-audio",
-                "href": "http:\/\/download.npr.org\/npr-mp4\/stationid\/1209.mp4",
+                "href": "https:\/\/download.npr.org\/npr-mp4\/stationid\/1209.mp4",
                 "content-type": "audio\/aac"
             }]
         },
