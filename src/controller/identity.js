@@ -7,7 +7,7 @@ import StationFinder from './station-finder';
 
 
 /**
- * Encapsulates all of the logic for communication with the [Identity Service](http://dev.npr.org/api/#/identity)
+ * Encapsulates all of the logic for communication with the [Identity Service](https://dev.npr.org/api/#/identity)
  * in the NPR One API.
  *
  * Note that consumers should not be accessing this class directly but should instead use the provided pass-through

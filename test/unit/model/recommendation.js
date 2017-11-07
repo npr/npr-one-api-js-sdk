@@ -9,7 +9,7 @@ import { LISTENING_V2_RECOMMENDATIONS_RESPONSE } from '../../test-data';
 /** @test {Recommendation} */
 describe('Recommendation', () => {
     const response = LISTENING_V2_RECOMMENDATIONS_RESPONSE;
-    const adsWizzUrl = '^http://demo.adswizz.com';
+    const adsWizzUrl = '^https://demo.adswizz.com';
     const doubleClickUrl = '^https://ad.doubleclick.net';
     /** @type {Recommendation} */
     let recStationId;
