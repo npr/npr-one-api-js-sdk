@@ -176,30 +176,106 @@ interface RecommendationAttributes {
 }
 
 
+declare enum AudioContentType {
+    HLS = 'application/vnd.apple.mpegurl',
+    MP3 = 'audio/mp3',
+    MP4 = 'audio/aac',
+    WAV = 'audio/wav',
+    WMA = 'audio/x-ms-wax',
+}
+
+
+declare enum AudioRel {
+    Download = 'download',
+}
+
+
+declare enum ImageContentType {
+    GIF = 'image/gif',
+    JPEG = 'image/jpeg',
+    PNG = 'image/png',
+}
+
+
+declare enum ImageRel {
+    Custom = 'custom',
+    Enlargement = 'enlargement',
+    Icon = 'icon',
+    LogoSquare = 'logo_square',
+    Square = 'square',
+    Standard = 'standard',
+    Wide = 'wide',
+}
+
+
+declare enum WebContentType {
+    HTML = 'text/html',
+    JSON = 'application/json',
+    XML = 'application/xml',
+}
+
+
+declare enum WebRel {
+    Embed = 'embed',
+    Transcript = 'transcript',
+}
+
+
 interface Link {
     /** The URI that represents the resource */
     href: string;
 
     /** The MIME-type of the resource */
-        'content-type'?: string;
+    'content-type'?: string;
 }
 
 
 interface FormFactorLink extends Link {
     /** The form-factor for the most appropriate display of or interaction with the resource, usually irrelevant unless there is more than one link of the same type */
-        'form-factor'?: string;
+    'form-factor'?: string;
 }
 
 
-interface ImageLink extends FormFactorLink {
-    /** The relation of the image to the content, which usually corresponds to the crop-type */
+interface RelLink extends Link {
+    /** The relation of the link to the content */
     rel?: string;
+}
+
+
+interface AudioLink extends RelLink {
+    'content-type': AudioContentType;
+
+    rel?: AudioRel;
+}
+
+
+interface ImageLink extends FormFactorLink, RelLink {
+    'content-type': ImageContentType;
+
+    /** The relation of the image to the content, which usually corresponds to the crop-type */
+    rel?: ImageRel;
 
     /** The pixel height of the image */
     height?: number;
 
     /** The pixel width of the image */
     width?: number;
+
+    /** The producer of the image; should be used for properly attributing the image when it exists */
+    producer?: string;
+
+    /** The provider of the image; should be used for properly attributing the image when it exists */
+    provider?: string;
+
+    /** A unique identifier for the image */
+    image?: string;
+}
+
+
+interface WebLink extends RelLink {
+    'content-type': WebContentType;
+
+    rel?: WebRel;
 }
 
 
@@ -213,13 +289,13 @@ export interface Recommendation {
     attributes: RecommendationAttributes;
 
     /** The actual audio files associated with this recommendation; should never be empty */
-    audio: Array<Link>;
+    audio: Array<AudioLink>;
 
     /** A list of images associated with this recommendation; could be empty */
     images: Array<ImageLink>;
 
     /** A list of links to other places where this story can be found on the web (for example, on NPR.org); could be empty */
-    web: Array<Link>;
+    web: Array<WebLink>;
 
     /** A list of links that are used as the canonical link(s) when sharing this story on social media */
     onramps: Array<Link>;
@@ -252,16 +328,16 @@ export interface Recommendation {
     /**
      * Returns the actual audio files associated with this recommendation
      *
-     * @returns {Array<Link>}
+     * @returns {Array<RelLink>}
      */
-    getAudio(): Array<Link>;
+    getAudio(): Array<RelLink>;
 
     /**
      * Returns a list of links to other places where this story can be found on the web (for example, on NPR.org)
      *
-     * @returns {Array<Link>}
+     * @returns {Array<RelLink>}
      */
-    getWeb(): Array<Link>;
+    getWeb(): Array<RelLink>;
 
     /**
      * Returns a list of links that are used as the canonical link(s) when sharing this story on social media.
@@ -907,7 +983,7 @@ export default class NprOneSDK {
      * @param {number|string} stationId   The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
      * @returns {Promise<Station>}
      */
-    getStationDetails(stationId: number | string): Promise<Array<Station>>;
+    getStationDetails(stationId: number | string): Promise<Station>;
 
     /**
      * Returns the foundational path for a given service
