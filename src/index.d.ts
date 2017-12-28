@@ -201,6 +201,7 @@ declare enum ImageRel {
     Custom = 'custom',
     Enlargement = 'enlargement',
     Icon = 'icon',
+    Logo = 'logo',
     LogoSquare = 'logo_square',
     Square = 'square',
     Standard = 'standard',
