@@ -19,14 +19,14 @@ export interface AccessToken {
     isExpired(): boolean;
 
     /** The access token itself (40-character alphanumeric string) */
-    token: string;
+    readonly token: string;
 
     /**
      * Returns the TTL (in milliseconds) until this access token expires. If you are using an auth proxy and have
      * correctly configured the `refreshTokenUrl`, this SDK will automatically refresh expired access tokens for you,
      * so consumers typically do not need to worry about whether or not a token is expired or about to expire.
      */
-    ttl: number;
+    readonly ttl: number;
 
     /**
      * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
@@ -108,24 +108,24 @@ export interface DeviceCode {
     isExpired(): boolean;
 
     /** The user code (8-character alphanumeric string) */
-    userCode: string;
+    readonly userCode: string;
 
     /** The verification URL (the place where the user should go on their mobile device or laptop to log in) */
-    verificationUri: string;
+    readonly verificationUri: string;
 
     /**
      * Returns the TTL (in milliseconds) until this device code/user code pair expires. The SDK will automatically generate
      * a new key pair upon expiry, so consumers of the SDK will generally not have to use this value directly; however,
      * you may opt to display on the screen how much time the user has left to log in before a new code is generated.
      */
-    ttl: number;
+    readonly ttl: number;
 
     /**
      * Returns the interval (in milliseconds) at which the client (in this case the SDK) should poll the `POST /token`
      * endpoint (or the OAuth proxy that lies in between). Consumers of the SDK should generally not have to use this
      * value directly.
      */
-    interval: number;
+    readonly interval: number;
 
     /**
      * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
@@ -137,9 +137,23 @@ export interface DeviceCode {
 }
 
 
+declare enum RecommendationType {
+    Audio = 'audio',
+    Donate = 'donate',
+    FeatureCardAsyncRequest = 'featureCardAsyncRequest',
+    FeatureCardExternalLink = 'featureCardExternalLink',
+    FeatureCardInformational = 'featureCardInformational',
+    FeatureCardNotification = 'featureCardNotification',
+    FeatureCardPromotion = 'featureCardPromotion',
+    Intro = 'intro',
+    Sponsorship = 'sponsorship',
+    StationID = 'stationId',
+}
+
+
 interface RecommendationAttributes {
     /** The type of recommendation, usually `audio`. Can also be `stationId`, `sponsorship`, etc. */
-        type: string;
+    type: RecommendationType | string;
 
     /** The universal identifier of the recommendation */
     uid: string;
@@ -244,17 +258,17 @@ interface RelLink extends Link {
 
 
 interface AudioLink extends RelLink {
-    'content-type': AudioContentType;
+    'content-type': AudioContentType | string;
 
-    rel?: AudioRel;
+    rel?: AudioRel | string;
 }
 
 
 interface ImageLink extends FormFactorLink, RelLink {
-    'content-type': ImageContentType;
+    'content-type': ImageContentType | string;
 
     /** The relation of the image to the content, which usually corresponds to the crop-type */
-    rel?: ImageRel;
+    rel?: ImageRel | string;
 
     /** The pixel height of the image */
     height?: number;
@@ -274,9 +288,9 @@ interface ImageLink extends FormFactorLink, RelLink {
 
 
 interface WebLink extends RelLink {
-    'content-type': WebContentType;
+    'content-type': WebContentType | string;
 
-    rel?: WebRel;
+    rel?: WebRel | string;
 }
 
 
@@ -464,26 +478,26 @@ export interface Station {
      * The unique ID that represents this station across NPR's various APIs. The ID is an integer between 1 and
      * 9999, but it will always be returned in string format.
      */
-    id: string;
+    readonly id: string;
 
     /**
      * The display name that the station would prefer to use. Please use this anytime you want to display a
      * given station's name, rather than attempting to find the appropriate field inside of {@link Station.attributes}
      * yourself; branding is a sensitive issue for stations and we should all respect how they wish to be identified.
      */
-    displayName: string;
+    readonly displayName: string;
 
     /**
      * The logo for this station, if one can be found. If no logo can be found at all, this will return `null`.
      */
-    logo?: string;
+    readonly logo?: string;
 
     /**
      * The tagline for this station. This should be used as supplemental metadata for a station; it should never
      * be used as the sole identifying information. Note that while the majority of the stations in our system have
      * taglines, it is not guaranteed that each station has one.
      */
-    tagline: string;
+    readonly tagline: string;
 
     /**
      * The call sign, brand (AM or FM), and frequency together as one string, e.g. `'WAMU FM 88.5'` or
@@ -493,7 +507,7 @@ export interface Station {
      * and therefore use the same display name and logo; in those cases, the call sign + band + frequency combination is
      * the main way to disambiguate between multiple stations in the same network. This value is guaranteed to be unique.
      */
-    callSignAndFrequency?: string;
+    readonly callSignAndFrequency?: string;
 
     /**
      * The location of the station, which always consists of a city and (abbreviated) state, e.g. `'Austin, TX'`
@@ -502,24 +516,23 @@ export interface Station {
      * and {@link logo}. Note that this value isn't guaranteed to be unique; some cities (e.g. Boston) have multiple
      * NPR stations.
      */
-    location: string;
+    readonly location: string;
 
     /** The URL to the station's website, if available. */
-    homepageUrl?: string;
+    readonly homepageUrl?: string;
 
     /** The URL to the station's online donation page, if available. */
-    donationUrl?: string;
+    readonly donationUrl?: string;
 
     /** Whether or not the station is eligible for inclusion in NPR One applications. */
-    isNprOneEligible: boolean;
+    readonly isNprOneEligible: boolean;
 
     /**
-     * The raw attributes that represent this station. Please use this with caution; the public accessor methods
+     * Returns the raw attributes that represent this station. Please use this with caution; the public accessor methods
      * in this class should be sufficient for most use cases, and consumers should rarely need to use this additional
-     * metadata. These attributes will also be changing in version 3 of the Station Finder Service, so we are
-     * discouraging clients from writing code against these.
+     * metadata.
      */
-    attributes: any;
+    readonly attributes: any;
 
     /**
      * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
