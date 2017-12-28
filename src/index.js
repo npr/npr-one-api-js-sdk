@@ -13,8 +13,7 @@ Logger.setLevel(Logger.WARN);
  * In general, a consumer of this API should be primarily concerned with asking for
  * recommendations and recording user actions against those recommendations.
  */
-export default class NprOneSDK
-{
+export class NprOneSDK {
     /**
      * Instantiates the NPR One SDK.
      */
@@ -394,6 +393,7 @@ export default class NprOneSDK
         return `${NprOneSDK.config.apiBaseUrl}/${service}/${NprOneSDK.config.apiVersion}`;
     }
 }
+export default NprOneSDK;
 
 /**
  * @external {Response} https://developer.mozilla.org/en-US/docs/Web/API/Response

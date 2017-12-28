@@ -716,7 +716,7 @@ export class Logger {
  * In general, a consumer of this API should be primarily concerned with asking for
  * recommendations and recording user actions against those recommendations.
  */
-export default class NprOneSDK {
+export class NprOneSDK {
     /** Updates private `_config` member attributes but does not overwrite entire `_config` object */
     static config: Config;
 
@@ -1007,3 +1007,4 @@ export default class NprOneSDK {
      */
     static getServiceUrl(service: string): string;
 }
+export default NprOneSDK;

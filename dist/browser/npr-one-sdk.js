@@ -93,6 +93,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	exports.__esModule = true;
+	exports.NprOneSDK = undefined;
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -134,7 +135,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * recommendations and recording user actions against those recommendations.
 	 */
 	
-	var NprOneSDK = function () {
+	var NprOneSDK = exports.NprOneSDK = function () {
 	    /**
 	     * Instantiates the NPR One SDK.
 	     */
@@ -595,6 +596,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return NprOneSDK;
 	}();
 	
+	exports.default = NprOneSDK;
+	
 	/**
 	 * @external {Response} https://developer.mozilla.org/en-US/docs/Web/API/Response
 	 */
@@ -604,9 +607,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @external {JsLogger} https://github.com/jonnyreeves/js-logger
 	 */
-	
-	
-	exports.default = NprOneSDK;
 
 /***/ },
 /* 3 */
