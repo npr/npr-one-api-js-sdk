@@ -137,7 +137,7 @@ export interface DeviceCode {
 }
 
 
-declare enum RecommendationType {
+export enum RecommendationType {
     Audio = 'audio',
     Donate = 'donate',
     FeatureCardAsyncRequest = 'featureCardAsyncRequest',
@@ -151,7 +151,7 @@ declare enum RecommendationType {
 }
 
 
-interface RecommendationAttributes {
+export interface RecommendationAttributes {
     /** The type of recommendation, usually `audio`. Can also be `stationId`, `sponsorship`, etc. */
     type: RecommendationType | string;
 
@@ -190,7 +190,7 @@ interface RecommendationAttributes {
 }
 
 
-declare enum AudioContentType {
+export enum AudioContentType {
     HLS = 'application/vnd.apple.mpegurl',
     MP3 = 'audio/mp3',
     MP4 = 'audio/aac',
@@ -199,19 +199,19 @@ declare enum AudioContentType {
 }
 
 
-declare enum AudioRel {
+export enum AudioRel {
     Download = 'download',
 }
 
 
-declare enum ImageContentType {
+export enum ImageContentType {
     GIF = 'image/gif',
     JPEG = 'image/jpeg',
     PNG = 'image/png',
 }
 
 
-declare enum ImageRel {
+export enum ImageRel {
     Custom = 'custom',
     Enlargement = 'enlargement',
     Icon = 'icon',
@@ -223,20 +223,20 @@ declare enum ImageRel {
 }
 
 
-declare enum WebContentType {
+export enum WebContentType {
     HTML = 'text/html',
     JSON = 'application/json',
     XML = 'application/xml',
 }
 
 
-declare enum WebRel {
+export enum WebRel {
     Embed = 'embed',
     Transcript = 'transcript',
 }
 
 
-interface Link {
+export interface Link {
     /** The URI that represents the resource */
     href: string;
 
@@ -245,26 +245,26 @@ interface Link {
 }
 
 
-interface FormFactorLink extends Link {
+export interface FormFactorLink extends Link {
     /** The form-factor for the most appropriate display of or interaction with the resource, usually irrelevant unless there is more than one link of the same type */
     'form-factor'?: string;
 }
 
 
-interface RelLink extends Link {
+export interface RelLink extends Link {
     /** The relation of the link to the content */
     rel?: string;
 }
 
 
-interface AudioLink extends RelLink {
+export interface AudioLink extends RelLink {
     'content-type': AudioContentType | string;
 
     rel?: AudioRel | string;
 }
 
 
-interface ImageLink extends FormFactorLink, RelLink {
+export interface ImageLink extends FormFactorLink, RelLink {
     'content-type': ImageContentType | string;
 
     /** The relation of the image to the content, which usually corresponds to the crop-type */
@@ -287,7 +287,7 @@ interface ImageLink extends FormFactorLink, RelLink {
 }
 
 
-interface WebLink extends RelLink {
+export interface WebLink extends RelLink {
     'content-type': WebContentType | string;
 
     rel?: WebRel | string;
@@ -343,16 +343,16 @@ export interface Recommendation {
     /**
      * Returns the actual audio files associated with this recommendation
      *
-     * @returns {Array<RelLink>}
+     * @returns {Array<AudioLink>}
      */
-    getAudio(): Array<RelLink>;
+    getAudio(): Array<AudioLink>;
 
     /**
      * Returns a list of links to other places where this story can be found on the web (for example, on NPR.org)
      *
-     * @returns {Array<RelLink>}
+     * @returns {Array<WebLink>}
      */
-    getWeb(): Array<RelLink>;
+    getWeb(): Array<WebLink>;
 
     /**
      * Returns a list of links that are used as the canonical link(s) when sharing this story on social media.
@@ -544,7 +544,7 @@ export interface Station {
 }
 
 
-interface UserAttributes {
+export interface UserAttributes {
     /** Some unique identifier for the user */
     id: string;
 
@@ -559,7 +559,7 @@ interface UserAttributes {
 }
 
 
-interface UserOrganization {
+export interface UserOrganization {
     /** Some unique identifier for the organization */
     id: string;
 
@@ -580,7 +580,7 @@ interface UserOrganization {
 }
 
 
-interface UserAffiliation {
+export interface UserAffiliation {
     /** A unique identifier for the aggregation (program) */
     id: number;
 
