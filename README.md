@@ -55,7 +55,7 @@ Depending on your environment, there are various methods you can use to add this
 
 Assuming a recent version of [node.js](https://nodejs.org) (v0.12.x or newer) and [npm](https://npmjs.org) are installed globally on your system, you can do:
 
-    npm install npr-one-sdk --save
+    npm install @npr/npr-one-sdk --save
 
 ...to add the latest stable version of this SDK to your existing node.js project.
 
@@ -63,7 +63,7 @@ If you do not already have an existing node.js project, you can start one with:
 
     npm init
 
-...which will ask you some questions and generate a `package.json` for you. You can then run `npm install npr-one-sdk --save` to save the SDK to your new project's list of dependencies.
+...which will ask you some questions and generate a `package.json` for you. You can then run `npm install @npr/npr-one-sdk --save` to save the SDK to your new project's list of dependencies.
 
 ### Using Bower
 
@@ -105,7 +105,7 @@ Your setup will depend slightly on whether you are using ES5 (the current mainst
 If you're using ES6, we are generally assuming that you are already using [npm](https://npmjs.org) as your frontend package manager in combination with a modern JavaScript module bundler such as [Webpack](https://webpack.github.io/), [Browserify](https://browserify.org/) or [jspm](https://jspm.io/). Those tools will typically resolve your dependencies, pulling in our distribution files from the proper location, so all you need to do to import the SDK and use it is:
 
 ```javascript
-import NprOneSDK from 'npr-one-sdk';
+import NprOneSDK from '@npr/npr-one-sdk';
 const nprOneSDK = new NprOneSDK();
 
 NprOneSDK.config = {
@@ -139,7 +139,7 @@ Because node.js already takes care of loading dependencies, the only prerequisit
 In ES5 (most common):
 
 ```javascript
-var NprOneSDK = require('npr-one-sdk').default;
+var NprOneSDK = require('@npr/npr-one-sdk').default;
 var nprOneSDK = new NprOneSDK();
 
 NprOneSDK.config = {
@@ -151,7 +151,7 @@ NprOneSDK.config = {
 In ES6 (less common):
 
 ```javascript
-const NprOneSDK = require('npr-one-sdk').default;
+const NprOneSDK = require('@npr/npr-one-sdk').default;
 const nprOneSDK = new NprOneSDK();
 
 NprOneSDK.config = {
@@ -277,13 +277,13 @@ This SDK abstracts away the logic of when to actually make new API calls. Given 
 nprOneSDK.getRecommendation()
     .then(function (recommendation) {
         recommendation.recordAction(NprOneSDK.Action.START, 0);
-    
+
         audioPlayer.play(recommendation.getAudio()[0]); // where "audioPlayer" here is a stand-in for your audio player implementation
-    
+
         // assuming some time passes and the audio player completes playing the audio...
-    
+
         recommendation.recordAction(NprOneSDK.Action.COMPLETED, recommendation.attributes.duration);
-    
+
         nprOneSDK.getRecommendation()
             .then(function (nextRecommendation) {
                 // repeat the same steps as above with the new recommendation; repeat ad infinitum

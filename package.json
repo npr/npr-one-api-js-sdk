@@ -1,6 +1,6 @@
 {
-  "name": "npr-one-sdk",
-  "version": "0.0.0-semantically-released",
+  "name": "@npr/npr-one-sdk",
+  "version": "2.0.0",
   "homepage": "http://npr.github.io/npr-one-api-js-sdk/",
   "description": "An SDK for interfacing with the NPR One API, designed as a Universal Javascript Module",
   "keywords": [
@@ -56,10 +56,10 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "dependencies": {
-    "es6-error": "^3.0.1",
-    "isomorphic-fetch": "^2.2.1",
-    "js-logger": "^1.2.0",
-    "url-parse": "^1.0.5"
+    "es6-error": "3.0.1",
+    "isomorphic-fetch": "2.2.1",
+    "js-logger": "1.3.0",
+    "url-parse": "1.0.5"
   },
   "devDependencies": {
     "babel-cli": "6.11.4",
@@ -101,5 +101,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
