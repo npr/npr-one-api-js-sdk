@@ -37,7 +37,7 @@
   },
   "typings": "./src/index.d.ts",
   "scripts": {
-    "update": "npm prune && npm cache clean --force && npm install",
+    "update": "npm prune && npm cache clean && npm install",
     "lint": "eslint 'src/**/*.js'",
     "lint:fix": "npm run lint -- --fix",
     "compile": "npm run compile:node && npm run compile:browser",
@@ -52,7 +52,7 @@
     "predocs": "rm -rf docs/",
     "docs": "esdoc -c esdoc.json",
     "commit": "git-cz",
-    "prepare": "not-in-install && npm run compile || true",
+    "prepublish": "not-in-install && npm run compile || true",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "dependencies": {
@@ -94,8 +94,8 @@
     "webpack": "1.13.1"
   },
   "engines": {
-    "node": ">= 8",
-    "npm": ">= 5.5"
+    "node": ">= 0.12",
+    "npm": ">= 2.0"
   },
   "config": {
     "commitizen": {
