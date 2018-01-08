@@ -35,7 +35,7 @@ export class NprOneSDK {
         this._stationfinder = new StationFinder();
 
         // setup the default config
-        NprOneSDK.config; // eslint-disable-line
+        NprOneSDK._initConfig();
     }
 
     /**
@@ -57,24 +57,7 @@ export class NprOneSDK {
      * @type {Config}
      */
     static get config() {
-        if (!NprOneSDK._config) {
-            NprOneSDK._config = {
-                apiBaseUrl: 'https://api.npr.org',
-                apiVersion: 'v2',
-                authProxyBaseUrl: '',
-                newDeviceCodePath: '/device',
-                pollDeviceCodePath: '/device/poll',
-                refreshTokenPath: '/refresh',
-                tempUserPath: '/temporary',
-                logoutPath: '/logout',
-                accessToken: '',
-                clientId: '',
-                advertisingId: '',
-                advertisingTarget: '',
-            };
-        }
-
-        /** @type {Config} */
+        NprOneSDK._initConfig();
         return NprOneSDK._config;
     }
 
@@ -84,9 +67,7 @@ export class NprOneSDK {
      * @type {Config}
      */
     static set config(value) {
-        if (!NprOneSDK._config) {
-            NprOneSDK.config; // eslint-disable-line
-        }
+        NprOneSDK._initConfig();
         Object.assign(NprOneSDK._config, value);
     }
 
@@ -391,6 +372,30 @@ export class NprOneSDK {
             return `${NprOneSDK.config.apiBaseUrl}/${service}/v3`;
         }
         return `${NprOneSDK.config.apiBaseUrl}/${service}/${NprOneSDK.config.apiVersion}`;
+    }
+
+    /**
+     * Initializes the config using default settings.
+     *
+     * @private
+     */
+    static _initConfig() {
+        if (!NprOneSDK._config) {
+            NprOneSDK._config = {
+                apiBaseUrl: 'https://api.npr.org',
+                apiVersion: 'v2',
+                authProxyBaseUrl: '',
+                newDeviceCodePath: '/device',
+                pollDeviceCodePath: '/device/poll',
+                refreshTokenPath: '/refresh',
+                tempUserPath: '/temporary',
+                logoutPath: '/logout',
+                accessToken: '',
+                clientId: '',
+                advertisingId: '',
+                advertisingTarget: '',
+            };
+        }
     }
 }
 export default NprOneSDK;
