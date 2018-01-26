@@ -359,7 +359,7 @@ If you're interested in contributing to this project by submitting bug reports, 
 
 ## License
 
-Copyright (c) 2016 NPR
+Copyright (c) 2016-2018 NPR
 
 Licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/License-2.0) (the “License”) with the following modification; You may not use this file except in compliance with the License as modified by the addition of Section 10, as follows:
 
