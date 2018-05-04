@@ -53,7 +53,7 @@ Depending on your environment, there are various methods you can use to add this
 
 ### Using NPM
 
-Assuming a recent version of [node.js](https://nodejs.org) (v4.x or newer) and [npm](https://npmjs.org) are installed globally on your system, you can do:
+Assuming a recent version of [node.js](https://nodejs.org) (v6.x or newer) and [npm](https://npmjs.org) are installed globally on your system, you can do:
 
     npm install @npr/npr-one-sdk --save
 
