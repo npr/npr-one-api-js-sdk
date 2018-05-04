@@ -94,7 +94,7 @@
     "webpack": "1.13.1"
   },
   "engines": {
-    "node": ">= 4",
+    "node": ">= 6",
     "npm": ">= 2.0"
   },
   "config": {
