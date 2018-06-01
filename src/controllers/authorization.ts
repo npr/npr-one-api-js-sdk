@@ -99,6 +99,40 @@ export default class Authorization {
     }
 
     /**
+     * Creates a temporary user from the NPR One API and use that user's access token for
+     * subsequent API requests.
+     *
+     * Caution: most clients are not authorized to use temporary users.
+     *
+     * @returns {Promise<User>}
+     * @throws {TypeError} if an OAuth proxy is not configured or no client ID is set
+     */
+    createTemporaryUser() {
+        if (!NPROneSDK.config.authProxyBaseUrl) {
+            throw new TypeError('OAuth proxy not configured. Unable to create temporary users.');
+        }
+        if (!NPROneSDK.config.clientId) {
+            throw new TypeError('A client ID must be set for temporary user requests.');
+        }
+
+        let url = `${NPROneSDK.config.authProxyBaseUrl}${NPROneSDK.config.tempUserPath}`;
+        const glueCharacter = url.indexOf('?') >= 0 ? '&' : '?';
+        url = `${url}${glueCharacter}clientId=${NPROneSDK.config.clientId}`;
+
+        const options = {
+            credentials: 'include',
+        };
+
+        return FetchUtil.nprApiFetch(url, options)
+            .then((json) => {
+                const tokenModel = new AccessToken(json);
+                tokenModel.validate(); // throws exception if invalid
+                NPROneSDK.accessToken = tokenModel.token;
+                return tokenModel; // never directly consumed, but useful for testing
+            });
+    }
+
+    /**
      * Logs out the user, revoking their access token from the authorization server and removing the refresh token from
      * the secure storage in the backend proxy (if a backend proxy is configured). Note that the consuming client is
      * still responsible for removing the access token anywhere else it might be stored outside of this SDK (e.g. in

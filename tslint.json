@@ -1,0 +1,26 @@
+{
+    "extends": "tslint-config-airbnb",
+    "rules": {
+        "ter-indent": [
+            true,
+            4,
+            { "SwitchCase": 1 }
+        ],
+        "space-before-function-paren": [
+            true,
+            { "anonymous": "always", "named": "never", "asyncArrow": "always" }
+        ],
+        "variable-name": [
+            true,
+            "check-format",
+            "allow-leading-underscore"
+        ],
+        "strict-boolean-expressions": [
+            false // change to true once https://github.com/progre/tslint-config-airbnb/issues/29 is resolved...
+        ],
+        "max-line-length": [
+            true,
+            140
+        ]
+    }
+}

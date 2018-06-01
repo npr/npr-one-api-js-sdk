@@ -1,0 +1,34 @@
+{
+    "transform": {
+        "^.+\\.ts?$": "ts-jest"
+    },
+    "moduleFileExtensions": ["ts", "js", "json"],
+    "testMatch": ["**/*.spec.ts"],
+    "roots": [
+        "<rootDir>/src/"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+        "src/**/*.ts",
+        "!src/**/*.d.ts"
+    ],
+    "coverageDirectory": "<rootDir>/test-reports/coverage/",
+    "coverageReporters": [
+        "json",
+        "lcov",
+        "text",
+        "cobertura"
+    ],
+    "reporters": [
+        [
+            "jest-nyan-reporter", {
+                "suppressErrorReporter": false
+            }
+        ]
+    ],
+    "globals": {
+        "ts-jest": {
+            "tsConfigFile": "tsconfig.jest.json"
+        }
+    }
+}

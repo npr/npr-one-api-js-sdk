@@ -1,43 +1,44 @@
-var webpack = require('webpack'); // eslint-disable-line no-var
-
-if (!process.env.NODE_ENV) {
-    process.env.NODE_ENV = process.env.ENV = 'production';
-}
-var ENV = process.env.NODE_ENV; // eslint-disable-line no-var
-
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
     devtool: 'source-map',
-    debug: ENV !== 'production',
     entry: {
-        'npr-one-sdk': ['./src/index.js'],
-        'npr-one-sdk.min': ['./src/index.js']
+        'npr-one-sdk': ['./src/index.ts'],
+        'npr-one-sdk.min': ['./src/index.ts'],
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+        ],
+    },
+    resolve: {
+        extensions: [ '.ts', '.js' ],
     },
     output: {
-        path: './dist/browser',
+        path: path.resolve(__dirname, 'dist', 'browser'),
         filename: '[name].js',
         libraryTarget: 'umd',
-        library: 'NprOneSDK'
-    },
-    module:{
-        loaders: [
-            { test: /\.js$/, loaders: [ 'babel-loader', 'eslint-loader' ], exclude: /node_modules/ },
-        ]
+        library: 'NprOneSDK',
     },
     plugins: [
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurenceOrderPlugin(true),
-        new webpack.optimize.UglifyJsPlugin({
+        new CleanWebpackPlugin([path.resolve(__dirname, 'dist', 'browser')]),
+        new UglifyJsPlugin({
             include: /\.min\.js$/,
-            minimize: true,
-            beautify: false,
-            mangle: {
-                screw_ie8: true
+            sourceMap: true,
+            uglifyOptions: {
+                ecma: 5,
+                ie8: false,
+                output: {
+                    comments: false,
+                    beautify: false,
+                },
             },
-            compress: {
-                screw_ie8: true
-            },
-            comments: false
-        })
-    ]
+        }),
+    ],
 };

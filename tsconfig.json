@@ -1,21 +1,31 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
+    "include": [
+        "src/**/*"
+    ],
+	"exclude": [
+        "src/**/*.spec.ts",
+        "src/**/__mocks__/*.ts"
+    ],
+    "compileOnSave": false,
+	"compilerOptions": {
+		"outDir": "./dist/node",
+		"sourceMap": true,
+		"declaration": true,
+		"declarationDir": "./dist",
+		"target": "es5",
+		"module": "commonjs",
         "moduleResolution": "node",
-        "noImplicitAny": false,
-        "removeComments": false,
-        "preserveConstEnums": true,
-        "sourceMap": false,
-        "declaration": true
-    },
-    "exclude": [
-        "node_modules",
-        "dist",
-        "docs",
-        "examples",
-        "hooks",
-        "test",
-        "test-reports",
-        "webpack.config.js"
-    ]
+        "typeRoots": [
+			"node_modules/@types"
+		],
+		"lib": [
+            "dom",
+			"esnext"
+		],
+        "allowJs": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"alwaysStrict": true,
+		"removeComments": true
+	}
 }
