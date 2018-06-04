@@ -19,7 +19,7 @@ import 'isomorphic-fetch';
  *     });
  *
  */
-export default class ApiError extends es6Error {
+export class ApiError extends es6Error {
     /** The status code of the response (e.g., `400` for a bad request). */
     public readonly statusCode: number;
     /** The status message corresponding to the status code (e.g., `Bad Request` for 400). */
@@ -51,3 +51,4 @@ export default class ApiError extends es6Error {
         this.json = json;
     }
 }
+export default ApiError;

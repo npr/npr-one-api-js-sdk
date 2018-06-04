@@ -10,7 +10,5 @@ Logger.useDefaults({
     },
 });
 
-/**
- * @typedef {JsLogger} Logger
- */
+export { Logger };
 export default Logger;

@@ -10,8 +10,8 @@ function getServiceUrl(subdomain: string = ''): string {
 /**
  * Returns a {@link Station} model for the station with the given ID.
  *
- * @param config The configuration object powering all API calls
- * @param stationId The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+ * @param config - The configuration object powering all API calls
+ * @param stationId - The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
  *
  * @throws {Error} if the station is a valid NPR member station but it is not eligible for NPR One
  */
@@ -22,7 +22,7 @@ async function getStationDetails(config: Config, stationId: string | number): Pr
     }
 
     const url = `${getServiceUrl(config.subdomain)}/stations/${stationId}`;
-    const searchResult: CollectionDocJSON = await FetchUtil.nprApiCall(config, url);
+    const searchResult: CollectionDocJSON = await FetchUtil.nprApiFetch(config, url);
     const station = new Station(searchResult);
     if (!station.isNprOneEligible) {
         throw new Error(`The station ${station.id} is not eligible for NPR One.`);
@@ -42,8 +42,8 @@ async function getStationDetails(config: Config, stationId: string | number): Pr
  * of the end-user, you can use {@link searchStationsByLatLongCoordinates} instead to retrieve a list of stations
  * geographically closest to the end-user.
  *
- * @param config The configuration object powering all API calls
- * @param query An optional query, which can be a station name, network name, or zip code
+ * @param config - The configuration object powering all API calls
+ * @param query - An optional query, which can be a station name, network name, or zip code
  */
 async function searchStations(config: Config, query?: string): Promise<Station[]> {
     return performStationSearch(config, query);
@@ -60,9 +60,9 @@ async function searchStations(config: Config, query?: string): Promise<Station[]
  * SDK has the same geographic location as the end-user. For that reason, `searchStationsByLatLongCoordinates()`
  * is really only needed if this SDK is being run in a server-side environment.
  *
- * @param config The configuration object powering all API calls
- * @param lat A float representing the latitude value of the geographic coordinates
- * @param long A float representing the longitude value of the geographic coordinates
+ * @param config - The configuration object powering all API calls
+ * @param lat - A float representing the latitude value of the geographic coordinates
+ * @param long - A float representing the longitude value of the geographic coordinates
  */
 async function searchStationsByLatLongCoordinates(config: Config, lat: number, long: number): Promise<Station[]> {
     return performStationSearch(config, undefined, lat, long);
@@ -73,9 +73,9 @@ async function searchStationsByLatLongCoordinates(config: Config, lat: number, l
  * _or_ state to {@link searchStations} as the query, `searchStationsByCityAndState()` will return more accurate
  * results and is the recommended function for clients wanting to offer a location search.
  *
- * @param config The configuration object powering all API calls
- * @param city A full city name (e.g. "New York", "San Francisco", "Phoenix")
- * @param state A state name (e.g. "Maryland") or abbreviation (e.g. "MD")
+ * @param config - The configuration object powering all API calls
+ * @param city - A full city name (e.g. "New York", "San Francisco", "Phoenix")
+ * @param state - A state name (e.g. "Maryland") or abbreviation (e.g. "MD")
  */
 async function searchStationsByCityAndState(config: Config, city: string, state: string): Promise<Station[]> {
     return performStationSearch(config, undefined, undefined, undefined, city, state);
@@ -86,8 +86,8 @@ async function searchStationsByCityAndState(config: Config, city: string, state:
  * use {@link searchStationsByCityAndState} instead, as it will return more accurate results and is the recommended
  * function for clients wanting to offer a location search.
  *
- * @param config The configuration object powering all API calls
- * @param city A full city name (e.g. "New York", "San Francisco", "Phoenix")
+ * @param config - The configuration object powering all API calls
+ * @param city - A full city name (e.g. "New York", "San Francisco", "Phoenix")
  */
 async function searchStationsByCity(config: Config, city: string): Promise<Station[]> {
     return performStationSearch(config, undefined, undefined, undefined, city);
@@ -98,8 +98,8 @@ async function searchStationsByCity(config: Config, city: string): Promise<Stati
  * recommended that you use {@link searchStationsByCityAndState} instead, as it will return more accurate results
  * and is the recommended function for clients wanting to offer a location search.
  *
- * @param config The configuration object powering all API calls
- * @param state A state name (e.g. "Maryland") or abbreviation (e.g. "MD")
+ * @param config - The configuration object powering all API calls
+ * @param state - A state name (e.g. "Maryland") or abbreviation (e.g. "MD")
  */
 async function searchStationsByState(config: Config, state: string): Promise<Station[]> {
     return performStationSearch(config, undefined, undefined, undefined, undefined, state);
@@ -108,12 +108,12 @@ async function searchStationsByState(config: Config, state: string): Promise<Sta
 /**
  * A private helper function that performs the actual station search.
  *
- * @param config The configuration object powering all API calls
- * @param query An optional query, which can be a station name, network name, or zip code
- * @param lat A float representing the latitude value of the geographic coordinates
- * @param long A float representing the longitude value of the geographic coordinates
- * @param city A full city name (e.g. "New York", "San Francisco", "Phoenix")
- * @param state A state name (e.g. "Maryland") or abbreviation (e.g. "MD")
+ * @param config - The configuration object powering all API calls
+ * @param query - An optional query, which can be a station name, network name, or zip code
+ * @param lat - A float representing the latitude value of the geographic coordinates
+ * @param long - A float representing the longitude value of the geographic coordinates
+ * @param city - A full city name (e.g. "New York", "San Francisco", "Phoenix")
+ * @param state - A state name (e.g. "Maryland") or abbreviation (e.g. "MD")
  */
 async function performStationSearch(
     config: Config,
@@ -139,7 +139,7 @@ async function performStationSearch(
         }
     }
 
-    const searchResults: CollectionDocJSON = await FetchUtil.nprApiCall(config, queryString ? `${url}?${queryString}` : url);
+    const searchResults: CollectionDocJSON = await FetchUtil.nprApiFetch(config, queryString ? `${url}?${queryString}` : url);
     const stations = [];
 
     if (searchResults && searchResults.items && searchResults.items.length) {

@@ -1,20 +1,16 @@
-import NPROneSDK from './../index';
-import AccessToken from './../model/access-token';
-import DeviceCode from './../model/device-code';
-import Logger from './../util/logger';
-import FetchUtil from './../util/fetch-util';
-import ApiError from './../error/api-error';
-
+import { NprOneSDK } from '../index';
+import { ApiError } from '../errors/api-error';
+import { AccessToken, AccessTokenJSON } from '../models/access-token';
+import { DeviceCode, DeviceCodeJSON } from '../models/device-code';
+import { Logger } from '../utils/logger';
+import { FetchUtil } from '../utils/fetch-util';
 
 /**
  * Simulates a delay by wrapping a Promise around JavaScript's native `setTimeout` function.
  *
- * @param {number} ms The amount of time to delay for, in milliseconds
- * @returns {Promise}
- * @private
+ * @param ms - The amount of time to delay for, in milliseconds
  */
-const delay = ms => new Promise(r => setTimeout(r, ms));
-
+const delay = (ms: number) => new Promise(r => setTimeout(r, ms));
 
 /**
  * Encapsulates all of the logic for communication with the [Authorization Service](https://dev.npr.org/api/#/authorization)
@@ -24,65 +20,56 @@ const delay = ms => new Promise(r => setTimeout(r, ms));
  * functions in the main {@link NprOneSDK} class.
  *
  * @example <caption>Rudimentary example of implementing the Device Code flow</caption>
- * const nprOneSDK = new NprOneSDK();
- * nprOneSDK.config = { ... };
+ * const NprOneSDK = new NprOneSDK();
+ * NprOneSDK.config = { ... };
  * const scopes = ['identity.readonly', 'identity.write', 'listening.readonly', 'listening.write'];
- * nprOneSDK.getDeviceCode(scopes)
+ * NprOneSDK.getDeviceCode(scopes)
  *     .then((deviceCodeModel) => {
  *         // display code to user on the screen
- *         nprOneSDK.pollDeviceCode()
+ *         NprOneSDK.pollDeviceCode()
  *             .then(() => {
- *                 nprOneSDK.getRecommendation();
+ *                 NprOneSDK.getRecommendation();
  *             });
  *      })
  *     .catch(() => {
- *         nprOneSDK.getDeviceCode(scopes).then(...); // repeat ad infinitum until `pollDeviceCode()` resolves successfully
+ *         NprOneSDK.getDeviceCode(scopes).then(...); // repeat ad infinitum until `pollDeviceCode()` resolves successfully
  *         // In actual use, it may be preferable to refactor this into a recursive function
  *     ));
  */
-export default class Authorization {
-    /**
-     * Initializes the controller class with private variables needed later on.
-     */
-    constructor() {
-        /** @type {null|DeviceCode} The device code model for the currently-active device code grant
-         * @private */
-        this._activeDeviceCodeModel = null;
-    }
+export class Authorization {
+    /** The device code model for the currently-active device code grant */
+    private activeDeviceCodeModel: DeviceCode | null = null;
 
     /**
      * Attempts to swap the existing access token for a new one using the refresh token endpoint in the OAuth proxy
      *
-     * @param {number} [numRetries=0]   The number of times this function has been tried. Will retry up to 3 times.
-     * @returns {Promise<AccessToken>}
+     * @param numRetries - The number of times this function has been tried. Will retry up to 3 times.
      * @throws {TypeError} if an OAuth proxy is not configured or no access token is set
      */
-    static refreshExistingAccessToken(numRetries = 0) {
-        if (!NPROneSDK.config.authProxyBaseUrl) {
+    static refreshExistingAccessToken(numRetries: number = 0): Promise<AccessToken> {
+        if (!NprOneSDK.config.authProxyBaseUrl) {
             throw new TypeError('OAuth proxy not configured. Unable to refresh the access token.');
         }
-        if (!NPROneSDK.accessToken) {
+        if (!NprOneSDK.accessToken) {
             throw new TypeError('An access token must be set in order to attempt a refresh.');
         }
 
         Logger.debug('Access token appears to have expired. Attempting to generate a fresh one.');
 
-        const url = `${NPROneSDK.config.authProxyBaseUrl}${NPROneSDK.config.refreshTokenPath}`;
+        const url = `${NprOneSDK.config.authProxyBaseUrl}${NprOneSDK.config.refreshTokenPath}`;
         const options = {
             method: 'POST',
             credentials: 'include',
         };
 
         return FetchUtil.nprApiFetch(url, options)
-            .then((json) => {
+            .then((json: AccessTokenJSON) => {
                 const tokenModel = new AccessToken(json);
-                tokenModel.validate(); // throws exception if invalid
-                Logger.debug('Access token refresh was successful, new token:',
-                    tokenModel.toString());
-                NPROneSDK.accessToken = tokenModel.token;
+                Logger.debug(`Access token refresh was successful, new token: ${tokenModel}`);
+                NprOneSDK.accessToken = tokenModel.token;
                 return tokenModel; // never directly consumed, but useful for testing
             })
-            .catch((err) => {
+            .catch((err: Error) => {
                 Logger.debug('Error generating a new token in refreshExistingAccessToken()');
                 Logger.debug(err);
 
@@ -104,30 +91,28 @@ export default class Authorization {
      *
      * Caution: most clients are not authorized to use temporary users.
      *
-     * @returns {Promise<User>}
      * @throws {TypeError} if an OAuth proxy is not configured or no client ID is set
      */
-    createTemporaryUser() {
-        if (!NPROneSDK.config.authProxyBaseUrl) {
+    createTemporaryUser(): Promise<AccessToken> {
+        if (!NprOneSDK.config.authProxyBaseUrl) {
             throw new TypeError('OAuth proxy not configured. Unable to create temporary users.');
         }
-        if (!NPROneSDK.config.clientId) {
+        if (!NprOneSDK.config.clientId) {
             throw new TypeError('A client ID must be set for temporary user requests.');
         }
 
-        let url = `${NPROneSDK.config.authProxyBaseUrl}${NPROneSDK.config.tempUserPath}`;
+        let url = `${NprOneSDK.config.authProxyBaseUrl}${NprOneSDK.config.tempUserPath}`;
         const glueCharacter = url.indexOf('?') >= 0 ? '&' : '?';
-        url = `${url}${glueCharacter}clientId=${NPROneSDK.config.clientId}`;
+        url = `${url}${glueCharacter}clientId=${NprOneSDK.config.clientId}`;
 
         const options = {
             credentials: 'include',
         };
 
         return FetchUtil.nprApiFetch(url, options)
-            .then((json) => {
+            .then((json: AccessTokenJSON) => {
                 const tokenModel = new AccessToken(json);
-                tokenModel.validate(); // throws exception if invalid
-                NPROneSDK.accessToken = tokenModel.token;
+                NprOneSDK.accessToken = tokenModel.token;
                 return tokenModel; // never directly consumed, but useful for testing
             });
     }
@@ -138,22 +123,21 @@ export default class Authorization {
      * still responsible for removing the access token anywhere else it might be stored outside of this SDK (e.g. in
      * localStorage or elsewhere in application memory).
      *
-     * @returns {Promise}
      * @throws {TypeError} if an OAuth proxy is not configured or no access token is currently set
      */
-    logout() {
-        if (!NPROneSDK.accessToken) {
+    logout(): Promise<void> {
+        if (!NprOneSDK.accessToken) {
             throw new TypeError('An access token must be set in order to attempt a logout.');
         }
-        if (!NPROneSDK.config.authProxyBaseUrl) {
+        if (!NprOneSDK.config.authProxyBaseUrl) {
             throw new TypeError('OAuth proxy not configured. Unable to securely log out the user.');
         }
 
-        const url = `${NPROneSDK.config.authProxyBaseUrl}${NPROneSDK.config.logoutPath}`;
+        const url = `${NprOneSDK.config.authProxyBaseUrl}${NprOneSDK.config.logoutPath}`;
         const options = {
             method: 'POST',
             credentials: 'include',
-            body: `token=${NPROneSDK.accessToken}`,
+            body: `token=${NprOneSDK.accessToken}`,
             headers: {
                 Accept: 'application/json, application/xml, text/plain, text/html, *.*',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
@@ -161,9 +145,9 @@ export default class Authorization {
         };
 
         return fetch(url, options) // we cannot use FetchUtil.nprApiFetch() here because the success response has an empty body
-            .then((response) => {
+            .then((response: any) => {
                 if (response.ok) {
-                    NPROneSDK.accessToken = '';
+                    NprOneSDK.accessToken = '';
                     return true;
                 }
                 return FetchUtil.formatErrorResponse(response);
@@ -193,16 +177,15 @@ export default class Authorization {
      *
      * @see https://dev.npr.org/guide/services/authorization/#device_code
      *
-     * @param {Array<string>} [scopes=[]]   The scopes (as strings) that should be associated with the resulting access token
-     * @returns {Promise<DeviceCode>}
+     * @param scopes - The scopes (as strings) that should be associated with the resulting access token
      * @throws {TypeError} if an OAuth proxy is not configured
      */
-    getDeviceCode(scopes = []) {
-        if (!NPROneSDK.config.authProxyBaseUrl) {
+    getDeviceCode(scopes: string[] = []): Promise<DeviceCode> {
+        if (!NprOneSDK.config.authProxyBaseUrl) {
             throw new TypeError('OAuth proxy not configured. Unable to use the device code.');
         }
 
-        const url = `${NPROneSDK.config.authProxyBaseUrl}${NPROneSDK.config.newDeviceCodePath}`;
+        const url = `${NprOneSDK.config.authProxyBaseUrl}${NprOneSDK.config.newDeviceCodePath}`;
         const options = {
             method: 'POST',
             credentials: 'include',
@@ -214,10 +197,10 @@ export default class Authorization {
         };
 
         return FetchUtil.nprApiFetch(url, options)
-            .then((json) => {
+            .then((json: DeviceCodeJSON) => {
                 const deviceCodeModel = new DeviceCode(json);
                 deviceCodeModel.validate(); // throws exception if invalid
-                this._activeDeviceCodeModel = deviceCodeModel;
+                this.activeDeviceCodeModel = deviceCodeModel;
                 return deviceCodeModel;
             });
     }
@@ -226,7 +209,7 @@ export default class Authorization {
      * Uses the OAuth proxy to poll the access token endpoint as part of a `device_code` grant flow. This endpoint will
      * continue to poll until the user successfully logs in, _or_ the user goes to log in but then denies the request
      * for access to their account by this client, _or_ the device code/user code pair expires, whichever comes first.
-     * In the first case, it will automatically set {@link NPROneSDK.accessToken} to the newly-generated access token,
+     * In the first case, it will automatically set {@link NprOneSDK.accessToken} to the newly-generated access token,
      * and the consuming client can proceed to play recommendations immediately; in the other 2 cases, it will return
      * a Promise that rejects with a debugging message, but the next course of action would generally be to call
      * {@link getDeviceCode} again and start the whole process from the top.
@@ -245,66 +228,66 @@ export default class Authorization {
      *
      * @see https://dev.npr.org/guide/services/authorization/#device_code
      *
-     * @returns {Promise<AccessToken>}
      * @throws {TypeError} if an OAuth proxy is not configured or `getDeviceCode()` was not previously called
      */
-    pollDeviceCode() {
-        Logger.debug('Starting to poll device code. Will poll until user logs in or code expires'); // eslint-disable-line max-len
+    pollDeviceCode(): Promise<AccessToken> {
+        Logger.debug('Starting to poll device code. Will poll until user logs in or code expires');
 
-        if (!NPROneSDK.config.authProxyBaseUrl) {
+        if (!NprOneSDK.config.authProxyBaseUrl) {
             throw new TypeError('OAuth proxy not configured. Unable to use the device code.');
         }
-        if (!this._activeDeviceCodeModel) {
-            throw new TypeError('No active device code set. Please call getDeviceCode() before calling this function.'); // eslint-disable-line max-len
+        if (!this.activeDeviceCodeModel) {
+            throw new TypeError('No active device code set. Please call getDeviceCode() before calling this function.');
         }
 
-        return this._pollDeviceCodeOnce();
+        return this.pollDeviceCodeOnce();
     }
 
     /**
      * Polls the device code once. If the result is an error of type `'authorization_pending'`, this will recurse,
      * calling itself after a delay equal to the interval specified in the original call to {@link getDeviceCode}.
-     *
-     * @returns {Promise<AccessToken>}
-     * @private
      */
-    _pollDeviceCodeOnce() {
+    private pollDeviceCodeOnce(): Promise<AccessToken> {
         Logger.debug('Polling device code once');
 
-        if (this._activeDeviceCodeModel.isExpired()) {
-            return Promise.reject('The device code has expired. Please generate a new one before continuing.'); // eslint-disable-line max-len
+        if (!this.activeDeviceCodeModel) {
+            throw new TypeError('No active device code set. Please call getDeviceCode() before calling this function.');
+        }
+        if (this.activeDeviceCodeModel.isExpired()) {
+            return Promise.reject('The device code has expired. Please generate a new one before continuing.');
         }
 
-        const url = `${NPROneSDK.config.authProxyBaseUrl}${NPROneSDK.config.pollDeviceCodePath}`;
+        const url = `${NprOneSDK.config.authProxyBaseUrl}${NprOneSDK.config.pollDeviceCodePath}`;
         const options = {
             method: 'POST',
             credentials: 'include',
         };
 
         return FetchUtil.nprApiFetch(url, options)
-            .then((json) => {
-                Logger.debug('Device code poll returned successfully! An access token was returned.'); // eslint-disable-line max-len
+            .then((json: AccessTokenJSON) => {
+                Logger.debug('Device code poll returned successfully! An access token was returned.');
 
                 const tokenModel = new AccessToken(json);
-                tokenModel.validate(); // throws exception if invalid
-                NPROneSDK.accessToken = tokenModel.token;
+                NprOneSDK.accessToken = tokenModel.token;
                 return tokenModel; // never directly consumed, but useful for testing
             })
-            .catch((error) => {
+            .catch((error: Error) => {
                 if (error instanceof ApiError) {
-                    if (error.statusCode === 401) {
-                        if (error.json.type === 'authorization_pending') {
-                            return delay(this._activeDeviceCodeModel.interval)
-                                .then(this._pollDeviceCodeOnce.bind(this));
+                    if ((error as ApiError).statusCode === 401) {
+                        if ((error as ApiError).json.type === 'authorization_pending') {
+                            return delay((this.activeDeviceCodeModel as DeviceCode).interval)
+                                .then(this.pollDeviceCodeOnce.bind(this));
                         }
-                        Logger.debug('The response was a 401, but not of type "authorization_pending". The user presumably denied the app access; rejecting.'); // eslint-disable-line max-len
+                        Logger.debug('The response was a 401, but not of type "authorization_pending". ' +
+                            'The user presumably denied the app access; rejecting.');
                     } else {
-                        Logger.debug('Response was not a 401. The device code has probably expired; rejecting.'); // eslint-disable-line max-len
+                        Logger.debug('Response was not a 401. The device code has probably expired; rejecting.');
                     }
                 } else {
-                    Logger.debug('An unknown type of error was received. Unsure of how to respond; rejecting.'); // eslint-disable-line max-len
+                    Logger.debug('An unknown type of error was received. Unsure of how to respond; rejecting.');
                 }
                 return Promise.reject(error);
             });
     }
 }
+export default Authorization;

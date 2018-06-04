@@ -1,9 +1,9 @@
 import { CollectionDocJSON } from '../models/collection-doc';
 import { Config } from '../models/config';
 import { User } from '../models/user';
-import * as StationFinder from './station-finder';
 import * as FetchUtil from '../utils/fetch-util';
-import Logger from '../utils/logger';
+import { Logger } from '../utils/logger';
+import * as StationFinder from './station-finder';
 
 function getServiceUrl(subdomain: string = ''): string {
     return `https://${subdomain}identity.api.npr.org/v2`;
@@ -13,13 +13,11 @@ function getServiceUrl(subdomain: string = ''): string {
  * Gets user metadata, such as first and last name, programs they have shown an affinity for, and preferred NPR One
  * station.
  *
- * @param config The configuration object powering all API calls
- *
- * @throws {AccessTokenNeedsRefreshError} if the access token needs to be manually refreshed using `refreshToken()`
+ * @param config - The configuration object powering all API calls
  */
 async function getUser(config: Config): Promise<User> {
     const url = `${getServiceUrl(config.subdomain)}/user`;
-    const json: CollectionDocJSON = await FetchUtil.nprApiCall(config, url);
+    const json: CollectionDocJSON = await FetchUtil.nprApiFetch(config, url);
 
     return new User(json);
 }
@@ -28,10 +26,8 @@ async function getUser(config: Config): Promise<User> {
  * Sets a user's favorite NPR station. Note that this function will first validate whether the station with the given
  * ID actually exists, and will return a promise that rejects if not.
  *
- * @param config The configuration object powering all API calls
- * @param stationId The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
- *
- * @throws {AccessTokenNeedsRefreshError} if the access token needs to be manually refreshed using `refreshToken()`
+ * @param config - The configuration object powering all API calls
+ * @param stationId - The station's ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
  */
 async function setUserStation(config: Config, stationId: string | number): Promise<User> {
     await StationFinder.getStationDetails(config, stationId); // just verifying that it doesn't throw
@@ -44,7 +40,7 @@ async function setUserStation(config: Config, stationId: string | number): Promi
 
     let json: CollectionDocJSON;
     try {
-        json = await FetchUtil.nprApiCall(config, url, options);
+        json = await FetchUtil.nprApiFetch(config, url, options);
     } catch (err) {
         Logger.debug(`setUserStation failed, message: ${err}`);
         return Promise.reject(err);
@@ -62,11 +58,10 @@ async function setUserStation(config: Config, stationId: string | number): Promi
  * to `GET https://api.npr.org/listening/v2/search/recommendations` with a program name or other search parameters, or
  * wait until we implement search in this SDK (hopefully later this year).
  *
- * @param config The configuration object powering all API calls
- * @param aggregationId The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
+ * @param config - The configuration object powering all API calls
+ * @param aggregationId - The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
  *
  * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
- * @throws {AccessTokenNeedsRefreshError} if the access token needs to be manually refreshed using `refreshToken()`
  */
 async function followShow(config: Config, aggregationId: string | number): Promise<User> {
     return setFollowingStatusForShow(config, aggregationId, true);
@@ -80,7 +75,6 @@ async function followShow(config: Config, aggregationId: string | number): Promi
  * @param aggregationId The aggregation (show) ID, which is either an integer or a numeric string (e.g. `123` or `'123'`)
  *
  * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
- * @throws {AccessTokenNeedsRefreshError} if the access token needs to be manually refreshed using `refreshToken()`
  */
 async function unfollowShow(config: Config, aggregationId: string | number): Promise<User> {
     return setFollowingStatusForShow(config, aggregationId, false);
@@ -94,7 +88,6 @@ async function unfollowShow(config: Config, aggregationId: string | number): Pro
  * @param shouldFollow Whether or not the aggregation should be followed (`true`) or unfollowed (`false`)
  *
  * @throws {TypeError} if the passed-in aggregation (show) ID is not either a number or a numeric string
- * @throws {AccessTokenNeedsRefreshError} if the access token needs to be manually refreshed using `refreshToken()`
  */
 async function setFollowingStatusForShow(config: Config, aggregationId: string | number, shouldFollow: boolean): Promise<User> {
     const n = typeof aggregationId === 'string' ? parseInt(aggregationId, 10) : aggregationId;
@@ -112,7 +105,7 @@ async function setFollowingStatusForShow(config: Config, aggregationId: string |
         method: 'POST',
         body: data,
     };
-    const json: CollectionDocJSON = await FetchUtil.nprApiCall(config, url, options);
+    const json: CollectionDocJSON = await FetchUtil.nprApiFetch(config, url, options);
 
     return new User(json);
 }
