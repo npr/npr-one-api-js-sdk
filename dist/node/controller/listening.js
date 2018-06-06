@@ -2,8 +2,6 @@
 
 exports.__esModule = true;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 var _index = require('./../index');
 
 var _index2 = _interopRequireDefault(_index);
@@ -107,8 +105,8 @@ var Listening = function () {
 
 
     Listening.prototype.getRecommendation = function getRecommendation() {
-        var uid = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-        var channel = arguments.length <= 1 || arguments[1] === undefined ? 'npr' : arguments[1];
+        var uid = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+        var channel = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'npr';
 
         this._flowPromise = this._advanceFlowRecommendations(channel, uid);
 
@@ -128,7 +126,7 @@ var Listening = function () {
 
 
     Listening.prototype.getUpcomingFlowRecommendations = function getUpcomingFlowRecommendations() {
-        var channel = arguments.length <= 0 || arguments[0] === undefined ? 'npr' : arguments[0];
+        var channel = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'npr';
 
         if (this._flowRecommendations.length > 0) {
             return Promise.resolve(this._flowRecommendations);
@@ -153,7 +151,7 @@ var Listening = function () {
     Listening.prototype.getRecommendationsFromChannel = function getRecommendationsFromChannel() {
         var _this2 = this;
 
-        var channel = arguments.length <= 0 || arguments[0] === undefined ? 'recommended' : arguments[0];
+        var channel = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'recommended';
 
         var _channel = !channel || typeof channel !== 'string' ? 'recommended' : channel;
 
@@ -337,23 +335,17 @@ var Listening = function () {
 
         // if given a UID, we check first to see if we already have the recommendation cached
         if (uid && !!this._flowRecommendations && this._flowRecommendations.length > 0) {
-            var _ret = function () {
-                var isRecommendationFound = false;
-                _this4._flowRecommendations.forEach(function (recommendation, index) {
-                    if (!isRecommendationFound && recommendation.attributes.uid === uid) {
-                        _this4._flowRecommendations = _this4._flowRecommendations.slice(index);
-                        isRecommendationFound = true;
-                    }
-                });
-                if (isRecommendationFound) {
-                    _logger2.default.debug('Recommendation with UID ' + uid + ' was already queued up. ' + 'Returning the cached version instead of making a new API call.');
-                    return {
-                        v: Promise.resolve(_this4._flowRecommendations[0])
-                    };
+            var isRecommendationFound = false;
+            this._flowRecommendations.forEach(function (recommendation, index) {
+                if (!isRecommendationFound && recommendation.attributes.uid === uid) {
+                    _this4._flowRecommendations = _this4._flowRecommendations.slice(index);
+                    isRecommendationFound = true;
                 }
-            }();
-
-            if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+            });
+            if (isRecommendationFound) {
+                _logger2.default.debug('Recommendation with UID ' + uid + ' was already queued up. ' + 'Returning the cached version instead of making a new API call.');
+                return Promise.resolve(this._flowRecommendations[0]);
+            }
         }
 
         this._flowFetchActive = true;
@@ -484,7 +476,7 @@ var Listening = function () {
 
 
     Listening.prototype._getChannelRecommendations = function _getChannelRecommendations(channel) {
-        var uid = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+        var uid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
         var _channel = !channel || typeof channel !== 'string' ? 'npr' : channel;
 
@@ -525,7 +517,7 @@ var Listening = function () {
     Listening.prototype._sendRatings = function _sendRatings() {
         var _this5 = this;
 
-        var recommendMore = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+        var recommendMore = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
         /* istanbul ignore if: defensive coding */
         if (this._queuedRatings.length === 0) {

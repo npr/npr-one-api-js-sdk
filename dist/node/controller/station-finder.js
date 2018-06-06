@@ -57,7 +57,7 @@ var StationFinder = function () {
      * @returns {Promise<Array<Station>>}
      */
     StationFinder.prototype.searchStations = function searchStations() {
-        var query = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+        var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
         return this._performStationSearch(query);
     };
@@ -178,10 +178,10 @@ var StationFinder = function () {
 
 
     StationFinder.prototype._performStationSearch = function _performStationSearch(query) {
-        var lat = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-        var long = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-        var city = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
-        var state = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
+        var lat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+        var long = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+        var city = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+        var state = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
         var url = _index2.default.getServiceUrl('stationfinder') + '/stations';
 

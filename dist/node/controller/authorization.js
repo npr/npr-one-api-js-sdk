@@ -92,7 +92,7 @@ var Authorization = function () {
     Authorization.refreshExistingAccessToken = function refreshExistingAccessToken() {
         var _this = this;
 
-        var numRetries = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+        var numRetries = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
         if (!_index2.default.config.authProxyBaseUrl) {
             throw new TypeError('OAuth proxy not configured. Unable to refresh the access token.');
@@ -202,7 +202,7 @@ var Authorization = function () {
     Authorization.prototype.getDeviceCode = function getDeviceCode() {
         var _this2 = this;
 
-        var scopes = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+        var scopes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
         if (!_index2.default.config.authProxyBaseUrl) {
             throw new TypeError('OAuth proxy not configured. Unable to use the device code.');

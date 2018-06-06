@@ -49,7 +49,7 @@ var FetchUtil = function () {
      * @returns {Promise<Object>}
      */
     FetchUtil.nprApiFetch = function nprApiFetch(url) {
-        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
         _logger2.default.debug('Starting JSON fetch ' + url);
 
@@ -148,7 +148,7 @@ var FetchUtil = function () {
 
 
     FetchUtil._requestUrlIsAuthorizationCall = function _requestUrlIsAuthorizationCall(url) {
-        return _index2.default.config.authProxyBaseUrl && url.indexOf(_index2.default.config.authProxyBaseUrl) > -1 || new RegExp('/authorization/' + _index2.default.config.apiVersion).test(url);
+        return _index2.default.config.authProxyBaseUrl && url.indexOf(_index2.default.config.authProxyBaseUrl) > -1 || new RegExp(_index2.default.getServiceUrl('authorization')).test(url);
     };
 
     return FetchUtil;

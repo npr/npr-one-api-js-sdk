@@ -46,7 +46,7 @@ var ApiError = function (_ExtendableError) {
    * @param {Object} [json={}]     If available, the decoded JSON from the error response
    */
   function ApiError(response) {
-    var json = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var json = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
     _classCallCheck(this, ApiError);
 
