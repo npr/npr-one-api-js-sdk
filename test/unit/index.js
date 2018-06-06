@@ -25,16 +25,17 @@ describe('NprOneSDK', () => {
     describe('config', () => {
         describe('getter', () => {
             it('should return an object with config related properties', () => {
-                NprOneSDK.config.apiBaseUrl.should.be.ok;
+                NprOneSDK.config.authProxyBaseUrl.should.be.ok;
             });
         });
 
         describe('setter', () => {
             it('should update specific config values when set', () => {
-                const previousUrl = NprOneSDK.config.apiBaseUrl;
-                NprOneSDK.config = { 'apiBaseUrl': 'https://test' };
-                const newUrl = NprOneSDK.config.apiBaseUrl;
-                NprOneSDK.config.apiBaseUrl = previousUrl;
+                const previousUrl = NprOneSDK.config.authProxyBaseUrl;
+                NprOneSDK.config = { 'authProxyBaseUrl': 'https://test' };
+
+                const newUrl = NprOneSDK.config.authProxyBaseUrl;
+                NprOneSDK.config.authProxyBaseUrl = previousUrl;
                 newUrl.should.equal('https://test');
             });
 
@@ -42,6 +43,20 @@ describe('NprOneSDK', () => {
                 NprOneSDK._config = undefined;
                 NprOneSDK.config = { 'test': 'value' };
                 NprOneSDK.config.test.should.equal('value');
+            });
+
+            it('should log a warning when setting deprecated properties', () => {
+                const stub = sinon.stub(Logger, 'warn');
+
+                const previousUrl = NprOneSDK.config.apiBaseUrl;
+                NprOneSDK.config = {
+                    'apiBaseUrl': 'https://test',
+                    'apiVersion': 'v2',
+                };
+
+                NprOneSDK.config.apiBaseUrl.should.equal('https://test');
+                NprOneSDK.config.apiVersion.should.equal('v2');
+                stub.should.have.been.calledTwice;
             });
         });
     });

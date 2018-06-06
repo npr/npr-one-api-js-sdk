@@ -40,8 +40,8 @@ export class NprOneSDK {
 
     /**
      * @typedef {Object} Config
-     * @property {string} [apiBaseUrl='https://api.npr.org'] The NPR One API hostname and protocol, typically `https://api.npr.org`; in most cases, this does not need to be manually set by clients
-     * @property {string} [apiVersion='v2'] The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients
+     * @property {string} [apiBaseUrl='https://api.npr.org'] DEPRECATED / NO LONGER IN USE: The NPR One API hostname and protocol, typically `https://api.npr.org`; in most cases, this does not need to be manually set by clients
+     * @property {string} [apiVersion='v2'] DEPRECATED / NO LONGER IN USE: The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients
      * @property {string} [authProxyBaseUrl] The full URL to your OAuth proxy, e.g. `https://one.example.com/oauth2/`
      * @property {string} [newDeviceCodePath='/device'] The path to your proxy for starting a `device_code` grant (relative to `authProxyBaseUrl`)
      * @property {string} [pollDeviceCodePath='/device/poll'] The path to your proxy for polling a `device_code` grant (relative to `authProxyBaseUrl`)
@@ -52,6 +52,7 @@ export class NprOneSDK {
      * @property {string} [clientId] The NPR One API `client_id` to use, only required if using the auth proxy with the `temporary_user` grant type
      * @property {string} [advertisingId] The custom X-Advertising-ID header to send with most requests, not typically used by third-party clients
      * @property {string} [advertisingTarget] The custom X-Advertising-Target header to send with most requests, not typically used by third-party clients
+     * @property {string} [subdomain] The custom subdomain to use for requests, not typically used by third-party clients
      */
     /**
      * @type {Config}
@@ -67,6 +68,16 @@ export class NprOneSDK {
      * @type {Config}
      */
     static set config(value) {
+        if (value.apiBaseUrl) {
+            Logger.warn('Property "apiBaseUrl" in config is deprecated '
+                + 'and will be removed in a future release. '
+                + 'Please use the "subdomain" property instead if a different API URL is needed.');
+        }
+        if (value.apiVersion) {
+            Logger.warn('Property "apiVersion" in config is deprecated '
+                + 'and will be removed in a future release.');
+        }
+
         NprOneSDK._initConfig();
         Object.assign(NprOneSDK._config, value);
     }
@@ -365,13 +376,21 @@ export class NprOneSDK {
      *
      * @param {string} service
      * @returns {string}
+     * @throws {TypeError} if the passed-in service name is missing or invalid
      */
     static getServiceUrl(service) {
-        // @TODO we need to figure out a better long-term solution for the individually-versioned services
-        if (service === 'stationfinder') {
-            return `${NprOneSDK.config.apiBaseUrl}/${service}/v3`;
+        switch (service) {
+            case 'authorization':
+                return `https://${NprOneSDK.config.subdomain}authorization.api.npr.org/v2`;
+            case 'identity':
+                return `https://${NprOneSDK.config.subdomain}identity.api.npr.org/v2`;
+            case 'listening':
+                return `https://${NprOneSDK.config.subdomain}listening.api.npr.org/v2`;
+            case 'stationfinder':
+                return `https://${NprOneSDK.config.subdomain}station.api.npr.org/v3`;
+            default:
+                throw new TypeError('Must specify a valid service name');
         }
-        return `${NprOneSDK.config.apiBaseUrl}/${service}/${NprOneSDK.config.apiVersion}`;
     }
 
     /**
@@ -382,8 +401,6 @@ export class NprOneSDK {
     static _initConfig() {
         if (!NprOneSDK._config) {
             NprOneSDK._config = {
-                apiBaseUrl: 'https://api.npr.org',
-                apiVersion: 'v2',
                 authProxyBaseUrl: '',
                 newDeviceCodePath: '/device',
                 pollDeviceCodePath: '/device/poll',
@@ -394,6 +411,7 @@ export class NprOneSDK {
                 clientId: '',
                 advertisingId: '',
                 advertisingTarget: '',
+                subdomain: '',
             };
         }
     }

@@ -2,12 +2,12 @@
 export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
 {
     "version": "1.0",
-    "href": "https://api.npr.org/listening/v2/recommendations?channel=npr",
+    "href": "https://listening.api.npr.org/v2/recommendations?channel=npr",
     "attributes": {},
     "items": [
         {
             "version": "1.0",
-            "href": "https://api.npr.org/listening/v2/recommendations?channel=npr&sharedMediaId=300305:idWAMU2016-02-16-09-37",
+            "href": "https://listening.api.npr.org/v2/recommendations?channel=npr&sharedMediaId=300305:idWAMU2016-02-16-09-37",
             "attributes": {
                 "type": "stationId",
                 "uid": "300305:idWAMU2016-02-16-09-37",
@@ -48,7 +48,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "recommendations": [
                     {
                         "content-type": "application/json",
-                        "href": "https://api.npr.org/listening/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=0"
+                        "href": "https://listening.api.npr.org/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=0"
                     }
                 ]
             },
@@ -56,7 +56,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
         },
         {
             "version": "1.0",
-            "href": "https://api.npr.org/listening/v2/recommendations?channel=npr&sharedMediaId=999900001:2016-02-16T09:00:00-0500|short",
+            "href": "https://listening.api.npr.org/v2/recommendations?channel=npr&sharedMediaId=999900001:2016-02-16T09:00:00-0500|short",
             "attributes": {
                 "type": "audio",
                 "uid": "999900001:2016-02-16T09:00:00-0500|short",
@@ -94,7 +94,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "recommendations": [
                     {
                         "content-type": "application/json",
-                        "href": "https://api.npr.org/listening/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=2"
+                        "href": "https://listening.api.npr.org/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=2"
                     }
                 ]
             },
@@ -102,7 +102,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
         },
         {
             "version": "1.0",
-            "href": "https://api.npr.org/listening/v2/recommendations?channel=npr&sharedMediaId=466898631:466898632",
+            "href": "https://listening.api.npr.org/v2/recommendations?channel=npr&sharedMediaId=466898631:466898632",
             "attributes": {
                 "type": "audio",
                 "uid": "466898631:466898632",
@@ -172,7 +172,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "recommendations": [
                     {
                         "content-type": "application/json",
-                        "href": "https://api.npr.org/listening/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=3"
+                        "href": "https://listening.api.npr.org/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=3"
                     }
                 ]
             },
@@ -180,7 +180,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
         },
         {
             "version": "1.0",
-            "href": "https://api.npr.org/listening/v2/recommendations?channel=npr&sharedMediaId=299999:AdswizzAd13460|2016-02-17-12-42",
+            "href": "https://listening.api.npr.org/v2/recommendations?channel=npr&sharedMediaId=299999:AdswizzAd13460|2016-02-17-12-42",
             "attributes": {
                 "type": "sponsorship",
                 "uid": "299999:AdswizzAd13460|2016-02-17-12-42",
@@ -259,7 +259,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "recommendations": [
                     {
                         "content-type": "application/json",
-                        "href": "https://api.npr.org/listening/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=4"
+                        "href": "https://listening.api.npr.org/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=4"
                     }
                 ]
             },
@@ -267,7 +267,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
         },
         {
             "version": "1.0",
-            "href": "https://api.npr.org/listening/v2/recommendations?channel=npr&sharedMediaId=458726244:458726246-P",
+            "href": "https://listening.api.npr.org/v2/recommendations?channel=npr&sharedMediaId=458726244:458726246-P",
             "attributes": {
                 "type": "featureCardPromotion",
                 "uid": "458726244:458726246-P",
@@ -318,7 +318,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "recommendations": [
                     {
                         "content-type": "application/json",
-                        "href": "https://api.npr.org/listening/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=8"
+                        "href": "https://listening.api.npr.org/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=8"
                     }
                 ],
                 "action": [
@@ -332,7 +332,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
         },
         {
             "version": "1.0",
-            "href": "https://api.npr.org/listening/v2/recommendations?channel=npr&sharedMediaId=469897659:469897660",
+            "href": "https://listening.api.npr.org/v2/recommendations?channel=npr&sharedMediaId=469897659:469897660",
             "attributes": {
                 "type": "audio",
                 "uid": "469897659:469897660",
@@ -400,7 +400,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
                 "recommendations": [
                     {
                         "content-type": "application/json",
-                        "href": "https://api.npr.org/listening/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=10"
+                        "href": "https://listening.api.npr.org/v2/ratings?recommend=true&channel=npr&prevStories=1&queued=%5B%5D&flow=10"
                     }
                 ]
             },
@@ -414,7 +414,7 @@ export const LISTENING_V2_RECOMMENDATIONS_RESPONSE =
 export const IDENTITY_V2_USER_RESPONSE =
 {
     "version": "1.0",
-    "href": "https://api.npr.org/identity/v2/user",
+    "href": "https://identity.api.npr.org/v2/user",
     "attributes": {
         "id": "98765432",
         "email": "testuser@npr-invalid.org",
@@ -459,21 +459,21 @@ export const IDENTITY_V2_USER_RESPONSE =
         "affiliations": [
             {
                 "id": 35,
-                "href": "https://api.npr.org/listening/v2/aggregation/35/recommendations",
+                "href": "https://listening.api.npr.org/v2/aggregation/35/recommendations",
                 "following": false,
                 "rating": 1,
                 "daysSinceLastListen": 354
             },
             {
                 "id": 46,
-                "href": "https://api.npr.org/listening/v2/aggregation/46/recommendations",
+                "href": "https://listening.api.npr.org/v2/aggregation/46/recommendations",
                 "following": false,
                 "rating": 0.740000009537,
                 "daysSinceLastListen": 354
             },
             {
                 "id": 7,
-                "href": "https://api.npr.org/listening/v2/aggregation/7/recommendations",
+                "href": "https://listening.api.npr.org/v2/aggregation/7/recommendations",
                 "following": false,
                 "rating": 0.604911029339,
                 "daysSinceLastListen": 65

@@ -13,14 +13,14 @@ chai.use(chaiAsPromised);
 
 /** @test {Listening} */
 describe('Listening', () => {
-    const recommendUrl = `^${testConfig.apiBaseUrl}/listening/${testConfig.apiVersion}/recommendations`;
+    const recommendUrl = `^${NprOne.getServiceUrl('listening')}/recommendations`;
     // This hostname is set in TEST_DATA output
-    const ratingUrl = `^https://api.npr.org/listening/${testConfig.apiVersion}/ratings`;
+    const ratingUrl = `^${NprOne.getServiceUrl('listening')}/ratings`;
     const adsWizzUrl = '^https://demo.adswizz.com';
     const adsWizzWwwUrl = 'https://adswizz.com';
     const adsWizzCdnUrl = '^https://delivery-s3.adswizz.com';
     const doubleClickUrl = '^https://ad.doubleclick.net';
-    const historyUrl = `^${testConfig.apiBaseUrl}/listening/${testConfig.apiVersion}/history`;
+    const historyUrl = `^${NprOne.getServiceUrl('listening')}/history`;
 
     let testDataClone = {};
     let listening;
@@ -169,7 +169,7 @@ describe('Listening', () => {
             fetchMock.restore();
             mockery.deregisterMock('fetch');
 
-            const url = `^${testConfig.apiBaseUrl}/listening/${testConfig.apiVersion}/recommendations?channel=npr&sharedMediaId=123`;
+            const url = `^${NprOne.getServiceUrl('listening')}/recommendations?channel=npr&sharedMediaId=123`;
 
             mockery.registerMock('fetch', fetchMock
                 .mock(url, 'GET', LISTENING_V2_RECOMMENDATIONS_RESPONSE)
@@ -381,7 +381,7 @@ describe('Listening', () => {
             fetchMock.restore();
             mockery.deregisterMock('fetch');
 
-            const url = `^${testConfig.apiBaseUrl}/listening/${testConfig.apiVersion}/recommendations`;
+            const url = `^${NprOne.getServiceUrl('listening')}/recommendations`;
 
             testDataClone.items = [];
 
@@ -689,7 +689,7 @@ describe('Listening', () => {
     /** @test {Listening#resumeFlowFromRecommendation} */
     describe('resumeFlowFromRecommendation', () => {
         describe('no recommendations have been requested yet', () => {
-            it('should set the recommendations to the active recommendation ' + 
+            it('should set the recommendations to the active recommendation ' +
                'and the flow should advance as normal when actions are received', done => {
                 testDataClone.items.splice(0, 1); // remove stationId, should be newscast
 

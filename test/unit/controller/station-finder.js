@@ -13,7 +13,7 @@ const should = chai.should();
 describe('StationFinder', () => {
     let stationFinder;
     let stationResponseClone;
-    const searchStationsUrl = `^${testConfig.apiBaseUrl}/stationfinder/v3/stations`;
+    const searchStationsUrl = `^${NprOne.getServiceUrl('stationfinder')}/stations`;
 
     beforeEach(() => {
         stationFinder = new StationFinder();

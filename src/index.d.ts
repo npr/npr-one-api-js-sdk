@@ -649,10 +649,16 @@ export interface User {
 
 
 export interface Config {
-    /** The NPR One API hostname and protocol, typically `https://api.npr.org`; in most cases, this does not need to be manually set by clients */
+    /**
+     * DEPRECATED / NO LONGER IN USE: The NPR One API hostname and protocol, typically `https://api.npr.org`; in most cases, this does not need to be manually set by clients
+     * @deprecated
+     */
     apiBaseUrl?: string;
 
-    /** The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients */
+    /**
+     * DEPRECATED / NO LONGER IN USE: The NPR One API version, typically `v2`; in most cases, this does not need to be manually set by clients
+     * @deprecated
+     */
     apiVersion?: string;
 
     /** The full URL to your OAuth proxy, e.g. `https://one.example.com/oauth2/` */
@@ -684,6 +690,9 @@ export interface Config {
 
     /** The custom X-Advertising-Target header to send with most requests, not typically used by third-party clients */
     advertisingTarget?: string;
+
+    /** The custom subdomain to use for requests, not typically used by third-party clients */
+    subdomain?: string;
 }
 
 

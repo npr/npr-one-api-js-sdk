@@ -29,7 +29,7 @@ describe('Identity', () => {
 
     /** @test {Identity#getUser} */
     describe('getUser', () => {
-        const userUrl = `^${testConfig.apiBaseUrl}/identity/${testConfig.apiVersion}/user`;
+        const userUrl = `^${NprOne.getServiceUrl('identity')}/user`;
         let userClone;
 
         beforeEach(() => {
@@ -55,8 +55,8 @@ describe('Identity', () => {
 
     /** @test {Identity#setUserStation} */
     describe('setUserStation', () => {
-        const identityUrl = `^${testConfig.apiBaseUrl}/identity/${testConfig.apiVersion}/stations`;
-        const stationFinderUrl = `^${testConfig.apiBaseUrl}/stationfinder/v3/stations`;
+        const identityUrl = `^${NprOne.getServiceUrl('identity')}/stations`;
+        const stationFinderUrl = `^${NprOne.getServiceUrl('stationfinder')}/stations`;
         const stationId = 305;
 
         it('should validate the station, and then make a PUT request to identity/stations', (done) => {
@@ -99,7 +99,7 @@ describe('Identity', () => {
 
     /** @test {Identity#followShow} */
     describe('followShow', () => {
-        const identityUrl = `^${testConfig.apiBaseUrl}/identity/${testConfig.apiVersion}/following`;
+        const identityUrl = `^${NprOne.getServiceUrl('identity')}/following`;
         const aggregationId = 123;
 
         it('should validate the aggregation, and then make a POST request to identity/following', (done) => {
@@ -132,7 +132,7 @@ describe('Identity', () => {
 
     /** @test {Identity#unfollowShow} */
     describe('unfollowShow', () => {
-        const identityUrl = `^${testConfig.apiBaseUrl}/identity/${testConfig.apiVersion}/following`;
+        const identityUrl = `^${NprOne.getServiceUrl('identity')}/following`;
         const aggregationId = 456;
 
         it('should validate the aggregation, and then make a POST request to identity/following', (done) => {

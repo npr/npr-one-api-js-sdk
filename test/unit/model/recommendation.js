@@ -150,7 +150,7 @@ describe('Recommendation', () => {
 
     /** @test {Recommendation#getActionRecommendationUrl} */
     describe('getActionRecommendationUrl', () => {
-        const actionRecUrl = 'https://api.npr.org/listening/v2/ratings?sharedMediaId=458726244%3A458726246&flow=5&channel=npr&prevStories=1&recommend=true';
+        const actionRecUrl = 'https://listening.api.npr.org/v2/ratings?sharedMediaId=458726244%3A458726246&flow=5&channel=npr&prevStories=1&recommend=true';
 
         it('should match the API response', () => {
             recPromo.getActionRecommendationUrl().should.not.equal(response.items[4].links.action[0].href);
