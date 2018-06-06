@@ -400,5 +400,11 @@ describe('NprOneSDK', () => {
             const url = NprOneSDK.getServiceUrl('listening');
             url.should.be.ok;
         });
+
+        it('should throw if an invalid service name is specified', () => {
+            chai.expect(() => {
+                NprOneSDK.getServiceUrl('invalid');
+            }).to.throw('Must specify a valid service name');
+        });
     });
 });
