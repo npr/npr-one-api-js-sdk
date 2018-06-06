@@ -19,7 +19,7 @@ indent_style = space
 indent_size = 4
 
 # Matches the exact files either package.json, bower.json or .travis.yml
-[{package.json,bower.json,.travis.yml}]
+[{package.json,package-lock.json,bower.json,.travis.yml}]
 indent_style = space
 indent_size = 2
 

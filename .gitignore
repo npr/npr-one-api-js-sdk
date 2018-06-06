@@ -116,3 +116,6 @@ test-reports/
 
 # TypeScript stuff
 typings/
+
+# This is a library, so we ignore package-lock.json
+package-lock.json
