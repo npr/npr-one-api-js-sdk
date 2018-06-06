@@ -17,7 +17,6 @@ import 'isomorphic-fetch';
  *             }
  *         }
  *     });
- *
  */
 export class ApiError extends es6Error {
     /** The status code of the response (e.g., `400` for a bad request). */

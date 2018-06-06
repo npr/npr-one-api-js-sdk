@@ -10,7 +10,7 @@ import { FetchUtil } from '../utils/fetch-util';
  *
  * @param ms - The amount of time to delay for, in milliseconds
  */
-const delay = (ms: number) => new Promise(r => setTimeout(r, ms));
+const delay = <T extends {}>(ms: number): Promise<T> => new Promise<T>(r => setTimeout(r, ms));
 
 /**
  * Encapsulates all of the logic for communication with the [Authorization Service](https://dev.npr.org/api/#/authorization)

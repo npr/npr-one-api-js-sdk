@@ -17,7 +17,7 @@ export class FetchUtil {
     /**
      * Primary workhorse for interacting with the NPR One APIs.
      */
-    static nprApiFetch(url: string, options: { [key: string]: any } = {}): Promise<Object> {
+    static nprApiFetch(url: string, options: { [key: string]: any } = {}): Promise<any> {
         Logger.debug(`Starting JSON fetch ${url}`);
 
         if (!FetchUtil.requestUrlIsAuthorizationCall(url) && !options.headers) {
