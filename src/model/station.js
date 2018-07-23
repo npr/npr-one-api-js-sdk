@@ -141,6 +141,28 @@ export default class Station extends CollectionDoc {
     }
 
     /**
+     * Returns the primary stream object for this station, if one can be found. If no primary stream can be found at all, this will return `null`.
+     *
+     * @type {null|Link}
+     */
+    get primaryStream() {
+        if (this._raw.links.streams) {
+            return this._raw.links.streams.find(item => item.isPrimaryStream);
+        }
+        return null;
+    }
+
+    /**
+     * Returns the primary stream URL for this station, if one can be found. If no primary stream can be found at all, this will return `null`.
+     *
+     * @type {null|string}
+     */
+    get primaryStreamUrl() {
+        const primaryStream = this.primaryStream;
+        return primaryStream ? primaryStream.href : null;
+    }
+
+    /**
      * Returns whether or not the station is eligible for inclusion in NPR One applications.
      *
      * @type {boolean}

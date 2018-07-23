@@ -784,6 +784,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	    FetchUtil._requestUrlIsAuthorizationCall = function _requestUrlIsAuthorizationCall(url) {
+	        // eslint-disable-next-line max-len
 	        return _index2.default.config.authProxyBaseUrl && url.indexOf(_index2.default.config.authProxyBaseUrl) > -1 || new RegExp(_index2.default.getServiceUrl('authorization')).test(url);
 	    };
 	
@@ -4029,6 +4030,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	
 	            return preferredUrl || fallbackUrl || null;
+	        }
+	
+	        /**
+	         * Returns the primary stream object for this station, if one can be found. If no primary stream can be found at all, this will return `null`.
+	         *
+	         * @type {null|Link}
+	         */
+	
+	    }, {
+	        key: 'primaryStream',
+	        get: function get() {
+	            if (this._raw.links.streams) {
+	                return this._raw.links.streams.find(function (item) {
+	                    return item.isPrimaryStream;
+	                });
+	            }
+	            return null;
+	        }
+	
+	        /**
+	         * Returns the primary stream URL for this station, if one can be found. If no primary stream can be found at all, this will return `null`.
+	         *
+	         * @type {null|string}
+	         */
+	
+	    }, {
+	        key: 'primaryStreamUrl',
+	        get: function get() {
+	            var primaryStream = this.primaryStream;
+	            return primaryStream ? primaryStream.href : null;
 	        }
 	
 	        /**

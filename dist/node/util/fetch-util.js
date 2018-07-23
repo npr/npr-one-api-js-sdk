@@ -148,6 +148,7 @@ var FetchUtil = function () {
 
 
     FetchUtil._requestUrlIsAuthorizationCall = function _requestUrlIsAuthorizationCall(url) {
+        // eslint-disable-next-line max-len
         return _index2.default.config.authProxyBaseUrl && url.indexOf(_index2.default.config.authProxyBaseUrl) > -1 || new RegExp(_index2.default.getServiceUrl('authorization')).test(url);
     };
 

@@ -145,6 +145,44 @@ describe('Station', () => {
     });
 
 
+    /** @test {Station.primaryStream} */
+    describe('primaryStream', () => {
+        it('should equal the first stream link if it exists', () => {
+            station.primaryStream.should.deep.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.streams[0]);
+        });
+
+        it('should by null if no primary stream exists', () => {
+            responseClone.links.streams[0].isPrimaryStream = false;
+            responseClone.links.streams[1].isPrimaryStream = false;
+            chai.expect(station.primaryStream).to.not.be.ok;
+        });
+
+        it('should be null if no streams exists', () => {
+            delete responseClone.links.streams;
+            chai.expect(station.primaryStream).to.not.be.ok;
+        });
+    });
+
+
+    /** @test {Station.primaryStreamUrl} */
+    describe('primaryStreamUrl', () => {
+        it('should equal the first stream link if it exists', () => {
+            station.primaryStreamUrl.should.equal(STATION_FINDER_SINGLE_ORG_RESPONSE.links.streams[0].href);
+        });
+
+        it('should by null if no primary stream exists', () => {
+            responseClone.links.streams[0].isPrimaryStream = false;
+            responseClone.links.streams[1].isPrimaryStream = false;
+            chai.expect(station.primaryStreamUrl).to.not.be.ok;
+        });
+
+        it('should be null if no streams exists', () => {
+            delete responseClone.links.streams;
+            chai.expect(station.primaryStreamUrl).to.not.be.ok;
+        });
+    });
+
+
     /** @test {Station.attributes} */
     describe('attributes', () => {
         it('should exist on test data', () => {

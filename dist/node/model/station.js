@@ -301,6 +301,36 @@ var Station = function (_CollectionDoc) {
         }
 
         /**
+         * Returns the primary stream object for this station, if one can be found. If no primary stream can be found at all, this will return `null`.
+         *
+         * @type {null|Link}
+         */
+
+    }, {
+        key: 'primaryStream',
+        get: function get() {
+            if (this._raw.links.streams) {
+                return this._raw.links.streams.find(function (item) {
+                    return item.isPrimaryStream;
+                });
+            }
+            return null;
+        }
+
+        /**
+         * Returns the primary stream URL for this station, if one can be found. If no primary stream can be found at all, this will return `null`.
+         *
+         * @type {null|string}
+         */
+
+    }, {
+        key: 'primaryStreamUrl',
+        get: function get() {
+            var primaryStream = this.primaryStream;
+            return primaryStream ? primaryStream.href : null;
+        }
+
+        /**
          * Returns whether or not the station is eligible for inclusion in NPR One applications.
          *
          * @type {boolean}
