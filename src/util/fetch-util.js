@@ -117,6 +117,7 @@ export default class FetchUtil
      * @private
      */
     static _requestUrlIsAuthorizationCall(url) {
+        // eslint-disable-next-line max-len
         return (NPROneSDK.config.authProxyBaseUrl && (url.indexOf(NPROneSDK.config.authProxyBaseUrl) > -1))
             || new RegExp(NPROneSDK.getServiceUrl('authorization')).test(url);
     }
