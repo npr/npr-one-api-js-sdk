@@ -1,10 +1,14 @@
 import 'isomorphic-fetch';
-import Action from './model/action';
-import Logger from './util/logger';
 import Authorization from './controller/authorization';
 import Listening from './controller/listening';
 import Identity from './controller/identity';
 import StationFinder from './controller/station-finder';
+import Action from './model/action';
+import DeviceCode from './model/device-code';
+import Recommendation from './model/recommendation';
+import Station from './model/station';
+import User from './model/user';
+import Logger from './util/logger';
 
 Logger.setLevel(Logger.WARN);
 
@@ -417,6 +421,14 @@ export class NprOneSDK {
     }
 }
 export default NprOneSDK;
+
+export {
+    Action,
+    DeviceCode,
+    Recommendation,
+    Station,
+    User,
+};
 
 /**
  * @external {Response} https://developer.mozilla.org/en-US/docs/Web/API/Response

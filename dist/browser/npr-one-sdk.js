@@ -93,35 +93,51 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	exports.__esModule = true;
-	exports.NprOneSDK = undefined;
+	exports.User = exports.Station = exports.Recommendation = exports.DeviceCode = exports.Action = exports.NprOneSDK = undefined;
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(11);
+	__webpack_require__(15);
 	
-	var _action = __webpack_require__(5);
-	
-	var _action2 = _interopRequireDefault(_action);
-	
-	var _logger = __webpack_require__(1);
-	
-	var _logger2 = _interopRequireDefault(_logger);
-	
-	var _authorization = __webpack_require__(13);
+	var _authorization = __webpack_require__(17);
 	
 	var _authorization2 = _interopRequireDefault(_authorization);
 	
-	var _listening = __webpack_require__(15);
+	var _listening = __webpack_require__(19);
 	
 	var _listening2 = _interopRequireDefault(_listening);
 	
-	var _identity = __webpack_require__(14);
+	var _identity = __webpack_require__(18);
 	
 	var _identity2 = _interopRequireDefault(_identity);
 	
 	var _stationFinder = __webpack_require__(7);
 	
 	var _stationFinder2 = _interopRequireDefault(_stationFinder);
+	
+	var _action = __webpack_require__(5);
+	
+	var _action2 = _interopRequireDefault(_action);
+	
+	var _deviceCode = __webpack_require__(10);
+	
+	var _deviceCode2 = _interopRequireDefault(_deviceCode);
+	
+	var _recommendation = __webpack_require__(12);
+	
+	var _recommendation2 = _interopRequireDefault(_recommendation);
+	
+	var _station = __webpack_require__(13);
+	
+	var _station2 = _interopRequireDefault(_station);
+	
+	var _user = __webpack_require__(14);
+	
+	var _user2 = _interopRequireDefault(_user);
+	
+	var _logger = __webpack_require__(1);
+	
+	var _logger2 = _interopRequireDefault(_logger);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -619,6 +635,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	}();
 	
 	exports.default = NprOneSDK;
+	exports.Action = _action2.default;
+	exports.DeviceCode = _deviceCode2.default;
+	exports.Recommendation = _recommendation2.default;
+	exports.Station = _station2.default;
+	exports.User = _user2.default;
 	
 	/**
 	 * @external {Response} https://developer.mozilla.org/en-US/docs/Web/API/Response
@@ -1144,7 +1165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _fetchUtil2 = _interopRequireDefault(_fetchUtil);
 	
-	var _station = __webpack_require__(18);
+	var _station = __webpack_require__(13);
 	
 	var _station2 = _interopRequireDefault(_station);
 	
@@ -1586,6 +1607,135 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _validator = __webpack_require__(4);
+	
+	var _validator2 = _interopRequireDefault(_validator);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	/**
+	 * A thin wrapper around the raw JSON returned from the authorization server to represent a device code/user code pair
+	 */
+	var DeviceCode = function () {
+	    /**
+	     * @param {Object} json    The decoded JSON object that should be used as the basis for this model
+	     */
+	    function DeviceCode(json) {
+	        _classCallCheck(this, DeviceCode);
+	
+	        this._raw = json;
+	
+	        this._expiryDate = null;
+	        if (!isNaN(this._raw.expires_in)) {
+	            this._expiryDate = new Date(Date.now() + this.ttl);
+	        }
+	    }
+	
+	    /**
+	     * Ensure that the given device code model is valid
+	     *
+	     * @throws {TypeError} if device code model is invalid
+	     */
+	
+	
+	    DeviceCode.prototype.validate = function validate() {
+	        _validator2.default.validateDeviceCode(this._raw);
+	    };
+	
+	    /**
+	     * Returns whether or not this device code/user code pair has expired.
+	     * Note that due to network latency, etc., it's possible that the internally-stored expiry date could be about a
+	     * second or so behind, and so this function is not guaranteed to be perfectly accurate.
+	     *
+	     * @returns {boolean}
+	     */
+	
+	
+	    DeviceCode.prototype.isExpired = function isExpired() {
+	        return this._expiryDate !== null && new Date() >= this._expiryDate;
+	    };
+	
+	    /**
+	     * Returns the user code (8-character alphanumeric string)
+	     *
+	     * @type {string}
+	     */
+	
+	
+	    /**
+	     * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
+	     * In this case, we return the raw JSON string representing the entire object.
+	     *
+	     * @returns {string}
+	     */
+	    DeviceCode.prototype.toString = function toString() {
+	        return JSON.stringify(this._raw);
+	    };
+	
+	    _createClass(DeviceCode, [{
+	        key: 'userCode',
+	        get: function get() {
+	            return this._raw.user_code;
+	        }
+	
+	        /**
+	         * Returns the verification URL (the place where the user should go on their mobile device or laptop to log in)
+	         *
+	         * @type {string}
+	         */
+	
+	    }, {
+	        key: 'verificationUri',
+	        get: function get() {
+	            return this._raw.verification_uri;
+	        }
+	
+	        /**
+	         * Returns the TTL (in milliseconds) until this device code/user code pair expires. The SDK will automatically generate
+	         * a new key pair upon expiry, so consumers of the SDK will generally not have to use this value directly; however,
+	         * you may opt to display on the screen how much time the user has left to log in before a new code is generated.
+	         *
+	         * @type {number}
+	         */
+	
+	    }, {
+	        key: 'ttl',
+	        get: function get() {
+	            return this._raw.expires_in * 1000;
+	        }
+	
+	        /**
+	         * Returns the interval (in milliseconds) at which the client (in this case the SDK) should poll the `POST /token`
+	         * endpoint (or the OAuth proxy that lies in between). Consumers of the SDK should generally not have to use this
+	         * value directly.
+	         *
+	         * @type {number}
+	         */
+	
+	    }, {
+	        key: 'interval',
+	        get: function get() {
+	            return this._raw.interval * 1000;
+	        }
+	    }]);
+	
+	    return DeviceCode;
+	}();
+	
+	exports.default = DeviceCode;
+
+/***/ },
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1652,7 +1802,1107 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Rating;
 
 /***/ },
-/* 11 */
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	__webpack_require__(15);
+	
+	var _urlParse = __webpack_require__(16);
+	
+	var _urlParse2 = _interopRequireDefault(_urlParse);
+	
+	var _collectionDoc = __webpack_require__(6);
+	
+	var _collectionDoc2 = _interopRequireDefault(_collectionDoc);
+	
+	var _rating = __webpack_require__(11);
+	
+	var _rating2 = _interopRequireDefault(_rating);
+	
+	var _action = __webpack_require__(5);
+	
+	var _action2 = _interopRequireDefault(_action);
+	
+	var _logger = __webpack_require__(1);
+	
+	var _logger2 = _interopRequireDefault(_logger);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	/**
+	 * Container class for all metadata pertaining to a recommendation.
+	 *
+	 * Provides metadata and the recordAction method, which sends feedback on user actions to NPR's APIs and advances the flow of audio recommendations to the user
+	 *
+	 * @extends {CollectionDoc}
+	 */
+	var Recommendation = function (_CollectionDoc) {
+	    _inherits(Recommendation, _CollectionDoc);
+	
+	    /**
+	     * @param {CollectionDocJSON} json   The decoded JSON object that should be used as the basis for this model
+	     */
+	    function Recommendation(json) {
+	        _classCallCheck(this, Recommendation);
+	
+	        /** @type {Object}
+	         * @private */
+	        var _this = _possibleConstructorReturn(this, _CollectionDoc.call(this, json));
+	
+	        _this._raw = json;
+	        /**
+	         * The metadata used to describe this recommendation, such as type and title
+	         * @type {RecommendationAttributes}
+	         */
+	        _this.attributes = {};
+	        /**
+	         * An internal store of ratings collected for this application; should never be accessed directly by consumers
+	         * @type {Array<Rating>}
+	         */
+	        _this.ratings = [];
+	        /**
+	         * The actual audio files associated with this recommendation; should never be empty
+	         * @type {Array<Link>}
+	         */
+	        _this.audio = [];
+	        /**
+	         * A list of API calls the app can make to retrieve subsequent recommendations; should never be accessed directly by consumers
+	         * @type {Array<Link>}
+	         */
+	        _this.recommendations = [];
+	        /**
+	         * A list of images associated with this recommendation; could be empty
+	         * @type {Array<ImageLink>}
+	         */
+	        _this.images = [];
+	        /**
+	         * A list of links to other places where this story can be found on the web (for example, on NPR.org); could be empty
+	         * @type {Array<Link>}
+	         */
+	        _this.web = [];
+	        /**
+	         * A list of links that are used as the canonical link(s) when sharing this story on social media
+	         * @type {Array<Link>}
+	         */
+	        _this.onramps = [];
+	        /**
+	         * This is the `action` array from the API within `links`, and _NOT_ this SDK's notion of {@link Action}
+	         * @type {Array<Link>}
+	         */
+	        _this.callsToAction = [];
+	        /**
+	         * A list of API calls to make if this recommendation is of type `sponsorship` and the consuming client
+	         * has played the accompanying audio
+	         * @type {Array<FormFactorLink>}
+	         */
+	        _this.impressions = [];
+	        /**
+	         * A list of links to places where the app can take the user if they interact with this `sponsorship` item
+	         * @type {Array<FormFactorLink>}
+	         */
+	        _this.relateds = [];
+	        /**
+	         * A list of API calls to make if this recommendation is of type `sponsorship` and the consuming client has
+	         * chosen to interact with the sponsorship item using the contents of {@link relateds}
+	         * @type {Array<FormFactorLink>}
+	         */
+	        _this.relatedImpressions = [];
+	        /** @type {Object}
+	          * @private */
+	        _this._ratingTemplate = {};
+	        /**
+	         * Used to prevent impressions from being fired twice
+	         * @type {boolean}
+	         * @private
+	         */
+	        _this._hasSentImpressions = false;
+	        /** @type {null|Function}
+	          * @private */
+	        _this._ratingReceivedCallback = null;
+	
+	        _this._hydrate();
+	        return _this;
+	    }
+	
+	    /**
+	     * Hydrate the internal member variables.
+	     *
+	     * @private
+	     */
+	
+	
+	    Recommendation.prototype._hydrate = function _hydrate() {
+	        this._validate();
+	
+	        this._ratingTemplate = this._raw.attributes.rating;
+	
+	        // deep copy, we do not want duplicate rating objects
+	        this.attributes = Object.assign({}, this._raw.attributes);
+	        delete this.attributes.rating;
+	
+	        var links = this._raw.links;
+	
+	        // Required
+	        this.audio = links.audio;
+	        this.recommendations = links.recommendations;
+	
+	        // Optional
+	        this.web = links.web ? links.web : [];
+	        this.images = links.image ? links.image : [];
+	        this.onramps = links.onramps ? links.onramps : [];
+	        this.callsToAction = links.action ? links.action : [];
+	        this.impressions = links.impression ? links.impression : [];
+	        this.relateds = links.related ? links.related : [];
+	        this.relatedImpressions = links['related-impression'] ? links['related-impression'] : [];
+	    };
+	
+	    /**
+	     * Determines whether the collection doc has the required fields for a valid recommendation
+	     *
+	     * @protected
+	     * @throws {TypeError} if the collection doc is invalid
+	     */
+	
+	
+	    Recommendation.prototype._validate = function _validate() {
+	        var links = this._raw.links;
+	
+	        if (!links.audio || links.audio.constructor !== Array || links.audio.length <= 0) {
+	            throw new TypeError('Audio must exist within links.');
+	        }
+	
+	        if (!links.recommendations || links.recommendations.constructor !== Array || links.recommendations.length <= 0) {
+	            throw new TypeError('Recommendation (contains URL) must exist within links.');
+	        }
+	
+	        if (!this._raw.attributes.rating) {
+	            throw new TypeError('Attributes must contain a rating object.');
+	        }
+	    };
+	
+	    /**
+	     * Returns a list of images associated with this recommendation
+	     *
+	     * @returns {Array<ImageLink>}
+	     */
+	
+	
+	    Recommendation.prototype.getImages = function getImages() {
+	        return this.images;
+	    };
+	
+	    /**
+	     * Returns the actual audio files associated with this recommendation
+	     *
+	     * @returns {Array<Link>}
+	     */
+	
+	
+	    Recommendation.prototype.getAudio = function getAudio() {
+	        return this.audio;
+	    };
+	
+	    /**
+	     * Returns a list of links to other places where this story can be found on the web (for example, on NPR.org)
+	     *
+	     * @returns {Array<Link>}
+	     */
+	
+	
+	    Recommendation.prototype.getWeb = function getWeb() {
+	        return this.web;
+	    };
+	
+	    /**
+	     * Returns a list of links that are used as the canonical link(s) when sharing this story on social media.
+	     *
+	     * @returns {Array<Link>}
+	     */
+	
+	
+	    Recommendation.prototype.getOnRamps = function getOnRamps() {
+	        return this.onramps;
+	    };
+	
+	    /**
+	     * Returns a list of API calls to make if this recommendation is of type `sponsorship` and the consuming client
+	     * has played the accompanying audio. Note that the SDK will take care of this automatically as long as the client
+	     * uses {@link recordAction} to send the rating.
+	     *
+	     * @returns {Array<FormFactorLink>}
+	     */
+	
+	
+	    Recommendation.prototype.getImpressions = function getImpressions() {
+	        return this.impressions;
+	    };
+	
+	    /**
+	     * This is the `action` array from the API within `links`, and _NOT_ this SDK's notion of {@link Action}
+	     *
+	     * An example of what might be contained within this is array is a link to full-length content
+	     * for a promo recommendation.
+	     *
+	     * @returns {Array<Link>}
+	     */
+	
+	
+	    Recommendation.prototype.getCallsToAction = function getCallsToAction() {
+	        return this.callsToAction;
+	    };
+	
+	    /**
+	     * Returns a list of links to places where the app can take the user if they interact with this `sponsorship` item
+	     * (such as by clicking/tapping on the image or using a voice command to learn more)
+	     *
+	     * @returns {Array<FormFactorLink>}
+	     */
+	
+	
+	    Recommendation.prototype.getRelateds = function getRelateds() {
+	        return this.relateds;
+	    };
+	
+	    /**
+	     * Returns a list of API calls to make if this recommendation is of type `sponsorship` and the consuming client
+	     * has chosen to interact with the sponsorship item using the contents returned by {@link getRelateds}. Note that
+	     * the SDK will take care of this automatically as long as the client uses {@link recordAction} to send the rating.
+	     *
+	     * @returns {Array<FormFactorLink>}
+	     */
+	
+	
+	    Recommendation.prototype.getRelatedImpressions = function getRelatedImpressions() {
+	        return this.relatedImpressions;
+	    };
+	
+	    /**
+	     * Returns an internal store of ratings collected for this application. This should never be accessed directly by
+	     * consumers; use {@link recordAction} to send ratings, and the SDK will figure out the appropriate time to make
+	     * the API call that submits them to the server.
+	     *
+	     * @returns {Array<Rating>}
+	     */
+	
+	
+	    Recommendation.prototype.getRatings = function getRatings() {
+	        return this.ratings;
+	    };
+	
+	    /**
+	     * Returns the URL that should be used to obtain the next set of recommendations. This should typically not be used
+	     * by clients directly; use {@link recordAction} followed by {@link NprOneSDK#getRecommendation} instead.
+	     *
+	     * @returns {string}
+	     */
+	
+	
+	    Recommendation.prototype.getRecommendationUrl = function getRecommendationUrl() {
+	        return this.recommendations[0].href;
+	    };
+	
+	    /**
+	     * This method looks through the recommendation's action and related array to search for any URL starting with `'nprone://listen'`.
+	     * If found, everything from the query params is appended to the original recommendation URL.
+	     * This value is then used anytime a user indicates they want more similar stories by clicking or tapping on this recommendation.
+	     *
+	     * For many recommendations, this will not exist and getRecommendationUrl is used instead.
+	     *
+	     * @returns {string}
+	     */
+	
+	
+	    Recommendation.prototype.getActionRecommendationUrl = function getActionRecommendationUrl() {
+	        var original = new _urlParse2.default(this.getRecommendationUrl());
+	        var potentialActions = this.callsToAction.concat(this.relateds);
+	
+	        var nprOneUrl = '';
+	        for (var _iterator = potentialActions, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+	            var _ref;
+	
+	            if (_isArray) {
+	                if (_i >= _iterator.length) break;
+	                _ref = _iterator[_i++];
+	            } else {
+	                _i = _iterator.next();
+	                if (_i.done) break;
+	                _ref = _i.value;
+	            }
+	
+	            var action = _ref;
+	
+	            if (action.href && action.href.indexOf('nprone://') === 0) {
+	                nprOneUrl = new _urlParse2.default(action.href);
+	                break;
+	            }
+	        }
+	
+	        var url = '';
+	        if (nprOneUrl) {
+	            url = original.set('query', nprOneUrl.query).href + '&recommend=true';
+	        }
+	
+	        return url;
+	    };
+	
+	    /**
+	     * Returns whether this recommendation is of type `sponsorship`
+	     *
+	     * @returns {boolean}
+	     */
+	
+	
+	    Recommendation.prototype.isSponsorship = function isSponsorship() {
+	        return this.attributes.type === 'sponsorship';
+	    };
+	
+	    /**
+	     * Returns whether this recommendation is shareable on social media
+	     *
+	     * @returns {boolean}
+	     */
+	
+	
+	    Recommendation.prototype.isShareable = function isShareable() {
+	        return this.onramps.length > 0;
+	    };
+	
+	    /**
+	     * Returns whether this recommendation has a given action
+	     *
+	     * @param {string} action    Which action to look up; should be one of the static string constants returned by {@link Action}
+	     * @returns {boolean}
+	     */
+	
+	
+	    Recommendation.prototype.hasAction = function hasAction(action) {
+	        for (var _iterator2 = this.ratings, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+	            var _ref2;
+	
+	            if (_isArray2) {
+	                if (_i2 >= _iterator2.length) break;
+	                _ref2 = _iterator2[_i2++];
+	            } else {
+	                _i2 = _iterator2.next();
+	                if (_i2.done) break;
+	                _ref2 = _i2.value;
+	            }
+	
+	            var rating = _ref2;
+	
+	            if (rating.rating === action) {
+	                return true;
+	            }
+	        }
+	
+	        return false;
+	    };
+	
+	    /**
+	     * Returns whether this recommendation has received a rating indicating it is no longer
+	     * being presented to the user
+	     *
+	     * @returns {boolean}
+	     */
+	
+	
+	    Recommendation.prototype.hasEndAction = function hasEndAction() {
+	        for (var _iterator3 = _action2.default.getEndActions(), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+	            var _ref3;
+	
+	            if (_isArray3) {
+	                if (_i3 >= _iterator3.length) break;
+	                _ref3 = _iterator3[_i3++];
+	            } else {
+	                _i3 = _iterator3.next();
+	                if (_i3.done) break;
+	                _ref3 = _i3.value;
+	            }
+	
+	            var endAction = _ref3;
+	
+	            if (this.hasAction(endAction)) {
+	                return true;
+	            }
+	        }
+	
+	        return false;
+	    };
+	
+	    /**
+	     * Record a user action taken and the time it was taken against this recommendation
+	     *
+	     * @param {string} action                  Which action to record; should be one of the static string constants returned by {@link Action}
+	     * @param {number} elapsedTimeInSeconds    The number of seconds this piece of audio has been playing for
+	     */
+	
+	
+	    Recommendation.prototype.recordAction = function recordAction(action, elapsedTimeInSeconds) {
+	        var _elapsedTime = elapsedTimeInSeconds;
+	
+	        if (!_action2.default.isValidAction(action)) {
+	            throw new Error(action + ' action is invalid. See Action class for valid actions.');
+	        }
+	
+	        var n = parseInt(_elapsedTime, 10);
+	        if (isNaN(n) || !isFinite(n)) {
+	            throw new Error('Elapsed time must be supplied and be a positive integer value.');
+	        }
+	
+	        if (_elapsedTime < 0) {
+	            _logger2.default.warn('Elapsed time of ' + _elapsedTime + ' is invalid ' + 'and has been changed to 0 seconds.');
+	            _elapsedTime = 0;
+	        }
+	
+	        if (_elapsedTime > this.attributes.duration && this.attributes.duration > 0) {
+	            // 30s has been arbitrarily chosen as it's enough to indicate the consumer of this SDK might have made a coding error.
+	            if (_elapsedTime > this.attributes.duration + 30) {
+	                _logger2.default.warn('Elapsed time of ' + _elapsedTime + ' exceeds overall audio duration ' + ('and has been modified to ' + this.attributes.duration + ' seconds.'));
+	            }
+	            _elapsedTime = this.attributes.duration;
+	        }
+	
+	        if (_elapsedTime === 0 && (action === _action2.default.COMPLETED || action === _action2.default.SKIP)) {
+	            _logger2.default.warn('Elapsed time value should be greater than zero; ' + 'please ensure the time passed since the START rating is recorded.');
+	        }
+	
+	        if (action !== _action2.default.START) {
+	            if (!this.hasAction(_action2.default.START)) {
+	                _logger2.default.warn('Action \'' + action + '\' has been recorded; however, no START action ' + 'exists. Please ensure START actions are recorded first.');
+	            }
+	        }
+	
+	        var rating = new _rating2.default(this._ratingTemplate);
+	        rating.rating = action;
+	        rating.elapsed = _elapsedTime;
+	        rating.timestamp = new Date().toISOString();
+	        rating._recommendationUrl = this.getRecommendationUrl();
+	        rating._actionUrl = this.getActionRecommendationUrl();
+	
+	        // Handle Sponsorship Impressions
+	        if (this.isSponsorship() && action === _action2.default.START && !this._hasSentImpressions) {
+	            this._hasSentImpressions = true;
+	            var impressions = this.impressions.concat(this.relatedImpressions);
+	            impressions.forEach(function (link) {
+	                if (link['form-factor'] === 'audio') {
+	                    fetch(link.href, { mode: 'no-cors' }); // no really, that's it. We don't care about the result of these fetches.
+	                }
+	            });
+	        }
+	
+	        this.ratings.push(rating);
+	
+	        if (this._ratingReceivedCallback !== null) {
+	            this._ratingReceivedCallback(rating);
+	        }
+	    };
+	
+	    /**
+	     * A callback which provides for communication of a received rating
+	     *
+	     * @param {?Function} callback    A function to call whenever this recommendation has received a rating (action)
+	     */
+	
+	
+	    Recommendation.prototype.setRatingReceivedCallback = function setRatingReceivedCallback(callback) {
+	        this._ratingReceivedCallback = callback;
+	    };
+	
+	    /**
+	     * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
+	     *
+	     * @returns {string}
+	     */
+	
+	
+	    Recommendation.prototype.toString = function toString() {
+	        return '[UID=' + this.attributes.uid + ', R=' + this.getRatings().join(',') + ']';
+	    };
+	
+	    /**
+	     * @typedef {Object} RecommendationAttributes
+	     * @property {string} type The type of recommendation, usually `audio`. Can also be `stationId`, `sponsorship`, etc.
+	     * @property {string} uid The universal identifier of the recommendation
+	     * @property {string} title The title of the recommendation
+	     * @property {boolean} skippable Whether or not the recommendation is skippable, usually true, but false for e.g. sponsorship
+	     * @property {string} [slug] A slug or category for the recommendation
+	     * @property {string} provider The provider of the story, usually `NPR`. Can also be a member station or third-party podcast provider.
+	     * @property {string} [program] The program as part of which this recommendation aired
+	     * @property {number} duration The duration of the audio according to the API; note that the actual duration can differ
+	     * @property {string} date ISO-8601 formatted date/time; the date at which the story was first published
+	     * @property {string} [description] A short description of the recommendation
+	     * @property {string} rationale The reason for recommending this piece to the listener
+	     * @property {string} [button] The text to display in a clickable button on a feature card
+	     */
+	    /**
+	     * @typedef {Link} FormFactorLink
+	     * @property {string} [form-factor] The form-factor for the most appropriate display of or interaction with the resource, usually irrelevant unless there is more than one link of the same type
+	     */
+	    /**
+	     * @typedef {FormFactorLink} ImageLink
+	     * @property {string} [rel] The relation of the image to the content, which usually corresponds to the crop-type
+	     * @property {number} [height] The pixel height of the image
+	     * @property {number} [width] The pixel width of the image
+	     */
+	
+	
+	    return Recommendation;
+	}(_collectionDoc2.default);
+	
+	exports.default = Recommendation;
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _collectionDoc = __webpack_require__(6);
+	
+	var _collectionDoc2 = _interopRequireDefault(_collectionDoc);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	/**
+	 * Container class for all metadata pertaining to an organization (member station) from the NPR One API
+	 *
+	 * @extends {CollectionDoc}
+	 */
+	var Station = function (_CollectionDoc) {
+	    _inherits(Station, _CollectionDoc);
+	
+	    /**
+	     * @param {CollectionDocJSON} json    The decoded JSON object that should be used as the basis for this model
+	     */
+	    function Station(json) {
+	        _classCallCheck(this, Station);
+	
+	        var _this = _possibleConstructorReturn(this, _CollectionDoc.call(this, json));
+	
+	        _this._validate();
+	        return _this;
+	    }
+	
+	    /**
+	     * Returns the unique ID that represents this station across NPR's various APIs. The ID is an integer between 1 and
+	     * 9999, but it will always be returned in string format.
+	     *
+	     * @type {string}
+	     */
+	
+	
+	    /**
+	     * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
+	     * In this case, we return the station's display name.
+	     *
+	     * @returns {string}
+	     */
+	    Station.prototype.toString = function toString() {
+	        return this.displayName;
+	    };
+	
+	    /**
+	     * @typedef {Object} StationAttributes
+	     * @property {string} orgId The system's unique ID for this station, used across NPR One Microservices and NPR's other APIs
+	     * @property {string} guid The system's internal unique identifier for a station, not typically used by other APIs or consumers
+	     * @property {StationBrandData} brand An associative array of brand-related metadata for this station
+	     * @property {StationEligibilityData} eligibility An associative array of eligibility-related metadata for this station
+	     * @property {StationNewscastData} [newscast] Metadata about the newscast for this station; newscasts are handled internally by other microservices such as the NPR One Listening Service, so this data should typically not be used by consumers
+	     * @property {StationNetwork} Metadata about the network, if this station is part of a network
+	     */
+	    /**
+	     * @typedef {Object} StationBrandData
+	     * @property {string} name The display name for the station. In most cases, this will be the same as call letters combined with band. When returning networks, it will return the network name (e.g. Minnesota Public Radio).
+	     * @property {string|null} call The three-to-four-letter identifying code for this station. Please use this with caution; most stations prefer to be identified by their name in client applications instead of call.
+	     * @property {string|null} frequency Where on the radio dial the station can be heard. If the band is AM, the frequency will be between 540 and 1600. If the band is FM, the frequency will be between 87.8 and 108.0.
+	     * @property {string|null} band The subsection of the radio spectrum -- 'AM' or 'FM' -- where this station can be heard
+	     * @property {string} tagline A short text-logo for the station
+	     * @property {string} marketCity The city that the station is most closely associated with. This may or may not be the city the station is licensed in and it may or may not be the city that the station or the station's antenna is located in.
+	     * @property {string} marketState The state that the station is most closely associated with. This may or may not be the state the station is licensed in and it may or may not be the state that the station or the station's antenna is located in.
+	     */
+	    /**
+	     * @typedef {Object} StationEligibilityData
+	     * @property {boolean} nprOne Whether or not this organization is considered an NPR One station
+	     * @property {boolean} musicOnly Whether or not this station only plays music
+	     * @property {string} format The format of the programming on this station
+	     * @property {string} status The status of the station within NPR's system, not typically used by consumers
+	     */
+	    /**
+	     * @typedef {Object} StationNewscastData
+	     * @property {string} id The ID of the newscast that should be played for this station; this is handled internally by other microservices such as the NPR One Listening Service, so this field should typically not be used by consumers
+	     * @property {null|number} recency How often the newscast should be played, in minutes; a value of `null` implies no information is available, and sensible defaults should be used
+	     */
+	    /**
+	     * @typedef {Object} StationNetwork
+	     * @property {string} currentOrgId The current station being viewed. Client applications should generally ignore this field.
+	     * @property {boolean} usesInheritance Whether or not the current station inherits from a parent organization, also referred to as a network
+	     * @property {string} [inheritingFrom] The system' unique ID for the organization that the current station is inheriting from, if inheritance is on
+	     * @property {string} name The display name for the current organization
+	     * @property {StationNetworkTierOne} [tier1] The top-level organization, if this station is part of a network
+	     */
+	    /**
+	     * @typedef {Object} StationNetworkTierOne
+	     * @property {string} id The unique identifier of the top-level organization in the network
+	     * @property {boolean} usesInheritance Whether or not this station inherits from a parent organization, also referred to as a network
+	     * @property {string} name The display name for the top-level organization in the network
+	     * @property {string} status The status of the top-level organization within NPR's system, not typically used by consumers
+	     * @property {Array<StationNetworkTierTwo>} [tier2] One or more stations that are hierarchical children of this organization
+	     */
+	    /**
+	     * @typedef {Object} StationNetworkTierTwo
+	     * @property {string} id The unique identifier of a tier 2 organization in the network
+	     * @property {boolean} usesInheritance Whether or not this station inherits from a parent organization, also referred to as a network
+	     * @property {string} name The display name for a tier 2 organization in the network
+	     * @property {Array<StationNetworkTierThree>} [tier3] One or more stations that are hierarchical children of this organization
+	     */
+	    /**
+	     * @typedef {Object} StationNetworkTierThree
+	     * @property {string} id The unique identifier of a tier 3 organization in the network
+	     * @property {boolean} usesInheritance Whether or not this station inherits from a parent organization, also referred to as a network
+	     * @property {string} name The display name for a tier 3 organization in the network
+	     */
+	
+	
+	    _createClass(Station, [{
+	        key: 'id',
+	        get: function get() {
+	            return this._raw.attributes.orgId;
+	        }
+	
+	        /**
+	         * Returns the display name that the station would prefer to use. Please use this anytime you want to display a
+	         * given station's name, rather than attempting to find the appropriate field inside of {@link Station.attributes}
+	         * yourself; branding is a sensitive issue for stations and we should all respect how they wish to be identified.
+	         *
+	         * @type {string}
+	         */
+	
+	    }, {
+	        key: 'displayName',
+	        get: function get() {
+	            return this._raw.attributes.brand.name;
+	        }
+	
+	        /**
+	         * Returns the logo for this station, if one can be found. If no logo can be found at all, this will return `null`.
+	         *
+	         * @type {null|string}
+	         */
+	
+	    }, {
+	        key: 'logo',
+	        get: function get() {
+	            if (this._raw.links.brand) {
+	                for (var _iterator = this._raw.links.brand, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+	                    var _ref;
+	
+	                    if (_isArray) {
+	                        if (_i >= _iterator.length) break;
+	                        _ref = _iterator[_i++];
+	                    } else {
+	                        _i = _iterator.next();
+	                        if (_i.done) break;
+	                        _ref = _i.value;
+	                    }
+	
+	                    var link = _ref;
+	
+	                    if (link.rel === 'logo') {
+	                        return link.href;
+	                    }
+	                }
+	            }
+	            return null;
+	        }
+	
+	        /**
+	         * Returns the tagline for this station. This should be used as supplemental metadata for a station; it should never
+	         * be used as the sole identifying information. Note that while the majority of the stations in our system have
+	         * taglines, it is not guaranteed that each station has one.
+	         *
+	         * @type {string}
+	         */
+	
+	    }, {
+	        key: 'tagline',
+	        get: function get() {
+	            return this._raw.attributes.brand.tagline || '';
+	        }
+	
+	        /**
+	         * Returns the call sign, brand (AM or FM), and frequency together as one string, e.g. `'WAMU FM 88.5'` or
+	         * `'KCFR FM 90.1'` or `'KWSU AM 1250'`. Again, this should be treated as supplemental metadata for a station and
+	         * not the sole identifying information; where possible, stations prefer to be identified primarily by their
+	         * {@link displayName} and {@link logo}. However, some local stations are members of networks such as Colorado Public Radio
+	         * and therefore use the same display name and logo; in those cases, the call sign + band + frequency combination is
+	         * the main way to disambiguate between multiple stations in the same network. This value is guaranteed to be unique.
+	         *
+	         * @type {null|string}
+	         */
+	
+	    }, {
+	        key: 'callSignAndFrequency',
+	        get: function get() {
+	            var callSignAndFrequency = '';
+	            var brand = this._raw.attributes.brand;
+	            if (brand.call) {
+	                callSignAndFrequency += brand.call;
+	            }
+	            if (brand.band) {
+	                callSignAndFrequency += ' ' + brand.band;
+	            }
+	            if (brand.frequency) {
+	                callSignAndFrequency += ' ' + brand.frequency;
+	            }
+	            return callSignAndFrequency.trim() || null;
+	        }
+	
+	        /**
+	         * Returns the location of the station, which always consists of a city and (abbreviated) state, e.g. `'Austin, TX'`
+	         * or `'Rochester, NY'`. Similarly to {@link callSignAndFrequency}, this is most useful for disambiguating between
+	         * multiple local stations in a bigger network such as Colorado Public Radio, which use the same {@link displayName}
+	         * and {@link logo}. Note that this value isn't guaranteed to be unique; some cities (e.g. Boston) have multiple
+	         * NPR stations.
+	         *
+	         * @type {string}
+	         */
+	
+	    }, {
+	        key: 'location',
+	        get: function get() {
+	            var brand = this._raw.attributes.brand;
+	            return brand.marketCity + ', ' + brand.marketState;
+	        }
+	
+	        /**
+	         * Returns the URL to the station's website, if available.
+	         *
+	         * @type {null|string}
+	         */
+	
+	    }, {
+	        key: 'homepageUrl',
+	        get: function get() {
+	            if (this._raw.links.brand) {
+	                for (var _iterator2 = this._raw.links.brand, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+	                    var _ref2;
+	
+	                    if (_isArray2) {
+	                        if (_i2 >= _iterator2.length) break;
+	                        _ref2 = _iterator2[_i2++];
+	                    } else {
+	                        _i2 = _iterator2.next();
+	                        if (_i2.done) break;
+	                        _ref2 = _i2.value;
+	                    }
+	
+	                    var link = _ref2;
+	
+	                    if (link.rel === 'homepage') {
+	                        return link.href;
+	                    }
+	                }
+	            }
+	            return null;
+	        }
+	
+	        /**
+	         * Returns the URL to the station's online donation page, if available.
+	         *
+	         * @type {null|string}
+	         */
+	
+	    }, {
+	        key: 'donationUrl',
+	        get: function get() {
+	            var preferredUrl = void 0;
+	            var fallbackUrl = void 0;
+	
+	            if (this._raw.links.donation) {
+	                for (var _iterator3 = this._raw.links.donation, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+	                    var _ref3;
+	
+	                    if (_isArray3) {
+	                        if (_i3 >= _iterator3.length) break;
+	                        _ref3 = _iterator3[_i3++];
+	                    } else {
+	                        _i3 = _iterator3.next();
+	                        if (_i3.done) break;
+	                        _ref3 = _i3.value;
+	                    }
+	
+	                    var link = _ref3;
+	
+	                    if (link.typeId === '27') {
+	                        preferredUrl = link.href;
+	                        break;
+	                    } else if (link.typeId === '4') {
+	                        fallbackUrl = link.href;
+	                    }
+	                }
+	            }
+	
+	            return preferredUrl || fallbackUrl || null;
+	        }
+	
+	        /**
+	         * Returns the primary stream object for this station, if one can be found. If no primary stream can be found at all, this will return `null`.
+	         *
+	         * @type {null|Link}
+	         */
+	
+	    }, {
+	        key: 'primaryStream',
+	        get: function get() {
+	            if (this._raw.links.streams) {
+	                return this._raw.links.streams.find(function (item) {
+	                    return item.isPrimaryStream;
+	                });
+	            }
+	            return null;
+	        }
+	
+	        /**
+	         * Returns the primary stream URL for this station, if one can be found. If no primary stream can be found at all, this will return `null`.
+	         *
+	         * @type {null|string}
+	         */
+	
+	    }, {
+	        key: 'primaryStreamUrl',
+	        get: function get() {
+	            var primaryStream = this.primaryStream;
+	            return primaryStream ? primaryStream.href : null;
+	        }
+	
+	        /**
+	         * Returns whether or not the station is eligible for inclusion in NPR One applications.
+	         *
+	         * @type {boolean}
+	         */
+	
+	    }, {
+	        key: 'isNprOneEligible',
+	        get: function get() {
+	            return this._raw.attributes.eligibility.nprOne;
+	        }
+	
+	        /**
+	         * Returns the raw attributes that represent this station. Please use this with caution; the public accessor methods
+	         * in this class should be sufficient for most use cases, and consumers should rarely need to use this additional
+	         * metadata.
+	         *
+	         * @type {StationAttributes}
+	         */
+	
+	    }, {
+	        key: 'attributes',
+	        get: function get() {
+	            return this._raw.attributes;
+	        }
+	    }]);
+	
+	    return Station;
+	}(_collectionDoc2.default);
+	
+	exports.default = Station;
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _collectionDoc = __webpack_require__(6);
+	
+	var _collectionDoc2 = _interopRequireDefault(_collectionDoc);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	/**
+	 * Container class for all metadata pertaining to a user object from the NPR One API
+	 *
+	 * @extends {CollectionDoc}
+	 */
+	var User = function (_CollectionDoc) {
+	  _inherits(User, _CollectionDoc);
+	
+	  /**
+	   * @param {CollectionDocJSON} json    The decoded JSON object that should be used as the basis for this model
+	   */
+	  function User(json) {
+	    _classCallCheck(this, User);
+	
+	    /** @type {Object}
+	     * @private */
+	    var _this = _possibleConstructorReturn(this, _CollectionDoc.call(this, json));
+	
+	    _this._raw = json;
+	    /** @type {UserAttributes} */
+	    _this.attributes = {};
+	    _this._hydrate();
+	    return _this;
+	  }
+	
+	  /**
+	   * Hydrate the internal member variables.
+	   *
+	   * @private
+	   */
+	
+	
+	  User.prototype._hydrate = function _hydrate() {
+	    this._validate();
+	    this.attributes = this._raw.attributes;
+	  };
+	
+	  /**
+	   * Whether this user is a temporary user or not
+	   *
+	   * @returns {boolean}
+	   */
+	
+	
+	  User.prototype.isTemporary = function isTemporary() {
+	    return parseInt(this.attributes.id, 10) >= 1000000000;
+	  };
+	
+	  /**
+	   * Returns the user's cohort. In most cases, SDK consumers will never need to use this.
+	   *
+	   * @returns {UserCohort}
+	   */
+	
+	
+	  User.prototype.getCohort = function getCohort() {
+	    return this.attributes.cohort;
+	  };
+	
+	  /**
+	   * Returns the list of organizations this user is affiliated with. In most cases, you only want a single
+	   * organization, in which case {@link User#getPrimaryOrganization} should be used.
+	   *
+	   * @returns {Array<UserOrganization>}
+	   */
+	
+	
+	  User.prototype.getOrganizations = function getOrganizations() {
+	    return this.attributes.organizations || [];
+	  };
+	
+	  /**
+	   * Returns the primary, non-NPR organization that this user is affiliated with, or null if no such organization
+	   * exists.
+	   *
+	   * @returns {null|UserOrganization}
+	   */
+	
+	
+	  User.prototype.getPrimaryOrganization = function getPrimaryOrganization() {
+	    var orgs = this.getOrganizations();
+	    return orgs[0] && orgs[0].id !== '1' ? orgs[0] : null;
+	  };
+	
+	  /**
+	   * Returns the programs, shows, and podcasts that this user has positively interacted with.
+	   *
+	   * @returns {Array<UserAffiliation>}
+	   */
+	
+	
+	  User.prototype.getAffiliations = function getAffiliations() {
+	    return this.attributes.affiliations;
+	  };
+	
+	  /**
+	   * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
+	   * In this case, we return the user's ID.
+	   *
+	   * @returns {string}
+	   */
+	
+	
+	  User.prototype.toString = function toString() {
+	    return this.attributes.id;
+	  };
+	
+	  /**
+	   * @typedef {Object} UserAttributes
+	   * @property {string} id Some unique identifier for the user
+	   * @property {string} email The user's email address
+	   * @property {string} firstName The user's first name
+	   * @property {string} lastName The user's last name
+	   * @property {UserCohort} cohort The user's cohort (an experimental grouping for User Experience A/B Testing)
+	   * @property {Array<UserOrganization>} organizations User's chosen NPR Member Station(s)
+	   * @property {Array<UserAffiliation>} affiliations Programs, shows, and podcasts that the user has positively interacted with
+	   */
+	  /**
+	   * @typedef {Object} UserCohort
+	   * @property {string} id A short ID for this cohort
+	   * @property {string} name A text string identifying the cohort, useful for metrics
+	   * @property {string} directory For internal use only; represents the current configuration file being used by the Listening Service
+	   */
+	  /**
+	   * @typedef {Object} UserOrganization
+	   * @property {string} id Some unique identifier for the organization
+	   * @property {string} displayName A short displayable text field for the end user, strictly text
+	   * @property {string} call Station call letters
+	   * @property {string} city A short description of the station's main market city
+	   * @property {string} [logo] Station logo image URL
+	   * @property {string} [donationUrl] The URL to a website where users may make a donation to support the station
+	   */
+	  /**
+	   * @typedef {Object} UserAffiliation
+	   * @property {number} id A unique identifier for the aggregation (program)
+	   * @property {string} [title] The display name of the aggregation (program)
+	   * @property {string} href A link that can be followed to get content from this aggregation (program)
+	   * @property {boolean} following Whether or not the user is following the aggregation. When changing affiliation status, the client is expected to toggle this value and then send the entire object back.
+	   * @property {number} [rating] The user's average rating for this affiliation on a scale of 0-1. Absent if user never listened to the aggregation.
+	   * @property {number} [daysSinceLastListen] The number of days since a user last listened to a story from this aggregation. Absent if user never listened to the aggregation.
+	   */
+	
+	
+	  return User;
+	}(_collectionDoc2.default);
+	
+	exports.default = User;
+
+/***/ },
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
@@ -1664,7 +2914,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 12 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1898,7 +3148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 13 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1913,7 +3163,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _accessToken2 = _interopRequireDefault(_accessToken);
 	
-	var _deviceCode = __webpack_require__(16);
+	var _deviceCode = __webpack_require__(10);
 	
 	var _deviceCode2 = _interopRequireDefault(_deviceCode);
 	
@@ -2225,7 +3475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Authorization;
 
 /***/ },
-/* 14 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2240,7 +3490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _fetchUtil2 = _interopRequireDefault(_fetchUtil);
 	
-	var _user = __webpack_require__(19);
+	var _user = __webpack_require__(14);
 	
 	var _user2 = _interopRequireDefault(_user);
 	
@@ -2430,7 +3680,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Identity;
 
 /***/ },
-/* 15 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2449,7 +3699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _action2 = _interopRequireDefault(_action);
 	
-	var _rating2 = __webpack_require__(10);
+	var _rating2 = __webpack_require__(11);
 	
 	var _rating3 = _interopRequireDefault(_rating2);
 	
@@ -3036,1235 +4286,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Listening;
 
 /***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _validator = __webpack_require__(4);
-	
-	var _validator2 = _interopRequireDefault(_validator);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	/**
-	 * A thin wrapper around the raw JSON returned from the authorization server to represent a device code/user code pair
-	 */
-	var DeviceCode = function () {
-	    /**
-	     * @param {Object} json    The decoded JSON object that should be used as the basis for this model
-	     */
-	    function DeviceCode(json) {
-	        _classCallCheck(this, DeviceCode);
-	
-	        this._raw = json;
-	
-	        this._expiryDate = null;
-	        if (!isNaN(this._raw.expires_in)) {
-	            this._expiryDate = new Date(Date.now() + this.ttl);
-	        }
-	    }
-	
-	    /**
-	     * Ensure that the given device code model is valid
-	     *
-	     * @throws {TypeError} if device code model is invalid
-	     */
-	
-	
-	    DeviceCode.prototype.validate = function validate() {
-	        _validator2.default.validateDeviceCode(this._raw);
-	    };
-	
-	    /**
-	     * Returns whether or not this device code/user code pair has expired.
-	     * Note that due to network latency, etc., it's possible that the internally-stored expiry date could be about a
-	     * second or so behind, and so this function is not guaranteed to be perfectly accurate.
-	     *
-	     * @returns {boolean}
-	     */
-	
-	
-	    DeviceCode.prototype.isExpired = function isExpired() {
-	        return this._expiryDate !== null && new Date() >= this._expiryDate;
-	    };
-	
-	    /**
-	     * Returns the user code (8-character alphanumeric string)
-	     *
-	     * @type {string}
-	     */
-	
-	
-	    /**
-	     * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
-	     * In this case, we return the raw JSON string representing the entire object.
-	     *
-	     * @returns {string}
-	     */
-	    DeviceCode.prototype.toString = function toString() {
-	        return JSON.stringify(this._raw);
-	    };
-	
-	    _createClass(DeviceCode, [{
-	        key: 'userCode',
-	        get: function get() {
-	            return this._raw.user_code;
-	        }
-	
-	        /**
-	         * Returns the verification URL (the place where the user should go on their mobile device or laptop to log in)
-	         *
-	         * @type {string}
-	         */
-	
-	    }, {
-	        key: 'verificationUri',
-	        get: function get() {
-	            return this._raw.verification_uri;
-	        }
-	
-	        /**
-	         * Returns the TTL (in milliseconds) until this device code/user code pair expires. The SDK will automatically generate
-	         * a new key pair upon expiry, so consumers of the SDK will generally not have to use this value directly; however,
-	         * you may opt to display on the screen how much time the user has left to log in before a new code is generated.
-	         *
-	         * @type {number}
-	         */
-	
-	    }, {
-	        key: 'ttl',
-	        get: function get() {
-	            return this._raw.expires_in * 1000;
-	        }
-	
-	        /**
-	         * Returns the interval (in milliseconds) at which the client (in this case the SDK) should poll the `POST /token`
-	         * endpoint (or the OAuth proxy that lies in between). Consumers of the SDK should generally not have to use this
-	         * value directly.
-	         *
-	         * @type {number}
-	         */
-	
-	    }, {
-	        key: 'interval',
-	        get: function get() {
-	            return this._raw.interval * 1000;
-	        }
-	    }]);
-	
-	    return DeviceCode;
-	}();
-	
-	exports.default = DeviceCode;
-
-/***/ },
-/* 17 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	__webpack_require__(11);
-	
-	var _urlParse = __webpack_require__(12);
-	
-	var _urlParse2 = _interopRequireDefault(_urlParse);
-	
-	var _collectionDoc = __webpack_require__(6);
-	
-	var _collectionDoc2 = _interopRequireDefault(_collectionDoc);
-	
-	var _rating = __webpack_require__(10);
-	
-	var _rating2 = _interopRequireDefault(_rating);
-	
-	var _action = __webpack_require__(5);
-	
-	var _action2 = _interopRequireDefault(_action);
-	
-	var _logger = __webpack_require__(1);
-	
-	var _logger2 = _interopRequireDefault(_logger);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-	
-	/**
-	 * Container class for all metadata pertaining to a recommendation.
-	 *
-	 * Provides metadata and the recordAction method, which sends feedback on user actions to NPR's APIs and advances the flow of audio recommendations to the user
-	 *
-	 * @extends {CollectionDoc}
-	 */
-	var Recommendation = function (_CollectionDoc) {
-	    _inherits(Recommendation, _CollectionDoc);
-	
-	    /**
-	     * @param {CollectionDocJSON} json   The decoded JSON object that should be used as the basis for this model
-	     */
-	    function Recommendation(json) {
-	        _classCallCheck(this, Recommendation);
-	
-	        /** @type {Object}
-	         * @private */
-	        var _this = _possibleConstructorReturn(this, _CollectionDoc.call(this, json));
-	
-	        _this._raw = json;
-	        /**
-	         * The metadata used to describe this recommendation, such as type and title
-	         * @type {RecommendationAttributes}
-	         */
-	        _this.attributes = {};
-	        /**
-	         * An internal store of ratings collected for this application; should never be accessed directly by consumers
-	         * @type {Array<Rating>}
-	         */
-	        _this.ratings = [];
-	        /**
-	         * The actual audio files associated with this recommendation; should never be empty
-	         * @type {Array<Link>}
-	         */
-	        _this.audio = [];
-	        /**
-	         * A list of API calls the app can make to retrieve subsequent recommendations; should never be accessed directly by consumers
-	         * @type {Array<Link>}
-	         */
-	        _this.recommendations = [];
-	        /**
-	         * A list of images associated with this recommendation; could be empty
-	         * @type {Array<ImageLink>}
-	         */
-	        _this.images = [];
-	        /**
-	         * A list of links to other places where this story can be found on the web (for example, on NPR.org); could be empty
-	         * @type {Array<Link>}
-	         */
-	        _this.web = [];
-	        /**
-	         * A list of links that are used as the canonical link(s) when sharing this story on social media
-	         * @type {Array<Link>}
-	         */
-	        _this.onramps = [];
-	        /**
-	         * This is the `action` array from the API within `links`, and _NOT_ this SDK's notion of {@link Action}
-	         * @type {Array<Link>}
-	         */
-	        _this.callsToAction = [];
-	        /**
-	         * A list of API calls to make if this recommendation is of type `sponsorship` and the consuming client
-	         * has played the accompanying audio
-	         * @type {Array<FormFactorLink>}
-	         */
-	        _this.impressions = [];
-	        /**
-	         * A list of links to places where the app can take the user if they interact with this `sponsorship` item
-	         * @type {Array<FormFactorLink>}
-	         */
-	        _this.relateds = [];
-	        /**
-	         * A list of API calls to make if this recommendation is of type `sponsorship` and the consuming client has
-	         * chosen to interact with the sponsorship item using the contents of {@link relateds}
-	         * @type {Array<FormFactorLink>}
-	         */
-	        _this.relatedImpressions = [];
-	        /** @type {Object}
-	          * @private */
-	        _this._ratingTemplate = {};
-	        /**
-	         * Used to prevent impressions from being fired twice
-	         * @type {boolean}
-	         * @private
-	         */
-	        _this._hasSentImpressions = false;
-	        /** @type {null|Function}
-	          * @private */
-	        _this._ratingReceivedCallback = null;
-	
-	        _this._hydrate();
-	        return _this;
-	    }
-	
-	    /**
-	     * Hydrate the internal member variables.
-	     *
-	     * @private
-	     */
-	
-	
-	    Recommendation.prototype._hydrate = function _hydrate() {
-	        this._validate();
-	
-	        this._ratingTemplate = this._raw.attributes.rating;
-	
-	        // deep copy, we do not want duplicate rating objects
-	        this.attributes = Object.assign({}, this._raw.attributes);
-	        delete this.attributes.rating;
-	
-	        var links = this._raw.links;
-	
-	        // Required
-	        this.audio = links.audio;
-	        this.recommendations = links.recommendations;
-	
-	        // Optional
-	        this.web = links.web ? links.web : [];
-	        this.images = links.image ? links.image : [];
-	        this.onramps = links.onramps ? links.onramps : [];
-	        this.callsToAction = links.action ? links.action : [];
-	        this.impressions = links.impression ? links.impression : [];
-	        this.relateds = links.related ? links.related : [];
-	        this.relatedImpressions = links['related-impression'] ? links['related-impression'] : [];
-	    };
-	
-	    /**
-	     * Determines whether the collection doc has the required fields for a valid recommendation
-	     *
-	     * @protected
-	     * @throws {TypeError} if the collection doc is invalid
-	     */
-	
-	
-	    Recommendation.prototype._validate = function _validate() {
-	        var links = this._raw.links;
-	
-	        if (!links.audio || links.audio.constructor !== Array || links.audio.length <= 0) {
-	            throw new TypeError('Audio must exist within links.');
-	        }
-	
-	        if (!links.recommendations || links.recommendations.constructor !== Array || links.recommendations.length <= 0) {
-	            throw new TypeError('Recommendation (contains URL) must exist within links.');
-	        }
-	
-	        if (!this._raw.attributes.rating) {
-	            throw new TypeError('Attributes must contain a rating object.');
-	        }
-	    };
-	
-	    /**
-	     * Returns a list of images associated with this recommendation
-	     *
-	     * @returns {Array<ImageLink>}
-	     */
-	
-	
-	    Recommendation.prototype.getImages = function getImages() {
-	        return this.images;
-	    };
-	
-	    /**
-	     * Returns the actual audio files associated with this recommendation
-	     *
-	     * @returns {Array<Link>}
-	     */
-	
-	
-	    Recommendation.prototype.getAudio = function getAudio() {
-	        return this.audio;
-	    };
-	
-	    /**
-	     * Returns a list of links to other places where this story can be found on the web (for example, on NPR.org)
-	     *
-	     * @returns {Array<Link>}
-	     */
-	
-	
-	    Recommendation.prototype.getWeb = function getWeb() {
-	        return this.web;
-	    };
-	
-	    /**
-	     * Returns a list of links that are used as the canonical link(s) when sharing this story on social media.
-	     *
-	     * @returns {Array<Link>}
-	     */
-	
-	
-	    Recommendation.prototype.getOnRamps = function getOnRamps() {
-	        return this.onramps;
-	    };
-	
-	    /**
-	     * Returns a list of API calls to make if this recommendation is of type `sponsorship` and the consuming client
-	     * has played the accompanying audio. Note that the SDK will take care of this automatically as long as the client
-	     * uses {@link recordAction} to send the rating.
-	     *
-	     * @returns {Array<FormFactorLink>}
-	     */
-	
-	
-	    Recommendation.prototype.getImpressions = function getImpressions() {
-	        return this.impressions;
-	    };
-	
-	    /**
-	     * This is the `action` array from the API within `links`, and _NOT_ this SDK's notion of {@link Action}
-	     *
-	     * An example of what might be contained within this is array is a link to full-length content
-	     * for a promo recommendation.
-	     *
-	     * @returns {Array<Link>}
-	     */
-	
-	
-	    Recommendation.prototype.getCallsToAction = function getCallsToAction() {
-	        return this.callsToAction;
-	    };
-	
-	    /**
-	     * Returns a list of links to places where the app can take the user if they interact with this `sponsorship` item
-	     * (such as by clicking/tapping on the image or using a voice command to learn more)
-	     *
-	     * @returns {Array<FormFactorLink>}
-	     */
-	
-	
-	    Recommendation.prototype.getRelateds = function getRelateds() {
-	        return this.relateds;
-	    };
-	
-	    /**
-	     * Returns a list of API calls to make if this recommendation is of type `sponsorship` and the consuming client
-	     * has chosen to interact with the sponsorship item using the contents returned by {@link getRelateds}. Note that
-	     * the SDK will take care of this automatically as long as the client uses {@link recordAction} to send the rating.
-	     *
-	     * @returns {Array<FormFactorLink>}
-	     */
-	
-	
-	    Recommendation.prototype.getRelatedImpressions = function getRelatedImpressions() {
-	        return this.relatedImpressions;
-	    };
-	
-	    /**
-	     * Returns an internal store of ratings collected for this application. This should never be accessed directly by
-	     * consumers; use {@link recordAction} to send ratings, and the SDK will figure out the appropriate time to make
-	     * the API call that submits them to the server.
-	     *
-	     * @returns {Array<Rating>}
-	     */
-	
-	
-	    Recommendation.prototype.getRatings = function getRatings() {
-	        return this.ratings;
-	    };
-	
-	    /**
-	     * Returns the URL that should be used to obtain the next set of recommendations. This should typically not be used
-	     * by clients directly; use {@link recordAction} followed by {@link NprOneSDK#getRecommendation} instead.
-	     *
-	     * @returns {string}
-	     */
-	
-	
-	    Recommendation.prototype.getRecommendationUrl = function getRecommendationUrl() {
-	        return this.recommendations[0].href;
-	    };
-	
-	    /**
-	     * This method looks through the recommendation's action and related array to search for any URL starting with `'nprone://listen'`.
-	     * If found, everything from the query params is appended to the original recommendation URL.
-	     * This value is then used anytime a user indicates they want more similar stories by clicking or tapping on this recommendation.
-	     *
-	     * For many recommendations, this will not exist and getRecommendationUrl is used instead.
-	     *
-	     * @returns {string}
-	     */
-	
-	
-	    Recommendation.prototype.getActionRecommendationUrl = function getActionRecommendationUrl() {
-	        var original = new _urlParse2.default(this.getRecommendationUrl());
-	        var potentialActions = this.callsToAction.concat(this.relateds);
-	
-	        var nprOneUrl = '';
-	        for (var _iterator = potentialActions, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-	            var _ref;
-	
-	            if (_isArray) {
-	                if (_i >= _iterator.length) break;
-	                _ref = _iterator[_i++];
-	            } else {
-	                _i = _iterator.next();
-	                if (_i.done) break;
-	                _ref = _i.value;
-	            }
-	
-	            var action = _ref;
-	
-	            if (action.href && action.href.indexOf('nprone://') === 0) {
-	                nprOneUrl = new _urlParse2.default(action.href);
-	                break;
-	            }
-	        }
-	
-	        var url = '';
-	        if (nprOneUrl) {
-	            url = original.set('query', nprOneUrl.query).href + '&recommend=true';
-	        }
-	
-	        return url;
-	    };
-	
-	    /**
-	     * Returns whether this recommendation is of type `sponsorship`
-	     *
-	     * @returns {boolean}
-	     */
-	
-	
-	    Recommendation.prototype.isSponsorship = function isSponsorship() {
-	        return this.attributes.type === 'sponsorship';
-	    };
-	
-	    /**
-	     * Returns whether this recommendation is shareable on social media
-	     *
-	     * @returns {boolean}
-	     */
-	
-	
-	    Recommendation.prototype.isShareable = function isShareable() {
-	        return this.onramps.length > 0;
-	    };
-	
-	    /**
-	     * Returns whether this recommendation has a given action
-	     *
-	     * @param {string} action    Which action to look up; should be one of the static string constants returned by {@link Action}
-	     * @returns {boolean}
-	     */
-	
-	
-	    Recommendation.prototype.hasAction = function hasAction(action) {
-	        for (var _iterator2 = this.ratings, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-	            var _ref2;
-	
-	            if (_isArray2) {
-	                if (_i2 >= _iterator2.length) break;
-	                _ref2 = _iterator2[_i2++];
-	            } else {
-	                _i2 = _iterator2.next();
-	                if (_i2.done) break;
-	                _ref2 = _i2.value;
-	            }
-	
-	            var rating = _ref2;
-	
-	            if (rating.rating === action) {
-	                return true;
-	            }
-	        }
-	
-	        return false;
-	    };
-	
-	    /**
-	     * Returns whether this recommendation has received a rating indicating it is no longer
-	     * being presented to the user
-	     *
-	     * @returns {boolean}
-	     */
-	
-	
-	    Recommendation.prototype.hasEndAction = function hasEndAction() {
-	        for (var _iterator3 = _action2.default.getEndActions(), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-	            var _ref3;
-	
-	            if (_isArray3) {
-	                if (_i3 >= _iterator3.length) break;
-	                _ref3 = _iterator3[_i3++];
-	            } else {
-	                _i3 = _iterator3.next();
-	                if (_i3.done) break;
-	                _ref3 = _i3.value;
-	            }
-	
-	            var endAction = _ref3;
-	
-	            if (this.hasAction(endAction)) {
-	                return true;
-	            }
-	        }
-	
-	        return false;
-	    };
-	
-	    /**
-	     * Record a user action taken and the time it was taken against this recommendation
-	     *
-	     * @param {string} action                  Which action to record; should be one of the static string constants returned by {@link Action}
-	     * @param {number} elapsedTimeInSeconds    The number of seconds this piece of audio has been playing for
-	     */
-	
-	
-	    Recommendation.prototype.recordAction = function recordAction(action, elapsedTimeInSeconds) {
-	        var _elapsedTime = elapsedTimeInSeconds;
-	
-	        if (!_action2.default.isValidAction(action)) {
-	            throw new Error(action + ' action is invalid. See Action class for valid actions.');
-	        }
-	
-	        var n = parseInt(_elapsedTime, 10);
-	        if (isNaN(n) || !isFinite(n)) {
-	            throw new Error('Elapsed time must be supplied and be a positive integer value.');
-	        }
-	
-	        if (_elapsedTime < 0) {
-	            _logger2.default.warn('Elapsed time of ' + _elapsedTime + ' is invalid ' + 'and has been changed to 0 seconds.');
-	            _elapsedTime = 0;
-	        }
-	
-	        if (_elapsedTime > this.attributes.duration && this.attributes.duration > 0) {
-	            // 30s has been arbitrarily chosen as it's enough to indicate the consumer of this SDK might have made a coding error.
-	            if (_elapsedTime > this.attributes.duration + 30) {
-	                _logger2.default.warn('Elapsed time of ' + _elapsedTime + ' exceeds overall audio duration ' + ('and has been modified to ' + this.attributes.duration + ' seconds.'));
-	            }
-	            _elapsedTime = this.attributes.duration;
-	        }
-	
-	        if (_elapsedTime === 0 && (action === _action2.default.COMPLETED || action === _action2.default.SKIP)) {
-	            _logger2.default.warn('Elapsed time value should be greater than zero; ' + 'please ensure the time passed since the START rating is recorded.');
-	        }
-	
-	        if (action !== _action2.default.START) {
-	            if (!this.hasAction(_action2.default.START)) {
-	                _logger2.default.warn('Action \'' + action + '\' has been recorded; however, no START action ' + 'exists. Please ensure START actions are recorded first.');
-	            }
-	        }
-	
-	        var rating = new _rating2.default(this._ratingTemplate);
-	        rating.rating = action;
-	        rating.elapsed = _elapsedTime;
-	        rating.timestamp = new Date().toISOString();
-	        rating._recommendationUrl = this.getRecommendationUrl();
-	        rating._actionUrl = this.getActionRecommendationUrl();
-	
-	        // Handle Sponsorship Impressions
-	        if (this.isSponsorship() && action === _action2.default.START && !this._hasSentImpressions) {
-	            this._hasSentImpressions = true;
-	            var impressions = this.impressions.concat(this.relatedImpressions);
-	            impressions.forEach(function (link) {
-	                if (link['form-factor'] === 'audio') {
-	                    fetch(link.href, { mode: 'no-cors' }); // no really, that's it. We don't care about the result of these fetches.
-	                }
-	            });
-	        }
-	
-	        this.ratings.push(rating);
-	
-	        if (this._ratingReceivedCallback !== null) {
-	            this._ratingReceivedCallback(rating);
-	        }
-	    };
-	
-	    /**
-	     * A callback which provides for communication of a received rating
-	     *
-	     * @param {?Function} callback    A function to call whenever this recommendation has received a rating (action)
-	     */
-	
-	
-	    Recommendation.prototype.setRatingReceivedCallback = function setRatingReceivedCallback(callback) {
-	        this._ratingReceivedCallback = callback;
-	    };
-	
-	    /**
-	     * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
-	     *
-	     * @returns {string}
-	     */
-	
-	
-	    Recommendation.prototype.toString = function toString() {
-	        return '[UID=' + this.attributes.uid + ', R=' + this.getRatings().join(',') + ']';
-	    };
-	
-	    /**
-	     * @typedef {Object} RecommendationAttributes
-	     * @property {string} type The type of recommendation, usually `audio`. Can also be `stationId`, `sponsorship`, etc.
-	     * @property {string} uid The universal identifier of the recommendation
-	     * @property {string} title The title of the recommendation
-	     * @property {boolean} skippable Whether or not the recommendation is skippable, usually true, but false for e.g. sponsorship
-	     * @property {string} [slug] A slug or category for the recommendation
-	     * @property {string} provider The provider of the story, usually `NPR`. Can also be a member station or third-party podcast provider.
-	     * @property {string} [program] The program as part of which this recommendation aired
-	     * @property {number} duration The duration of the audio according to the API; note that the actual duration can differ
-	     * @property {string} date ISO-8601 formatted date/time; the date at which the story was first published
-	     * @property {string} [description] A short description of the recommendation
-	     * @property {string} rationale The reason for recommending this piece to the listener
-	     * @property {string} [button] The text to display in a clickable button on a feature card
-	     */
-	    /**
-	     * @typedef {Link} FormFactorLink
-	     * @property {string} [form-factor] The form-factor for the most appropriate display of or interaction with the resource, usually irrelevant unless there is more than one link of the same type
-	     */
-	    /**
-	     * @typedef {FormFactorLink} ImageLink
-	     * @property {string} [rel] The relation of the image to the content, which usually corresponds to the crop-type
-	     * @property {number} [height] The pixel height of the image
-	     * @property {number} [width] The pixel width of the image
-	     */
-	
-	
-	    return Recommendation;
-	}(_collectionDoc2.default);
-	
-	exports.default = Recommendation;
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _collectionDoc = __webpack_require__(6);
-	
-	var _collectionDoc2 = _interopRequireDefault(_collectionDoc);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-	
-	/**
-	 * Container class for all metadata pertaining to an organization (member station) from the NPR One API
-	 *
-	 * @extends {CollectionDoc}
-	 */
-	var Station = function (_CollectionDoc) {
-	    _inherits(Station, _CollectionDoc);
-	
-	    /**
-	     * @param {CollectionDocJSON} json    The decoded JSON object that should be used as the basis for this model
-	     */
-	    function Station(json) {
-	        _classCallCheck(this, Station);
-	
-	        var _this = _possibleConstructorReturn(this, _CollectionDoc.call(this, json));
-	
-	        _this._validate();
-	        return _this;
-	    }
-	
-	    /**
-	     * Returns the unique ID that represents this station across NPR's various APIs. The ID is an integer between 1 and
-	     * 9999, but it will always be returned in string format.
-	     *
-	     * @type {string}
-	     */
-	
-	
-	    /**
-	     * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
-	     * In this case, we return the station's display name.
-	     *
-	     * @returns {string}
-	     */
-	    Station.prototype.toString = function toString() {
-	        return this.displayName;
-	    };
-	
-	    /**
-	     * @typedef {Object} StationAttributes
-	     * @property {string} orgId The system's unique ID for this station, used across NPR One Microservices and NPR's other APIs
-	     * @property {string} guid The system's internal unique identifier for a station, not typically used by other APIs or consumers
-	     * @property {StationBrandData} brand An associative array of brand-related metadata for this station
-	     * @property {StationEligibilityData} eligibility An associative array of eligibility-related metadata for this station
-	     * @property {StationNewscastData} [newscast] Metadata about the newscast for this station; newscasts are handled internally by other microservices such as the NPR One Listening Service, so this data should typically not be used by consumers
-	     * @property {StationNetwork} Metadata about the network, if this station is part of a network
-	     */
-	    /**
-	     * @typedef {Object} StationBrandData
-	     * @property {string} name The display name for the station. In most cases, this will be the same as call letters combined with band. When returning networks, it will return the network name (e.g. Minnesota Public Radio).
-	     * @property {string|null} call The three-to-four-letter identifying code for this station. Please use this with caution; most stations prefer to be identified by their name in client applications instead of call.
-	     * @property {string|null} frequency Where on the radio dial the station can be heard. If the band is AM, the frequency will be between 540 and 1600. If the band is FM, the frequency will be between 87.8 and 108.0.
-	     * @property {string|null} band The subsection of the radio spectrum -- 'AM' or 'FM' -- where this station can be heard
-	     * @property {string} tagline A short text-logo for the station
-	     * @property {string} marketCity The city that the station is most closely associated with. This may or may not be the city the station is licensed in and it may or may not be the city that the station or the station's antenna is located in.
-	     * @property {string} marketState The state that the station is most closely associated with. This may or may not be the state the station is licensed in and it may or may not be the state that the station or the station's antenna is located in.
-	     */
-	    /**
-	     * @typedef {Object} StationEligibilityData
-	     * @property {boolean} nprOne Whether or not this organization is considered an NPR One station
-	     * @property {boolean} musicOnly Whether or not this station only plays music
-	     * @property {string} format The format of the programming on this station
-	     * @property {string} status The status of the station within NPR's system, not typically used by consumers
-	     */
-	    /**
-	     * @typedef {Object} StationNewscastData
-	     * @property {string} id The ID of the newscast that should be played for this station; this is handled internally by other microservices such as the NPR One Listening Service, so this field should typically not be used by consumers
-	     * @property {null|number} recency How often the newscast should be played, in minutes; a value of `null` implies no information is available, and sensible defaults should be used
-	     */
-	    /**
-	     * @typedef {Object} StationNetwork
-	     * @property {string} currentOrgId The current station being viewed. Client applications should generally ignore this field.
-	     * @property {boolean} usesInheritance Whether or not the current station inherits from a parent organization, also referred to as a network
-	     * @property {string} [inheritingFrom] The system' unique ID for the organization that the current station is inheriting from, if inheritance is on
-	     * @property {string} name The display name for the current organization
-	     * @property {StationNetworkTierOne} [tier1] The top-level organization, if this station is part of a network
-	     */
-	    /**
-	     * @typedef {Object} StationNetworkTierOne
-	     * @property {string} id The unique identifier of the top-level organization in the network
-	     * @property {boolean} usesInheritance Whether or not this station inherits from a parent organization, also referred to as a network
-	     * @property {string} name The display name for the top-level organization in the network
-	     * @property {string} status The status of the top-level organization within NPR's system, not typically used by consumers
-	     * @property {Array<StationNetworkTierTwo>} [tier2] One or more stations that are hierarchical children of this organization
-	     */
-	    /**
-	     * @typedef {Object} StationNetworkTierTwo
-	     * @property {string} id The unique identifier of a tier 2 organization in the network
-	     * @property {boolean} usesInheritance Whether or not this station inherits from a parent organization, also referred to as a network
-	     * @property {string} name The display name for a tier 2 organization in the network
-	     * @property {Array<StationNetworkTierThree>} [tier3] One or more stations that are hierarchical children of this organization
-	     */
-	    /**
-	     * @typedef {Object} StationNetworkTierThree
-	     * @property {string} id The unique identifier of a tier 3 organization in the network
-	     * @property {boolean} usesInheritance Whether or not this station inherits from a parent organization, also referred to as a network
-	     * @property {string} name The display name for a tier 3 organization in the network
-	     */
-	
-	
-	    _createClass(Station, [{
-	        key: 'id',
-	        get: function get() {
-	            return this._raw.attributes.orgId;
-	        }
-	
-	        /**
-	         * Returns the display name that the station would prefer to use. Please use this anytime you want to display a
-	         * given station's name, rather than attempting to find the appropriate field inside of {@link Station.attributes}
-	         * yourself; branding is a sensitive issue for stations and we should all respect how they wish to be identified.
-	         *
-	         * @type {string}
-	         */
-	
-	    }, {
-	        key: 'displayName',
-	        get: function get() {
-	            return this._raw.attributes.brand.name;
-	        }
-	
-	        /**
-	         * Returns the logo for this station, if one can be found. If no logo can be found at all, this will return `null`.
-	         *
-	         * @type {null|string}
-	         */
-	
-	    }, {
-	        key: 'logo',
-	        get: function get() {
-	            if (this._raw.links.brand) {
-	                for (var _iterator = this._raw.links.brand, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-	                    var _ref;
-	
-	                    if (_isArray) {
-	                        if (_i >= _iterator.length) break;
-	                        _ref = _iterator[_i++];
-	                    } else {
-	                        _i = _iterator.next();
-	                        if (_i.done) break;
-	                        _ref = _i.value;
-	                    }
-	
-	                    var link = _ref;
-	
-	                    if (link.rel === 'logo') {
-	                        return link.href;
-	                    }
-	                }
-	            }
-	            return null;
-	        }
-	
-	        /**
-	         * Returns the tagline for this station. This should be used as supplemental metadata for a station; it should never
-	         * be used as the sole identifying information. Note that while the majority of the stations in our system have
-	         * taglines, it is not guaranteed that each station has one.
-	         *
-	         * @type {string}
-	         */
-	
-	    }, {
-	        key: 'tagline',
-	        get: function get() {
-	            return this._raw.attributes.brand.tagline || '';
-	        }
-	
-	        /**
-	         * Returns the call sign, brand (AM or FM), and frequency together as one string, e.g. `'WAMU FM 88.5'` or
-	         * `'KCFR FM 90.1'` or `'KWSU AM 1250'`. Again, this should be treated as supplemental metadata for a station and
-	         * not the sole identifying information; where possible, stations prefer to be identified primarily by their
-	         * {@link displayName} and {@link logo}. However, some local stations are members of networks such as Colorado Public Radio
-	         * and therefore use the same display name and logo; in those cases, the call sign + band + frequency combination is
-	         * the main way to disambiguate between multiple stations in the same network. This value is guaranteed to be unique.
-	         *
-	         * @type {null|string}
-	         */
-	
-	    }, {
-	        key: 'callSignAndFrequency',
-	        get: function get() {
-	            var callSignAndFrequency = '';
-	            var brand = this._raw.attributes.brand;
-	            if (brand.call) {
-	                callSignAndFrequency += brand.call;
-	            }
-	            if (brand.band) {
-	                callSignAndFrequency += ' ' + brand.band;
-	            }
-	            if (brand.frequency) {
-	                callSignAndFrequency += ' ' + brand.frequency;
-	            }
-	            return callSignAndFrequency.trim() || null;
-	        }
-	
-	        /**
-	         * Returns the location of the station, which always consists of a city and (abbreviated) state, e.g. `'Austin, TX'`
-	         * or `'Rochester, NY'`. Similarly to {@link callSignAndFrequency}, this is most useful for disambiguating between
-	         * multiple local stations in a bigger network such as Colorado Public Radio, which use the same {@link displayName}
-	         * and {@link logo}. Note that this value isn't guaranteed to be unique; some cities (e.g. Boston) have multiple
-	         * NPR stations.
-	         *
-	         * @type {string}
-	         */
-	
-	    }, {
-	        key: 'location',
-	        get: function get() {
-	            var brand = this._raw.attributes.brand;
-	            return brand.marketCity + ', ' + brand.marketState;
-	        }
-	
-	        /**
-	         * Returns the URL to the station's website, if available.
-	         *
-	         * @type {null|string}
-	         */
-	
-	    }, {
-	        key: 'homepageUrl',
-	        get: function get() {
-	            if (this._raw.links.brand) {
-	                for (var _iterator2 = this._raw.links.brand, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-	                    var _ref2;
-	
-	                    if (_isArray2) {
-	                        if (_i2 >= _iterator2.length) break;
-	                        _ref2 = _iterator2[_i2++];
-	                    } else {
-	                        _i2 = _iterator2.next();
-	                        if (_i2.done) break;
-	                        _ref2 = _i2.value;
-	                    }
-	
-	                    var link = _ref2;
-	
-	                    if (link.rel === 'homepage') {
-	                        return link.href;
-	                    }
-	                }
-	            }
-	            return null;
-	        }
-	
-	        /**
-	         * Returns the URL to the station's online donation page, if available.
-	         *
-	         * @type {null|string}
-	         */
-	
-	    }, {
-	        key: 'donationUrl',
-	        get: function get() {
-	            var preferredUrl = void 0;
-	            var fallbackUrl = void 0;
-	
-	            if (this._raw.links.donation) {
-	                for (var _iterator3 = this._raw.links.donation, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-	                    var _ref3;
-	
-	                    if (_isArray3) {
-	                        if (_i3 >= _iterator3.length) break;
-	                        _ref3 = _iterator3[_i3++];
-	                    } else {
-	                        _i3 = _iterator3.next();
-	                        if (_i3.done) break;
-	                        _ref3 = _i3.value;
-	                    }
-	
-	                    var link = _ref3;
-	
-	                    if (link.typeId === '27') {
-	                        preferredUrl = link.href;
-	                        break;
-	                    } else if (link.typeId === '4') {
-	                        fallbackUrl = link.href;
-	                    }
-	                }
-	            }
-	
-	            return preferredUrl || fallbackUrl || null;
-	        }
-	
-	        /**
-	         * Returns the primary stream object for this station, if one can be found. If no primary stream can be found at all, this will return `null`.
-	         *
-	         * @type {null|Link}
-	         */
-	
-	    }, {
-	        key: 'primaryStream',
-	        get: function get() {
-	            if (this._raw.links.streams) {
-	                return this._raw.links.streams.find(function (item) {
-	                    return item.isPrimaryStream;
-	                });
-	            }
-	            return null;
-	        }
-	
-	        /**
-	         * Returns the primary stream URL for this station, if one can be found. If no primary stream can be found at all, this will return `null`.
-	         *
-	         * @type {null|string}
-	         */
-	
-	    }, {
-	        key: 'primaryStreamUrl',
-	        get: function get() {
-	            var primaryStream = this.primaryStream;
-	            return primaryStream ? primaryStream.href : null;
-	        }
-	
-	        /**
-	         * Returns whether or not the station is eligible for inclusion in NPR One applications.
-	         *
-	         * @type {boolean}
-	         */
-	
-	    }, {
-	        key: 'isNprOneEligible',
-	        get: function get() {
-	            return this._raw.attributes.eligibility.nprOne;
-	        }
-	
-	        /**
-	         * Returns the raw attributes that represent this station. Please use this with caution; the public accessor methods
-	         * in this class should be sufficient for most use cases, and consumers should rarely need to use this additional
-	         * metadata.
-	         *
-	         * @type {StationAttributes}
-	         */
-	
-	    }, {
-	        key: 'attributes',
-	        get: function get() {
-	            return this._raw.attributes;
-	        }
-	    }]);
-	
-	    return Station;
-	}(_collectionDoc2.default);
-	
-	exports.default = Station;
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _collectionDoc = __webpack_require__(6);
-	
-	var _collectionDoc2 = _interopRequireDefault(_collectionDoc);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-	
-	/**
-	 * Container class for all metadata pertaining to a user object from the NPR One API
-	 *
-	 * @extends {CollectionDoc}
-	 */
-	var User = function (_CollectionDoc) {
-	  _inherits(User, _CollectionDoc);
-	
-	  /**
-	   * @param {CollectionDocJSON} json    The decoded JSON object that should be used as the basis for this model
-	   */
-	  function User(json) {
-	    _classCallCheck(this, User);
-	
-	    /** @type {Object}
-	     * @private */
-	    var _this = _possibleConstructorReturn(this, _CollectionDoc.call(this, json));
-	
-	    _this._raw = json;
-	    /** @type {UserAttributes} */
-	    _this.attributes = {};
-	    _this._hydrate();
-	    return _this;
-	  }
-	
-	  /**
-	   * Hydrate the internal member variables.
-	   *
-	   * @private
-	   */
-	
-	
-	  User.prototype._hydrate = function _hydrate() {
-	    this._validate();
-	    this.attributes = this._raw.attributes;
-	  };
-	
-	  /**
-	   * Whether this user is a temporary user or not
-	   *
-	   * @returns {boolean}
-	   */
-	
-	
-	  User.prototype.isTemporary = function isTemporary() {
-	    return parseInt(this.attributes.id, 10) >= 1000000000;
-	  };
-	
-	  /**
-	   * Returns the user's cohort. In most cases, SDK consumers will never need to use this.
-	   *
-	   * @returns {UserCohort}
-	   */
-	
-	
-	  User.prototype.getCohort = function getCohort() {
-	    return this.attributes.cohort;
-	  };
-	
-	  /**
-	   * Returns the list of organizations this user is affiliated with. In most cases, you only want a single
-	   * organization, in which case {@link User#getPrimaryOrganization} should be used.
-	   *
-	   * @returns {Array<UserOrganization>}
-	   */
-	
-	
-	  User.prototype.getOrganizations = function getOrganizations() {
-	    return this.attributes.organizations || [];
-	  };
-	
-	  /**
-	   * Returns the primary, non-NPR organization that this user is affiliated with, or null if no such organization
-	   * exists.
-	   *
-	   * @returns {null|UserOrganization}
-	   */
-	
-	
-	  User.prototype.getPrimaryOrganization = function getPrimaryOrganization() {
-	    var orgs = this.getOrganizations();
-	    return orgs[0] && orgs[0].id !== '1' ? orgs[0] : null;
-	  };
-	
-	  /**
-	   * Returns the programs, shows, and podcasts that this user has positively interacted with.
-	   *
-	   * @returns {Array<UserAffiliation>}
-	   */
-	
-	
-	  User.prototype.getAffiliations = function getAffiliations() {
-	    return this.attributes.affiliations;
-	  };
-	
-	  /**
-	   * A convenience function to cast this object back to a string, generally only used by the {@link Logger} class.
-	   * In this case, we return the user's ID.
-	   *
-	   * @returns {string}
-	   */
-	
-	
-	  User.prototype.toString = function toString() {
-	    return this.attributes.id;
-	  };
-	
-	  /**
-	   * @typedef {Object} UserAttributes
-	   * @property {string} id Some unique identifier for the user
-	   * @property {string} email The user's email address
-	   * @property {string} firstName The user's first name
-	   * @property {string} lastName The user's last name
-	   * @property {UserCohort} cohort The user's cohort (an experimental grouping for User Experience A/B Testing)
-	   * @property {Array<UserOrganization>} organizations User's chosen NPR Member Station(s)
-	   * @property {Array<UserAffiliation>} affiliations Programs, shows, and podcasts that the user has positively interacted with
-	   */
-	  /**
-	   * @typedef {Object} UserCohort
-	   * @property {string} id A short ID for this cohort
-	   * @property {string} name A text string identifying the cohort, useful for metrics
-	   * @property {string} directory For internal use only; represents the current configuration file being used by the Listening Service
-	   */
-	  /**
-	   * @typedef {Object} UserOrganization
-	   * @property {string} id Some unique identifier for the organization
-	   * @property {string} displayName A short displayable text field for the end user, strictly text
-	   * @property {string} call Station call letters
-	   * @property {string} city A short description of the station's main market city
-	   * @property {string} [logo] Station logo image URL
-	   * @property {string} [donationUrl] The URL to a website where users may make a donation to support the station
-	   */
-	  /**
-	   * @typedef {Object} UserAffiliation
-	   * @property {number} id A unique identifier for the aggregation (program)
-	   * @property {string} [title] The display name of the aggregation (program)
-	   * @property {string} href A link that can be followed to get content from this aggregation (program)
-	   * @property {boolean} following Whether or not the user is following the aggregation. When changing affiliation status, the client is expected to toggle this value and then send the entire object back.
-	   * @property {number} [rating] The user's average rating for this affiliation on a scale of 0-1. Absent if user never listened to the aggregation.
-	   * @property {number} [daysSinceLastListen] The number of days since a user last listened to a story from this aggregation. Absent if user never listened to the aggregation.
-	   */
-	
-	
-	  return User;
-	}(_collectionDoc2.default);
-	
-	exports.default = User;
-
-/***/ },
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -4277,7 +4298,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _validator2 = _interopRequireDefault(_validator);
 	
-	var _recommendation = __webpack_require__(17);
+	var _recommendation = __webpack_require__(12);
 	
 	var _recommendation2 = _interopRequireDefault(_recommendation);
 	
@@ -4800,7 +4821,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	module.exports = function lolcation(loc) {
 	  loc = loc || global.location || {};
-	  URL = URL || __webpack_require__(12);
+	  URL = URL || __webpack_require__(16);
 	
 	  var finaldestination = {}
 	    , type = typeof loc

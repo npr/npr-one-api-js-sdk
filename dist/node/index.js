@@ -1,19 +1,11 @@
 'use strict';
 
 exports.__esModule = true;
-exports.NprOneSDK = undefined;
+exports.User = exports.Station = exports.Recommendation = exports.DeviceCode = exports.Action = exports.NprOneSDK = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 require('isomorphic-fetch');
-
-var _action = require('./model/action');
-
-var _action2 = _interopRequireDefault(_action);
-
-var _logger = require('./util/logger');
-
-var _logger2 = _interopRequireDefault(_logger);
 
 var _authorization = require('./controller/authorization');
 
@@ -30,6 +22,30 @@ var _identity2 = _interopRequireDefault(_identity);
 var _stationFinder = require('./controller/station-finder');
 
 var _stationFinder2 = _interopRequireDefault(_stationFinder);
+
+var _action = require('./model/action');
+
+var _action2 = _interopRequireDefault(_action);
+
+var _deviceCode = require('./model/device-code');
+
+var _deviceCode2 = _interopRequireDefault(_deviceCode);
+
+var _recommendation = require('./model/recommendation');
+
+var _recommendation2 = _interopRequireDefault(_recommendation);
+
+var _station = require('./model/station');
+
+var _station2 = _interopRequireDefault(_station);
+
+var _user = require('./model/user');
+
+var _user2 = _interopRequireDefault(_user);
+
+var _logger = require('./util/logger');
+
+var _logger2 = _interopRequireDefault(_logger);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -527,6 +543,11 @@ var NprOneSDK = exports.NprOneSDK = function () {
 }();
 
 exports.default = NprOneSDK;
+exports.Action = _action2.default;
+exports.DeviceCode = _deviceCode2.default;
+exports.Recommendation = _recommendation2.default;
+exports.Station = _station2.default;
+exports.User = _user2.default;
 
 /**
  * @external {Response} https://developer.mozilla.org/en-US/docs/Web/API/Response
