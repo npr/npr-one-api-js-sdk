@@ -47,6 +47,16 @@ export default class AccessToken
     }
 
     /**
+     * Returns the refresh token (40-character alphanumeric string) if included
+     * (some auth proxies deliberately hide this from the response).
+     *
+     * @type {string|null}
+     */
+    get refreshToken() {
+        return this._raw.refresh_token || null;
+    }
+
+    /**
      * Returns the TTL (in milliseconds) until this access token expires. If you are using an auth proxy and have
      * correctly configured the `refreshTokenUrl`, this SDK will automatically refresh expired access tokens for you,
      * so consumers typically do not need to worry about whether or not a token is expired or about to expire.

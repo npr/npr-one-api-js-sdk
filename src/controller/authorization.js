@@ -61,8 +61,8 @@ export default class Authorization {
         if (!NPROneSDK.config.authProxyBaseUrl) {
             throw new TypeError('OAuth proxy not configured. Unable to refresh the access token.');
         }
-        if (!NPROneSDK.accessToken) {
-            throw new TypeError('An access token must be set in order to attempt a refresh.');
+        if (!NPROneSDK.accessToken && !NPROneSDK.refreshToken) {
+            throw new TypeError('An access token or refresh token must be set in order to attempt a refresh.'); // eslint-disable-line max-len
         }
 
         Logger.debug('Access token appears to have expired. Attempting to generate a fresh one.');
@@ -73,13 +73,22 @@ export default class Authorization {
             credentials: 'include',
         };
 
+        if (NPROneSDK.refreshToken) {
+            options.body = `token=${NPROneSDK.refreshToken}`;
+        }
+
         return FetchUtil.nprApiFetch(url, options)
             .then((json) => {
                 const tokenModel = new AccessToken(json);
                 tokenModel.validate(); // throws exception if invalid
                 Logger.debug('Access token refresh was successful, new token:',
                     tokenModel.toString());
+
                 NPROneSDK.accessToken = tokenModel.token;
+                if (tokenModel.refreshToken) {
+                    NPROneSDK.refreshToken = tokenModel.refreshToken;
+                }
+
                 return tokenModel; // never directly consumed, but useful for testing
             })
             .catch((err) => {
@@ -108,8 +117,8 @@ export default class Authorization {
      * @throws {TypeError} if an OAuth proxy is not configured or no access token is currently set
      */
     logout() {
-        if (!NPROneSDK.accessToken) {
-            throw new TypeError('An access token must be set in order to attempt a logout.');
+        if (!NPROneSDK.accessToken && !NPROneSDK.refreshToken) {
+            throw new TypeError('An access token or refresh token must be set in order to attempt a logout.'); // eslint-disable-line max-len
         }
         if (!NPROneSDK.config.authProxyBaseUrl) {
             throw new TypeError('OAuth proxy not configured. Unable to securely log out the user.');
@@ -119,7 +128,8 @@ export default class Authorization {
         const options = {
             method: 'POST',
             credentials: 'include',
-            body: `token=${NPROneSDK.accessToken}`,
+            body: `token=${NPROneSDK.accessToken || NPROneSDK.refreshToken}&` +
+                `token_type_hint=${NPROneSDK.accessToken ? 'access_token' : 'refresh_token'}`,
             headers: {
                 Accept: 'application/json, application/xml, text/plain, text/html, *.*',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
@@ -130,6 +140,7 @@ export default class Authorization {
             .then((response) => {
                 if (response.ok) {
                     NPROneSDK.accessToken = '';
+                    NPROneSDK.refreshToken = '';
                     return true;
                 }
                 return FetchUtil.formatErrorResponse(response);
@@ -247,13 +258,22 @@ export default class Authorization {
             credentials: 'include',
         };
 
+        if (this._activeDeviceCodeModel.deviceCode) {
+            options.body = `code=${this._activeDeviceCodeModel.deviceCode}`;
+        }
+
         return FetchUtil.nprApiFetch(url, options)
             .then((json) => {
                 Logger.debug('Device code poll returned successfully! An access token was returned.'); // eslint-disable-line max-len
 
                 const tokenModel = new AccessToken(json);
                 tokenModel.validate(); // throws exception if invalid
+
                 NPROneSDK.accessToken = tokenModel.token;
+                if (tokenModel.refreshToken) {
+                    NPROneSDK.refreshToken = tokenModel.refreshToken;
+                }
+
                 return tokenModel; // never directly consumed, but useful for testing
             })
             .catch((error) => {

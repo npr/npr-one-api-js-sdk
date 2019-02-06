@@ -63,6 +63,24 @@ describe('AccessToken', () => {
     });
 
 
+    /** @test {AccessToken.refreshToken} */
+    describe('refreshToken', () => {
+        it('should return null if the auth proxy removes the original refresh_token value from the response', () => {
+            should.not.exist(accessToken.refreshToken);
+        });
+
+        describe('if the auth proxy does not hide it from the response', () => {
+            it('should match the "refresh_token" value from the API response', () => {
+                responseClone = JSON.parse(JSON.stringify(ACCESS_TOKEN_RESPONSE));
+                responseClone.refresh_token = '1234567890abcdefghij1234567890abcdefghij';
+                const nonObfuscatedAccessToken = new AccessToken(responseClone);
+
+                nonObfuscatedAccessToken.refreshToken.should.equal(responseClone.refresh_token);
+            });
+        });
+    });
+
+
     /** @test {AccessToken.ttl} */
     describe('ttl', () => {
         it('should convert the "expires_in" value from the API response (which is in seconds) to milliseconds', () => {

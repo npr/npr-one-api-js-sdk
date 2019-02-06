@@ -55,6 +55,24 @@ describe('DeviceCode', () => {
     });
 
 
+    /** @test {DeviceCode.deviceCode} */
+    describe('deviceCode', () => {
+        it('should return null if the auth proxy removes the original device_code value from the response', () => {
+            should.not.exist(deviceCode.deviceCode);
+        });
+
+        describe('if the auth proxy does not hide it from the response', () => {
+            it('should match the "device_code" value from the API response', () => {
+                responseClone = JSON.parse(JSON.stringify(DEVICE_CODE_RESPONSE));
+                responseClone.device_code = '1234567890abcdefghij1234567890abcdefghij';
+                const nonObfuscatedDeviceCode = new DeviceCode(responseClone);
+
+                nonObfuscatedDeviceCode.deviceCode.should.equal(responseClone.device_code);
+            });
+        });
+    });
+
+
     /** @test {DeviceCode.userCode} */
     describe('userCode', () => {
         it('should match the "user_code" value from the API response', () => {

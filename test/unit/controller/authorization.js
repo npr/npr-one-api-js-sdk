@@ -141,7 +141,7 @@ describe('Authorization', () => {
             it('should throw a TypeError', () => {
                 chai.expect(() => {
                     Authorization.refreshExistingAccessToken();
-                }).to.throw('An access token must be set in order to attempt a refresh.');
+                }).to.throw('An access token or refresh token must be set in order to attempt a refresh.');
             });
         });
     });
@@ -161,7 +161,7 @@ describe('Authorization', () => {
                     fetchMock.called(logoutUrl).should.be.true;
                     fetchMock.calls().unmatched.length.should.equal(0);
                     const options = fetchMock.lastOptions(logoutUrl);
-                    options.body.should.equal(`token=${oldAccessToken}`);
+                    options.body.should.equal(`token=${oldAccessToken}&token_type_hint=access_token`);
                     NprOne.accessToken.should.equal('');
                     done();
                 })
@@ -188,7 +188,7 @@ describe('Authorization', () => {
             it('should throw a TypeError', () => {
                 chai.expect(() => {
                     authorization.logout();
-                }).to.throw('An access token must be set in order to attempt a logout.');
+                }).to.throw('An access token or refresh token must be set in order to attempt a logout.');
             });
         });
 

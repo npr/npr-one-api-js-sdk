@@ -38,6 +38,16 @@ export default class DeviceCode
     }
 
     /**
+     * Returns the device code (40-character alphanumeric string to input into the /token endpoint, not for display to the user)
+     * or null (some auth proxies deliberately hide this from the response).
+     *
+     * @type {string|null}
+     */
+    get deviceCode() {
+        return this._raw.device_code || null;
+    }
+
+    /**
      * Returns the user code (8-character alphanumeric string)
      *
      * @type {string}
