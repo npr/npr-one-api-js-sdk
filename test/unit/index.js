@@ -113,6 +113,57 @@ describe('NprOneSDK', () => {
     });
 
 
+    /** @test {NprOneSDK.refreshToken} */
+    describe('refreshToken', () => {
+        describe('getter', () => {
+            it('should return the value of the refreshToken string in the hidden config object', () => {
+                NprOneSDK.refreshToken.should.equal(NprOneSDK.config.refreshToken);
+            });
+        });
+
+        describe('setter', () => {
+            it('should throw a TypeError if the passed-in value is not a string', () => {
+                chai.expect(() => {
+                    NprOneSDK.refreshToken = 1234;
+                }).to.throw('Value for refreshToken must be a string');
+            });
+
+            it('should set the internal access token to the supplied string', () => {
+                NprOneSDK.refreshToken = 'abcdefgh123456';
+
+                NprOneSDK.config.refreshToken.should.equal('abcdefgh123456');
+            });
+
+            it('should call the registered callback if one is set', (done) => {
+                NprOneSDK.onRefreshTokenChanged = () => {
+                    NprOneSDK.config.refreshToken.should.equal('abcdefgh123456789abced');
+                    done();
+                };
+                NprOneSDK.refreshToken = 'abcdefgh123456789abced';
+            });
+
+            it('but only if the new token is different from the old', () => {
+                NprOneSDK.onAccessTokenChanged = () => {
+                    throw new Error('access token did not actually change, should never get here');
+                };
+                NprOneSDK.refreshToken = NprOneSDK.config.refreshToken;
+            });
+        });
+    });
+
+
+    /** @test {NprOneSDK.onRefreshTokenChanged} */
+    describe('onRefreshTokenChanged', () => {
+        describe('setter', () => {
+            it('should throw a TypeError if the passed-in value is not a function', () => {
+                chai.expect(() => {
+                    NprOneSDK.onRefreshTokenChanged = 'i_am_not_a_function';
+                }).to.throw('Value for onRefreshTokenChanged must be a function');
+            });
+        });
+    });
+
+
     /** @test {NprOneSDK.Action} */
     describe('Action', () => {
         it('should return the Action class', () => {
