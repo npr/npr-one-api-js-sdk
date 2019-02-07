@@ -69,6 +69,9 @@ var NprOneSDK = exports.NprOneSDK = function () {
         /** @type {null|Function} A callback that gets triggered whenever the access token has changed
          * @private */
         this._accessTokenChangedCallback = null;
+        /** @type {null|Function} A callback that gets triggered whenever the refresh token has changed
+         * @private */
+        this._refreshTokenChangedCallback = null;
         /** @type {Authorization}
          * @private */
         this._authorization = new _authorization2.default();
@@ -97,6 +100,7 @@ var NprOneSDK = exports.NprOneSDK = function () {
      * @property {string} [tempUserPath='/temporary'] The path to your proxy for the `temporary_user` grant (relative to `authProxyBaseUrl`), not available to third-party clients
      * @property {string} [logoutPath='/logout'] The path to your proxy for the `POST /authorization/v2/token/revoke` endpoint (relative to `authProxyBaseUrl`)
      * @property {string} [accessToken] The access token to use if not using the auth proxy
+     * @property {string} [refreshToken] The refresh token to use if not using an auth proxy that supports cookies
      * @property {string} [clientId] The NPR One API `client_id` to use, only required if using the auth proxy with the `temporary_user` grant type
      * @property {string} [advertisingId] The custom X-Advertising-ID header to send with most requests, not typically used by third-party clients
      * @property {string} [advertisingTarget] The custom X-Advertising-Target header to send with most requests, not typically used by third-party clients
@@ -439,6 +443,7 @@ var NprOneSDK = exports.NprOneSDK = function () {
                 tempUserPath: '/temporary',
                 logoutPath: '/logout',
                 accessToken: '',
+                refreshToken: '',
                 clientId: '',
                 advertisingId: '',
                 advertisingTarget: '',
@@ -512,6 +517,48 @@ var NprOneSDK = exports.NprOneSDK = function () {
                 throw new TypeError('Value for onAccessTokenChanged must be a function');
             }
             NprOneSDK._accessTokenChangedCallback = callback;
+        }
+
+        /** @type {string} */
+
+    }, {
+        key: 'refreshToken',
+        get: function get() {
+            return NprOneSDK.config.refreshToken;
+        }
+
+        /** @type {string} */
+        ,
+        set: function set(token) {
+            if (typeof token !== 'string') {
+                throw new TypeError('Value for refreshToken must be a string');
+            }
+
+            var oldToken = NprOneSDK.refreshToken;
+            NprOneSDK.config.refreshToken = token;
+
+            if (oldToken !== token && typeof NprOneSDK._refreshTokenChangedCallback === 'function') {
+                NprOneSDK._refreshTokenChangedCallback(token);
+            }
+        }
+
+        /**
+         * Sets a callback to be triggered whenever the SDK rotates the access token for a new one, usually when
+         * the old token expires and a `refresh_token` is used to generate a fresh token. Clients who wish to persist
+         * logins across sessions are urged to use this callback to be notified whenever a token change has
+         * occurred; the only other alternative is to call `get refreshToken()` after every API call.
+         *
+         * @type {Function}
+         * @throws {TypeError} if the passed-in value isn't a function
+         */
+
+    }, {
+        key: 'onRefreshTokenChanged',
+        set: function set(callback) {
+            if (typeof callback !== 'function') {
+                throw new TypeError('Value for onRefreshTokenChanged must be a function');
+            }
+            NprOneSDK._refreshTokenChangedCallback = callback;
         }
 
         /**

@@ -97,8 +97,8 @@ var Authorization = function () {
         if (!_index2.default.config.authProxyBaseUrl) {
             throw new TypeError('OAuth proxy not configured. Unable to refresh the access token.');
         }
-        if (!_index2.default.accessToken) {
-            throw new TypeError('An access token must be set in order to attempt a refresh.');
+        if (!_index2.default.accessToken && !_index2.default.refreshToken) {
+            throw new TypeError('An access token or refresh token must be set in order to attempt a refresh.'); // eslint-disable-line max-len
         }
 
         _logger2.default.debug('Access token appears to have expired. Attempting to generate a fresh one.');
@@ -109,11 +109,20 @@ var Authorization = function () {
             credentials: 'include'
         };
 
+        if (_index2.default.refreshToken) {
+            options.body = 'token=' + _index2.default.refreshToken;
+        }
+
         return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
             var tokenModel = new _accessToken2.default(json);
             tokenModel.validate(); // throws exception if invalid
             _logger2.default.debug('Access token refresh was successful, new token:', tokenModel.toString());
+
             _index2.default.accessToken = tokenModel.token;
+            if (tokenModel.refreshToken) {
+                _index2.default.refreshToken = tokenModel.refreshToken;
+            }
+
             return tokenModel; // never directly consumed, but useful for testing
         }).catch(function (err) {
             _logger2.default.debug('Error generating a new token in refreshExistingAccessToken()');
@@ -142,8 +151,8 @@ var Authorization = function () {
 
 
     Authorization.prototype.logout = function logout() {
-        if (!_index2.default.accessToken) {
-            throw new TypeError('An access token must be set in order to attempt a logout.');
+        if (!_index2.default.accessToken && !_index2.default.refreshToken) {
+            throw new TypeError('An access token or refresh token must be set in order to attempt a logout.'); // eslint-disable-line max-len
         }
         if (!_index2.default.config.authProxyBaseUrl) {
             throw new TypeError('OAuth proxy not configured. Unable to securely log out the user.');
@@ -153,7 +162,7 @@ var Authorization = function () {
         var options = {
             method: 'POST',
             credentials: 'include',
-            body: 'token=' + _index2.default.accessToken,
+            body: 'token=' + (_index2.default.accessToken || _index2.default.refreshToken) + '&' + ('token_type_hint=' + (_index2.default.accessToken ? 'access_token' : 'refresh_token')),
             headers: {
                 Accept: 'application/json, application/xml, text/plain, text/html, *.*',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
@@ -164,6 +173,7 @@ var Authorization = function () {
         .then(function (response) {
             if (response.ok) {
                 _index2.default.accessToken = '';
+                _index2.default.refreshToken = '';
                 return true;
             }
             return _fetchUtil2.default.formatErrorResponse(response);
@@ -292,12 +302,21 @@ var Authorization = function () {
             credentials: 'include'
         };
 
+        if (this._activeDeviceCodeModel.deviceCode) {
+            options.body = 'code=' + this._activeDeviceCodeModel.deviceCode;
+        }
+
         return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
             _logger2.default.debug('Device code poll returned successfully! An access token was returned.'); // eslint-disable-line max-len
 
             var tokenModel = new _accessToken2.default(json);
             tokenModel.validate(); // throws exception if invalid
+
             _index2.default.accessToken = tokenModel.token;
+            if (tokenModel.refreshToken) {
+                _index2.default.refreshToken = tokenModel.refreshToken;
+            }
+
             return tokenModel; // never directly consumed, but useful for testing
         }).catch(function (error) {
             if (error instanceof _apiError2.default) {

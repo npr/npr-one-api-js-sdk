@@ -161,6 +161,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        /** @type {null|Function} A callback that gets triggered whenever the access token has changed
 	         * @private */
 	        this._accessTokenChangedCallback = null;
+	        /** @type {null|Function} A callback that gets triggered whenever the refresh token has changed
+	         * @private */
+	        this._refreshTokenChangedCallback = null;
 	        /** @type {Authorization}
 	         * @private */
 	        this._authorization = new _authorization2.default();
@@ -189,6 +192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @property {string} [tempUserPath='/temporary'] The path to your proxy for the `temporary_user` grant (relative to `authProxyBaseUrl`), not available to third-party clients
 	     * @property {string} [logoutPath='/logout'] The path to your proxy for the `POST /authorization/v2/token/revoke` endpoint (relative to `authProxyBaseUrl`)
 	     * @property {string} [accessToken] The access token to use if not using the auth proxy
+	     * @property {string} [refreshToken] The refresh token to use if not using an auth proxy that supports cookies
 	     * @property {string} [clientId] The NPR One API `client_id` to use, only required if using the auth proxy with the `temporary_user` grant type
 	     * @property {string} [advertisingId] The custom X-Advertising-ID header to send with most requests, not typically used by third-party clients
 	     * @property {string} [advertisingTarget] The custom X-Advertising-Target header to send with most requests, not typically used by third-party clients
@@ -531,6 +535,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                tempUserPath: '/temporary',
 	                logoutPath: '/logout',
 	                accessToken: '',
+	                refreshToken: '',
 	                clientId: '',
 	                advertisingId: '',
 	                advertisingTarget: '',
@@ -604,6 +609,48 @@ return /******/ (function(modules) { // webpackBootstrap
 	                throw new TypeError('Value for onAccessTokenChanged must be a function');
 	            }
 	            NprOneSDK._accessTokenChangedCallback = callback;
+	        }
+	
+	        /** @type {string} */
+	
+	    }, {
+	        key: 'refreshToken',
+	        get: function get() {
+	            return NprOneSDK.config.refreshToken;
+	        }
+	
+	        /** @type {string} */
+	        ,
+	        set: function set(token) {
+	            if (typeof token !== 'string') {
+	                throw new TypeError('Value for refreshToken must be a string');
+	            }
+	
+	            var oldToken = NprOneSDK.refreshToken;
+	            NprOneSDK.config.refreshToken = token;
+	
+	            if (oldToken !== token && typeof NprOneSDK._refreshTokenChangedCallback === 'function') {
+	                NprOneSDK._refreshTokenChangedCallback(token);
+	            }
+	        }
+	
+	        /**
+	         * Sets a callback to be triggered whenever the SDK rotates the access token for a new one, usually when
+	         * the old token expires and a `refresh_token` is used to generate a fresh token. Clients who wish to persist
+	         * logins across sessions are urged to use this callback to be notified whenever a token change has
+	         * occurred; the only other alternative is to call `get refreshToken()` after every API call.
+	         *
+	         * @type {Function}
+	         * @throws {TypeError} if the passed-in value isn't a function
+	         */
+	
+	    }, {
+	        key: 'onRefreshTokenChanged',
+	        set: function set(callback) {
+	            if (typeof callback !== 'function') {
+	                throw new TypeError('Value for onRefreshTokenChanged must be a function');
+	            }
+	            NprOneSDK._refreshTokenChangedCallback = callback;
 	        }
 	
 	        /**
@@ -1586,6 +1633,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	        /**
+	         * Returns the refresh token (40-character alphanumeric string) if included
+	         * (some auth proxies deliberately hide this from the response).
+	         *
+	         * @type {string|null}
+	         */
+	
+	    }, {
+	        key: 'refreshToken',
+	        get: function get() {
+	            return this._raw.refresh_token || null;
+	        }
+	
+	        /**
 	         * Returns the TTL (in milliseconds) until this access token expires. If you are using an auth proxy and have
 	         * correctly configured the `refreshTokenUrl`, this SDK will automatically refresh expired access tokens for you,
 	         * so consumers typically do not need to worry about whether or not a token is expired or about to expire.
@@ -1666,9 +1726,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    /**
-	     * Returns the user code (8-character alphanumeric string)
+	     * Returns the device code (40-character alphanumeric string to input into the /token endpoint, not for display to the user)
+	     * or null (some auth proxies deliberately hide this from the response).
 	     *
-	     * @type {string}
+	     * @type {string|null}
 	     */
 	
 	
@@ -1683,6 +1744,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    _createClass(DeviceCode, [{
+	        key: 'deviceCode',
+	        get: function get() {
+	            return this._raw.device_code || null;
+	        }
+	
+	        /**
+	         * Returns the user code (8-character alphanumeric string)
+	         *
+	         * @type {string}
+	         */
+	
+	    }, {
 	        key: 'userCode',
 	        get: function get() {
 	            return this._raw.user_code;
@@ -3250,8 +3323,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (!_index2.default.config.authProxyBaseUrl) {
 	            throw new TypeError('OAuth proxy not configured. Unable to refresh the access token.');
 	        }
-	        if (!_index2.default.accessToken) {
-	            throw new TypeError('An access token must be set in order to attempt a refresh.');
+	        if (!_index2.default.accessToken && !_index2.default.refreshToken) {
+	            throw new TypeError('An access token or refresh token must be set in order to attempt a refresh.'); // eslint-disable-line max-len
 	        }
 	
 	        _logger2.default.debug('Access token appears to have expired. Attempting to generate a fresh one.');
@@ -3262,11 +3335,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	            credentials: 'include'
 	        };
 	
+	        if (_index2.default.refreshToken) {
+	            options.body = 'token=' + _index2.default.refreshToken;
+	        }
+	
 	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
 	            var tokenModel = new _accessToken2.default(json);
 	            tokenModel.validate(); // throws exception if invalid
 	            _logger2.default.debug('Access token refresh was successful, new token:', tokenModel.toString());
+	
 	            _index2.default.accessToken = tokenModel.token;
+	            if (tokenModel.refreshToken) {
+	                _index2.default.refreshToken = tokenModel.refreshToken;
+	            }
+	
 	            return tokenModel; // never directly consumed, but useful for testing
 	        }).catch(function (err) {
 	            _logger2.default.debug('Error generating a new token in refreshExistingAccessToken()');
@@ -3295,8 +3377,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	    Authorization.prototype.logout = function logout() {
-	        if (!_index2.default.accessToken) {
-	            throw new TypeError('An access token must be set in order to attempt a logout.');
+	        if (!_index2.default.accessToken && !_index2.default.refreshToken) {
+	            throw new TypeError('An access token or refresh token must be set in order to attempt a logout.'); // eslint-disable-line max-len
 	        }
 	        if (!_index2.default.config.authProxyBaseUrl) {
 	            throw new TypeError('OAuth proxy not configured. Unable to securely log out the user.');
@@ -3306,7 +3388,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var options = {
 	            method: 'POST',
 	            credentials: 'include',
-	            body: 'token=' + _index2.default.accessToken,
+	            body: 'token=' + (_index2.default.accessToken || _index2.default.refreshToken) + '&' + ('token_type_hint=' + (_index2.default.accessToken ? 'access_token' : 'refresh_token')),
 	            headers: {
 	                Accept: 'application/json, application/xml, text/plain, text/html, *.*',
 	                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
@@ -3317,6 +3399,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        .then(function (response) {
 	            if (response.ok) {
 	                _index2.default.accessToken = '';
+	                _index2.default.refreshToken = '';
 	                return true;
 	            }
 	            return _fetchUtil2.default.formatErrorResponse(response);
@@ -3445,12 +3528,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	            credentials: 'include'
 	        };
 	
+	        if (this._activeDeviceCodeModel.deviceCode) {
+	            options.body = 'code=' + this._activeDeviceCodeModel.deviceCode;
+	        }
+	
 	        return _fetchUtil2.default.nprApiFetch(url, options).then(function (json) {
 	            _logger2.default.debug('Device code poll returned successfully! An access token was returned.'); // eslint-disable-line max-len
 	
 	            var tokenModel = new _accessToken2.default(json);
 	            tokenModel.validate(); // throws exception if invalid
+	
 	            _index2.default.accessToken = tokenModel.token;
+	            if (tokenModel.refreshToken) {
+	                _index2.default.refreshToken = tokenModel.refreshToken;
+	            }
+	
 	            return tokenModel; // never directly consumed, but useful for testing
 	        }).catch(function (error) {
 	            if (error instanceof _apiError2.default) {

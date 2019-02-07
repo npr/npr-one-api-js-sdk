@@ -55,9 +55,10 @@ var DeviceCode = function () {
     };
 
     /**
-     * Returns the user code (8-character alphanumeric string)
+     * Returns the device code (40-character alphanumeric string to input into the /token endpoint, not for display to the user)
+     * or null (some auth proxies deliberately hide this from the response).
      *
-     * @type {string}
+     * @type {string|null}
      */
 
 
@@ -72,6 +73,18 @@ var DeviceCode = function () {
     };
 
     _createClass(DeviceCode, [{
+        key: 'deviceCode',
+        get: function get() {
+            return this._raw.device_code || null;
+        }
+
+        /**
+         * Returns the user code (8-character alphanumeric string)
+         *
+         * @type {string}
+         */
+
+    }, {
         key: 'userCode',
         get: function get() {
             return this._raw.user_code;
