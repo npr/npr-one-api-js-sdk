@@ -492,7 +492,22 @@ export const ACCESS_TOKEN_RESPONSE = {
     "expires_in": 20160
 };
 
+export const ACCESS_TOKEN_RESPONSE_WITH_REFRESH_TOKEN = {
+    "access_token": "LT8gvVDyeKwQJVVf6xwKAWdK0bOik64faketoken",
+    "token_type": "Bearer",
+    "expires_in": 20160,
+    "refresh_token": "Bq1UtlLiwJn5gficFQ7oso1B9MfkHWvfaketoken",
+};
+
 export const DEVICE_CODE_RESPONSE = {
+    "user_code": "2OA7PP",
+    "verification_uri": "https:\/\/www.npr.org\/device",
+    "expires_in": 1800,
+    "interval": 5
+};
+
+export const DEVICE_CODE_RESPONSE_WITH_DEVICE_CODE = {
+    "device_code": "KDbQAPmbmlh7j7AvgoVyfcBvsVM7k1xBfakecode",
     "user_code": "2OA7PP",
     "verification_uri": "https:\/\/www.npr.org\/device",
     "expires_in": 1800,

@@ -1,5 +1,5 @@
 import chai from 'chai';
-import { ACCESS_TOKEN_RESPONSE, DEVICE_CODE_RESPONSE, DEVICE_CODE_POLL_RESPONSE, DEVICE_CODE_DENIED_RESPONSE, DEVICE_CODE_EXPIRED_RESPONSE } from '../../test-data';
+import { ACCESS_TOKEN_RESPONSE, ACCESS_TOKEN_RESPONSE_WITH_REFRESH_TOKEN, DEVICE_CODE_RESPONSE, DEVICE_CODE_RESPONSE_WITH_DEVICE_CODE, DEVICE_CODE_POLL_RESPONSE, DEVICE_CODE_DENIED_RESPONSE, DEVICE_CODE_EXPIRED_RESPONSE } from '../../test-data';
 import mockery from 'mockery';
 import fetchMock from 'fetch-mock';
 import Authorization from './../../../src/controller/authorization';
@@ -144,6 +144,37 @@ describe('Authorization', () => {
                 }).to.throw('An access token or refresh token must be set in order to attempt a refresh.');
             });
         });
+
+        describe('if a refresh token is set', () => {
+            const refreshToken = 'xxxxyyyyzzzz87654321';
+
+            beforeEach(() => {
+                NprOne.config = {
+                    refreshToken,
+                    accessToken: '',
+                };
+            });
+
+            it('should call the refresh token endpoint in the auth proxy', (done) => {
+                mockery.registerMock('fetch', fetchMock
+                    .mock(refreshTokenUrl, 'POST', ACCESS_TOKEN_RESPONSE_WITH_REFRESH_TOKEN)
+                    .mock(adsWizzWwwUrl, 'GET', 200) // @TODO remove as part of fix for #8
+                    .mock(adsWizzCdnUrl, 'GET', 200) // @TODO remove as part of fix for #8
+                    .getMock());
+
+                Authorization.refreshExistingAccessToken()
+                    .then(() => {
+                        fetchMock.called(refreshTokenUrl).should.be.true;
+                        fetchMock.calls().unmatched.length.should.equal(0);
+                        const options = fetchMock.lastOptions(refreshTokenUrl);
+                        options.body.should.equal(`token=${refreshToken}`);
+                        NprOne.accessToken.should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                        NprOne.refreshToken.should.equal(ACCESS_TOKEN_RESPONSE_WITH_REFRESH_TOKEN.refresh_token);
+                        done();
+                    })
+                    .catch(done);
+            });
+        });
     });
 
 
@@ -163,6 +194,7 @@ describe('Authorization', () => {
                     const options = fetchMock.lastOptions(logoutUrl);
                     options.body.should.equal(`token=${oldAccessToken}&token_type_hint=access_token`);
                     NprOne.accessToken.should.equal('');
+                    NprOne.refreshToken.should.equal('');
                     done();
                 })
                 .catch(done);
@@ -201,6 +233,35 @@ describe('Authorization', () => {
                 chai.expect(() => {
                     authorization.logout();
                 }).to.throw('OAuth proxy not configured. Unable to securely log out the user.');
+            });
+        });
+
+        describe('if a refresh token is set', () => {
+            const refreshToken = 'xxxxyyyyzzzz87654321';
+
+            beforeEach(() => {
+                NprOne.config = {
+                    refreshToken,
+                    accessToken: '',
+                };
+            });
+
+            it('should call the logout endpoint in the auth proxy', (done) => {
+                mockery.registerMock('fetch', fetchMock
+                    .mock(logoutUrl, 'POST', JSON.stringify(''))
+                    .getMock());
+
+                authorization.logout()
+                    .then(() => {
+                        fetchMock.called(logoutUrl).should.be.true;
+                        fetchMock.calls().unmatched.length.should.equal(0);
+                        const options = fetchMock.lastOptions(logoutUrl);
+                        options.body.should.equal(`token=${refreshToken}&token_type_hint=refresh_token`);
+                        NprOne.accessToken.should.equal('');
+                        NprOne.refreshToken.should.equal('');
+                        done();
+                    })
+                    .catch(done);
             });
         });
     });
@@ -377,6 +438,31 @@ describe('Authorization', () => {
                 .then(() => {
                     authorization.pollDeviceCode().should.be.rejectedWith(`TypeError: 'expires_in' is missing and is required. :${JSON.stringify(accessTokenClone)}`).notify(done);
                 });
+        });
+
+        describe('if the previous call to getDeviceCode() included the device_code in the response', () => {
+            it('should return a Promise that resolves to a valid access token if device code is valid', (done) => {
+                mockery.registerMock('fetch', fetchMock
+                    .mock(newDeviceCodeUrl, 'POST', DEVICE_CODE_RESPONSE_WITH_DEVICE_CODE)
+                    .mock(deviceCodePollUrl, 'POST', ACCESS_TOKEN_RESPONSE_WITH_REFRESH_TOKEN)
+                    .getMock());
+
+                authorization.getDeviceCode()
+                    .then(() => {
+                        return authorization.pollDeviceCode();
+                    })
+                    .then((accessToken) => {
+                        fetchMock.called(deviceCodePollUrl).should.be.true;
+                        fetchMock.calls().unmatched.length.should.equal(0);
+                        const options = fetchMock.lastOptions(deviceCodePollUrl);
+                        options.body.should.equal(`code=${DEVICE_CODE_RESPONSE_WITH_DEVICE_CODE.device_code}`);
+                        NprOne.accessToken.should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                        accessToken.toString().should.equal(ACCESS_TOKEN_RESPONSE.access_token);
+                        NprOne.refreshToken.should.equal(ACCESS_TOKEN_RESPONSE_WITH_REFRESH_TOKEN.refresh_token);
+                    })
+                    .then(done)
+                    .catch(done);
+            });
         });
     });
 });
