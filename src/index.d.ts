@@ -745,6 +745,16 @@ export class NprOneSDK {
      */
     static onAccessTokenChanged: Function;
 
+    /**
+     * Sets a callback to be triggered whenever the SDK rotates the access token for a new one, usually when
+     * the old token expires and a `refresh_token` is used to generate a fresh token. Clients who wish to persist
+     * access tokens across sessions are urged to use this callback to be notified whenever a token change has
+     * occurred; the only other alternative is to call `get accessToken()` after every API call.
+     *
+     * @throws {TypeError} if the passed-in value isn't a function
+     */
+    static onRefreshTokenChanged: Function;
+
     /** Exposes the Action class for clients to record actions */
     static Action: Action;
 
