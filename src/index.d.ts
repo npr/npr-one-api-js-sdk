@@ -732,6 +732,9 @@ export class NprOneSDK {
     /** The actual access token being used for all API calls requiring an Authorization header */
     static accessToken: string;
 
+    /** The actual refresh token used for getting a new access token after the current token expires */
+    static refreshToken: string;
+
     /**
      * Sets a callback to be triggered whenever the SDK rotates the access token for a new one, usually when
      * the old token expires and a `refresh_token` is used to generate a fresh token. Clients who wish to persist
