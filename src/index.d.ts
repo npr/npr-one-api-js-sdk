@@ -282,6 +282,9 @@ export interface ImageLink extends FormFactorLink, RelLink {
     /** The provider of the image; should be used for properly attributing the image when it exists */
     provider?: string;
 
+    /** The description of the image */
+    caption?: string;
+
     /** A unique identifier for the image */
     image?: string;
 }
