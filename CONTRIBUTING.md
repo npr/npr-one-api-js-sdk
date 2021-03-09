@@ -24,7 +24,7 @@ If you're interested in contributing to this project by submitting bug reports, 
 
 ## Code of Conduct
 
-Please note that this project has a [Code of Conduct](https://github.com/npr/npr-one-api-js-sdk/tree/master/CODE_OF_CONDUCT.md). By participating in this project, you agree to abide by its terms.
+Please note that this project has a [Code of Conduct](https://github.com/npr/npr-one-api-js-sdk/tree/main/CODE_OF_CONDUCT.md). By participating in this project, you agree to abide by its terms.
 
 
 ## Submitting Issues
@@ -84,7 +84,7 @@ Finally, this project is [Commitizen-friendly](https://github.com/commitizen/cz-
 
 #### Command-Line Tasks
 
-Tasks are setup via [package.json](https://github.com/npr/npr-one-api-js-sdk/tree/master/package.json) to be run on the command line, which help automate all the common steps for building and development. They are:
+Tasks are setup via [package.json](https://github.com/npr/npr-one-api-js-sdk/tree/main/package.json) to be run on the command line, which help automate all the common steps for building and development. They are:
 
 - `npm run update`: Updates all dependencies and prunes previously-installed, unused dependencies
 - `npm run lint`: Runs [ESLint](https://eslint.org/) to verify compliance of source code with our Javascript coding standards
@@ -124,7 +124,7 @@ To update the documentation on the site:
 
 ```
 git checkout gh-pages       # check out the gh-pages branch
-git rebase master           # make sure you have the latest changes from master
+git rebase main           # make sure you have the latest changes from main
                             # at this point there are likely merge conflicts for you to resolve; resolve them first
 npm run update              # make sure you also pull in all necessary dependency updates
 npm run docs                # actually generate the new doc files
@@ -151,8 +151,8 @@ Alternatively, if installing/using global packages isn't an option for some reas
 
 ### Publishing Releases
 
-A new [release](https://github.com/npr/npr-one-api-js-sdk/releases) is published anytime code is merged into our `master` branch, which will generally only ever be done by a maintainer from within NPR. The entire process is managed by [Semantic Release](https://github.com/semantic-release/semantic-release) and does not require any manual steps, but just in case there is ever a need to publish manually, the shortcut CLI command is:
+A new [release](https://github.com/npr/npr-one-api-js-sdk/releases) is published anytime code is merged into our `main` branch, which will generally only ever be done by a maintainer from within NPR. The entire process is managed by [Semantic Release](https://github.com/semantic-release/semantic-release) and does not require any manual steps, but just in case there is ever a need to publish manually, the shortcut CLI command is:
 
     npm run semantic-release
 
-... but again, our automatic processes should be handling all releases, and a human should generally never have to touch a button after code is merged into `master`.
+... but again, our automatic processes should be handling all releases, and a human should generally never have to touch a button after code is merged into `main`.

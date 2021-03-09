@@ -2,7 +2,7 @@
 
 A [Universal JavaScript Module](https://github.com/umdjs/umd) for interfacing with the [NPR One API](https://dev.npr.org/api/), suitable for both client-side and server-side projects.
 
-[![npm](https://img.shields.io/npm/v/@npr/npr-one-sdk.svg)](https://www.npmjs.com/package/@npr/npr-one-sdk) [![Build Status](https://travis-ci.org/npr/npr-one-api-js-sdk.svg?branch=master)](https://travis-ci.org/npr/npr-one-api-js-sdk) [![Coverage Status](https://coveralls.io/repos/github/npr/npr-one-api-js-sdk/badge.svg?branch=master)](https://coveralls.io/github/npr/npr-one-api-js-sdk?branch=master) [![Documentation coverage](https://npr.github.io/npr-one-api-js-sdk/docs/badge.svg)](https://npr.github.io/npr-one-api-js-sdk/docs/) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](https://commitizen.github.io/cz-cli/) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![npm](https://img.shields.io/npm/v/@npr/npr-one-sdk.svg)](https://www.npmjs.com/package/@npr/npr-one-sdk) [![Build Status](https://travis-ci.org/npr/npr-one-api-js-sdk.svg?branch=main)](https://travis-ci.org/npr/npr-one-api-js-sdk) [![Coverage Status](https://coveralls.io/repos/github/npr/npr-one-api-js-sdk/badge.svg?branch=main)](https://coveralls.io/github/npr/npr-one-api-js-sdk?branch=main) [![Documentation coverage](https://npr.github.io/npr-one-api-js-sdk/docs/badge.svg)](https://npr.github.io/npr-one-api-js-sdk/docs/) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](https://commitizen.github.io/cz-cli/) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 
 ##### Table of Contents
@@ -85,7 +85,7 @@ If you do not already have an existing Bower project, you can start one with:
 
 **DISCLAIMER:** We strongly discourage using this method unless using a package manager is not an option.
 
-You can download the project files in a ZIP [here](https://github.com/npr/npr-one-api-js-sdk/archive/master.zip), then unzip and/or copy-paste those files into your project. Note that you should generally only need the contents of the `dist` directory (and more specifically, only `dist/browser` for frontend JS projects, or `dist/node` for server-side JS projects); the `src` directory is included only for reference and in most cases can be safely deleted.
+You can download the project files in a ZIP [here](https://github.com/npr/npr-one-api-js-sdk/archive/main.zip), then unzip and/or copy-paste those files into your project. Note that you should generally only need the contents of the `dist` directory (and more specifically, only `dist/browser` for frontend JS projects, or `dist/node` for server-side JS projects); the `src` directory is included only for reference and in most cases can be safely deleted.
 
 We will consider providing the distribution files for this project via a CDN (for frontend JS projects) if there is demand, but we will hold off on that until we have a chance to see how much traction this library receives.
 
@@ -332,12 +332,12 @@ Search will be implemented at some later date; we don't typically add functional
 
 ## Examples
 
-The [examples](https://github.com/npr/npr-one-api-js-sdk/tree/master/examples/) directory contains some examples of the SDK in use, both for client-side and server-side environments.
+The [examples](https://github.com/npr/npr-one-api-js-sdk/tree/main/examples/) directory contains some examples of the SDK in use, both for client-side and server-side environments.
 
-* [`examples/browser/example.html`](https://github.com/npr/npr-one-api-js-sdk/tree/master/examples/browser/example.html) shows an example of the SDK in use in the browser
-* [`examples/node/main.js`](https://github.com/npr/npr-one-api-js-sdk/tree/master/examples/node/main.js) shows an example of the SDK in use in a node.js server-side app
+* [`examples/browser/example.html`](https://github.com/npr/npr-one-api-js-sdk/tree/main/examples/browser/example.html) shows an example of the SDK in use in the browser
+* [`examples/node/main.js`](https://github.com/npr/npr-one-api-js-sdk/tree/main/examples/node/main.js) shows an example of the SDK in use in a node.js server-side app
 
-These example files will not run out-of-the-box because they require a valid OAuth access token to be configured. If you would like to try running these, clone or download the repository to your local filesystem, then edit [line 38 of the browser example file](https://github.com/npr/npr-one-api-js-sdk/tree/master/examples/browser/example.html#L38) and [line 9 of the node.js example file](https://github.com/npr/npr-one-api-js-sdk/tree/master/examples/node/main.js#L9), respectively, replacing the fake access token with your own, valid access token.
+These example files will not run out-of-the-box because they require a valid OAuth access token to be configured. If you would like to try running these, clone or download the repository to your local filesystem, then edit [line 38 of the browser example file](https://github.com/npr/npr-one-api-js-sdk/tree/main/examples/browser/example.html#L38) and [line 9 of the node.js example file](https://github.com/npr/npr-one-api-js-sdk/tree/main/examples/node/main.js#L9), respectively, replacing the fake access token with your own, valid access token.
 
 
 ## Documentation
@@ -354,7 +354,7 @@ The changelog can be found on our [GitHub releases](https://github.com/npr/npr-o
 
 ## Contributing
 
-If you're interested in contributing to this project by submitting bug reports, helping to improve the documentation, or writing actual code, please read [our contribution guidelines](https://github.com/npr/npr-one-api-js-sdk/tree/master/CONTRIBUTING.md).
+If you're interested in contributing to this project by submitting bug reports, helping to improve the documentation, or writing actual code, please read [our contribution guidelines](https://github.com/npr/npr-one-api-js-sdk/tree/main/CONTRIBUTING.md).
 
 
 ## License
