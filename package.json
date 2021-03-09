@@ -41,25 +41,25 @@
     "lint": "eslint 'src/**/*.js'",
     "lint:fix": "npm run lint -- --fix",
     "compile": "npm run compile:node && npm run compile:browser",
-    "compile:node": "rm -rf dist/node && babel src -d dist/node --optional runtime",
-    "compile:browser": "rm -rf dist/browser && webpack",
-    "pretest": "rm -rf test-reports/ && mkdir test-reports/",
+    "compile:node": "rimraf dist/node && babel src -d dist/node --optional runtime",
+    "compile:browser": "rimraf dist/browser && webpack",
+    "pretest": "rimraf test-reports/ && mkdir test-reports/",
     "test": "mocha --compilers js:babel-core/register test/test.js",
     "test:debug": "env LOG=on npm run test",
-    "precoverage": "rm -rf test-reports/coverage/ && mkdir test-reports/coverage/",
+    "precoverage": "rimraf test-reports/coverage/ && mkdir test-reports/coverage/",
     "coverage": "babel-node ./node_modules/.bin/babel-istanbul cover --dir ./test-reports/coverage ./node_modules/mocha/bin/_mocha --coverage --report html",
     "coverage:upload": "npm run coverage -- --report lcovonly -- -R spec && cat ./test-reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "predocs": "rm -rf docs/",
+    "predocs": "rimraf docs/",
     "docs": "esdoc -c esdoc.json",
     "commit": "git-cz",
-    "prepublish": "not-in-install && npm run compile || true",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "travis-deploy-once": "travis-deploy-once --pro",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "es6-error": "3.0.1",
     "isomorphic-fetch": "2.2.1",
     "js-logger": "1.3.0",
-    "url-parse": "1.0.5"
+    "url-parse": "1.5.1"
   },
   "devDependencies": {
     "babel-cli": "6.11.4",
@@ -72,9 +72,9 @@
     "babel-preset-es2015-loose": "7.0.0",
     "chai": "3.5.0",
     "chai-as-promised": "5.3.0",
-    "commitizen": "2.8.5",
-    "coveralls": "2.11.12",
-    "cz-conventional-changelog": "1.1.7",
+    "commitizen": "4.2.3",
+    "coveralls": "3.1.0",
+    "cz-conventional-changelog": "3.3.0",
     "esdoc": "0.4.8",
     "esdoc-importpath-plugin": "0.0.1",
     "eslint": "3.2.2",
@@ -82,20 +82,21 @@
     "eslint-loader": "1.5.0",
     "eslint-plugin-import": "1.12.0",
     "fetch-mock": "4.6.1",
-    "in-publish": "2.0.0",
     "istanbul": "0.4.4",
     "mocha": "2.5.3",
     "mocha-lcov-reporter": "1.2.0",
     "mockery": "1.7.0",
-    "semantic-release": "4.3.5",
+    "rimraf": "3.0.2",
+    "semantic-release": "17.4.1",
     "shared-git-hooks": "1.2.1",
     "sinon": "1.17.5",
     "sinon-chai": "2.8.0",
+    "travis-deploy-once": "5.0.11",
     "webpack": "1.13.1"
   },
   "engines": {
-    "node": ">= 6",
-    "npm": ">= 2.0"
+    "node": ">= 10.13",
+    "npm": ">= 6.4.1"
   },
   "config": {
     "commitizen": {

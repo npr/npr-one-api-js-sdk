@@ -41,7 +41,7 @@ If you find a bug in the source code or a mistake in the documentation, you can 
 
 ### Want a Feature?
 
-You can request a new feature by [submitting an issue to our GitHub repository](https://github.com/npr/npr-one-api-js-sdk/issues/new). Even for small feature requests, please submit an issue for to review before you write the code. Because this package is largely intended to function as an educational tool, the codebase will be kept as streamlined as possible and not all feature requests will be accepted. However, you are welcome to maintain a fork of our repository with any additional features you wish to add.
+You can request a new feature by [submitting an issue to our GitHub repository](https://github.com/npr/npr-one-api-js-sdk/issues/new). Even for small feature requests, please submit an issue for us to review before you write the code. Because this package is largely intended to function as an educational tool, the codebase will be kept as streamlined as possible and not all feature requests will be accepted. However, you are welcome to maintain a fork of our repository with any additional features you wish to add.
 
 
 ## Contributing to Development
@@ -74,7 +74,7 @@ A few other nifty tools we use as part of our development, CI and release proces
 
 #### Prerequisites
 
-A recent version of [node.js](https://nodejs.org) (v4.x or newer) and [npm](https://npmjs.org) installed globally on your system. (Note that to consume the SDK, only Node v0.12.x or higher is required, but because of some of our dev-dependencies, contributors need to use at least v4.x in order to produce a stable build.)
+A recent version of [node.js](https://nodejs.org) (v10.x or newer) and [npm](https://npmjs.org) installed globally on your system. (Note that to consume the SDK, older versions of Node may still be compatible, but because of some of our dev-dependencies, contributors need to use at least v4.x in order to produce a stable build.)
 
 Running unit tests is possible without an NPR One API key; however, actual interaction with the NPR One API requires an OAuth2 `client_id` and a valid access token, which can be obtained by registering for an account within the [NPR One Developer Center](https://dev.npr.org/apply/).
 
